@@ -2,11 +2,17 @@
 background no
 out_to_console yes
 out_to_x no
-update_interval 1.0
+update_interval 0.5
 total_run_times 0
 use_spacer none
 
-TEXT
-cpu %${cpu cpu1} %${cpu cpu2} %${cpu cpu3} %${cpu cpu4} | ram %${memperc} of ${memmax} \
-up ${upspeed} down ${downspeed}
+lua_load ~/.conky.lua
 
+TEXT
+cpu ${lua_parse format %2u ${cpu cpu1}} \
+${lua_parse format %2u ${cpu cpu2}} \
+${lua_parse format %2u ${cpu cpu3}} \
+${lua_parse format %2u ${cpu cpu4}} \
+| ${lua_parse format %6.1f ${upspeedf}} up \
+${lua_parse format %6.1f ${downspeedf}} down \
+| ram used %${memperc} of ${memmax} \

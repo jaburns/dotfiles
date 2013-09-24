@@ -23,12 +23,15 @@ import Data.List
 --------------------------------------------------------------------------------
 
 -- Commands and configuration for dzen bar and other spawned processes.
-dzenCmd = ("dzen2 -h '18' -bg '#000000' -fg '#ffffff' -fn 'Ubuntu Sans-9:Regular' " ++)
+dzenCmd = ("dzen2 -h '18' -bg '#000000' -fg '#ffffff' -fn 'Ubuntu Mono-12:Regular' " ++)
 statBarCmd0 = dzenCmd "-ta 'l' -x '0' -w '1440'"
 statBarCmd1 = dzenCmd "-ta 'l' -x '1920' -w '960'"
-statBarCmd2 = dzenCmd "-ta 'l' -x '4480' -w '1920'"
+statBarCmd2 = dzenCmd "-ta 'l' -x '4480' -w '960'"
+
 pandoraCmd  = "ruby ~/.xmonad/dzen-pandora/dzen-pandora.rb | "
               ++ dzenCmd "-ta 'r' -x '2880' -w '1600'"
+
+conkyCmd = "conky | " ++ dzenCmd "-ta 'r' -x '5440' -w '960'"
 
 -- Specifies the physical order of monitors indexed by xinerama.
 screenOrder = [2,1,0]
@@ -42,6 +45,7 @@ main = do
     statBar2 <- spawnPipe statBarCmd2
 
     _ <- spawn pandoraCmd
+    _ <- spawn conkyCmd
 
     xmonad . ewmh $ xfceConfig
             {
@@ -153,7 +157,7 @@ dzenWriter monitor pp =
         "^fg(black)^bg(white)" ++ pad (show n) ++ "^fg()^bg()"
 
       | n `elem` wsVisibles wsStats || n `elem` wsHiddens wsStats =
-        "^fg(green)" ++ pad (show n) ++ "^fg()"
+        "^fg()^bg(#444444)" ++ pad (show n) ++ "^fg()^bg()"
 
       | n `elem` wsUrgents wsStats =
         "^fg(red)" ++ pad (show n) ++ "^fg()"

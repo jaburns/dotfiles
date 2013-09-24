@@ -7,6 +7,7 @@ repo_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 file_list=$( cat <<EOF
 .bashrc
 .conkyrc
+.conky.lua
 .vimrc
 .xmonad/xmonad.hs
 tools/imgur-upload
