@@ -3,17 +3,17 @@
 # Get the script's running folder.
 repo_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Define the dotfiles we're keeping track of in this format:
-#   Name in repo : Path and name relative to home
+# Define the files we're keeping track of.
 file_list=$( cat <<EOF
-.bashrc:.bashrc
-.conkyrc:.conkyrc
-.vimrc:.vimrc
-xmonad.hs:.xmonad/xmonad.hs
+.bashrc
+.conkyrc
+.vimrc
+.xmonad/xmonad.hs
+tools/imgur-upload
 EOF
 )
 
-# Determine if we're collecting up the dotfiles or installing them.
+# Determine if we're collecting up the files or installing them.
 if [ "$1" == "--collect" ]; then
     echo "Collecting dotfiles..."
     collect=true
@@ -25,14 +25,12 @@ else
     exit
 fi
 
-# Copy the dotfiles in or out of the repo folder.
+# Copy the files in or out of the repo folder.
 for x in $file_list; do
-    A="$repo_dir/$( echo $x | cut -d: -f1 )"
-    B="$HOME/$( echo $x | cut -d: -f2)"
     if $collect; then
-        cp "$B" "$A"
+        cp "$HOME/$x" "$repo_dir/$x"
     else
-        cp "$A" "$B"
+        cp "$repo_dir/$x" "$HOME/$x"
     fi
 done
 

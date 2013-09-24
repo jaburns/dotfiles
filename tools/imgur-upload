@@ -10,8 +10,7 @@ function uploadImage {
     | grep -E -o "http://i.imgur.com/[^<]*"
 }
 
-scrot -s "shot.png"
-uploadImage "shot.png" | xclip -selection c
-rm "shot.png"
-notify-send "Screenshot Uploaded"
+uploadImage "$1" | xclip -selection c
+rm "$1"
+notify-send "Image Uploaded"
 
