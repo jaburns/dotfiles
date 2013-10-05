@@ -173,18 +173,17 @@ let g:neocomplcache_disable_auto_complete = 1
 let g:neocomplcache_enable_auto_close_preview = 0
 
 " Terminal vim understands c-space as c-@ so map both to auto-complete
-inoremap <c-space> <c-x><c-o><c-n>
+imap <c-space> <c-x><c-o><c-n><c-p>
 imap <c-@> <c-space>
+inoremap <expr><CR> pumvisible() ? neocomplcache#smart_close_popup() : "\<CR>"
 
-inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-
-" Define keyword, for minor languages
+" Define keyword for minor languages
 if !exists('g:neocomplcache_keyword_patterns')
   let g:neocomplcache_keyword_patterns = {}
 endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
-" Enable heavy omni completion, which require computational power and may stall the vim.
+" Enable heavy omni completion
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
