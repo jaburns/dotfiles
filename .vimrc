@@ -54,6 +54,10 @@ set pastetoggle=<F7>
 nnoremap j gj
 nnoremap k gk
 
+" Remap single character subsitute to search+replace
+nnoremap s :s/
+nnoremap S :%s/
+
 " jk quickly to exit insert/visual mode
 inoremap jk <esc>
 vnoremap jk <esc>
@@ -62,14 +66,25 @@ vnoremap jk <esc>
 nnoremap K i<cr><esc>
 
 " Ctrl+j/k to move around quicker
-noremap <c-j> 15gj
-noremap <c-k> 15gk
+nnoremap <c-j> 15gj
+nnoremap <c-k> 15gk
+vnoremap <c-j> 15gj
+vnoremap <c-k> 15gk
 
 " Use the arrow keys to move between splits
 noremap <left>  <c-w>h
 noremap <up>    <c-w>k
 noremap <down>  <c-w>j
 noremap <right> <c-w>l
+
+" Some sane bindings for window resizing
+nnoremap <c-w>, 2<c-w><
+nnoremap <c-w>. 2<c-w>>
+nnoremap <c-w>y 10<c-w><
+nnoremap <c-w>o 10<c-w>>
+nnoremap <c-w><c-y> 10<c-w><
+nnoremap <c-w><c-o> 10<c-w>>
+
 
 " Stay in visual mode when indenting
 vnoremap < <gv
@@ -123,6 +138,12 @@ silent! call pathogen#infect()
 silent! call pathogen#helptags()
 
 
+" --------- CtrlP settings -----------------------------------------------------
+
+
+let g:ctrlp_working_path_mode = ''
+
+
 " --------- OmniSharp settings -------------------------------------------------
 
 
@@ -130,10 +151,9 @@ silent! call pathogen#helptags()
 let g:OmniSharp_host = "http://localhost:2000"
 
 "Set the type lookup function to use the preview window instead of the status line
-let g:OmniSharp_typeLookupInPreview = 1
+"let g:OmniSharp_typeLookupInPreview = 1
 
-"Showmatch significantly slows down omnicomplete
-"when the first match contains parentheses.
+"Showmatch significantly slows down omnicomplete when the first match contains parentheses.
 set noshowmatch
 
 "don't autoselect first item in omnicomplete, show if only one item (for preview)
@@ -151,7 +171,6 @@ nnoremap <leader>tt :OmniSharpTypeLookup<cr>
 nnoremap <leader>ii :OmniSharpGetCodeActions<cr>
 
 " rename with dialog
-nnoremap <leader>nm :OmniSharpRename<cr>
 nnoremap <F2> :OmniSharpRename<cr>
 " rename without dialog - with cursor on the symbol to rename... ':Rename newname'
 command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
@@ -164,7 +183,9 @@ nnoremap <leader>ss :OmniSharpStartServer<cr>
 nnoremap <leader>sp :OmniSharpStopServer<cr>
 nnoremap <leader>th :OmniSharpHighlightTypes<cr>
 
+
 " --------- neocomplcache settings (mainly for OmniSharp) ----------------------
+
 
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
