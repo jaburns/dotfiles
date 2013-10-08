@@ -141,6 +141,7 @@ silent! call pathogen#helptags()
 " --------- CtrlP settings -----------------------------------------------------
 
 
+" Force CtrlP to operate from the working directory instead of the current file's.
 let g:ctrlp_working_path_mode = ''
 
 
