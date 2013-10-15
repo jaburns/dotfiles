@@ -1,24 +1,25 @@
 #.bashrc
 
+# vi mode
 set editing-mode vi
 set keymap vi
 set -o vi
-
 export EDITOR="vim"
 
-PS1="\u@\h:\w $ "
+# Command aliases
+alias l='ls -1aG'
+alias grep='grep --color=auto'
 
+# Add personal toolbox to path
 export PATH=$PATH:/home/jaburns/tools
 
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
+# Colored prompt with error display
+ps1_color_error () {
+    if [ "$1" -eq 0 ]; then
+        tput setaf 2
+    else
+        tput setaf 1
+        echo " $1 "
+    fi;
+}
+export PS1="\$(ps1_color_error \$?)\u\$(tput setaf 4) \W)\$(tput sgr0) "
