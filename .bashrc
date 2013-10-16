@@ -10,6 +10,15 @@ export EDITOR="vim"
 alias l='ls -1aG'
 alias grep='grep --color=auto'
 
+# SVN status grep
+svnstag () {
+    if [ "$#" -lt 2 ]; then
+        svn st | grep "$1"
+    else
+        svn st | grep "$1" | awk '{print $2}' | xargs svn "$2"
+    fi;
+}
+
 # Add personal toolbox to path
 export PATH=$PATH:/home/jaburns/tools
 
@@ -19,7 +28,7 @@ ps1_color_error () {
         tput setaf 2
     else
         tput setaf 1
-        echo " $1 "
+        printf " $1 "
     fi;
 }
-export PS1="\$(ps1_color_error \$?)\u\$(tput setaf 4) \W)\$(tput sgr0) "
+export PS1='\[$(ps1_color_error $?)\]\u\[$(tput setaf 4)\] \W) \[$(tput sgr0)\]'
