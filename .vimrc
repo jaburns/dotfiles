@@ -64,7 +64,7 @@ nnoremap <cr> :nohlsearch<cr>
 
 " Map \\ to go back to the previous buffer.
 nnoremap <leader><leader> <c-^>
-nnoremap <leader>v :e $MYVIMRC<cr> " ------------------------------------------------------
+nnoremap <leader>v :sp $MYVIMRC<cr>
 
 " Automatically reload vimrc after saving changes to it
 autocmd BufWritePost .vimrc source $MYVIMRC
@@ -85,6 +85,9 @@ nnoremap <c-j> 15gj
 nnoremap <c-k> 15gk
 vnoremap <c-j> 15gj
 vnoremap <c-k> 15gk
+
+" Replace word under the cursor with the " register without destroying it
+nnoremap <leader>r viwpyiw
 
 " Some sane bindings for window resizing
 nnoremap <c-w>, 2<c-w><
@@ -132,13 +135,19 @@ augroup END
 
 " --------- CtrlP settings -----------------------------------------------------
 
-" Force CtrlP to operate from the working directory instead of the current file's.
+" Force CtrlP to operate from the working directory instead of the current file's
 let g:ctrlp_working_path_mode = ''
+
+" Size CtrlP window a little bigger than default
+let g:ctrlp_max_height = 20
 
 " --------- OmniSharp settings -------------------------------------------------
 
 " This is the default value, setting it isn't actually necessary
 let g:OmniSharp_host = "http://localhost:2000"
+
+" Ignore some subfolders and files which we won't want to edit in vim
+set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb
 
 " Set the type lookup function to use the preview window instead of the status line
 let g:OmniSharp_typeLookupInPreview = 1
@@ -164,6 +173,12 @@ nnoremap <leader>ii :OmniSharpGetCodeActions<cr>
 nnoremap <leader>rl :OmniSharpReloadSolution<cr>
 nnoremap <leader>cf :OmniSharpCodeFormat<cr>
 nnoremap <leader>tp :OmniSharpAddToProject<cr>
+nnoremap <leader>os O/// <summary><cr></summary><esc>O
+
+" Given that the cursor is on a class definition's name, this pulls it out in
+" to a new file in the same folder.
+" TODO Take namespace, take usings, start from anywhere in class
+nnoremap <leader>orc "zyiwVj%"xd:vsp %:p:h/<c-r>z.cs<cr>"xp
 
 " Map command 'OSR' to do a rename with OmniSharp
 command! -nargs=1 OSR :call OmniSharp#RenameTo("<args>")
