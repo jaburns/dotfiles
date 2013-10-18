@@ -29,6 +29,7 @@ set viminfo='20,\"500   " Remember copy registers after quitting in the .viminfo
 set bs=indent,eol,start " Allow backspacing over everything in insert mode
 set nobackup            " No backup~ files
 set hidden              " Don't ask to save when changing buffers
+set noswapfile          " Stop creating bothersome swap files
 
 " Get rid of GUI noise (toolbar, menus, scrollbars)
 set guioptions-=T
@@ -86,8 +87,9 @@ nnoremap <c-k> 15gk
 vnoremap <c-j> 15gj
 vnoremap <c-k> 15gk
 
-" Replace word under the cursor with the " register without destroying it
-nnoremap <leader>r viwpyiw
+" Map a ctrl-free shortcut for pasting the yank register
+vnoremap <leader>p c<c-r>0<esc>
+nnoremap <leader>p i<c-r>0<esc>
 
 " Some sane bindings for window resizing
 nnoremap <c-w>, 2<c-w><
