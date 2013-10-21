@@ -45,7 +45,7 @@ pandoraCmd  = "ruby ~/.xmonad/dzen-pandora/dzen-pandora.rb | "
 conkyCmd = "conky | " ++ dzenMono "-ta 'r' -x '5440' -w '960'"
 
 -- Specifies the physical order of monitors indexed by xinerama.
-screenOrder = [2,1,0]
+desktopScreenOrder = [2,1,0]
 
 --------------------------------------------------------------------------------
 
@@ -65,7 +65,7 @@ desktop = do
     _ <- spawn pandoraCmd
     _ <- spawn conkyCmd
 
-    return $ customLogHook [statBar0,statBar1,statBar2] screenOrder
+    return $ customLogHook [statBar0,statBar1,statBar2] desktopScreenOrder
 
 
 mainAction :: Machine -> IO ()
@@ -102,7 +102,7 @@ myKeys =
     ]
     ++ -- Map M-"qwe" to select a monitor in the proper order, and use M-r for restarting xmonad.
     [ (mask ++ "M-" ++ [key], screenWorkspace scr >>= flip whenJust (windows . action))
-         | (key, scr)  <- zip "qwe" screenOrder
+         | (key, scr)  <- zip "qwe" desktopScreenOrder
          , (action, mask) <- [ (W.view, "") , (W.shift, "S-") ] ]
 
 --------------------------------------------------------------------------------
