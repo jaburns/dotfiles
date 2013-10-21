@@ -25,6 +25,9 @@ svnl () {
     svn log -r "$(expr $rev - $1):HEAD"
 }
 
+# Quick alias for editing the ignore list in svn
+alias svni='svn propedit svn:ignore .'
+
 # Add personal toolbox to path
 export PATH=$PATH:/home/jaburns/tools
 
