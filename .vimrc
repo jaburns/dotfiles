@@ -48,6 +48,11 @@ if has('gui_win32')
     set guifont=Consolas
     set background=dark
     colorscheme solarized
+else
+"    syntax enable
+"    set background=dark
+"    let g:solarized_termcolors=256
+"    colorscheme solarized
 endif
 
 " Toggles vim's paste mode; when we want to paste something into vim from a

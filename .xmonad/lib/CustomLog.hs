@@ -2,14 +2,16 @@
 module CustomLog (customLogHook) where
 
 
+import Data.List
+import Data.List.Split
+import GHC.IO.Handle
 import XMonad
 import XMonad.Util.Run
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.WorkspaceCompare
-import Data.List
-import Data.List.Split
 
 
+customLogHook :: Ord o => [Handle] -> [o] -> X ()
 customLogHook handles screenOrder = dynamicLogWithPP $ defaultPP
     {
       ppCurrent = wrap "c" ","

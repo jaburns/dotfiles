@@ -1,4 +1,5 @@
---xmonad.hs
+
+module XMonadConfig (mainAction, Machine(..)) where
 
 import Prelude as P
 import XMonad
@@ -20,15 +21,19 @@ import XMonad.StackSet as W
 import Data.List.Split as S
 import Data.List
 
-import CustomLog
+import CustomLog (customLogHook)
+
+data Machine = Desktop | Laptop
 
 --------------------------------------------------------------------------------
 
 -- Commands and configuration for dzen bar and other spawned processes.
-dzenCmd fnt = (++) $ "dzen2 -h '18' -bg '#000000' -fg '#ffffff' -fn '"++fnt++"' "
+dzenCmd fnt = (++) $ "dzen2 -h '25' -bg '#000000' -fg '#ffffff' -fn '"++fnt++"' " -- height should be 18 for desktop
 
 dzenSans = dzenCmd "Ubuntu Sans-10:Regular"
 dzenMono = dzenCmd "Ubuntu Mono-12:Regular"
+
+statBarCmdLaptop = dzenSans "-ta 'l' -x '0' -w '1440'"
 
 statBarCmd0 = dzenSans "-ta 'l' -x '0' -w '1440'"
 statBarCmd1 = dzenSans "-ta 'l' -x '1920' -w '960'"
@@ -44,7 +49,14 @@ screenOrder = [2,1,0]
 
 --------------------------------------------------------------------------------
 
-main = do
+laptop :: IO (X ())
+laptop = do
+    statBar <- spawnPipe statBarCmdLaptop
+    return $ customLogHook [statBar] [0]
+
+
+desktop :: IO (X ())
+desktop = do
 
     statBar0 <- spawnPipe statBarCmd0
     statBar1 <- spawnPipe statBarCmd1
@@ -53,18 +65,28 @@ main = do
     _ <- spawn pandoraCmd
     _ <- spawn conkyCmd
 
+    return $ customLogHook [statBar0,statBar1,statBar2] screenOrder
+
+
+mainAction :: Machine -> IO ()
+mainAction machine = do
+
+    logHook' <- case machine of
+        Laptop -> laptop
+        Desktop -> desktop
+
     xmonad . ewmh $ xfceConfig
             {
               XMonad.workspaces = (map show [1..9]),
               normalBorderColor = "#000000",
               focusedBorderColor = "#cb4b16",
-              modMask = mod4Mask,
-              terminal = "terminator",
+              --modMask = mod4Mask,
+              terminal = "gnome-terminal",
               focusFollowsMouse = False,
               borderWidth = 2,
               layoutHook = layoutHook',
               manageHook = manageHook',
-              logHook = customLogHook [statBar0,statBar1,statBar2] screenOrder
+              logHook = logHook'
             } `additionalKeysP` myKeys
 
 --------------------------------------------------------------------------------
@@ -76,7 +98,7 @@ myKeys =
         ("M-p", spawn "dmenu_run -nb black -nf white"),
         ("M-S-h", sendMessage MirrorShrink),
         ("M-S-l", sendMessage MirrorExpand),
-        ("M-r", spawn "xmonad --restart")
+        ("M-r", spawn "xmonad --recompile && xmonad --restart")
     ]
     ++ -- Map M-"qwe" to select a monitor in the proper order, and use M-r for restarting xmonad.
     [ (mask ++ "M-" ++ [key], screenWorkspace scr >>= flip whenJust (windows . action))
@@ -89,8 +111,8 @@ layoutHook' = border1 (ResizableTall 1 (3/100) (1/2) [])
           ||| border2 (ThreeColMid   1 (3/100) (1/2))
           ||| noBorders Full
   where
-    border1 = avoidStruts . smartBorders . spacing 4
-    border2 = avoidStruts . smartBorders . spacing 2
+    border1 = avoidStruts . smartBorders -- . spacing 4
+    border2 = avoidStruts . smartBorders -- . spacing 2
 
 --------------------------------------------------------------------------------
 
