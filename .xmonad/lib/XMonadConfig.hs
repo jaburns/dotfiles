@@ -28,12 +28,12 @@ data Machine = Desktop | Laptop
 --------------------------------------------------------------------------------
 
 -- Commands and configuration for dzen bar and other spawned processes.
-dzenCmd fnt = (++) $ "dzen2 -h '25' -bg '#000000' -fg '#ffffff' -fn '"++fnt++"' " -- height should be 18 for desktop
+dzenCmd fnt = (++) $ "dzen2 -h '24' -bg '#000000' -fg '#ffffff' -fn '"++fnt++"' " -- height should be 18 for desktop
 
 dzenSans = dzenCmd "Ubuntu Sans-10:Regular"
 dzenMono = dzenCmd "Ubuntu Mono-12:Regular"
 
-statBarCmdLaptop = dzenSans "-ta 'l' -x '0' -w '1440'"
+statBarCmdLaptop = dzenSans "-ta 'l' -x '0' -y '1056' -w '1440'"
 
 statBarCmd0 = dzenSans "-ta 'l' -x '0' -w '1440'"
 statBarCmd1 = dzenSans "-ta 'l' -x '1920' -w '960'"

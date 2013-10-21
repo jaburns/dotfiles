@@ -60,16 +60,17 @@ dzenWriter scOrd pp monitor =
   where
     wsStats = parsePPStats scOrd . head . splitOn ":" $ pp
     title   = concat . tail . splitOn ":" $ pp
+    padShow s = "  " ++ show s ++ "  "
 
     render n
       | n == wsVisibles wsStats !! monitor =
-        "^fg(black)^bg(white)" ++ pad (show n) ++ "^fg()^bg()"
+        "^fg(black)^bg(white)" ++ padShow n ++ "^fg()^bg()"
 
       | n `elem` wsVisibles wsStats || n `elem` wsHiddens wsStats =
-        "^fg()^bg(#444444)" ++ pad (show n) ++ "^fg()^bg()"
+        "^fg()^bg(#444444)" ++ padShow n ++ "^fg()^bg()"
 
       | n `elem` wsUrgents wsStats =
-        "^fg(red)" ++ pad (show n) ++ "^fg()"
+        "^fg(red)" ++ padShow n ++ "^fg()"
 
-      | otherwise = pad . show $ n
+      | otherwise = padShow n
 
