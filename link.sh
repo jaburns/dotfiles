@@ -13,7 +13,6 @@ EOF
 files_xmonad=$( cat <<EOF
 .conkyrc
 .conky.lua
-.xmonad/xmonad.hs
 .xmonad/set-machine.sh
 .xmonad/lib/CustomLog.hs
 .xmonad/lib/XMonadConfig.hs
