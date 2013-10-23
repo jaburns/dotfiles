@@ -13,7 +13,7 @@ alias grep='grep --color=auto'
 # Grep SVN status for a pattern and execute an svn command on the selection.
 svng () {
     if [ "$#" -lt 2 ]; then
-        svn st | grep "$1"
+        svn st | grep "$1" | awk '{print $2}'
     else
         svn st | grep "$1" | sed 's/^. *//g;s/\(.*\)/"\1"/' | xargs svn "$2"
     fi;
