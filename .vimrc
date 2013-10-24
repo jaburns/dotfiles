@@ -185,6 +185,9 @@ nnoremap <leader>orc "zyiwVj%"xd:vsp %:p:h/<c-r>z.cs<cr>"xp
 " Map command 'OSR' to do a rename with OmniSharp
 command! -nargs=1 OSR :call OmniSharp#RenameTo("<args>")
 
+" Creates a new Unity MonoBehaviour in the same directory as the current file.
+command! -nargs=1 UNew :e %:p:h/<args>.cs
+
 " Fix the syntax coloring on cross-project classes
 au BufRead,BufWritePost,FileWritePost *.cs :OmniSharpHighlightTypes
 
