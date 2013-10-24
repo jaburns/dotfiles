@@ -177,6 +177,9 @@ nnoremap <leader>cf :OmniSharpCodeFormat<cr>
 nnoremap <leader>tp :OmniSharpAddToProject<cr>
 nnoremap <leader>os O/// <summary><cr></summary><esc>O
 
+" Generate a class template for a Unity script
+nnoremap <leader>uu ggousing System;<cr>using UnityEngine;<cr><cr>public class <c-r>=expand('%:t')<cr><esc>F.C : MonoBehaviour<cr>{<cr>}<esc>O
+
 " Given that the cursor is on a class definition's name, this pulls it out in
 " to a new file in the same folder.
 " TODO Take namespace, take usings, start from anywhere in class
