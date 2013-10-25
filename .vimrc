@@ -175,24 +175,27 @@ nnoremap <leader>ii :OmniSharpGetCodeActions<cr>
 nnoremap <leader>rl :OmniSharpReloadSolution<cr>
 nnoremap <leader>cf :OmniSharpCodeFormat<cr>
 nnoremap <leader>tp :OmniSharpAddToProject<cr>
+nnoremap <leader>oh :OmniSharpHighlightTypes<cr>
 nnoremap <leader>os O/// <summary><cr></summary><esc>O
-
-" Generate a class template for a Unity script
-nnoremap <leader>uu ggousing System;<cr>using UnityEngine;<cr><cr>public class <c-r>=expand('%:t')<cr><esc>F.C : MonoBehaviour<cr>{<cr>}<esc>O
-
-" Given that the cursor is on a class definition's name, this pulls it out in
-" to a new file in the same folder.
-" TODO Take namespace, take usings, start from anywhere in class
-nnoremap <leader>orc "zyiwVj%"xd:vsp %:p:h/<c-r>z.cs<cr>"xp
 
 " Map command 'OSR' to do a rename with OmniSharp
 command! -nargs=1 OSR :call OmniSharp#RenameTo("<args>")
 
-" Creates a new Unity MonoBehaviour in the same directory as the current file.
-command! -nargs=1 UNew :e %:p:h/<args>.cs
+" --------- Unity3D bindings ---------------------------------------------------
 
-" Fix the syntax coloring on cross-project classes
-au BufRead,BufWritePost,FileWritePost *.cs :OmniSharpHighlightTypes
+function! Unity3D_newClass (name)
+    exe "e %:p:h/" . a:name . '.cs'
+    normal ousing System;
+    normal ousing UnityEngine;
+    normal o
+    exe 'normal opublic class ' . a:name . ' : MonoBehaviour'
+    normal o{
+    normal o}
+    normal k
+endfunction
+
+" Creates a new Unity MonoBehaviour in the same directory as the current file.
+command! -nargs=1 Unew :call Unity3D_newClass("<args>")
 
 " --------- neocomplcache settings (mainly for OmniSharp) ----------------------
 
