@@ -31,6 +31,10 @@ set nobackup            " No backup~ files
 set hidden              " Don't ask to save when changing buffers
 set noswapfile          " Stop creating bothersome swap files
 
+" Use comma as leader, move comma's default functionality to \
+let mapleader=','
+nnoremap <bslash> ,
+
 " Get rid of GUI noise (toolbar, menus, scrollbars)
 set guioptions-=T
 set guioptions-=l
@@ -54,7 +58,6 @@ endif
 " different application, turning on paste mode prevents extra whitespace.
 set pastetoggle=<F7>
 
-let mapleader=','
 
 " Remap single character subsitute to search+replace
 nnoremap s :s/
@@ -73,6 +76,9 @@ autocmd BufWritePost _vimrc source $MYVIMRC
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
+
+" Simplify quick macro invocation with q register
+nnoremap Q @q
 
 " jk quickly to exit insert/visual mode
 inoremap jk <esc>
@@ -149,7 +155,7 @@ let g:ctrlp_max_height = 20
 let g:OmniSharp_host = "http://localhost:2000"
 
 " Ignore some subfolders and files which we won't want to edit in vim
-set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb
+set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb,*.meta
 
 " Set the type lookup function to use the preview window instead of the status line
 let g:OmniSharp_typeLookupInPreview = 1
