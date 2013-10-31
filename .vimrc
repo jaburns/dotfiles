@@ -58,11 +58,6 @@ endif
 " different application, turning on paste mode prevents extra whitespace.
 set pastetoggle=<F7>
 
-
-" Remap single character subsitute to search+replace
-nnoremap s :s/
-nnoremap S :%s/
-
 " Clear search result highlighting on press enter
 nnoremap <cr> :nohlsearch<cr>
 
@@ -79,6 +74,11 @@ nnoremap Y y$
 
 " Simplify quick macro invocation with q register
 nnoremap Q @q
+
+" Use line position mark jump by default, and remap ` to quickly use M
+nnoremap ' `
+nnoremap ` mM
+nnoremap `` `M
 
 " jk quickly to exit insert/visual mode
 inoremap jk <esc>

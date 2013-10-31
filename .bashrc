@@ -36,10 +36,11 @@ export PATH=$PATH:/home/jaburns/tools
 # Colored prompt with error display
 ps1_color_error () {
     if [ "$1" -eq 0 ]; then
-        printf '\033[1;32m'
+        printf '\033[0;32m'
+        printf "^_^ "
     else
-        printf '\033[1;31m'
-        printf " $1 "
+        printf '\033[0;31m'
+        printf "%-4s" "$1"
     fi;
 }
-export PS1='$(ps1_color_error $?)\u\[\033[1;34m\] \W) \[\033[0m\]'
+export PS1='$(ps1_color_error $?)\u\[\033[0;34m\] \W) \[\033[0m\]'
