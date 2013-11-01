@@ -49,7 +49,7 @@ filetype plugin indent on
 " GUI VIM font/color configuration
 if has('gui_win32')
     syntax enable
-    set guifont=Consolas
+    set guifont=Consolas:h11
     set background=dark
     colorscheme solarized
 endif
