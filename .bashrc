@@ -10,6 +10,25 @@ export EDITOR="vim"
 alias l='ls -1aG'
 alias grep='grep --color=auto'
 
+# Add personal toolbox to path
+export PATH=$PATH:/home/jaburns/tools
+
+# ----- git helpers -----------------------------------------------------------
+
+gg () {
+    if [ "$#" -lt 1 ]; then
+        git status
+    elif [ "$#" -lt 2 ]; then
+        git ls-files -m -o | grep "$1"
+    else
+        git ls-files -m -o | grep "$1" | xargs git "$2"
+    fi;
+}
+
+alias gc='git commit -m'
+
+# ----- SVN helpers -----------------------------------------------------------
+
 # Grep SVN status for a pattern and execute an svn command on the selection.
 sg () {
     if [ "$#" -lt 1 ]; then
@@ -30,10 +49,8 @@ sl () {
 # Quick alias for editing the ignore list in svn
 alias si='svn propedit svn:ignore .'
 
-# Add personal toolbox to path
-export PATH=$PATH:/home/jaburns/tools
+# ----- Prompt config ---------------------------------------------------------
 
-# Colored prompt with error display
 ps1_color_error () {
     if [ "$1" -eq 0 ]; then
         printf '\033[0;32m'
