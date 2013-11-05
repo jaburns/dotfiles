@@ -1,9 +1,6 @@
 
 BoldAsFont=no
-FontHei
-
-
-ght=10
+FontHeight=10
 CursorType=block
 
 ForegroundColour=131, 148, 150

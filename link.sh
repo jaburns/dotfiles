@@ -40,9 +40,9 @@ echo "Done!"
 echo ""
 
 if [ "$1" == 'windows' ]; then
-    echo "Installing windows _vimrc file..."
+    echo "Linking windows _vimrc file..."
     rm -f "/cygdrive/c/Users/$(whoami)/_vimrc"
-    cp "$repo_dir/.vimrc" "/cygdrive/c/Users/$(whoami)/_vimrc"
+    ln "$repo_dir/.vimrc" "/cygdrive/c/Users/$(whoami)/_vimrc"
     echo "$repo_dir/.vimrc" '==>' "/cygdrive/c/Users/$(whoami)/_vimrc"
     echo "Done!"
     echo ""
