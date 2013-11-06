@@ -1,5 +1,7 @@
 ".vimrc
 
+filetype plugin indent on
+
 " Load up plugins if pathogen is installed
 silent! call pathogen#infect()
 silent! call pathogen#helptags()
@@ -43,8 +45,6 @@ set guioptions-=r
 set guioptions-=R
 set guioptions-=m
 set guioptions-=M
-
-filetype plugin indent on
 
 " GUI VIM font/color configuration
 if has('gui_win32')
