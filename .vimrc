@@ -88,10 +88,10 @@ vnoremap jk <esc>
 nnoremap K i<cr><esc>
 
 " Ctrl+j/k to move around quicker
-nnoremap <c-j> 15gj
-nnoremap <c-k> 15gk
-vnoremap <c-j> 15gj
-vnoremap <c-k> 15gk
+nnoremap <c-j> 15j
+nnoremap <c-k> 15k
+vnoremap <c-j> 15j
+vnoremap <c-k> 15k
 
 " Map a ctrl-free shortcut for pasting the yank register
 vnoremap <leader>p c<c-r>0<esc>
