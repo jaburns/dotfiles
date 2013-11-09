@@ -25,9 +25,10 @@ gg () {
     fi;
 }
 
-alias gc='git commit -m'
-alias ga='git add -A'
+alias gc='git commit'
+alias ga='git add'
 alias gp='git push'
+alias gu='git pull'
 
 # ----- SVN helpers -----------------------------------------------------------
 
