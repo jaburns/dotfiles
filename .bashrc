@@ -15,6 +15,8 @@ export PATH=$PATH:/home/jaburns/tools
 
 # ----- git helpers -----------------------------------------------------------
 
+# git config --global credential.helper "cache --timeout=3600"
+
 gg () {
     if [ "$#" -lt 1 ]; then
         git status
