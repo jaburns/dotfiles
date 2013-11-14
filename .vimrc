@@ -51,7 +51,7 @@ if has('gui_win32')
     syntax enable
     set guifont=Consolas:h11
     set background=dark
-    colorscheme solarized
+    colorscheme jaburns
 endif
 
 " Toggles vim's paste mode; when we want to paste something into vim from a

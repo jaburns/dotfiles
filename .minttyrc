@@ -3,8 +3,8 @@ BoldAsFont=no
 FontHeight=11
 CursorType=block
 
-ForegroundColour=131, 148, 150
-BackgroundColour=  0,  43,  54
+ForegroundColour=230, 225, 220
+BackgroundColour= 43,  37,  33
 CursorColour=    220,  50,  47
 
 Black=             7,  54,  66
