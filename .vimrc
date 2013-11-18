@@ -155,6 +155,7 @@ let g:ctrlp_max_height = 20
 let g:OmniSharp_host = "http://localhost:2000"
 
 " Ignore some subfolders and files which we won't want to edit in vim
+let NERDTreeIgnore = ['\.meta$']
 set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb,*.meta
 
 " Set the type lookup function to use the preview window instead of the status line
