@@ -52,7 +52,22 @@ if has('gui_win32')
     set guifont=Consolas:h11
     set background=dark
     colorscheme jaburns
+
+    " C-Right to toggle fullscreen mode in windows gvim
+    nnoremap <C-Right> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
 endif
+
+" Use control + vertical arrows to resize font in gvim.
+nnoremap <C-Up> :silent! let &guifont = substitute(
+ \ &guifont,
+ \ ':h\zs\d\+',
+ \ '\=eval(submatch(0)+1)',
+ \ 'g')<CR>
+nnoremap <C-Down> :silent! let &guifont = substitute(
+ \ &guifont,
+ \ ':h\zs\d\+',
+ \ '\=eval(submatch(0)-1)',
+ \ 'g')<CR>
 
 " Toggles vim's paste mode; when we want to paste something into vim from a
 " different application, turning on paste mode prevents extra whitespace.
@@ -112,10 +127,13 @@ vnoremap > >gv
 " Map Ctrl+v to paste in insert mode, using the appropriate clipboard
 if has('macunix')
     inoremap <c-v> <c-r>"
+    cnoremap <c-v> <c-r>"
 elseif has('unnamedplus')
     inoremap <c-v> <c-r>+
+    cnoremap <c-v> <c-r>+
 else
     inoremap <c-v> <c-r>*
+    cnoremap <c-v> <c-r>*
 endif
 
 " This option makes Vim use the system default clipboard. On OSX use nothing.
