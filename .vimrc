@@ -109,8 +109,10 @@ vnoremap <c-j> 15j
 vnoremap <c-k> 15k
 
 " Map a ctrl-free shortcut for pasting the yank register
-vnoremap <leader>p c<c-r>0<esc>
-nnoremap <leader>p i<c-r>0<esc>
+vnoremap pp "0p
+nnoremap pp "0p
+vnoremap PP "0P
+nnoremap PP "0P
 
 " Some sane bindings for window resizing
 nnoremap <c-w>, 2<c-w><
