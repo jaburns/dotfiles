@@ -138,6 +138,10 @@ else
     cnoremap <c-v> <c-r>*
 endif
 
+" Double c-v to paste the yank register
+inoremap <c-v><c-v> <c-r>0
+cnoremap <c-v><c-v> <c-r>0
+
 " This option makes Vim use the system default clipboard. On OSX use nothing.
 if has('unnamedplus')
     " Note that on X11, there are _two_ system clipboards: the "standard" one, and

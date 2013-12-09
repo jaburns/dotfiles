@@ -45,6 +45,12 @@ sg () {
     fi;
 }
 
+# Remove all deleted files, and add all new files.
+sa () {
+    test `sg '!' | wc -l` -gt 0 && sg '!' rm
+    test `sg '?' | wc -l` -gt 0 && sg '?' add
+}
+
 # Show the log from HEAD back n revisions
 sl () {
     rev=$(svn info | grep 'Revision' | cut -d\  -f2)
