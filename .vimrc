@@ -44,12 +44,10 @@ set guioptions-=R
 set guioptions-=m
 set guioptions-=M
 
-
-
 " GUI VIM font/color configuration
 if has('gui_win32')
     syntax enable
-    set guifont=Consolas:h11
+    set guifont=Consolas:h10
     set background=dark
     colorscheme jaburns
 endif
@@ -73,7 +71,7 @@ set pastetoggle=<F7>
 " Clear search result highlighting on press enter
 nnoremap <cr> :nohlsearch<cr>
 
-" Map \\ to go back to the previous buffer.
+" Map double leader to go back to the previous buffer.
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>v :sp $MYVIMRC<cr>
 
