@@ -21,7 +21,7 @@ set number              " Print the line number in front of each line
 set scrolloff=10        " Minimal number of screen lines to keep above and below the cursor
 set cursorline          " Highlight the cursor line
 set nostartofline       " Don't jump to start of line when paging up/down
-set timeoutlen=300      " Set multi-character command time-out
+set timeoutlen=500      " Set multi-character command time-out
 set gdefault            " Makes search/replace global by default
 set mouse=a             " Enables the mouse in all modes
 set title               " Show file in title bar
@@ -86,10 +86,8 @@ autocmd BufWritePost _vimrc source $MYVIMRC
 nnoremap Y y$
 
 " Make x behave like d, but preserve the " register.
-nnoremap x "xd
-vnoremap x "xd
-nnoremap X x
-vnoremap X x
+nnoremap X "xd
+vnoremap X "xd
 
 " Simplify quick macro invocation with q register
 nnoremap Q @q
