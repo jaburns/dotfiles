@@ -33,8 +33,6 @@ set nobackup            " No backup~ files
 set hidden              " Don't ask to save when changing buffers
 set noswapfile          " Stop creating bothersome swap files
 
-let mapleader=' '
-
 " Get rid of GUI noise (toolbar, menus, scrollbars)
 set guioptions-=T
 set guioptions-=l
@@ -43,6 +41,13 @@ set guioptions-=r
 set guioptions-=R
 set guioptions-=m
 set guioptions-=M
+
+let mapleader=' '
+
+" Clear vimrc augroup so we don't pile up autocmds when reloading the config.
+augroup vimrc
+    autocmd!
+augroup END
 
 " GUI VIM font/color configuration
 if has('gui_win32')
@@ -76,18 +81,27 @@ inoremap <c-backspace> <esc>dbxi
 
 " Map double leader to go back to the previous buffer.
 nnoremap <leader><leader> <c-^>
-nnoremap <leader>v :sp $MYVIMRC<cr>
+nnoremap <leader>v :e $MYVIMRC<cr>
+
+" Quickly get 3 vertical splits open and select the middle one.
+nnoremap <leader>s :vsp<cr>:vsp<cr><c-w>k
 
 " Automatically reload vimrc after saving changes to it
-autocmd BufWritePost .vimrc source $MYVIMRC
-autocmd BufWritePost _vimrc source $MYVIMRC
+augroup vimrc
+    autocmd BufWritePost .vimrc source $MYVIMRC
+    autocmd BufWritePost _vimrc source $MYVIMRC
+augroup END
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
 
-" Make x behave like d, but preserve the " register.
+" Make X behave like d, but preserve the " register.
 nnoremap X "xd
 vnoremap X "xd
+
+" Prevent x from clobbering the " register.
+nnoremap x "xx
+vnoremap x "xx
 
 " Simplify quick macro invocation with q register
 nnoremap Q @q
