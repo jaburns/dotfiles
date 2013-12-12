@@ -76,6 +76,9 @@ set pastetoggle=<F7>
 " Clear search result highlighting on press enter
 nnoremap <cr> :nohlsearch<cr>
 
+" Get the standard c-backspace behaviour in insert mode
+inoremap <c-backspace> <esc>dbxi
+
 " Map \\ to go back to the previous buffer.
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>v :sp $MYVIMRC<cr>

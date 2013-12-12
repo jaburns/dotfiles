@@ -10,6 +10,8 @@ export EDITOR="vim"
 alias l='ls -1aG'
 alias grep='grep --color=auto'
 
+alias cck='ack --csharp'
+
 # Add personal toolbox to path
 export PATH=$PATH:/home/jaburns/tools
 
