@@ -34,8 +34,7 @@ set hidden              " Don't ask to save when changing buffers
 set noswapfile          " Stop creating bothersome swap files
 
 " Use comma as leader, move comma's default functionality to \
-let mapleader=','
-nnoremap <bslash> ,
+let mapleader='m'
 
 " Get rid of GUI noise (toolbar, menus, scrollbars)
 set guioptions-=T
@@ -90,10 +89,10 @@ nnoremap Y y$
 " Simplify quick macro invocation with q register
 nnoremap Q @q
 
-" Use line position mark jump by default, and remap ` to quickly use M
-nnoremap ' `
-nnoremap ` mM
-nnoremap `` `M
+" Use tick and doubletick to get around quickly, leaving ` for named marks.
+nnoremap <bslash> m
+nnoremap ' mM
+nnoremap '' `M
 
 " jk quickly to exit insert/visual mode
 inoremap jk <esc>
