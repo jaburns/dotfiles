@@ -34,7 +34,7 @@ set hidden              " Don't ask to save when changing buffers
 set noswapfile          " Stop creating bothersome swap files
 
 " Use comma as leader, move comma's default functionality to \
-let mapleader='m'
+let mapleader=' '
 
 " Get rid of GUI noise (toolbar, menus, scrollbars)
 set guioptions-=T
@@ -90,7 +90,6 @@ nnoremap Y y$
 nnoremap Q @q
 
 " Use tick and doubletick to get around quickly, leaving ` for named marks.
-nnoremap <bslash> m
 nnoremap ' mM
 nnoremap '' `M
 
