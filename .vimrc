@@ -33,9 +33,7 @@ set nobackup            " No backup~ files
 set hidden              " Don't ask to save when changing buffers
 set noswapfile          " Stop creating bothersome swap files
 
-" Use comma as leader, move comma's default functionality to \
-let mapleader=','
-nnoremap <bslash> ,
+let mapleader=' '
 
 " Get rid of GUI noise (toolbar, menus, scrollbars)
 set guioptions-=T
@@ -49,12 +47,9 @@ set guioptions-=M
 " GUI VIM font/color configuration
 if has('gui_win32')
     syntax enable
-    set guifont=Consolas:h11
+    set guifont=Consolas:h10
     set background=dark
     colorscheme jaburns
-
-    " C-Right to toggle fullscreen mode in windows gvim
-    nnoremap <C-Right> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
 endif
 
 " Use control + vertical arrows to resize font in gvim.
@@ -79,7 +74,7 @@ nnoremap <cr> :nohlsearch<cr>
 " Get the standard c-backspace behaviour in insert mode
 inoremap <c-backspace> <esc>dbxi
 
-" Map \\ to go back to the previous buffer.
+" Map double leader to go back to the previous buffer.
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>v :sp $MYVIMRC<cr>
 
@@ -90,13 +85,18 @@ autocmd BufWritePost _vimrc source $MYVIMRC
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
 
+" Make x behave like d, but preserve the " register.
+nnoremap x "xd
+vnoremap x "xd
+nnoremap X x
+vnoremap X x
+
 " Simplify quick macro invocation with q register
 nnoremap Q @q
 
-" Use line position mark jump by default, and remap ` to quickly use M
-nnoremap ' `
-nnoremap ` mM
-nnoremap `` `M
+" Use tick and doubletick to get around quickly, leaving ` for named marks.
+nnoremap ' mM
+nnoremap '' `M
 
 " jk quickly to exit insert/visual mode
 inoremap jk <esc>
@@ -111,19 +111,25 @@ nnoremap <c-k> 15k
 vnoremap <c-j> 15j
 vnoremap <c-k> 15k
 
-" Map a ctrl-free shortcut for pasting the yank register
-vnoremap pp "0p
-nnoremap pp "0p
-vnoremap PP "0P
-nnoremap PP "0P
+" Use ctrl-c to paste the yank register
+vnoremap <c-c> "0p
+nnoremap <c-c> "0p
+vnoremap <c-C> "0P
+nnoremap <c-C> "0P
+inoremap <c-c> <c-r>0
+cnoremap <c-c> <c-r>0
 
 " Some sane bindings for window resizing
-nnoremap <c-w>, 2<c-w><
-nnoremap <c-w>. 2<c-w>>
 nnoremap <c-w>y 10<c-w><
+nnoremap <c-w>u 10<c-w>+
+nnoremap <c-w>i 10<c-w>-
 nnoremap <c-w>o 10<c-w>>
 nnoremap <c-w><c-y> 10<c-w><
+nnoremap <c-w><c-u> 10<c-w>+
+nnoremap <c-w><c-i> 10<c-w>-
 nnoremap <c-w><c-o> 10<c-w>>
+nnoremap <c-w>, 2<c-w><
+nnoremap <c-w>. 2<c-w>>
 
 " Stay in visual mode when indenting
 vnoremap < <gv
@@ -140,10 +146,6 @@ else
     inoremap <c-v> <c-r>*
     cnoremap <c-v> <c-r>*
 endif
-
-" Double c-v to paste the yank register
-inoremap <c-v><c-v> <c-r>0
-cnoremap <c-v><c-v> <c-r>0
 
 " This option makes Vim use the system default clipboard. On OSX use nothing.
 if has('unnamedplus')
