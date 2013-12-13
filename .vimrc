@@ -84,7 +84,7 @@ nnoremap <leader><leader> <c-^>
 nnoremap <leader>v :e $MYVIMRC<cr>
 
 " Quickly get 3 vertical splits open and select the middle one.
-nnoremap <leader>s :vsp<cr>:vsp<cr><c-w>k
+nnoremap <leader>s :vsp<cr>:vsp<cr><c-w>l
 
 " Automatically reload vimrc after saving changes to it
 augroup vimrc
