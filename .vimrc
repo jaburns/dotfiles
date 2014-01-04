@@ -21,7 +21,7 @@ set number              " Print the line number in front of each line
 set scrolloff=10        " Minimal number of screen lines to keep above and below the cursor
 set cursorline          " Highlight the cursor line
 set nostartofline       " Don't jump to start of line when paging up/down
-set timeoutlen=300      " Set multi-character command time-out
+set timeoutlen=500      " Set multi-character command time-out
 set gdefault            " Makes search/replace global by default
 set mouse=a             " Enables the mouse in all modes
 set title               " Show file in title bar
@@ -33,10 +33,6 @@ set nobackup            " No backup~ files
 set hidden              " Don't ask to save when changing buffers
 set noswapfile          " Stop creating bothersome swap files
 
-" Use comma as leader, move comma's default functionality to \
-let mapleader=','
-nnoremap <bslash> ,
-
 " Get rid of GUI noise (toolbar, menus, scrollbars)
 set guioptions-=T
 set guioptions-=l
@@ -46,13 +42,32 @@ set guioptions-=R
 set guioptions-=m
 set guioptions-=M
 
+let mapleader=' '
+
+" Clear vimrc augroup so we don't pile up autocmds when reloading the config.
+augroup vimrc
+    autocmd!
+augroup END
+
 " GUI VIM font/color configuration
 if has('gui_win32')
     syntax enable
-    set guifont=Consolas:h11
+    set guifont=Consolas:h10
     set background=dark
-    colorscheme solarized
+    colorscheme jaburns
 endif
+
+" Use control + vertical arrows to resize font in gvim.
+nnoremap <C-Up> :silent! let &guifont = substitute(
+ \ &guifont,
+ \ ':h\zs\d\+',
+ \ '\=eval(submatch(0)+1)',
+ \ 'g')<CR>
+nnoremap <C-Down> :silent! let &guifont = substitute(
+ \ &guifont,
+ \ ':h\zs\d\+',
+ \ '\=eval(submatch(0)-1)',
+ \ 'g')<CR>
 
 " Toggles vim's paste mode; when we want to paste something into vim from a
 " different application, turning on paste mode prevents extra whitespace.
@@ -61,24 +76,39 @@ set pastetoggle=<F7>
 " Clear search result highlighting on press enter
 nnoremap <cr> :nohlsearch<cr>
 
-" Map \\ to go back to the previous buffer.
+" Get the standard c-backspace behaviour in insert mode
+inoremap <c-backspace> <esc>dbxi
+
+" Map double leader to go back to the previous buffer.
 nnoremap <leader><leader> <c-^>
-nnoremap <leader>v :sp $MYVIMRC<cr>
+nnoremap <leader>v :e $MYVIMRC<cr>
+
+" Quickly get 3 vertical splits open and select the middle one.
+nnoremap <leader>s :vsp<cr>:vsp<cr><c-w>l
 
 " Automatically reload vimrc after saving changes to it
-autocmd BufWritePost .vimrc source $MYVIMRC
-autocmd BufWritePost _vimrc source $MYVIMRC
+augroup vimrc
+    autocmd BufWritePost .vimrc source $MYVIMRC
+    autocmd BufWritePost _vimrc source $MYVIMRC
+augroup END
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
 
+" Make X behave like d, but preserve the " register.
+nnoremap X "xd
+vnoremap X "xd
+
+" Prevent x from clobbering the " register.
+nnoremap x "xx
+vnoremap x "xx
+
 " Simplify quick macro invocation with q register
 nnoremap Q @q
 
-" Use line position mark jump by default, and remap ` to quickly use M
-nnoremap ' `
-nnoremap ` mM
-nnoremap `` `M
+" Use tick and doubletick to get around quickly, leaving ` for named marks.
+nnoremap ' mM
+nnoremap '' `M
 
 " jk quickly to exit insert/visual mode
 inoremap jk <esc>
@@ -93,17 +123,25 @@ nnoremap <c-k> 15k
 vnoremap <c-j> 15j
 vnoremap <c-k> 15k
 
-" Map a ctrl-free shortcut for pasting the yank register
-vnoremap <leader>p c<c-r>0<esc>
-nnoremap <leader>p i<c-r>0<esc>
+" Use ctrl-c to paste the yank register
+vnoremap <c-c> "0p
+nnoremap <c-c> "0p
+vnoremap <c-C> "0P
+nnoremap <c-C> "0P
+inoremap <c-c> <c-r>0
+cnoremap <c-c> <c-r>0
 
 " Some sane bindings for window resizing
-nnoremap <c-w>, 2<c-w><
-nnoremap <c-w>. 2<c-w>>
 nnoremap <c-w>y 10<c-w><
+nnoremap <c-w>u 10<c-w>+
+nnoremap <c-w>i 10<c-w>-
 nnoremap <c-w>o 10<c-w>>
 nnoremap <c-w><c-y> 10<c-w><
+nnoremap <c-w><c-u> 10<c-w>+
+nnoremap <c-w><c-i> 10<c-w>-
 nnoremap <c-w><c-o> 10<c-w>>
+nnoremap <c-w>, 2<c-w><
+nnoremap <c-w>. 2<c-w>>
 
 " Stay in visual mode when indenting
 vnoremap < <gv
@@ -112,10 +150,13 @@ vnoremap > >gv
 " Map Ctrl+v to paste in insert mode, using the appropriate clipboard
 if has('macunix')
     inoremap <c-v> <c-r>"
+    cnoremap <c-v> <c-r>"
 elseif has('unnamedplus')
     inoremap <c-v> <c-r>+
+    cnoremap <c-v> <c-r>+
 else
     inoremap <c-v> <c-r>*
+    cnoremap <c-v> <c-r>*
 endif
 
 " This option makes Vim use the system default clipboard. On OSX use nothing.
@@ -155,6 +196,7 @@ let g:ctrlp_max_height = 20
 let g:OmniSharp_host = "http://localhost:2000"
 
 " Ignore some subfolders and files which we won't want to edit in vim
+let NERDTreeIgnore = ['\.meta$']
 set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb,*.meta
 
 " Set the type lookup function to use the preview window instead of the status line

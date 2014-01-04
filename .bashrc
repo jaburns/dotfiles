@@ -10,10 +10,14 @@ export EDITOR="vim"
 alias l='ls -1aG'
 alias grep='grep --color=auto'
 
+alias cck='ack --csharp'
+
 # Add personal toolbox to path
 export PATH=$PATH:/home/jaburns/tools
 
 # ----- git helpers -----------------------------------------------------------
+
+# git config --global credential.helper "cache --timeout=3600"
 
 gg () {
     if [ "$#" -lt 1 ]; then
@@ -25,9 +29,10 @@ gg () {
     fi;
 }
 
-alias gc='git commit -m'
-alias ga='git add -A'
+alias gc='git commit'
+alias ga='git add'
 alias gp='git push'
+alias gu='git pull'
 
 # ----- SVN helpers -----------------------------------------------------------
 
@@ -40,6 +45,12 @@ sg () {
     else
         svn st | grep "$1" | sed 's/^. *//g;s/\(.*\)/"\1"/' | xargs svn "$2"
     fi;
+}
+
+# Remove all deleted files, and add all new files.
+sa () {
+    test `sg '!' | wc -l` -gt 0 && sg '!' rm
+    test `sg '?' | wc -l` -gt 0 && sg '?' add
 }
 
 # Show the log from HEAD back n revisions
@@ -55,11 +66,15 @@ alias si='svn propedit svn:ignore .'
 
 ps1_color_error () {
     if [ "$1" -eq 0 ]; then
-        printf '\033[0;32m'
-        printf "  0 "
+        printf '32'
     else
-        printf '\033[0;31m'
-        printf "%3s " "$1"
+        printf '31'
+    fi;
+    exit $1
+}
+ps1_value_error () {
+    if [ "$1" -gt 0 ]; then
+        printf " $1 "
     fi;
 }
-export PS1='$(ps1_color_error $?)\u\[\033[0;34m\] \W) \[\033[0m\]'
+export PS1='\[\033[0;$(ps1_color_error $?)m\]$(ps1_value_error $?)\u\[\033[0;34m\] \W) \[\033[0m\]'

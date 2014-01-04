@@ -24,6 +24,8 @@ files_xmonad=$( cat <<EOF
 EOF
 )
 
+# TODO Link .xmonad as a folder, and link .vim in *nix
+
 do_files () {
     for x in $*; do
         [ -a "$HOME/$x" ] && rm "$HOME/$x"
@@ -40,11 +42,17 @@ echo "Done!"
 echo ""
 
 if [ "$1" == 'windows' ]; then
-    echo "Linking windows _vimrc file..."
+    echo "Linking windows vim files..."
+
     rm -f "/cygdrive/c/Users/$(whoami)/_vimrc"
+    rm -rf "/cygdrive/c/Users/$(whoami)/vimfiles"
+
     ln "$repo_dir/.vimrc" "/cygdrive/c/Users/$(whoami)/_vimrc"
     echo "$repo_dir/.vimrc" '==>' "/cygdrive/c/Users/$(whoami)/_vimrc"
+
+    echo "mklink /j \"c:\\Users\\$(whoami)\\vimfiles\" \"C:\\cygwin\\home\\jaburns\\dotfiles\\.vim\"" | cmd
+
     echo "Done!"
     echo ""
-fi;
+fi
 
