@@ -11,6 +11,7 @@ alias l='ls -1aG'
 alias grep='grep --color=auto'
 
 alias cck='ack --csharp'
+alias aak='ack --actionscript'
 
 # Add personal toolbox to path
 export PATH=$PATH:/home/jaburns/tools
