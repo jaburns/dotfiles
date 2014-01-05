@@ -6,10 +6,11 @@ set keymap vi
 set -o vi
 export EDITOR="vim"
 
-# Command aliases
+# Basic command default parameters
 alias l='ls -1aG'
 alias grep='grep --color=auto'
 
+# Acks I'm using a lot right now
 alias cck='ack --csharp'
 alias aak='ack --actionscript'
 
