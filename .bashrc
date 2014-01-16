@@ -32,6 +32,7 @@ gg () {
 }
 
 alias gc='git commit'
+alias gd='git diff'
 alias ga='git add'
 alias gp='git push'
 alias gu='git pull'
