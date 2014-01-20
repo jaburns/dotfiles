@@ -90,6 +90,7 @@ nnoremap <leader>n <c-w>v:NERDTree<cr><c-w>=<c-w>l
 augroup vimrc
     autocmd BufWritePost .vimrc source $MYVIMRC
     autocmd BufWritePost _vimrc source $MYVIMRC
+    autocmd BufNewFile,BufRead *.as set filetype=javascript
 augroup END
 
 " Make Y behave consistently like D instead of yy
