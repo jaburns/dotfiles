@@ -81,4 +81,4 @@ ps1_value_error () {
         printf " $1 "
     fi;
 }
-export PS1='\[\033[0;$(ps1_color_error $?)m\]$(ps1_value_error $?)cylon13\[\033[0;34m\] \W) \[\033[0m\]'
+export PS1='\[\033[0;$(ps1_color_error $?)m\]$(ps1_value_error $?)\u\[\033[0;34m\] \W) \[\033[0m\]'
