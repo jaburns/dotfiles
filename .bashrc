@@ -9,8 +9,8 @@ export EDITOR="vim"
 # Command aliases
 alias l='ls -1aG'
 alias grep='grep --color=auto'
-
 alias cck='ack --csharp'
+alias pyhttp='python -m SimpleHTTPServer'
 
 # Add personal toolbox to path
 export PATH=$PATH:/home/jaburns/tools
@@ -77,4 +77,4 @@ ps1_value_error () {
         printf " $1 "
     fi;
 }
-export PS1='\[\033[0;$(ps1_color_error $?)m\]$(ps1_value_error $?)\u\[\033[0;34m\] \W) \[\033[0m\]'
+export PS1='\[\033[0;$(ps1_color_error $?)m\]$(ps1_value_error $?)cylon13\[\033[0;34m\] \W) \[\033[0m\]'
