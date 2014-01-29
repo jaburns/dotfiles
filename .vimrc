@@ -83,13 +83,14 @@ inoremap <c-backspace> <esc>dbxi
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>v :e $MYVIMRC<cr>
 
-" Quickly get 3 vertical splits open and select the middle one.
-nnoremap <leader>s :vsp<cr>:vsp<cr><c-w>l
+" Open up NERDTree and a couple of splits.
+nnoremap <leader>n <c-w>v:NERDTree<cr><c-w>=<c-w>l
 
 " Automatically reload vimrc after saving changes to it
 augroup vimrc
     autocmd BufWritePost .vimrc source $MYVIMRC
     autocmd BufWritePost _vimrc source $MYVIMRC
+    autocmd BufNewFile,BufRead *.as set filetype=javascript
 augroup END
 
 " Make Y behave consistently like D instead of yy
@@ -142,6 +143,7 @@ nnoremap <c-w><c-i> 10<c-w>-
 nnoremap <c-w><c-o> 10<c-w>>
 nnoremap <c-w>, 2<c-w><
 nnoremap <c-w>. 2<c-w>>
+
 
 " Stay in visual mode when indenting
 vnoremap < <gv

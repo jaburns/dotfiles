@@ -6,10 +6,13 @@ set keymap vi
 set -o vi
 export EDITOR="vim"
 
-# Command aliases
+# Basic command default parameters
 alias l='ls -1aG'
 alias grep='grep --color=auto'
+
 alias cck='ack --csharp'
+alias aak='ack --actionscript'
+
 alias pyhttp='python -m SimpleHTTPServer'
 
 # Add personal toolbox to path
@@ -30,6 +33,7 @@ gg () {
 }
 
 alias gc='git commit'
+alias gd='git diff'
 alias ga='git add'
 alias gp='git push'
 alias gu='git pull'
