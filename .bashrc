@@ -15,8 +15,9 @@ alias aak='ack --actionscript'
 
 alias pyhttp='python -m SimpleHTTPServer'
 
-# Add personal toolbox to path
+# Add machine specific and shared toolboxes to path
 export PATH=$PATH:/home/jaburns/tools
+export PATH=$PATH:/home/jaburns/dotfiles/tools
 
 # ----- git helpers -----------------------------------------------------------
 
