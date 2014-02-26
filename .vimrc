@@ -111,9 +111,8 @@ nnoremap Q @q
 nnoremap ' mM
 nnoremap '' `M
 
-" jk quickly to exit insert/visual mode
+" jk quickly to exit insert mode
 inoremap jk <esc>
-vnoremap jk <esc>
 
 " Use K to split the current line
 nnoremap K i<cr><esc>
