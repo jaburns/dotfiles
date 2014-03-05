@@ -10,8 +10,8 @@ export EDITOR="vim"
 alias l='ls -1aG'
 alias grep='grep --color=auto'
 
-alias cck='ack --csharp'
-alias aak='ack --actionscript'
+alias cck='echo && echo && echo && echo && ack --csharp'
+alias aak='echo && echo && echo && echo && ack --actionscript'
 
 alias pyhttp='python -m SimpleHTTPServer'
 
