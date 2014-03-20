@@ -143,11 +143,6 @@ nnoremap <c-w><c-o> 10<c-w>>
 nnoremap <c-w>, 2<c-w><
 nnoremap <c-w>. 2<c-w>>
 
-
-" Stay in visual mode when indenting
-vnoremap < <gv
-vnoremap > >gv
-
 " Map Ctrl+v to paste in insert mode, using the appropriate clipboard
 if has('macunix')
     inoremap <c-v> <c-r>"

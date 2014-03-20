@@ -13,6 +13,7 @@ alias grep='grep --color=auto'
 alias cck='echo && echo && echo && echo && ack --csharp'
 alias aak='echo && echo && echo && echo && ack --actionscript'
 
+alias notes='vim ~/Dropbox/notes.txt'
 alias pyhttp='python -m SimpleHTTPServer'
 
 # Add machine specific and shared toolboxes to path
