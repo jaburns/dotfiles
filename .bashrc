@@ -23,6 +23,7 @@ export PATH=$PATH:/home/jaburns/.cabal/bin
 # ----- git helpers -----------------------------------------------------------
 
 # git config --global credential.helper "cache --timeout=3600"
+# git config --global color.ui auto
 
 gg () {
     if [ "$#" -lt 1 ]; then

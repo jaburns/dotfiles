@@ -50,11 +50,14 @@ augroup vimrc
 augroup END
 
 " GUI VIM font/color configuration
-if has('gui_win32')
+if has('gui_running')
     syntax enable
-    set guifont=Consolas:h10
     set background=dark
     colorscheme jaburns
+endif
+
+if has('gui_win32')
+    set guifont=Consolas:h10
 endif
 
 " Use control + vertical arrows to resize font in gvim.
