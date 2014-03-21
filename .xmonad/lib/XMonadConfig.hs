@@ -35,17 +35,17 @@ dzenMono = dzenCmd "Ubuntu Mono-12:Regular"
 
 statBarCmdLaptop = dzenSans "-ta 'l' -x '0' -y '1056' -w '1440'"
 
-statBarCmd0 = dzenSans "-ta 'l' -x '0' -w '1440'"
+statBarCmd0 = dzenSans "-ta 'l' -x '0' -y '360' -w '1440'"
 statBarCmd1 = dzenSans "-ta 'l' -x '1920' -w '960'"
-statBarCmd2 = dzenSans "-ta 'l' -x '4480' -w '960'"
+statBarCmd2 = dzenSans "-ta 'l' -x '4480' -w '1280'"
 
 pandoraCmd  = "ruby ~/.xmonad/dzen-pandora/dzen-pandora.rb | "
               ++ dzenSans "-ta 'r' -x '2880' -w '1600'"
 
-conkyCmd = "conky | " ++ dzenMono "-ta 'r' -x '5440' -w '960'"
+conkyCmd = "conky | " ++ dzenMono "-ta 'r' -x '5760' -w '1280'"
 
 -- Specifies the physical order of monitors indexed by xinerama.
-desktopScreenOrder = [2,1,0]
+desktopScreenOrder = [1,2,0]
 
 --------------------------------------------------------------------------------
 
@@ -111,8 +111,8 @@ layoutHook' = border1 (ResizableTall 1 (3/100) (1/2) [])
           ||| border2 (ThreeColMid   1 (3/100) (1/2))
           ||| noBorders Full
   where
-    border1 = avoidStruts . smartBorders -- . spacing 4
-    border2 = avoidStruts . smartBorders -- . spacing 2
+    border1 = avoidStruts . smartBorders . spacing 4
+    border2 = avoidStruts . smartBorders . spacing 2
 
 --------------------------------------------------------------------------------
 
