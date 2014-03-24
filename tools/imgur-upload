@@ -3,6 +3,8 @@
 # Thanks to Sirupsen for this tool!
 #   http://sirupsen.com/a-simple-imgur-bash-screenshot-utility/
 
+# usage: xfce4-screenshooter -r -o ~/dotfiles/tools/imgur-upload
+
 function uploadImage {
   curl -s -F "image=@$1" -F "key=486690f872c678126a2c09a9e196ce1b" \
       https://imgur.com/api/upload.xml \

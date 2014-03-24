@@ -50,11 +50,14 @@ augroup vimrc
 augroup END
 
 " GUI VIM font/color configuration
-if has('gui_win32')
+if has('gui_running')
     syntax enable
-    set guifont=Consolas:h10
     set background=dark
     colorscheme jaburns
+endif
+
+if has('gui_win32')
+    set guifont=Consolas:h10
 endif
 
 " Use control + vertical arrows to resize font in gvim.
@@ -83,13 +86,14 @@ inoremap <c-backspace> <esc>dbxi
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>v :e $MYVIMRC<cr>
 
-" Quickly get 3 vertical splits open and select the middle one.
-nnoremap <leader>s :vsp<cr>:vsp<cr><c-w>l
+" Open up NERDTree and a couple of splits.
+nnoremap <leader>n <c-w>v:NERDTree<cr><c-w>=<c-w>l
 
 " Automatically reload vimrc after saving changes to it
 augroup vimrc
     autocmd BufWritePost .vimrc source $MYVIMRC
     autocmd BufWritePost _vimrc source $MYVIMRC
+    autocmd BufNewFile,BufRead *.as set filetype=javascript
 augroup END
 
 " Make Y behave consistently like D instead of yy
@@ -110,9 +114,8 @@ nnoremap Q @q
 nnoremap ' mM
 nnoremap '' `M
 
-" jk quickly to exit insert/visual mode
+" jk quickly to exit insert mode
 inoremap jk <esc>
-vnoremap jk <esc>
 
 " Use K to split the current line
 nnoremap K i<cr><esc>
@@ -142,10 +145,6 @@ nnoremap <c-w><c-i> 10<c-w>-
 nnoremap <c-w><c-o> 10<c-w>>
 nnoremap <c-w>, 2<c-w><
 nnoremap <c-w>. 2<c-w>>
-
-" Stay in visual mode when indenting
-vnoremap < <gv
-vnoremap > >gv
 
 " Map Ctrl+v to paste in insert mode, using the appropriate clipboard
 if has('macunix')
