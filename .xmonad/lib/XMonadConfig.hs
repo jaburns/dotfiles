@@ -33,7 +33,8 @@ dzenCmd fnt = (++) $ "dzen2 -h '24' -bg '#000000' -fg '#ffffff' -fn '"++fnt++"' 
 dzenSans = dzenCmd "Ubuntu Sans-10:Regular"
 dzenMono = dzenCmd "Ubuntu Mono-12:Regular"
 
-statBarCmdLaptop = dzenSans "-ta 'l' -x '0' -y '1056' -w '1440'"
+--statBarCmdLaptop = dzenSans "-ta 'l' -x '0' -y '1056' -w '1440'"   --1920x1080
+statBarCmdLaptop = dzenSans "-ta 'l' -x '0' -y '1176' -w '1440'"   --1920x1200
 
 statBarCmd0 = dzenSans "-ta 'l' -x '0' -w '1440'"
 statBarCmd1 = dzenSans "-ta 'l' -x '1920' -w '960'"
