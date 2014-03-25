@@ -81,7 +81,7 @@ mainAction machine = do
               normalBorderColor = "#000000",
               focusedBorderColor = "#cb4b16",
               --modMask = mod4Mask,
-              terminal = "gnome-terminal",
+              terminal = "xfce4-terminal",
               focusFollowsMouse = False,
               borderWidth = 2,
               layoutHook = layoutHook',
@@ -95,7 +95,7 @@ myKeys =
     [
      -- check if unsafeSpawn can call standard 'shoot' script
         ("M-x", spawn "xfce4-screenshooter -r -o /home/jaburns/tools/imgur-upload"),
-        ("M-p", spawn "dmenu_run -nb black -nf white"),
+        ("M-p", spawn "dmenu_run -fn r24 -nb black -nf white"),
         ("M-S-h", sendMessage MirrorShrink),
         ("M-S-l", sendMessage MirrorExpand),
         ("M-r", spawn "xmonad --recompile && xmonad --restart")
