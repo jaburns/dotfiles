@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+devid=$(xinput list \
+    | grep -i touchpad \
+    | sed 's/^.*id=//;s/ *\[.*$//')
+
+enabled=$(xinput list-props $devid \
+    | grep "Device Enabled" \
+    | sed 's/^.*:\t*//')
+
+xinput set-prop $devid "Device Enabled" $(( 1 - enabled ))
