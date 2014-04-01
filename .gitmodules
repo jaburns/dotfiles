@@ -16,3 +16,6 @@
 [submodule "tools/dzen-pandora"]
 	path = tools/dzen-pandora
 	url = https://github.com/jaburns/dzen-pandora
+[submodule "tools/winsnap"]
+	path = tools/winsnap
+	url = https://github.com/jaburns/winsnap
