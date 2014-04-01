@@ -13,3 +13,6 @@
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree
+[submodule "tools/dzen-pandora"]
+	path = tools/dzen-pandora
+	url = htps://github.com/jaburns/dzen-pandora
