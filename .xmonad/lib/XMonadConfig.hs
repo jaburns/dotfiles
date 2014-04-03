@@ -43,8 +43,6 @@ statBarCmd2 = dzenSans "-ta 'l' -x '4480' -w '1280'"
 pandoraCmd  = "ruby ~/.xmonad/dzen-pandora/dzen-pandora.rb | "
               ++ dzenSans "-ta 'r' -x '2880' -w '1600'"
 
-conkyCmd = "conky | " ++ dzenMono "-ta 'r' -x '5760' -w '1280'"
-
 -- Specifies the physical order of monitors indexed by xinerama.
 desktopScreenOrder = [1,2,0]
 
@@ -64,7 +62,6 @@ desktop = do
     statBar2 <- spawnPipe statBarCmd2
 
     _ <- spawn pandoraCmd
-    _ <- spawn conkyCmd
 
     return $ customLogHook [statBar0,statBar1,statBar2] desktopScreenOrder
 
