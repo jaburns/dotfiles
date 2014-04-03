@@ -1,0 +1,32 @@
+#!/bin/bash
+
+repo_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+install () {
+    if [[ "$1" == "dir" ]]; then
+        rm -rf "$HOME/$2"
+        mkdir -p "$(dirname "$HOME/$2")"
+        ln -s "$repo_dir/$2" "$HOME/$2"
+    else
+        rm -r "$HOME/$2"
+        ln "$repo_dir/$2" "$HOME/$2"
+    fi
+    echo "Linking '$repo_dir/$2' -> '$HOME/$2'"
+}
+
+git submodule update --init --recursive
+
+install dir  .vim
+install dir  .themes/jaburns
+install file .bashrc
+install file .tmux.conf
+
+if [[ "$(uname -o)" == "Cygwin" ]]; then
+
+    install file .minttyrc
+
+    rm -rf "/cygdrive/c/Users/$(whoami)/vimfiles"
+    echo "mklink /j \"c:\\Users\\$(whoami)\\vimfiles\" \
+                    \"C:\\cygwin\\home\\$(whoami)\\dotfiles\\.vim\"" | cmd
+
+fi
