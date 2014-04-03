@@ -103,6 +103,16 @@ nnoremap Y y$
 " Make X behave like d, but preserve the " register.
 nnoremap X "xd
 vnoremap X "xd
+nnoremap XX "xdd
+
+" Make c preserve the " register
+nnoremap c "xc
+nnoremap C "xC
+vnoremap c "xc
+vnoremap C "xC
+
+" Prevent pasting in visual mode from yanking the replaced text.
+vnoremap p "_dP
 
 " Prevent x from clobbering the " register.
 nnoremap x "xx
@@ -126,14 +136,6 @@ nnoremap <c-j> 15j
 nnoremap <c-k> 15k
 vnoremap <c-j> 15j
 vnoremap <c-k> 15k
-
-" Use ctrl-c to paste the yank register
-vnoremap <c-c> "0p
-nnoremap <c-c> "0p
-vnoremap <c-C> "0P
-nnoremap <c-C> "0P
-inoremap <c-c> <c-r>0
-cnoremap <c-c> <c-r>0
 
 " Some sane bindings for window resizing
 nnoremap <c-w>y 10<c-w><
