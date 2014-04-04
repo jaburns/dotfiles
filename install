@@ -29,5 +29,6 @@ if [[ "$(uname -o)" == "Cygwin" ]]; then
     rm -rf "/cygdrive/c/Users/$(whoami)/vimfiles"
     echo "mklink /j \"c:\\Users\\$(whoami)\\vimfiles\" \
                     \"C:\\cygwin\\home\\$(whoami)\\dotfiles\\.vim\"" | cmd
+    echo ""
 
 fi
