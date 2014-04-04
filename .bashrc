@@ -16,9 +16,9 @@ alias aak='echo && echo && echo && echo && ack --actionscript'
 alias notes='vim ~/Dropbox/notes.txt'
 alias pyhttp='python -m SimpleHTTPServer'
 
-export PATH=$PATH:/home/jaburns/tools
-export PATH=$PATH:/home/jaburns/dotfiles/tools
-export PATH=$PATH:/home/jaburns/.cabal/bin
+export PATH=$PATH:$HOME/tools
+export PATH=$PATH:$HOME/dotfiles/tools
+export PATH=$PATH:$HOME/.cabal/bin
 
 # ----- git helpers -----------------------------------------------------------
 
