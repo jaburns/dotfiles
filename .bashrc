@@ -10,15 +10,25 @@ export EDITOR="vim"
 alias l='ls -1aG'
 alias grep='grep --color=auto'
 
-alias cck='echo && echo && echo && echo && ack --csharp'
-alias aak='echo && echo && echo && echo && ack --actionscript'
-
 alias notes='vim ~/Dropbox/notes.txt'
 alias pyhttp='python -m SimpleHTTPServer'
 
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cabal/bin
+
+# ----- ack helpers -----------------------------------------------------------
+
+ack_formatted () {
+    local lang=$1
+    shift
+    printf "\n\n\n    $@\n\n"
+    ack $lang $@
+    printf "\n\n\n\n"
+}
+
+alias cck='ack_formatted --csharp'
+alias aak='ack_formatted --actionscript'
 
 # ----- git helpers -----------------------------------------------------------
 
