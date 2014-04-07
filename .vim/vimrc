@@ -189,7 +189,11 @@ set omnifunc=syntaxcomplete#Complete
 
 " Filetype specific settings
 augroup vimrc
-    autocmd FileType cs source ~/.vim/cs.vim
+    if has("win32")
+        autocmd FileType cs source ~/vimfiles/cs.vim
+    else
+        autocmd FileType cs source ~/.vim/cs.vim
+    endif
 augroup END
 
 " --------- CtrlP settings -----------------------------------------------------
