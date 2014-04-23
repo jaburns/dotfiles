@@ -49,7 +49,7 @@ alias gc='git commit'
 alias gd='git diff'
 alias ga='git add'
 alias gp='git push'
-alias gu='git pull'
+alias gu='git pull --ff-only --all'
 
 # ----- SVN helpers -----------------------------------------------------------
 
