@@ -125,9 +125,6 @@ nnoremap Q @q
 nnoremap ' mM
 nnoremap '' `M
 
-" jk quickly to exit insert mode
-inoremap jk <esc>
-
 " Use K to split the current line
 nnoremap K i<cr><esc>
 
