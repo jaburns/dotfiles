@@ -4,10 +4,6 @@
 " This is the default value, setting it isn't actually necessary
 let g:OmniSharp_host = "http://localhost:2000"
 
-" Ignore some subfolders and files which we won't want to edit in vim
-let NERDTreeIgnore = ['\.meta$']
-set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb,*.meta
-
 " Set the type lookup function to use the preview window instead of the status line
 let g:OmniSharp_typeLookupInPreview = 1
 
