@@ -125,8 +125,9 @@ nnoremap Q @q
 nnoremap ' mM
 nnoremap '' `M
 
-" jk quickly to exit insert mode
-inoremap jk <esc>
+" Keep selection during tabbing. Don't require shift to tab in v-mode.
+vnoremap . >gv
+vnoremap , <gv
 
 " Use K to split the current line
 nnoremap K i<cr><esc>

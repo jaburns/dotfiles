@@ -30,6 +30,10 @@ ack_formatted () {
 alias cck='ack_formatted --csharp'
 alias aak='ack_formatted --actionscript'
 
+cjns () {
+    curl "$1" | sed 's/:"[^"]*/:"/g'
+}
+
 # ----- git helpers -----------------------------------------------------------
 
 # git config --global credential.helper "cache --timeout=3600"
