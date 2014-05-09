@@ -3,7 +3,7 @@
 	url = git://github.com/kien/ctrlp.vim.git
 [submodule ".vim/bundle/Omnisharp"]
 	path = .vim/bundle/Omnisharp
-	url = https://github.com/nosami/Omnisharp.git
+	url = http://github.com/nosami/Omnisharp
 [submodule ".vim/bundle/vim-dispatch"]
 	path = .vim/bundle/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch
