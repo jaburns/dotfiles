@@ -7,6 +7,8 @@ let g:OmniSharp_host = "http://localhost:2000"
 " Set the type lookup function to use the preview window instead of the status line
 let g:OmniSharp_typeLookupInPreview = 1
 
+setlocal omnifunc=OmniSharp#Complete
+
 " Showmatch significantly slows down omnicomplete when the first match contains parentheses.
 set noshowmatch
 
