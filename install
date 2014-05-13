@@ -1,5 +1,16 @@
 #!/bin/bash
 
+if [[ "$1" == "omni" ]]; then
+    cd .vim/bundle/Omnisharp/server/Omnisharp
+    if [[ "$(uname -o)" == "Cygwin" ]]; then
+        echo msbuild | cmd
+        echo ""
+    else
+        xbuild
+    fi
+    exit 0
+fi
+
 repo_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 install () {
@@ -30,5 +41,4 @@ if [[ "$(uname -o)" == "Cygwin" ]]; then
     echo "mklink /j \"c:\\Users\\$(whoami)\\vimfiles\" \
                     \"C:\\cygwin\\home\\$(whoami)\\dotfiles\\.vim\"" | cmd
     echo ""
-
 fi
