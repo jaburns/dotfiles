@@ -17,6 +17,21 @@ export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cabal/bin
 
+cjns () {
+    curl "$1" | sed 's/:"[^"]*/:"/g'
+}
+
+cdls () {
+    cd "$1"
+    local cderr="$?"
+    if [ "$cderr" -eq 0 ]; then
+        pwd
+        ls -a --color
+    fi
+    return "$cderr"
+}
+alias cd='cdls'
+
 # ----- ack helpers -----------------------------------------------------------
 
 ack_formatted () {
@@ -29,10 +44,6 @@ ack_formatted () {
 
 alias cck='ack_formatted --csharp'
 alias aak='ack_formatted --actionscript'
-
-cjns () {
-    curl "$1" | sed 's/:"[^"]*/:"/g'
-}
 
 # ----- git helpers -----------------------------------------------------------
 
