@@ -23,17 +23,18 @@ cjns () {
 # ----- set default output for ls; add auto ls after cd -----------------------
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    alias ls='ls -aG'
+    alias ls='ls -G'
 else
-    alias ls='ls -a --color'
+    alias ls='ls --color'
 fi
 
 cdls () {
     cd "$1"
     local cderr="$?"
-    if [ "$cderr" -eq 0 ]; then
-        pwd
-        ls
+    if [ "$cderr" -eq '0' ]; then
+        [ "$1" -eq '-' ] || pwd
+        shift
+        ls $@
     fi
     return "$cderr"
 }
