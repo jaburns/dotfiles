@@ -32,7 +32,7 @@ cdls () {
     cd "$1"
     local cderr="$?"
     if [ "$cderr" -eq '0' ]; then
-        [ "$1" -eq '-' ] || pwd
+        [ "$1" = '-' ] || pwd
         shift
         ls $@
     fi
