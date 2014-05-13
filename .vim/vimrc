@@ -33,6 +33,7 @@ set nobackup            " No backup~ files
 set hidden              " Don't ask to save when changing buffers
 set noswapfile          " Stop creating bothersome swap files
 set lazyredraw          " Don't render every detail when running macros
+set nowrap              " No line wrap by default
 
 " Get rid of GUI noise (toolbar, menus, scrollbars)
 set guioptions-=T
@@ -92,8 +93,7 @@ nnoremap <leader>n <c-w>v:NERDTree<cr><c-w>=<c-w>l
 
 " Automatically reload vimrc after saving changes to it
 augroup vimrc
-    autocmd BufWritePost .vimrc source $MYVIMRC
-    autocmd BufWritePost _vimrc source $MYVIMRC
+    autocmd BufWritePost vimrc source $MYVIMRC
     autocmd BufNewFile,BufRead *.as set filetype=javascript
 augroup END
 
