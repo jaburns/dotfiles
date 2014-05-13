@@ -6,10 +6,7 @@ set keymap vi
 set -o vi
 export EDITOR="vim"
 
-# Basic command default parameters
-alias l='ls -1aG'
 alias grep='grep --color=auto'
-
 alias notes='vim ~/Dropbox/notes.txt'
 alias pyhttp='python -m SimpleHTTPServer'
 
@@ -17,19 +14,30 @@ export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cabal/bin
 
+# ----- command for curling json without string contents ----------------------
+
 cjns () {
     curl "$1" | sed 's/:"[^"]*/:"/g'
 }
+
+# ----- set default output for ls; add auto ls after cd -----------------------
+
+if [[ "$(uname)" == "Darwin" ]]; then
+    alias ls='ls -aG'
+else
+    alias ls='ls -a --color'
+fi
 
 cdls () {
     cd "$1"
     local cderr="$?"
     if [ "$cderr" -eq 0 ]; then
         pwd
-        ls -a --color
+        ls
     fi
     return "$cderr"
 }
+
 alias cd='cdls'
 
 # ----- ack helpers -----------------------------------------------------------
