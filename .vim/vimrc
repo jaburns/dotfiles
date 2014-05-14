@@ -84,8 +84,10 @@ nnoremap <cr> :nohlsearch<cr>
 " Get the standard c-backspace behaviour in insert mode
 inoremap <c-backspace> <esc>dbxi
 
-" Map double leader to go back to the previous buffer.
+" Some leader combos to navigate buffers
 nnoremap <leader><leader> <c-^>
+nnoremap <leader>j :bnext<cr>
+nnoremap <leader>k :bprevious<cr>
 nnoremap <leader>v :e $MYVIMRC<cr>
 
 " Open up NERDTree and a couple of splits.
