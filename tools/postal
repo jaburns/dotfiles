@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+url='https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive'
+key='ea98-jc42-tf94-jk98'
+
+search=$(echo "$1" | sed 's/ /%20/g')
+
+echo "Asking CanadaPost..."
+
+id=$(curl -s "$url/Find/v2.00/json3.ws?Key=$key&Country=CAN&SearchTerm=$search" \
+    | grep -o 'CAN[^"]*')
+
+code=$(curl -s "$url/Retrieve/v2.00/json2.ws?Key=$key&Id=$id" \
+    | grep -m 1 -o 'PostalCode:"[^"]*' \
+    | sed 's/^.*"//')
+
+echo $code
