@@ -3,7 +3,7 @@
 url='https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive'
 key='ea98-jc42-tf94-jk98'
 
-search=$(echo "$1" | sed 's/ /%20/g')
+search=$(echo "$@" | sed 's/ /%20/g')
 
 echo "Asking CanadaPost..."
 
