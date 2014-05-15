@@ -34,7 +34,7 @@ cdls () {
     if [ "$cderr" -eq '0' ]; then
         [ "$1" = '-' ] || pwd
         shift
-        ls $@
+        ls "$@"
     fi
     return "$cderr"
 }
@@ -47,7 +47,7 @@ ack_formatted () {
     local lang=$1
     shift
     printf "\n\n\n    $@\n\n"
-    ack $lang $@
+    ack $lang "$@"
     printf "\n\n\n\n"
 }
 
@@ -67,7 +67,13 @@ gg () {
     else
         local gurp="$1"
         shift
-        git ls-files -m -o --exclude-standard | grep "$gurp" | xargs $@
+        if [ "$1" = '!' ]; then
+            cmd=
+            shift
+        else
+            cmd='git'
+        fi
+        git ls-files -m -o --exclude-standard | grep "$gurp" | xargs "$cmd" "$@"
         git status
     fi
 }
