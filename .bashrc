@@ -68,12 +68,11 @@ gg () {
         local gurp="$1"
         shift
         if [ "$1" = '!' ]; then
-            cmd=
             shift
+            git ls-files -m -o --exclude-standard | grep "$gurp" | xargs "$@"
         else
-            cmd='git'
+            git ls-files -m -o --exclude-standard | grep "$gurp" | xargs git "$@"
         fi
-        git ls-files -m -o --exclude-standard | grep "$gurp" | xargs "$cmd" "$@"
         git status
     fi
 }
