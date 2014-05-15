@@ -66,6 +66,7 @@ gg () {
         git ls-files -m -o | grep "$1"
     else
         git ls-files -m -o | grep "$1" | xargs git "$2"
+        git status
     fi;
 }
 
@@ -74,6 +75,9 @@ alias gd='git diff'
 alias ga='git add'
 alias gp='git push'
 alias gu='git pull --ff-only --all'
+alias gf='git fetch'
+alias gr='git rebase'
+alias gm='git merge'
 
 # ----- SVN helpers -----------------------------------------------------------
 
