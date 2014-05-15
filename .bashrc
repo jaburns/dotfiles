@@ -63,11 +63,13 @@ gg () {
     if [ "$#" -lt 1 ]; then
         git status
     elif [ "$#" -lt 2 ]; then
-        git ls-files -m -o | grep "$1"
+        git ls-files -m -o --exclude-standard | grep "$1"
     else
-        git ls-files -m -o | grep "$1" | xargs git "$2"
+        local gurp="$1"
+        shift
+        git ls-files -m -o --exclude-standard | grep "$gurp" | xargs $@
         git status
-    fi;
+    fi
 }
 
 alias gc='git commit'
