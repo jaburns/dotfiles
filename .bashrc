@@ -73,7 +73,9 @@ gg () {
         else
             git ls-files -m -o --exclude-standard | grep "$gurp" | xargs git "$@"
         fi
-        git status
+        if [ "$@" != 'diff' ]; then
+            git status
+        fi
     fi
 }
 
