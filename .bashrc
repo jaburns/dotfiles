@@ -31,8 +31,8 @@ fi
 cdls () {
     cd "$1"
     local cderr="$?"
-    if [ "$cderr" -eq '0' ]; then
-        [ "$1" = '-' ] || pwd
+    if [[ "$cderr" -eq '0' ]]; then
+        [[ "$1" = '-' ]] || pwd
         shift
         ls "$@"
     fi
@@ -60,20 +60,20 @@ alias aak='ack_formatted --actionscript'
 # git config --global color.ui auto
 
 gg () {
-    if [ "$#" -lt 1 ]; then
+    if [[ "$#" -lt 1 ]]; then
         git status
-    elif [ "$#" -lt 2 ]; then
+    elif [[ "$#" -lt 2 ]]; then
         git ls-files -m -o --exclude-standard | grep "$1"
     else
         local gurp="$1"
         shift
-        if [ "$1" = '!' ]; then
+        if [[ "$1" = '!' ]]; then
             shift
             git ls-files -m -o --exclude-standard | grep "$gurp" | xargs "$@"
         else
             git ls-files -m -o --exclude-standard | grep "$gurp" | xargs git "$@"
         fi
-        if [ "$@" != 'diff' ]; then
+        if [[ "$@" != 'diff' ]]; then
             git status
         fi
     fi
@@ -92,9 +92,9 @@ alias gm='git merge'
 
 # Grep SVN status for a pattern and execute an svn command on the selection.
 sg () {
-    if [ "$#" -lt 1 ]; then
+    if [[ "$#" -lt 1 ]]; then
         svn st
-    elif [ "$#" -lt 2 ]; then
+    elif [[ "$#" -lt 2 ]]; then
         svn st | grep "$1" | awk '{print $2}'
     else
         svn st | grep "$1" | sed 's/^. *//g;s/\(.*\)/"\1"/' | xargs svn "$2"
@@ -119,7 +119,7 @@ alias si='svn propedit svn:ignore .'
 # ----- Prompt config ---------------------------------------------------------
 
 ps1_color_error () {
-    if [ "$1" -eq 0 ]; then
+    if [[ "$1" -eq 0 ]]; then
         printf '32'
     else
         printf '31'
@@ -127,7 +127,7 @@ ps1_color_error () {
     exit $1
 }
 ps1_value_error () {
-    if [ "$1" -gt 0 ]; then
+    if [[ "$1" -gt 0 ]]; then
         printf " $1 "
     fi;
 }
