@@ -69,9 +69,9 @@ gg () {
         shift
         if [[ "$1" = '!' ]]; then
             shift
-            git ls-files -m -o --exclude-standard | grep "$gurp" | xargs "$@"
+            git ls-files -m -o --exclude-standard | grep "$gurp" | xargs -d"\n" "$@"
         else
-            git ls-files -m -o --exclude-standard | grep "$gurp" | xargs git "$@"
+            git ls-files -m -o --exclude-standard | grep "$gurp" | xargs -d"\n" git "$@"
         fi
         if [[ "$@" != 'diff' ]]; then
             git status
