@@ -203,6 +203,16 @@ augroup END
 let NERDTreeIgnore = ['\.meta$']
 set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb,*.meta
 
+" --------- Snippets settings --------------------------------------------------
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<leader>s"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 " --------- CtrlP settings -----------------------------------------------------
 
 " Force CtrlP to operate from the working directory instead of the current file's
