@@ -206,7 +206,7 @@ set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb,*.meta
 " --------- Snippets settings --------------------------------------------------
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<leader>s"
+let g:UltiSnipsExpandTrigger="<c-h>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
