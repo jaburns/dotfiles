@@ -19,3 +19,6 @@
 [submodule "tools/winsnap"]
 	path = tools/winsnap
 	url = https://github.com/jaburns/winsnap
+[submodule ".vim/bundle/ultisnips"]
+	path = .vim/bundle/ultisnips
+	url = https://github.com/sirver/ultisnips
