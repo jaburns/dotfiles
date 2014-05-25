@@ -1,8 +1,16 @@
 #!/bin/bash
 
-if [[ "$1" == "omni" ]]; then
-    cd .vim/bundle/Omnisharp/server/Omnisharp
-    if [[ "$(uname -o)" == "Cygwin" ]]; then
+if [[ "$(uname)" == 'Linux' ]]; then
+    os=linux
+elif [[ "$(uname)" == 'Darwin' ]]; then
+    os=osx
+else
+    os=windows
+fi
+
+if [[ "$1" == 'omni' ]]; then
+    cd .vim/bundle/Omnisharp/server/OmniSharp
+    if [[ "$os" == 'windows' ]]; then
         echo msbuild | cmd
         echo ""
     else
@@ -14,7 +22,7 @@ fi
 repo_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 install () {
-    if [[ "$1" == "dir" ]]; then
+    if [[ "$1" == 'dir' ]]; then
         rm -rf "$HOME/$2"
         mkdir -p "$(dirname "$HOME/$2")"
         ln -s "$repo_dir/$2" "$HOME/$2"
@@ -33,7 +41,11 @@ install file .ctags
 install file .bashrc
 install file .tmux.conf
 
-if [[ "$(uname -o)" == "Cygwin" ]]; then
+if [[ "$os" == 'linux' ]]; then
+    install file .xinitrc
+fi
+
+if [[ "$os" == 'windows' ]]; then
 
     install file .minttyrc
 
