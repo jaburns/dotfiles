@@ -36,12 +36,12 @@ install () {
 git submodule update --init --recursive
 
 install dir  .vim
-install dir  .themes/jaburns
 install file .ctags
 install file .bashrc
 install file .tmux.conf
 
 if [[ "$os" == 'linux' ]]; then
+    install dir  .themes/jaburns
     install file .xinitrc
 fi
 
