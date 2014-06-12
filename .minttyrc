@@ -22,3 +22,4 @@ White=238,232,213
 BoldWhite=253,246,227
 Scrollbar=none
 Term=xterm-256color
+BellSound=no
