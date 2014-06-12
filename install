@@ -33,7 +33,9 @@ install () {
     echo "Linking '$repo_dir/$2' -> '$HOME/$2'"
 }
 
-git submodule update --init --recursive
+if [[ "$1" != 'light' ]]; then
+    git submodule update --init --recursive
+fi
 
 install dir  .vim
 install file .ctags
