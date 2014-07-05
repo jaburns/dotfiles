@@ -44,7 +44,6 @@ install file .tmux.conf
 
 if [[ "$os" == 'linux' ]]; then
     install dir  .themes/jaburns
-    install file .xinitrc
     install file .Xmodmap
 fi
 
