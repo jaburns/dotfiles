@@ -83,10 +83,12 @@ alias gc='git commit'
 alias gd='git diff'
 alias ga='git add'
 alias gp='git push'
-alias gu='git pull --ff-only --all'
+alias gu='git pull --ff-only'
 alias gf='git fetch'
 alias gr='git rebase'
 alias gm='git merge'
+alias gco='git checkout'
+alias gb='git branch'
 
 # ----- SVN helpers -----------------------------------------------------------
 
