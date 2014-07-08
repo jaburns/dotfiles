@@ -1,12 +1,10 @@
 #!/bin/bash
 
-if [[ "$(uname)" == 'Linux' ]]; then
-    os=linux
-elif [[ "$(uname)" == 'Darwin' ]]; then
-    os=osx
-else
-    os=windows
-fi
+case "$OSTYPE" in
+    linux*)  os='linux'   ;;
+    darwin*) os='osx'     ;;
+    *)       os='windows' ;;
+esac
 
 if [[ "$1" == 'omni' ]]; then
     cd .vim/bundle/Omnisharp/server/OmniSharp
