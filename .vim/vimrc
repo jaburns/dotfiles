@@ -34,6 +34,8 @@ set hidden              " Don't ask to save when changing buffers
 set noswapfile          " Stop creating bothersome swap files
 set lazyredraw          " Don't render every detail when running macros
 set nowrap              " No line wrap by default
+set ignorecase          " This needs to be enabled to use smartcase
+set smartcase           " Use smartcase in searches (and replaces unfortunately)
 
 " Get rid of GUI noise (toolbar, menus, scrollbars)
 set guioptions-=T
