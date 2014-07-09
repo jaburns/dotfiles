@@ -15,6 +15,9 @@ if [[ "$1" == 'omni' ]]; then
         xbuild
     fi
     exit 0
+elif [[ "$1" == 'plugins' ]]; then
+    git submodule update --init --recursive
+    exit 0
 fi
 
 repo_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -30,10 +33,6 @@ install () {
     fi
     echo "Linking '$repo_dir/$2' -> '$HOME/$2'"
 }
-
-if [[ "$1" != 'light' ]]; then
-    git submodule update --init --recursive
-fi
 
 install dir  .vim
 install file .ctags
