@@ -136,7 +136,8 @@ ps1_value_error () {
 ps1_git_branch () {
     local br="$(git branch 2> /dev/null)"
     if [[ ! -z "$br" ]]; then
-        printf "$br" | sed '/^[^*]/d;s/* \(.*\)/(\1)/'
+        printf '\b'
+        printf "$br" | sed '/^[^*]/d;s/* \(.*\)/ \1)/'
     fi
 }
-export PS1='\[\033[0;$(ps1_color_error $?)m\]$(ps1_value_error $?)\u\[\033[0;34m\] \W)\[\033[0;35m\]$(ps1_git_branch) \[\033[0m\]'
+export PS1='\[\033[0;$(ps1_color_error $?)m\]$(ps1_value_error $?)\u\[\033[0;34m\] \W)\[\033[0;35m\]$(ps1_git_branch)\[\033[0m\] '
