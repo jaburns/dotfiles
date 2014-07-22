@@ -48,6 +48,10 @@ set guioptions-=M
 
 let mapleader=' '
 
+augroup vimrc
+    autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+augroup END
+
 " Clear vimrc augroup so we don't pile up autocmds when reloading the config.
 augroup vimrc
     autocmd!
