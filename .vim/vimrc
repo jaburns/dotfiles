@@ -48,10 +48,6 @@ set guioptions-=M
 
 let mapleader=' '
 
-augroup vimrc
-    autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
-augroup END
-
 " Clear vimrc augroup so we don't pile up autocmds when reloading the config.
 augroup vimrc
     autocmd!
@@ -195,15 +191,6 @@ augroup END
 
 " Enable default omnicomplete
 set omnifunc=syntaxcomplete#Complete
-
-" Filetype specific settings
-augroup vimrc
-    if has("win32")
-        autocmd FileType cs source ~/vimfiles/cs.vim
-    else
-        autocmd FileType cs source ~/.vim/cs.vim
-    endif
-augroup END
 
 " Ignore some subfolders and files which we won't want to edit in vim
 let NERDTreeIgnore = ['\.meta$']
