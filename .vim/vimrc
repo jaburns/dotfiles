@@ -136,6 +136,9 @@ vnoremap , <gv
 " Use K to split the current line
 nnoremap K i<cr><esc>
 
+" Ctrl-z in insert mode cancels the insert
+inoremap <c-z> <esc>u
+
 " Ctrl+j/k to move around quicker
 nnoremap <c-j> 15j
 nnoremap <C-k> 15k
