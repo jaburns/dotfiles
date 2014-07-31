@@ -46,6 +46,8 @@ set guioptions-=R
 set guioptions-=m
 set guioptions-=M
 
+
+
 let mapleader=' '
 
 " Clear vimrc augroup so we don't pile up autocmds when reloading the config.
@@ -94,6 +96,10 @@ nnoremap <leader>v :e $MYVIMRC<cr>
 
 " Open up NERDTree and a couple of splits.
 nnoremap <leader>n <c-w>v:NERDTree<cr><c-w>=<c-w>l
+
+" Save and load session
+nnoremap <leader>s :mksession! $HOME/.session.vim<cr>
+nnoremap <leader>l :source $HOME/.session.vim<cr>
 
 " Automatically reload vimrc after saving changes to it
 augroup vimrc
