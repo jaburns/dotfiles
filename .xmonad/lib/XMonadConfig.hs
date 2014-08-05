@@ -13,6 +13,7 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.SimpleFloat
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.Reflect
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.WorkspaceCompare
 import XMonad.Hooks.EwmhDesktops
@@ -47,6 +48,9 @@ laptop = do
 
 desktop :: IO (X ())
 desktop = do
+    _ <- spawn $ "xrandr --output DVI-I-1 --mode 2560x1440 --primary "
+                     ++ "--output DVI-D-0 --mode 1920x1080 --pos 2560x360"
+
     statBar0 <- spawnPipe $ dzenSans "-ta 'l' -x '0' -y '0' -w '1280'"
     statBar1 <- spawnPipe $ dzenSans "-ta 'l' -x '2560' -y '360' -w '960'"
 
@@ -97,7 +101,8 @@ myKeys =
 --------------------------------------------------------------------------------
 
 layoutHook' = border1 (ResizableTall 1 (3/100) (1/2) [])
-          ||| border2 (ThreeColMid   1 (3/100) (1/2))
+          ||| border2 (ThreeCol 1 (3/100) (1/2))
+          ||| reflectHoriz (border2 (ThreeCol 1 (3/100) (1/2)))
           ||| noBorders Full
   where
     border1 = avoidStruts . smartBorders . spacing 4
