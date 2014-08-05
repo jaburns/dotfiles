@@ -42,6 +42,7 @@ install file .tmux.conf
 if [[ "$os" == 'linux' ]]; then
     install dir  .themes/jaburns
     install file .Xmodmap
+    install dir  .xmonad
 fi
 
 if [[ "$os" == 'windows' ]]; then
