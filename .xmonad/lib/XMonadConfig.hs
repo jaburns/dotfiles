@@ -33,37 +33,29 @@ dzenCmd fnt = (++) $ "dzen2 -h '24' -bg '#000000' -fg '#ffffff' -fn '"++fnt++"' 
 dzenSans = dzenCmd "Ubuntu Sans-10:Regular"
 dzenMono = dzenCmd "Ubuntu Mono-12:Regular"
 
---statBarCmdLaptop = dzenSans "-ta 'l' -x '0' -y '1056' -w '1440'"   --1920x1080
-statBarCmdLaptop = dzenSans "-ta 'l' -x '0' -y '1176' -w '1440'"   --1920x1200
-
-statBarCmd0 = dzenSans "-ta 'l' -x '0' -y '360' -w '1440'"
-statBarCmd1 = dzenSans "-ta 'l' -x '1920' -w '960'"
-statBarCmd2 = dzenSans "-ta 'l' -x '4480' -w '1280'"
-
-pandoraCmd  = "ruby ~/.xmonad/dzen-pandora/dzen-pandora.rb | "
-              ++ dzenSans "-ta 'r' -x '2880' -w '1600'"
-
 -- Specifies the physical order of monitors indexed by xinerama.
-desktopScreenOrder = [1,2,0]
+desktopScreenOrder = [0,1]
 
 --------------------------------------------------------------------------------
 
 laptop :: IO (X ())
 laptop = do
-    statBar <- spawnPipe statBarCmdLaptop
+    statBar <- spawnPipe $ dzenSans "-ta 'l' -x '0' -y '1176' -w '1440'"   --1920x1200
+                                --  "-ta 'l' -x '0' -y '1056' -w '1440'"   --1920x1080
     return $ customLogHook [statBar] [0]
 
 
 desktop :: IO (X ())
 desktop = do
+    statBar0 <- spawnPipe $ dzenSans "-ta 'l' -x '0' -y '0' -w '1280'"
+    statBar1 <- spawnPipe $ dzenSans "-ta 'l' -x '2560' -y '360' -w '960'"
 
-    statBar0 <- spawnPipe statBarCmd0
-    statBar1 <- spawnPipe statBarCmd1
-    statBar2 <- spawnPipe statBarCmd2
+    _ <- spawn $ "ruby ~/dotfiles/tools/dzen-pandora/dzen-pandora.rb | "
+                    ++ dzenSans "-ta 'r' -x '1280' -y '0' -w '640'"
 
-    _ <- spawn pandoraCmd
+    _ <- spawn $ "conky | " ++ dzenMono "-ta 'r' -x '3520' -y '360' -w '576'"
 
-    return $ customLogHook [statBar0,statBar1,statBar2] desktopScreenOrder
+    return $ customLogHook [statBar0,statBar1] desktopScreenOrder
 
 
 mainAction :: Machine -> IO ()
@@ -92,7 +84,6 @@ mainAction machine = do
 myKeys =
     [
      -- check if unsafeSpawn can call standard 'shoot' script
-        ("M-x", spawn "xfce4-screenshooter -r -o /home/jaburns/tools/imgur-upload"),
         ("M-p", spawn "dmenu_run -fn r24 -nb black -nf white"),
         ("M-S-h", sendMessage MirrorShrink),
         ("M-S-l", sendMessage MirrorExpand),
