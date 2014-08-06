@@ -41,8 +41,10 @@ desktopScreenOrder = [0,1]
 
 laptop :: IO (X ())
 laptop = do
-    statBar <- spawnPipe $ dzenSans "-ta 'l' -x '0' -y '1176' -w '1440'"   --1920x1200
-                                --  "-ta 'l' -x '0' -y '1056' -w '1440'"   --1920x1080
+
+    statBar <- spawnPipe $ dzenSans "-ta 'l' -x '0' -y '1056' -w '1440'"   --1920x1080
+                                 -- "-ta 'l' -x '0' -y '1176' -w '1440'"   --1920x1200
+    _ <- spawn "feh --bg-scale ~/Pictures/outer-space-HD-Wallpapers.jpg"
     return $ customLogHook [statBar] [0]
 
 
@@ -68,6 +70,7 @@ mainAction machine = do
     logHook' <- case machine of
         Laptop -> laptop
         Desktop -> desktop
+
 
     xmonad . ewmh $ xfceConfig
             {
@@ -112,6 +115,6 @@ layoutHook' = border1 (ResizableTall 1 (3/100) (1/2) [])
 
 manageHook' = fixNotify <+> manageHook xfceConfig
   where
-    fixNotify = composeAll [ className =? "xfce4-notifyd" --> doIgnore ]
+    fixNotify = composeAll [ className =? "Xfce4-notifyd" --> doIgnore ]
 
 
