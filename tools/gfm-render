@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ -z "$1" ]]; then
+    echo 'usage: ./gfm-render {markdown file} {optional: repository context}'
+    exit
+fi
+
 css='https://gist.githubusercontent.com/andyferra/2554919/raw/2e66cabdafe1c9a7f354aa2ebf5bc38265e638e5/github.css'
 
 data="$(
