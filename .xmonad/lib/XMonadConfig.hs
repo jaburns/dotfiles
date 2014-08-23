@@ -104,6 +104,7 @@ myKeys =
 --------------------------------------------------------------------------------
 
 layoutHook' = border1 (ResizableTall 1 (3/100) (1/2) [])
+          ||| reflectHoriz (border1 (ResizableTall 1 (3/100) (1/2) []))
           ||| border2 (ThreeCol 1 (3/100) (1/2))
           ||| reflectHoriz (border2 (ThreeCol 1 (3/100) (1/2)))
           ||| noBorders Full
