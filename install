@@ -37,10 +37,10 @@ install () {
 install dir  .vim
 install file .ctags
 install file .bashrc
+install file .vimrc
 install file .tmux.conf
 
 if [[ "$os" == 'linux' ]]; then
-    install dir  .themes/jaburns
     install file .Xmodmap
     install dir  .xmonad
 fi
