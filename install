@@ -50,6 +50,8 @@ if [[ "$os" == 'windows' ]]; then
     install file .minttyrc
 
     rm -rf "/cygdrive/c/Users/$(whoami)/vimfiles"
+    echo "mklink /h \"c:\\Users\\$(whoami)\\_vimrc\" \
+                    \"C:\\cygwin\\home\\$(whoami)\\dotfiles\\.vimrc" | cmd
     echo "mklink /j \"c:\\Users\\$(whoami)\\vimfiles\" \
                     \"C:\\cygwin\\home\\$(whoami)\\dotfiles\\.vim\"" | cmd
     echo ""
