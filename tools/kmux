@@ -1,7 +1,45 @@
 #!/usr/bin/env bash
-if [[ -z "$1" ]]; then
-    sleep 5
-    tmux new-session -s kindleshare
-else
-    tmux attach-session -t kindleshare
-fi
+
+send_script () {
+cat <<EOF
+#!/bin/sh
+echo 'Disable keyboard now'
+sleep 5
+lipc-set-prop com.lab126.winmgr orientationLock R
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no jaburns@192.168.15.201 -t 'kmux start'
+lipc-set-prop com.lab126.winmgr orientationLock U
+EOF
+}
+
+case $1 in
+    # Keep the USB network connection alive.
+    usb)
+        while true; do
+            sudo ifconfig usb0 192.168.15.201
+            sleep 5
+        done
+        ;;
+    # SSH in to the Kindle over USB.
+    ssh)
+        ssh root@192.168.15.244
+        ;;
+    # Command executed by Kindle as soon as it SSHs in to host.
+    start)
+        tmux new-session -s kindleshare
+        ;;
+    # Attach to the tmux session shared with the kindle.
+    host)
+        tmux attach-session -t kindleshare
+        ;;
+    # Send the connection script to the Kindle over USBnet with SCP
+    send)
+        send_script > ~/kmux-tmp-file
+        ssh root@192.168.15.244 -t '/usr/sbin/mntroot rw'
+        scp ~/kmux-tmp-file root@192.168.15.244:/bin/kmux
+        ssh root@192.168.15.244 -t 'chmod +x /bin/kmux; /usr/sbin/mntroot ro'
+        rm ~/kmux-tmp-file
+        ;;
+    *)
+        echo 'Usage: kmux {usb|ssh|host|send}'
+        ;;
+esac
