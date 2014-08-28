@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+if [[ -z "$1" ]]; then
+    sleep 5
+    tmux new-session -s kindleshare
+else
+    tmux attach-session -t kindleshare
+fi
