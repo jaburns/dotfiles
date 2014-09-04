@@ -105,6 +105,7 @@ nnoremap <leader>l :source $HOME/.session.vim<cr>
 augroup vimrc
     autocmd BufWritePost vimrc source $MYVIMRC
     autocmd BufNewFile,BufRead *.as set filetype=javascript
+    autocmd BufNewFile,BufRead *.as set shiftwidth=4
 augroup END
 
 " Make Y behave consistently like D instead of yy
