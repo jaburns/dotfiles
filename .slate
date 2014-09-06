@@ -1,0 +1,12 @@
+#.slate
+
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+config windowHintsShowIcons true
+config windowHintsIgnoreHiddenWindows false
+config windowHintsSpread true
+
+bind esc:cmd hint
+bind esc:cmd;shift grid padding:0 0:9,3
+
