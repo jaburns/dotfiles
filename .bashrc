@@ -14,6 +14,8 @@ export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cabal/bin
 
+command -v vim >/dev/null 2>&1 && alias vi='vim'
+
 # ----- command for curling json without string contents ----------------------
 
 cjns () {
