@@ -8,6 +8,7 @@ export EDITOR="vim"
 
 alias grep='grep --color=auto'
 alias notes='vim ~/Dropbox/notes.txt'
+alias music='vim ~/Dropbox/music.txt'
 alias pyhttp='python -m SimpleHTTPServer'
 
 export PATH=$PATH:$HOME/tools
