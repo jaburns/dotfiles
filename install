@@ -47,6 +47,7 @@ fi
 
 if [[ "$os" == 'osx' ]]; then
     install file .bash_profile
+    install file .slate
 fi
 
 if [[ "$os" == 'windows' ]]; then
