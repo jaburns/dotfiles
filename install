@@ -43,14 +43,10 @@ install file .tmux.conf
 if [[ "$os" == 'linux' ]]; then
     install file .Xmodmap
     install dir  .xmonad
-fi
-
-if [[ "$os" == 'osx' ]]; then
+elif [[ "$os" == 'osx' ]]; then
     install file .bash_profile
     install file .slate
-fi
-
-if [[ "$os" == 'windows' ]]; then
+elif [[ "$os" == 'windows' ]]; then
     install file .minttyrc
 
     rm -rf "/cygdrive/c/Users/$(whoami)/vimfiles"
