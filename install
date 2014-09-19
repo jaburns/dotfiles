@@ -45,6 +45,10 @@ if [[ "$os" == 'linux' ]]; then
     install dir  .xmonad
 fi
 
+if [[ "$os" == 'osx' ]]; then
+    install file .bash_profile
+fi
+
 if [[ "$os" == 'windows' ]]; then
     install file .minttyrc
 
