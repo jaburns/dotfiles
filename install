@@ -28,7 +28,7 @@ install () {
         mkdir -p "$(dirname "$HOME/$2")"
         ln -s "$repo_dir/$2" "$HOME/$2"
     else
-        rm -r "$HOME/$2"
+        rm -f "$HOME/$2"
         ln "$repo_dir/$2" "$HOME/$2"
     fi
     echo "Linking '$repo_dir/$2' -> '$HOME/$2'"
