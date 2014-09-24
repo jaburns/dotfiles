@@ -1,0 +1,7 @@
+[color]
+	ui = auto
+[user]
+	name = Jeremy Burns
+	email = j@jaburns.net
+[credential]
+	helper = cache --timeout=3600

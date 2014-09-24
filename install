@@ -38,6 +38,7 @@ install dir  .vim
 install file .ctags
 install file .bashrc
 install file .vimrc
+install file .gitconfig
 install file .tmux.conf
 
 if [[ "$os" == 'linux' ]]; then
