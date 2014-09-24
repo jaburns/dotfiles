@@ -62,6 +62,10 @@ alias aak='ack_formatted --actionscript'
 # git config --global credential.helper "cache --timeout=3600"
 # git config --global color.ui auto
 
+if ! whereis gxargs >/dev/null 2>/dev/null; then
+    alias gxargs=xargs
+fi
+
 gg () {
     if [[ "$#" -lt 1 ]]; then
         git status
@@ -72,9 +76,9 @@ gg () {
         shift
         if [[ "$1" = '!' ]]; then
             shift
-            git ls-files -m -o --exclude-standard | grep "$gurp" | xargs -d"\n" "$@"
+            git ls-files -m -o --exclude-standard | grep "$gurp" | gxargs -d"\n" "$@"
         else
-            git ls-files -m -o --exclude-standard | grep "$gurp" | xargs -d"\n" git "$@"
+            git ls-files -m -o --exclude-standard | grep "$gurp" | gxargs -d"\n" git "$@"
         fi
         if [[ "$@" != 'diff' ]]; then
             git status
