@@ -45,7 +45,6 @@ if [[ "$os" == 'linux' ]]; then
     install dir  .xmonad
 elif [[ "$os" == 'osx' ]]; then
     install file .bash_profile
-    install file .slate
 elif [[ "$os" == 'windows' ]]; then
     install file .minttyrc
 
