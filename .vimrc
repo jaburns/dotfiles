@@ -165,10 +165,7 @@ nnoremap <c-w>, 2<c-w><
 nnoremap <c-w>. 2<c-w>>
 
 " Map Ctrl+v to paste in insert mode, using the appropriate clipboard
-if has('macunix')
-    inoremap <c-v> <c-r>"
-    cnoremap <c-v> <c-r>"
-elseif has('unnamedplus')
+if has('unnamedplus') || has('macunix')
     inoremap <c-v> <c-r>+
     cnoremap <c-v> <c-r>+
 else
@@ -176,13 +173,13 @@ else
     cnoremap <c-v> <c-r>*
 endif
 
-" This option makes Vim use the system default clipboard. On OSX use nothing.
-if has('unnamedplus')
+" This option makes Vim use the system default clipboard.
+if has('unnamedplus') || has('macunix')
     " Note that on X11, there are _two_ system clipboards: the "standard" one, and
     " the selection/mouse-middle-click one. Vim sees the standard one as register
     " '+' (and this option makes Vim use it by default) and the selection one as '*'
     set clipboard=unnamedplus,unnamed
-elseif !has('macunix')
+else
     set clipboard=unnamed
 endif
 
