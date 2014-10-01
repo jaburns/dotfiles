@@ -30,6 +30,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     alias ls='ls --color'
 fi
+alias ll='ls --color=never'
 
 cdls () {
     cd "$1"
