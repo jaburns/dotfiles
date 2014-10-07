@@ -2,6 +2,7 @@
 " Vrapper-specific configs ----------------------------------------------------
 
 set shiftwidth=4
+set scrolloff=15
 set clipboard=unnamed
 inoremap <c-v> <c-r>+
 

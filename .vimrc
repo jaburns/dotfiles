@@ -18,7 +18,7 @@ set expandtab           " Always uses spaces instead of tabs
 set tabstop=4           " A tab is rendered as n spaces
 set ruler               " Show the line and column number of the cursor position
 set number              " Print the line number in front of each line
-set scrolloff=10        " Minimal number of screen lines to keep above and below the cursor
+set scrolloff=15        " Minimal number of screen lines to keep above and below the cursor
 set cursorline          " Highlight the cursor line
 set nostartofline       " Don't jump to start of line when paging up/down
 set timeoutlen=500      " Set multi-character command time-out
