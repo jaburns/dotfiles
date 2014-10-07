@@ -1,6 +1,13 @@
 
+" Vrapper-specific configs ----------------------------------------------------
+
 set shiftwidth=4
 set clipboard=unnamed
+inoremap <c-v> <c-r>+
+
+
+
+" Basic mappings from vimrc ---------------------------------------------------
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
@@ -45,8 +52,6 @@ nnoremap <c-j> 15j
 nnoremap <C-k> 15k
 vnoremap <c-j> 15j
 vnoremap <c-k> 15k
-
-nnoremap gd <f3>
 
 " Get the standard c-backspace behaviour in insert mode
 inoremap <c-backspace> <c-w>
