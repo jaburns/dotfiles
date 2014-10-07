@@ -46,8 +46,6 @@ set guioptions-=R
 set guioptions-=m
 set guioptions-=M
 
-
-
 let mapleader=' '
 
 " Clear vimrc augroup so we don't pile up autocmds when reloading the config.
@@ -85,9 +83,6 @@ set pastetoggle=<F7>
 " Clear search result highlighting on press enter
 nnoremap <cr> :nohlsearch<cr>
 
-" Get the standard c-backspace behaviour in insert mode
-inoremap <c-backspace> <c-w>
-
 " Some leader combos to navigate buffers
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>j :bnext<cr>
@@ -107,6 +102,10 @@ augroup vimrc
     autocmd BufNewFile,BufRead *.as set filetype=javascript
     autocmd BufNewFile,BufRead *.as set shiftwidth=4
 augroup END
+
+
+" ----- Basic editor key remappings --------------------------------------------
+
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
@@ -152,6 +151,13 @@ nnoremap <C-k> 15k
 vnoremap <c-j> 15j
 vnoremap <c-k> 15k
 
+" Get the standard c-backspace behaviour in insert mode
+inoremap <c-backspace> <c-w>
+
+
+" ------------------------------------------------------------------------------
+
+
 " Some sane bindings for window resizing
 nnoremap <c-w>y 10<c-w><
 nnoremap <c-w>u 10<c-w>+
@@ -166,21 +172,13 @@ nnoremap <c-w>. 2<c-w>>
 
 " Map Ctrl+v to paste in insert mode, using the appropriate clipboard
 if has('unnamedplus') || has('macunix')
+    set clipboard=unnamed
     inoremap <c-v> <c-r>+
     cnoremap <c-v> <c-r>+
 else
+    set clipboard=unnamedplus,unnamed
     inoremap <c-v> <c-r>*
     cnoremap <c-v> <c-r>*
-endif
-
-" This option makes Vim use the system default clipboard.
-if has('unnamedplus') || has('macunix')
-    " Note that on X11, there are _two_ system clipboards: the "standard" one, and
-    " the selection/mouse-middle-click one. Vim sees the standard one as register
-    " '+' (and this option makes Vim use it by default) and the selection one as '*'
-    set clipboard=unnamedplus,unnamed
-else
-    set clipboard=unnamed
 endif
 
 " Allow us to save a file we don't have permission to save after opening it

@@ -46,6 +46,7 @@ if [[ "$os" == 'linux' ]]; then
     install dir  .xmonad
 elif [[ "$os" == 'osx' ]]; then
     install file .bash_profile
+    install file .vrapperrc
 elif [[ "$os" == 'windows' ]]; then
     install file .minttyrc
 

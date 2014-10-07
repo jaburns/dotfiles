@@ -1,0 +1,52 @@
+
+set shiftwidth=4
+set clipboard=unnamed
+
+" Make Y behave consistently like D instead of yy
+nnoremap Y y$
+
+" Make X behave like d, but preserve the " register.
+nnoremap X "xd
+vnoremap X "xd
+nnoremap XX "xdd
+
+" Make c preserve the " register
+nnoremap c "xc
+nnoremap C "xC
+vnoremap c "xc
+vnoremap C "xC
+
+" Prevent pasting in visual mode from yanking the replaced text.
+vnoremap p "_dP
+
+" Prevent x from clobbering the " register.
+nnoremap x "xx
+vnoremap x "xx
+
+" Simplify quick macro invocation with q register
+nnoremap Q @q
+
+" Use tick and doubletick to get around quickly, leaving ` for named marks.
+nnoremap ' mM
+nnoremap '' `M
+
+" Keep selection during tabbing. Don't require shift to tab in v-mode.
+vnoremap . >gv
+vnoremap , <gv
+
+" Use K to split the current line
+nnoremap K i<cr><esc>
+
+" Ctrl-z in insert mode cancels the insert
+inoremap <c-z> <esc>u
+
+" Ctrl+j/k to move around quicker
+nnoremap <c-j> 15j
+nnoremap <C-k> 15k
+vnoremap <c-j> 15j
+vnoremap <c-k> 15k
+
+nnoremap gd <f3>
+
+" Get the standard c-backspace behaviour in insert mode
+inoremap <c-backspace> <c-w>
