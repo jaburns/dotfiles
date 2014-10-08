@@ -1,0 +1,9 @@
+#.slate
+
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+config windowHintsShowIcons false
+config windowHintsIgnoreHiddenWindows false
+config windowHintsSpread true
+bind tab:alt hint ASDFQWERZXCV
