@@ -2,8 +2,10 @@
 " Vrapper-specific configs ----------------------------------------------------
 
 set shiftwidth=4
+set softtabstop=4
 set scrolloff=15
 set clipboard=unnamed
+set nonumber " using relative numbers from http://matf.github.com/relativenumberruler/updatesite
 inoremap <c-v> <c-r>+
 
 
