@@ -1,13 +1,13 @@
 
+" using relative numbers from http://matf.github.com/relativenumberruler/updatesite
+
 " Vrapper-specific configs ----------------------------------------------------
 
 set shiftwidth=4
 set softtabstop=4
 set scrolloff=15
 set clipboard=unnamed
-set nonumber " using relative numbers from http://matf.github.com/relativenumberruler/updatesite
 inoremap <c-v> <c-r>+
-
 
 
 " Basic mappings from vimrc ---------------------------------------------------
@@ -37,7 +37,7 @@ vnoremap x "xx
 nnoremap Q @q
 
 " Use tick and doubletick to get around quickly, leaving ` for named marks.
-nnoremap ' mM
+nnoremap 'j mM
 nnoremap '' `M
 
 " Keep selection during tabbing. Don't require shift to tab in v-mode.
