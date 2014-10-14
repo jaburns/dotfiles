@@ -53,12 +53,9 @@ augroup vimrc
     autocmd!
 augroup END
 
-" GUI VIM font/color configuration
-if has('gui_running')
-    syntax enable
-    set background=dark
-    colorscheme jaburns
-endif
+syntax enable
+set background=dark
+colorscheme jaburns
 
 if has('gui_win32')
     set guifont=Consolas:h10
