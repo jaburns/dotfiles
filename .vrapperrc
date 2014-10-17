@@ -1,43 +1,42 @@
+".vrapperrc
 
-" using relative numbers from http://matf.github.com/relativenumberruler/updatesite
-
-" Vrapper-specific configs ----------------------------------------------------
+" Relative Numbers: http://matf.github.com/relativenumberruler/updatesite
 
 set shiftwidth=4
 set softtabstop=4
 set scrolloff=15
 set clipboard=unnamed
-inoremap <c-v> <c-r>+
 
 
-" Basic mappings from vimrc ---------------------------------------------------
+" ----- Text editing keys configuration ----------------------------------------
+
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
 
 " Make X behave like d, but preserve the " register.
-nnoremap X "xd
-vnoremap X "xd
-nnoremap XX "xdd
+nnoremap X "_d
+vnoremap X "_d
+nnoremap XX "_dd
 
 " Make c preserve the " register
-nnoremap c "xc
-nnoremap C "xC
-vnoremap c "xc
-vnoremap C "xC
+nnoremap c "_c
+nnoremap C "_C
+vnoremap c "_c
+vnoremap C "_C
 
 " Prevent pasting in visual mode from yanking the replaced text.
 vnoremap p "_dP
 
 " Prevent x from clobbering the " register.
-nnoremap x "xx
-vnoremap x "xx
+nnoremap x "_x
+vnoremap x "_x
 
 " Simplify quick macro invocation with q register
 nnoremap Q @q
 
 " Use tick and doubletick to get around quickly, leaving ` for named marks.
-nnoremap 'j mM
+nnoremap ' mM
 nnoremap '' `M
 
 " Keep selection during tabbing. Don't require shift to tab in v-mode.
@@ -47,9 +46,6 @@ vnoremap , <gv
 " Use K to split the current line
 nnoremap K i<cr><esc>
 
-" Ctrl-z in insert mode cancels the insert
-inoremap <c-z> <esc>u
-
 " Ctrl+j/k to move around quicker
 nnoremap <c-j> 15j
 nnoremap <C-k> 15k
@@ -58,3 +54,8 @@ vnoremap <c-k> 15k
 
 " Get the standard c-backspace behaviour in insert mode
 inoremap <c-backspace> <c-w>
+
+" Paste in insert mode
+inoremap <c-v> <esc>pa
+
+
