@@ -36,15 +36,12 @@ set lazyredraw          " Don't render every detail when running macros
 set nowrap              " No line wrap by default
 set ignorecase          " This needs to be enabled to use smartcase
 set smartcase           " Use smartcase in searches (and replaces unfortunately)
+set textwidth=0         " Turn off automatic newline insertion
+set wrapmargin=0        "  "
+set background=dark     " Tell vim that we're using a dark background.
 
-" Get rid of GUI noise (toolbar, menus, scrollbars)
-set guioptions-=T
-set guioptions-=l
-set guioptions-=L
-set guioptions-=r
-set guioptions-=R
-set guioptions-=m
-set guioptions-=M
+syntax enable
+colorscheme jaburns
 
 let mapleader=' '
 
@@ -53,77 +50,30 @@ augroup vimrc
     autocmd!
 augroup END
 
-syntax enable
-set background=dark
-colorscheme jaburns
 
-if has('gui_win32')
-    set guifont=Consolas:h10
-endif
-
-" Use control + vertical arrows to resize font in gvim.
-nnoremap <C-Up> :silent! let &guifont = substitute(
- \ &guifont,
- \ ':h\zs\d\+',
- \ '\=eval(submatch(0)+1)',
- \ 'g')<CR>
-nnoremap <C-Down> :silent! let &guifont = substitute(
- \ &guifont,
- \ ':h\zs\d\+',
- \ '\=eval(submatch(0)-1)',
- \ 'g')<CR>
-
-" Toggles vim's paste mode; when we want to paste something into vim from a
-" different application, turning on paste mode prevents extra whitespace.
-set pastetoggle=<F7>
-
-" Clear search result highlighting on press enter
-nnoremap <cr> :nohlsearch<cr>
-
-" Some leader combos to navigate buffers
-nnoremap <leader><leader> <c-^>
-nnoremap <leader>j :bnext<cr>
-nnoremap <leader>k :bprevious<cr>
-nnoremap <leader>v :e $MYVIMRC<cr>
-
-" Open up NERDTree and a couple of splits.
-nnoremap <leader>n <c-w>v:NERDTree<cr><c-w>=<c-w>l
-
-" Save and load session
-nnoremap <leader>s :mksession! $HOME/.session.vim<cr>
-nnoremap <leader>l :source $HOME/.session.vim<cr>
-
-" Automatically reload vimrc after saving changes to it
-augroup vimrc
-    autocmd BufWritePost vimrc source $MYVIMRC
-    autocmd BufNewFile,BufRead *.as set filetype=javascript
-    autocmd BufNewFile,BufRead *.as set shiftwidth=4
-augroup END
-
-
-" ----- Basic editor key remappings --------------------------------------------
+" ----- Text editing keys configuration ----------------------------------------
 
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
 
 " Make X behave like d, but preserve the " register.
-nnoremap X "xd
-vnoremap X "xd
-nnoremap XX "xdd
+nnoremap X "_d
+vnoremap X "_d
+nnoremap XX "_dd
 
 " Make c preserve the " register
-nnoremap c "xc
-nnoremap C "xC
-vnoremap c "xc
-vnoremap C "xC
+nnoremap c "_c
+nnoremap C "_C
+vnoremap c "_c
+vnoremap C "_C
 
 " Prevent pasting in visual mode from yanking the replaced text.
 vnoremap p "_dP
 
 " Prevent x from clobbering the " register.
-nnoremap x "xx
-vnoremap x "xx
+nnoremap x "_x
+vnoremap x "_x
 
 " Simplify quick macro invocation with q register
 nnoremap Q @q
@@ -139,9 +89,6 @@ vnoremap , <gv
 " Use K to split the current line
 nnoremap K i<cr><esc>
 
-" Ctrl-z in insert mode cancels the insert
-inoremap <c-z> <esc>u
-
 " Ctrl+j/k to move around quicker
 nnoremap <c-j> 15j
 nnoremap <C-k> 15k
@@ -151,9 +98,72 @@ vnoremap <c-k> 15k
 " Get the standard c-backspace behaviour in insert mode
 inoremap <c-backspace> <c-w>
 
+" Map Ctrl+v to paste in insert mode, using the appropriate clipboard
+if has('unnamedplus') || has('macunix')
+    set clipboard=unnamed
+    inoremap <c-v> <c-r>+
+    cnoremap <c-v> <c-r>+
+else
+    set clipboard=unnamedplus,unnamed
+    inoremap <c-v> <c-r>*
+    cnoremap <c-v> <c-r>*
+endif
 
-" ------------------------------------------------------------------------------
 
+" ----- gvim configuration -----------------------------------------------------
+
+
+if has('gui_win32')
+    set guifont=Consolas:h10
+endif
+
+" Get rid of GUI noise (toolbar, menus, scrollbars)
+set guioptions-=T
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+set guioptions-=m
+set guioptions-=M
+
+" Use control + vertical arrows to resize font in gvim.
+nnoremap <C-Up> :silent! let &guifont = substitute(
+ \ &guifont,
+ \ ':h\zs\d\+',
+ \ '\=eval(submatch(0)+1)',
+ \ 'g')<CR>
+nnoremap <C-Down> :silent! let &guifont = substitute(
+ \ &guifont,
+ \ ':h\zs\d\+',
+ \ '\=eval(submatch(0)-1)',
+ \ 'g')<CR>
+
+
+" ----- Editor configuration ---------------------------------------------------
+
+" Toggles vim's paste mode; when we want to paste something into vim from a
+" different application, turning on paste mode prevents extra whitespace.
+set pastetoggle=<F7>
+
+" Clear search result highlighting on press enter
+nnoremap <cr> :nohlsearch<cr>
+
+" Some leader combos to navigate buffers
+nnoremap <leader><leader> <c-^>
+nnoremap <leader>j :bnext<cr>
+nnoremap <leader>k :bprevious<cr>
+nnoremap <leader>v :e $MYVIMRC<cr>
+
+" Save and load session
+nnoremap <leader>s :mksession! $HOME/.session.vim<cr>
+nnoremap <leader>l :source $HOME/.session.vim<cr>
+
+" Automatically reload vimrc after saving changes to it
+augroup vimrc
+    autocmd BufWritePost vimrc source $MYVIMRC
+    autocmd BufNewFile,BufRead *.as set filetype=javascript
+    autocmd BufNewFile,BufRead *.as set shiftwidth=4
+augroup END
 
 " Some sane bindings for window resizing
 nnoremap <c-w>y 10<c-w><
@@ -167,38 +177,24 @@ nnoremap <c-w><c-o> 10<c-w>>
 nnoremap <c-w>, 2<c-w><
 nnoremap <c-w>. 2<c-w>>
 
-" Map Ctrl+v to paste in insert mode, using the appropriate clipboard
-if has('unnamedplus') || has('macunix')
-    set clipboard=unnamed
-    inoremap <c-v> <c-r>+
-    cnoremap <c-v> <c-r>+
-else
-    set clipboard=unnamedplus,unnamed
-    inoremap <c-v> <c-r>*
-    cnoremap <c-v> <c-r>*
-endif
-
 " Allow us to save a file we don't have permission to save after opening it
 cnoremap w!! w !sudo tee % >/dev/null
-
-" Switch syntax highlighting on when the terminal has colors
-if &t_Co > 2 || has('gui_running')
-    syntax on
-endif
 
 " Automatically delete trailing DOS-returns and whitespace on file open and write
 augroup vimrc
     autocmd BufRead,BufWritePre,FileWritePre * silent! %s/[\r \t]\+$//
 augroup END
 
-" Enable default omnicomplete
-set omnifunc=syntaxcomplete#Complete
-
 " Ignore some subfolders and files which we won't want to edit in vim
 let NERDTreeIgnore = ['\.meta$']
 set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb,*.meta,node_modules
 
+" Enable default omnicomplete
+set omnifunc=syntaxcomplete#Complete
+
+
 " --------- Snippets settings --------------------------------------------------
+
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-h>"
@@ -208,7 +204,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+
 " --------- CtrlP settings -----------------------------------------------------
+
 
 " Force CtrlP to operate from the working directory instead of the current file's
 let g:ctrlp_working_path_mode = ''
@@ -216,7 +214,9 @@ let g:ctrlp_working_path_mode = ''
 " Size CtrlP window a little bigger than default
 let g:ctrlp_max_height = 20
 
+
 " --------- neocomplcache settings (mainly for OmniSharp) ----------------------
+
 
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
@@ -240,4 +240,5 @@ if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
 let g:neocomplcache_omni_patterns.cs = '.*'
+
 
