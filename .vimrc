@@ -98,16 +98,8 @@ vnoremap <c-k> 15k
 " Get the standard c-backspace behaviour in insert mode
 inoremap <c-backspace> <c-w>
 
-" Map Ctrl+v to paste in insert mode, using the appropriate clipboard
-if has('unnamedplus') || has('macunix')
-    set clipboard=unnamed
-    inoremap <c-v> <c-r>+
-    cnoremap <c-v> <c-r>+
-else
-    set clipboard=unnamedplus,unnamed
-    inoremap <c-v> <c-r>*
-    cnoremap <c-v> <c-r>*
-endif
+" Paste in insert mode
+inoremap <c-v> <esc>pa
 
 
 " ----- gvim configuration -----------------------------------------------------
@@ -140,6 +132,14 @@ nnoremap <C-Down> :silent! let &guifont = substitute(
 
 
 " ----- Editor configuration ---------------------------------------------------
+
+
+" Use system clipboard as default
+if has('unnamedplus')
+    set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+end
 
 " Toggles vim's paste mode; when we want to paste something into vim from a
 " different application, turning on paste mode prevents extra whitespace.
