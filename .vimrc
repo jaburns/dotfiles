@@ -91,7 +91,7 @@ nnoremap K i<cr><esc>
 
 " Ctrl+j/k to move around quicker
 nnoremap <c-j> 15j
-nnoremap <C-k> 15k
+nnoremap <c-k> 15k
 vnoremap <c-j> 15j
 vnoremap <c-k> 15k
 
@@ -100,6 +100,7 @@ inoremap <c-backspace> <c-w>
 
 " Paste in insert mode
 inoremap <c-v> <esc>pa
+inoremap <c-c> <c-v>
 
 
 " ----- gvim configuration -----------------------------------------------------
@@ -119,12 +120,12 @@ set guioptions-=m
 set guioptions-=M
 
 " Use control + vertical arrows to resize font in gvim.
-nnoremap <C-Up> :silent! let &guifont = substitute(
+nnoremap <c-up> :silent! let &guifont = substitute(
  \ &guifont,
  \ ':h\zs\d\+',
  \ '\=eval(submatch(0)+1)',
  \ 'g')<CR>
-nnoremap <C-Down> :silent! let &guifont = substitute(
+nnoremap <c-down> :silent! let &guifont = substitute(
  \ &guifont,
  \ ':h\zs\d\+',
  \ '\=eval(submatch(0)-1)',
