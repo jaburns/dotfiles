@@ -10,6 +10,7 @@ alias grep='grep --color=auto'
 alias notes='vim ~/Dropbox/notes.txt'
 alias music='vim ~/Dropbox/music.txt'
 alias pyhttp='python -m SimpleHTTPServer'
+alias nosleep='pmset noidle'
 
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
@@ -118,7 +119,7 @@ sa () {
 }
 
 # Show the log from HEAD back n revisions
-sl () {
+svl () {
     rev=$(svn info | grep 'Revision' | cut -d\  -f2)
     svn log -r "$(expr $rev - $1):HEAD"
 }
