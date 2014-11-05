@@ -147,7 +147,7 @@ end
 set pastetoggle=<F7>
 
 " Clear search result highlighting on press enter
-nnoremap <cr> :nohlsearch<cr>
+nnoremap <leader><cr> :nohlsearch<cr>
 
 " Some leader combos to navigate buffers
 nnoremap <leader><leader> <c-^>

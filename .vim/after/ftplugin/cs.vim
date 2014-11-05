@@ -24,7 +24,7 @@ nnoremap <leader>fi :OmniSharpFindImplementations<cr>
 nnoremap <leader>ft :OmniSharpFindType<cr>
 nnoremap <leader>fs :OmniSharpFindSymbol<cr>
 nnoremap <leader>fu :OmniSharpFindUsages<cr>
-nnoremap <leader>fm :OmniSharpFindMembersInBuffer<cr>
+nnoremap <leader>fm :OmniSharpFindMembers<cr>
 nnoremap <leader>tt :OmniSharpTypeLookup<cr>
 nnoremap <leader>ii :OmniSharpGetCodeActions<cr>
 nnoremap <leader>rl :OmniSharpReloadSolution<cr>
