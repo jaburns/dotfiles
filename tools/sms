@@ -1,10 +1,12 @@
 #!/bin/bash
 
 # Script to monitor SMS via adb.
-#  Install to SD card:
-#    adb push ./sms /sdcard/sms'
-#  Run:
-#    adb shell su -c 'bash /sdcard/sms'
+
+if [[ ! -e /sdcard ]]; then
+    adb push $HOME/dotfiles/tools/sms /sdcard/sms
+    adb shell su -c 'bash /sdcard/sms'
+    exit
+fi
 
 cd /sdcard
 
@@ -27,6 +29,7 @@ get_latest () {
     done < sms.tmp
 }
 
+rm -f old.sms.tmp new.sms.tmp sms.tmp
 touch old.sms.tmp
 
 while true; do
