@@ -14,7 +14,8 @@ db_sms='/data/data/com.android.providers.telephony/databases/mmssms.db'
 db_contacts='/data/data/com.android.providers.contacts/databases/contacts2.db'
 
 get_latest () {
-    sqlite3 $db_sms 'select address,body,type from sms order by _id desc limit 20;' | tac > sms.tmp
+    sqlite3 $db_sms 'select * from (select address,body,type,_id from sms order by _id desc limit 20) order by _id asc;' \
+        > sms.tmp
     while read line; do
         num="$(echo $line | cut -d\| -f1)"
         message="$(echo $line | cut -d\| -f2)"
