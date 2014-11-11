@@ -14,12 +14,12 @@ db_sms='/data/data/com.android.providers.telephony/databases/mmssms.db'
 db_contacts='/data/data/com.android.providers.contacts/databases/contacts2.db'
 
 get_latest () {
-    sqlite3 $db_sms 'select address,body,type from sms order by _id desc limit 10;' | tac > sms.tmp
+    sqlite3 $db_sms 'select address,body,type from sms order by _id desc limit 20;' | tac > sms.tmp
     while read line; do
         num="$(echo $line | cut -d\| -f1)"
         message="$(echo $line | cut -d\| -f2)"
-        type="$(echo $line | cut -d\| -f3)"
-        if [[ "$type" -eq "2" ]]; then
+        mtype="$(echo $line | cut -d\| -f3)"
+        if [[ "$mtype" -eq "2" ]]; then
             echo "Me: $message"
         else
             cid="$(sqlite3 $db_contacts "select raw_contact_id from phone_lookup where normalized_number=${num} or normalized_number=+1${num};")"
