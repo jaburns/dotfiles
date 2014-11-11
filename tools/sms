@@ -1,55 +1,71 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Script to monitor SMS via adb.
-
-if [[ ! -e /sdcard ]]; then
-    if [[ "$1" -eq "send" ]]; then
-        adb shell input keyevent 26
-        adb shell input text $2
-        adb shell input keyevent 66
-        adb shell am start -a android.intent.action.SENDTO -d sms:+1$3 --es sms_body "$4" --ez exit_on_sent true
-        adb shell input keyevent 22
-        adb shell input keyevent 66
-        adb shell input keyevent 26
-    else
-        adb push $HOME/dotfiles/tools/sms /sdcard/sms
-        adb shell su -c 'bash /sdcard/sms'
-    fi
-    exit
-fi
-
-cd /sdcard
-
-db_sms='/data/data/com.android.providers.telephony/databases/mmssms.db'
-db_contacts='/data/data/com.android.providers.contacts/databases/contacts2.db'
-
-get_latest () {
-    sqlite3 $db_sms 'select * from (select address,body,type,_id from sms order by _id desc limit 20) order by _id asc;' \
-        > sms.tmp
-    while read line; do
-        num="$(echo $line | cut -d\| -f1)"
-        message="$(echo $line | cut -d\| -f2)"
-        mtype="$(echo $line | cut -d\| -f3)"
-        if [[ "$mtype" -eq "2" ]]; then
-            echo "Me: $message"
-        else
-            cid="$(sqlite3 $db_contacts "select raw_contact_id from phone_lookup where normalized_number=${num} or normalized_number=+1${num};")"
-            name="$(sqlite3 $db_contacts "select display_name from view_contacts where name_raw_contact_id=${cid};")"
-            echo "${name}: $message"
-        fi
-    done < sms.tmp
+usage () {
+    echo 'Tool for managing SMS on connected Android device. Usage:'
+    echo '  ./sms grep $name'
+    echo '  ./sms send $pin $uid $message'
+    echo '  ./sms monitor'
 }
 
-rm -f old.sms.tmp new.sms.tmp sms.tmp
-touch old.sms.tmp
+query_sms () {
+    adb shell su -c "sqlite3 /data/data/com.android.providers.telephony/databases/mmssms.db '$1'"
+}
 
-while true; do
-    get_latest > new.sms.tmp
-    if ! diff old.sms.tmp new.sms.tmp >/dev/null; then
+query_contacts () {
+    adb shell su -c "sqlite3 /data/data/com.android.providers.contacts/databases/contacts2.db '$1'"
+}
+
+lookup_contact () {
+    query_contacts 'select display_name,name_raw_contact_id from view_contacts' \
+        | grep -i "$1" \
+        | while read line; do
+            id="$(echo $line | cut -d\| -f2 | sed 's/.$//')"
+            name="$(echo $line | cut -d\| -f1)"
+            phone="$(query_contacts "select normalized_number from phone_lookup where raw_contact_id=$id" | tail -1)"
+            echo "$id :: $name :: $phone"
+        done
+}
+
+send_to_id () {
+    phone="$(query_contacts "select normalized_number from phone_lookup where raw_contact_id=$2" | tail -1)"
+    adb shell input keyevent 26
+    adb shell input text $1
+    adb shell input keyevent 66
+    adb shell am start -a android.intent.action.SENDTO -d sms:$phone --es sms_body "$3" --ez exit_on_sent true
+    adb shell input keyevent 22
+    adb shell input keyevent 66
+    adb shell input keyevent 26
+}
+
+show_latest_sms () {
+    query_sms "select * from (select address,body,type,_id from sms order by _id desc limit $1) order by _id asc" \
+        | while read line; do
+            num="$(echo $line | cut -d\| -f1)"
+            message="$(echo $line | cut -d\| -f2)"
+            mtype="$(echo $line | cut -d\| -f3)"
+            if [[ "$mtype" -eq "2" ]]; then
+                echo "Me: $message"
+            else
+                cid="$(query_contacts "select raw_contact_id from phone_lookup where normalized_number=${num} or normalized_number=+1${num}")"
+                name="$(query_contacts "select display_name from view_contacts where name_raw_contact_id=${cid}" | sed 's/.$//')"
+                echo "${name}: $message"
+            fi
+        done
+}
+
+monitor () {
+    while true; do
+        show_latest_sms 20 > /tmp/sms
         clear
-        cat new.sms.tmp
-        cp new.sms.tmp old.sms.tmp
-    fi
-    sleep 5
-done
+        cat /tmp/sms
+        sleep 5
+    done
+}
+
+case "$1" in
+    grep) lookup_contact "$2" ;;
+    send) send_to_id "$2" "$3" "$4" ;;
+    monitor) monitor ;;
+    *) usage ;;
+esac
 
