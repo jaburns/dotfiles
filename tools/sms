@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Script to monitor SMS via adb.
+#  Install to SD card:
+#    adb push ./sms /sdcard/sms'
+#  Run:
+#    adb shell su -c 'bash /sdcard/sms'
+
+cd /sdcard
+
+db_sms='/data/data/com.android.providers.telephony/databases/mmssms.db'
+db_contacts='/data/data/com.android.providers.contacts/databases/contacts2.db'
+
+get_latest () {
+    sqlite3 $db_sms 'select address,body,type from sms order by _id desc limit 10;' | tac > sms.tmp
+    while read line; do
+        num="$(echo $line | cut -d\| -f1)"
+        message="$(echo $line | cut -d\| -f2)"
+        type="$(echo $line | cut -d\| -f3)"
+        if [[ "$type" -eq "2" ]]; then
+            echo "Me: $message"
+        else
+            cid="$(sqlite3 $db_contacts "select raw_contact_id from phone_lookup where normalized_number=${num} or normalized_number=+1${num};")"
+            name="$(sqlite3 $db_contacts "select display_name from view_contacts where name_raw_contact_id=${cid};")"
+            echo "${name}: $message"
+        fi
+    done < sms.tmp
+}
+
+touch old.sms.tmp
+
+while true; do
+    get_latest > new.sms.tmp
+    if ! diff old.sms.tmp new.sms.tmp >/dev/null; then
+        clear
+        cat new.sms.tmp
+        cp new.sms.tmp old.sms.tmp
+    fi
+    sleep 5
+done
+
