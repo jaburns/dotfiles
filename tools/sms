@@ -54,6 +54,7 @@ send_message () {
     else
         local num=$(cat "/tmp/sms/number-1")
     fi
+    echo "Sending message to $num..."
     adb shell input keyevent 26
     adb shell input text "$(cat /tmp/sms/pin)"
     adb shell input keyevent 66
@@ -64,18 +65,19 @@ send_message () {
 }
 
 show_latest_sms () {
-    query_sms "select * from (select address,body,type,_id from sms order by _id desc limit $1) order by _id asc" \
+    query_sms "select * from (select address,body,type,date,_id from sms order by _id desc limit $1) order by _id asc" \
         | while read line; do
             local num="$(normalize_number "$(echo $line | cut -d\| -f1)")"
             local message="$(echo $line | cut -d\| -f2)"
             local mtype="$(echo $line | cut -d\| -f3)"
+            local date="$(gdate -d @$(expr $(echo $line | cut -d\| -f4) / 1000) +'%a %l:%M %p')"
             local name="$(get_name_from_number $num)"
             case "$mtype" in
                 1) local dash=': ' ;;
                 2) local dash='<<' ;;
                 *) local dash='--' ;;
             esac
-            echo "$name $dash $message"
+            echo "$date ~ $name $dash $message"
         done
 }
 
