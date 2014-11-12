@@ -21,21 +21,21 @@ query_contacts () {
 }
 
 normalize_number () {
-    num="$(echo "$1" | sed 's/[^0-9]//g')"
+    local num="$(echo "$1" | sed 's/[^0-9]//g')"
     [[ ${#num} -lt 11 ]] && num="1$num"
     [[ ${#num} -lt 12 ]] && num="+$num"
     printf "$num"
 }
 
 lookup_contact () {
-    count=1
+    local count=1
     grep -i "$1" /tmp/sms/contacts \
         | while read line; do
-            name="$(echo $line | cut -d\| -f1)"
-            num="$(echo $line | cut -d\| -f2)"
+            local name="$(echo $line | cut -d\| -f1)"
+            local num="$(echo $line | cut -d\| -f2)"
             echo " $count :: $num :: $name"
             echo "$num" > /tmp/sms/number-$count
-            count=$(expr $count + 1)
+            local count=$(expr $count + 1)
         done
 }
 
@@ -49,10 +49,10 @@ send_message () {
         return 1;
     fi
     if [[ ! -z "$2" ]]; then
-        num=$(cat "/tmp/sms/number-$1")
+        local num=$(cat "/tmp/sms/number-$1")
         shift
     else
-        num=$(cat "/tmp/sms/number-1")
+        local num=$(cat "/tmp/sms/number-1")
     fi
     adb shell input keyevent 26
     adb shell input text "$(cat /tmp/sms/pin)"
@@ -66,14 +66,14 @@ send_message () {
 show_latest_sms () {
     query_sms "select * from (select address,body,type,_id from sms order by _id desc limit $1) order by _id asc" \
         | while read line; do
-            num="$(normalize_number "$(echo $line | cut -d\| -f1)")"
-            message="$(echo $line | cut -d\| -f2)"
-            mtype="$(echo $line | cut -d\| -f3)"
-            name="$(get_name_from_number $num)"
-            if [[ "$mtype" -eq "2" ]]; then
-                echo "${name} << $message"
-            else
+            local num="$(normalize_number "$(echo $line | cut -d\| -f1)")"
+            local message="$(echo $line | cut -d\| -f2)"
+            local mtype="$(echo $line | cut -d\| -f3)"
+            local name="$(get_name_from_number $num)"
+            if [[ "$mtype" -eq "1" ]]; then
                 echo "${name} -- $message"
+            else
+                echo "${name} << $message"
             fi
         done
 }
@@ -92,8 +92,8 @@ init () {
     printf "Generating normalized numbers for contacts list..."
     query_contacts 'select name,number from view_v1_phones' \
         | while read line; do
-            name="$(echo $line | cut -d\| -f1)"
-            num="$(normalize_number "$(echo $line | cut -d\| -f2 | sed 's/.$//')")"
+            local name="$(echo $line | cut -d\| -f1)"
+            local num="$(normalize_number "$(echo $line | cut -d\| -f2 | sed 's/.$//')")"
             [[ ${#num} -eq 12 ]] && \
                 echo "$name|$num" >> /tmp/sms/contacts
         done
@@ -102,8 +102,13 @@ init () {
 
 monitor () {
     rm -f /tmp/sms/latest
+    if [[ -z "$1" ]]; then
+        local amount=20
+    else
+        local amount="$1"
+    fi
     while true; do
-        show_latest_sms 4 > /tmp/sms/latest
+        show_latest_sms "$amount" > /tmp/sms/latest
         clear
         cat /tmp/sms/latest
         sleep 5
@@ -115,7 +120,7 @@ case "$1" in
     clean) clean ;;
     grep) lookup_contact "$2" ;;
     send) send_message "$2" "$3" ;;
-    monitor) monitor ;;
+    monitor) monitor "$2" ;;
     *) usage ;;
 esac
 
