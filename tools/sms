@@ -90,9 +90,9 @@ init () {
     query_contacts 'select name,number from view_v1_phones' \
         | while read line; do
             name="$(echo $line | cut -d\| -f1)"
-            num="$(echo $line | cut -d\| -f2 | sed 's/.$//')"
+            num="$(normalize_number "$(echo $line | cut -d\| -f2 | sed 's/.$//')")"
             [[ ${#num} -eq 12 ]] && \
-                echo "$name|$(normalize_number $num)" >> /tmp/sms/contacts
+                echo "$name|$num" >> /tmp/sms/contacts
         done
     echo ' Done.'
 }
