@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# TODO check if monitor is running and don't run 2 instances
+# TODO handle failure modes
+
 usage () {
     echo 'Tool for managing SMS on connected Android device. Usage:'
     echo '  ./sms init'
@@ -98,7 +101,7 @@ init () {
 }
 
 monitor () {
-    rm /tmp/sms
+    rm -f /tmp/sms/latest
     while true; do
         show_latest_sms 4 > /tmp/sms/latest
         clear
