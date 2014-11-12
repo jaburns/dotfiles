@@ -2,8 +2,10 @@
 
 usage () {
     echo 'Tool for managing SMS on connected Android device. Usage:'
+    echo '  ./sms init'
+    echo '  ./sms clean'
     echo '  ./sms grep $name'
-    echo '  ./sms send $pin $uid $message'
+    echo '  ./sms send ($id) $message'
     echo '  ./sms monitor'
 }
 
@@ -15,23 +17,44 @@ query_contacts () {
     adb shell su -c "sqlite3 /data/data/com.android.providers.contacts/databases/contacts2.db '$1'"
 }
 
+normalize_number () {
+    num="$(echo "$1" | sed 's/[^0-9]//g')"
+    [[ ${#num} -lt 11 ]] && num="1$num"
+    [[ ${#num} -lt 12 ]] && num="+$num"
+    printf "$num"
+}
+
 lookup_contact () {
-    query_contacts 'select display_name,name_raw_contact_id from view_contacts' \
-        | grep -i "$1" \
+    count=1
+    grep -i "$1" /tmp/sms/contacts \
         | while read line; do
-            id="$(echo $line | cut -d\| -f2 | sed 's/.$//')"
             name="$(echo $line | cut -d\| -f1)"
-            phone="$(query_contacts "select normalized_number from phone_lookup where raw_contact_id=$id" | tail -1)"
-            echo "$id :: $name :: $phone"
+            num="$(echo $line | cut -d\| -f2)"
+            echo " $count :: $num :: $name"
+            echo "$num" > /tmp/sms/number-$count
+            count=$(expr $count + 1)
         done
 }
 
-send_to_id () {
-    phone="$(query_contacts "select normalized_number from phone_lookup where raw_contact_id=$2" | tail -1)"
+get_name_from_number () {
+    grep -i "$1" /tmp/sms/contacts | head -1 | cut -d\| -f1
+}
+
+send_message () {
+    if [[ ! -e /tmp/sms/pin ]]; then
+        echo 'Need to set phone pin'
+        return 1;
+    fi
+    if [[ ! -z "$2" ]]; then
+        num=$(cat "/tmp/sms/number-$1")
+        shift
+    else
+        num=$(cat "/tmp/sms/number-1")
+    fi
     adb shell input keyevent 26
-    adb shell input text $1
+    adb shell input text "$(cat /tmp/sms/pin)"
     adb shell input keyevent 66
-    adb shell am start -a android.intent.action.SENDTO -d sms:$phone --es sms_body "$3" --ez exit_on_sent true
+    adb shell am start -a android.intent.action.SENDTO -d sms:$num --es sms_body "$1" --ez exit_on_sent true
     adb shell input keyevent 22
     adb shell input keyevent 66
     adb shell input keyevent 26
@@ -40,31 +63,55 @@ send_to_id () {
 show_latest_sms () {
     query_sms "select * from (select address,body,type,_id from sms order by _id desc limit $1) order by _id asc" \
         | while read line; do
-            num="$(echo $line | cut -d\| -f1)"
+            num="$(normalize_number "$(echo $line | cut -d\| -f1)")"
             message="$(echo $line | cut -d\| -f2)"
             mtype="$(echo $line | cut -d\| -f3)"
+            name="$(get_name_from_number $num)"
             if [[ "$mtype" -eq "2" ]]; then
-                echo "Me: $message"
+                echo "${name} << $message"
             else
-                cid="$(query_contacts "select raw_contact_id from phone_lookup where normalized_number=${num} or normalized_number=+1${num}")"
-                name="$(query_contacts "select display_name from view_contacts where name_raw_contact_id=${cid}" | sed 's/.$//')"
-                echo "${name}: $message"
+                echo "${name} -- $message"
             fi
         done
 }
 
+clean () {
+    rm -rf /tmp/sms
+}
+
+init () {
+    clean
+    mkdir /tmp/sms
+    echo "Enter phone PIN:"
+    read pin
+    printf "$pin" > /tmp/sms/pin
+    touch /tmp/sms/contacts
+    printf "Generating normalized numbers for contacts list..."
+    query_contacts 'select name,number from view_v1_phones' \
+        | while read line; do
+            name="$(echo $line | cut -d\| -f1)"
+            num="$(echo $line | cut -d\| -f2 | sed 's/.$//')"
+            [[ ${#num} -eq 12 ]] && \
+                echo "$name|$(normalize_number $num)" >> /tmp/sms/contacts
+        done
+    echo ' Done.'
+}
+
 monitor () {
+    rm /tmp/sms
     while true; do
-        show_latest_sms 20 > /tmp/sms
+        show_latest_sms 4 > /tmp/sms/latest
         clear
-        cat /tmp/sms
+        cat /tmp/sms/latest
         sleep 5
     done
 }
 
 case "$1" in
+    init) init ;;
+    clean) clean ;;
     grep) lookup_contact "$2" ;;
-    send) send_to_id "$2" "$3" "$4" ;;
+    send) send_message "$2" "$3" ;;
     monitor) monitor ;;
     *) usage ;;
 esac
