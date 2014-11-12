@@ -70,11 +70,12 @@ show_latest_sms () {
             local message="$(echo $line | cut -d\| -f2)"
             local mtype="$(echo $line | cut -d\| -f3)"
             local name="$(get_name_from_number $num)"
-            if [[ "$mtype" -eq "1" ]]; then
-                echo "${name} -- $message"
-            else
-                echo "${name} << $message"
-            fi
+            case "$mtype" in
+                1) local dash=': ' ;;
+                2) local dash='<<' ;;
+                *) local dash='--' ;;
+            esac
+            echo "$name $dash $message"
         done
 }
 
@@ -85,8 +86,7 @@ clean () {
 init () {
     clean
     mkdir /tmp/sms
-    echo "Enter phone PIN:"
-    read pin
+    read -p  "Enter phone PIN: " pin
     printf "$pin" > /tmp/sms/pin
     touch /tmp/sms/contacts
     printf "Generating normalized numbers for contacts list..."
