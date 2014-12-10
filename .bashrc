@@ -11,6 +11,7 @@ alias notes='vim ~/Dropbox/notes.txt'
 alias music='vim ~/Dropbox/music.txt'
 alias pyhttp='python -m SimpleHTTPServer'
 alias nosleep='pmset noidle'
+alias ywd='printf "%q" "$(pwd)" | pbcopy'
 
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
@@ -18,10 +19,16 @@ export PATH=$PATH:$HOME/.cabal/bin
 
 command -v vim >/dev/null 2>&1 && alias vi='vim'
 
-# ----- command for curling json without string contents ----------------------
+# ----- Simple commands -------------------------------------------------------
 
+# Curl json without the string contents.
 cjns () {
     curl "$1" | sed 's/:"[^"]*/:"/g'
+}
+
+# Print the default dimensions of a SWF, local or remote
+swfsize () {
+    php -r "print_r(getimagesize('$1'));"
 }
 
 # ----- set default output for ls; add auto ls after cd -----------------------
@@ -45,6 +52,30 @@ cdls () {
 }
 
 alias cd='cdls'
+
+# ----- easy way to navigate to a dir parent ----------------------------------
+
+function cdup {
+    local newdir="${PWD/\/$1\/*/}/$1"
+    if [[ -d "$newdir" ]]
+    then
+        cd "$newdir"
+    else
+        echo "\"$newdir\" does not exist"
+    fi
+}
+
+function _cdup_complete {
+    local word=${COMP_WORDS[COMP_CWORD]}
+    local list=$(pwd | cut -c 2- | sed -e 's#/[^/]*$##g' -e 's/\([ ()]\)/\\\\\1/g')
+    IFS=/
+    list=$(compgen -W "$list" -- "$word")
+    IFS=$'\n'
+    COMPREPLY=($list)
+    return 0
+}
+
+complete -F _cdup_complete cdup
 
 # ----- ack helpers -----------------------------------------------------------
 
