@@ -10,8 +10,8 @@ alias grep='grep --color=auto'
 alias notes='vim ~/Dropbox/notes.txt'
 alias music='vim ~/Dropbox/music.txt'
 alias pyhttp='python -m SimpleHTTPServer'
-alias nosleep='pmset noidle'
 alias ywd='printf "%q" "$(pwd)" | pbcopy'
+alias dskill='find . -name .DS_Store | xargs rm'
 
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
