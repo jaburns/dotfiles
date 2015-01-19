@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cd /tmp
+mkdir rust-vim
+cd rust-vim
+git clone https://github.com/rust-lang/rust --depth=1
+mv rust/src/etc/vim rust/src/etc/rust-vim
+rm -rf ~/dotfiles/.vim/bundle/rust-vim
+cp -r rust/src/etc/rust-vim ~/dotfiles/.vim/bundle
+cd ..
+rm -rf rust-vim
