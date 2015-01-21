@@ -22,9 +22,9 @@ command -v vim >/dev/null 2>&1 && alias vi='vim'
 
 # ----- Simple commands -------------------------------------------------------
 
-# Curl json without the string contents.
-cjns () {
-    curl "$1" | sed 's/:"[^"]*/:"/g'
+# Find a file with name containing some text
+finn () {
+    find . -iname "*$1*"
 }
 
 # Print the default dimensions of a SWF, local or remote
