@@ -16,7 +16,7 @@ alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
-export PATH=$PATH:$HOME/.cabal/bin
+export PATH=$HOME/.cabal/bin:$PATH
 
 command -v vim >/dev/null 2>&1 && alias vi='vim'
 
