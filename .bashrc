@@ -96,7 +96,7 @@ alias aak='ack_formatted --actionscript'
 # git config --global credential.helper "cache --timeout=3600"
 # git config --global color.ui auto
 
-if ! whereis gxargs >/dev/null 2>/dev/null; then
+if ! which gxargs >/dev/null 2>/dev/null; then
     alias gxargs=xargs
 fi
 
