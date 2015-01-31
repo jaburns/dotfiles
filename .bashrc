@@ -159,6 +159,20 @@ svl () {
 # Quick alias for editing the ignore list in svn
 alias si='svn propedit svn:ignore .'
 
+# ----- node.js breakpoint debugger setup -------------------------------------
+
+ndb () {
+    local params="$@"
+    [[ -z "$params" ]] && local params=.
+    tmux split-window -v "node --debug-brk $params"
+    sleep 0.2
+    tmux split-window -h 'node-vim-inspector'
+    tmux swap-pane -U
+    tmux select-pane -U
+    tmux resize-pane -D 20
+    vim -nb
+}
+
 # ----- Prompt config ---------------------------------------------------------
 
 ps1_color_error () {
