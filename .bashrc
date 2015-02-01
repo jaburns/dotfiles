@@ -169,7 +169,6 @@ ndb () {
     tmux split-window -h 'node-vim-inspector'
     tmux swap-pane -U
     tmux select-pane -U
-    tmux resize-pane -D 20
     vim -nb
 }
 
