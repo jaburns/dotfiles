@@ -101,10 +101,13 @@ if ! which gxargs >/dev/null 2>/dev/null; then
 fi
 
 gg () {
+    local cmd=
     if [[ "$#" -lt 1 ]]; then
         git status
     elif [[ "$#" -lt 2 ]]; then
         git ls-files -m -o --exclude-standard | grep "$1"
+        read cmd
+        [[ ! -z "$cmd" ]] && gg "$1" $cmd
     else
         local gurp="$1"
         shift
