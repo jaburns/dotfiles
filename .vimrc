@@ -39,7 +39,6 @@ set smartcase           " Use smartcase in searches (and replaces unfortunately)
 set textwidth=0         " Turn off automatic newline insertion
 set wrapmargin=0        "  "
 set background=dark     " Tell vim that we're using a dark background.
-set autoread            " Automatically reload changed files.
 
 syntax enable
 colorscheme jaburns
@@ -160,11 +159,15 @@ nnoremap <leader>v :e $MYVIMRC<cr>
 nnoremap <leader>s :mksession! $HOME/.session.vim<cr>
 nnoremap <leader>l :source $HOME/.session.vim<cr>
 
-" Automatically reload vimrc after saving changes to it
 augroup vimrc
+    " Automatically reload vimrc after saving changes to it
     autocmd BufWritePost vimrc source $MYVIMRC
     autocmd BufNewFile,BufRead *.as set filetype=javascript
     autocmd BufNewFile,BufRead *.as set shiftwidth=4
+
+    " Automatically save files on switch from buffer, and reload files on switch to buffer
+    au FocusGained,BufEnter * :silent! !
+    au FocusLost,WinLeave * :silent! w
 augroup END
 
 " Some sane bindings for window resizing
