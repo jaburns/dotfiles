@@ -25,3 +25,6 @@
 [submodule ".vim/bundle/vim-node"]
     path = .vim/bundle/vim-node
     url = https://github.com/moll/vim-node
+[submodule ".vim/bundle/vaxe"]
+	path = .vim/bundle/vaxe
+	url = https://github.com/jdonaldson/vaxe
