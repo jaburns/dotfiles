@@ -28,3 +28,6 @@
 [submodule ".vim/bundle/vaxe"]
 	path = .vim/bundle/vaxe
 	url = https://github.com/jdonaldson/vaxe
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic
