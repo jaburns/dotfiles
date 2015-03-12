@@ -39,6 +39,7 @@ set smartcase           " Use smartcase in searches (and replaces unfortunately)
 set textwidth=0         " Turn off automatic newline insertion
 set wrapmargin=0        "  "
 set background=dark     " Tell vim that we're using a dark background.
+set autowrite           " Write files when focus is lost
 
 syntax enable
 colorscheme jaburns
