@@ -17,6 +17,7 @@ alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$HOME/.cabal/bin:$PATH
+export PATH=$PATH:/Applications/Adobe\ Flash\ Builder\ 4.7/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/bin
 
 command -v vim >/dev/null 2>&1 && alias vi='vim'
 
