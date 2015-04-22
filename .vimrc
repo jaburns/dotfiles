@@ -8,14 +8,15 @@ silent! call pathogen#helptags()
 
 set autoindent          " Copy indent from current line when starting a new line
 set copyindent          " Copy the previous indentation on autoindenting
-set linebreak           " Break wrapped lines on words
-set cindent             " Indenting for C-like languages
-set shiftwidth=4        " An indent is n spaces
 set nojoinspaces        " Don't convert spaces to tabs
 set shiftround          " Round spaces to nearest shiftwidth multiple
 set smarttab            " Indent instead of tab at start of line
-set expandtab           " Always uses spaces instead of tabs
+set shiftwidth=4        " An indent is n spaces
 set tabstop=4           " A tab is rendered as n spaces
+set softtabstop=4       " "
+"set expandtab          " Always uses spaces instead of tabs
+
+set linebreak           " Break wrapped lines on words
 set ruler               " Show the line and column number of the cursor position
 set number              " Print the line number in front of each line
 set scrolloff=15        " Minimal number of screen lines to keep above and below the cursor
@@ -42,7 +43,7 @@ set background=dark     " Tell vim that we're using a dark background.
 set autowrite           " Write files when focus is lost
 
 syntax enable
-colorscheme jaburns
+" colorscheme jaburns
 
 let mapleader=' '
 
@@ -50,6 +51,9 @@ let mapleader=' '
 augroup vimrc
     autocmd!
 augroup END
+
+highlight Tabs ctermbg=233
+match Tabs "\t"
 
 
 " ----- Text editing keys configuration ----------------------------------------
