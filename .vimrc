@@ -1,5 +1,8 @@
 ".vimrc
-
+"
+" JS Project stuff
+" let g:ctrlp_user_command = 'find %s -type f -iname "*.js" | grep -v "node_modules\|build"'
+"
 filetype plugin indent on
 
 " Load up plugins if pathogen is installed
@@ -14,7 +17,7 @@ set smarttab            " Indent instead of tab at start of line
 set shiftwidth=4        " An indent is n spaces
 set tabstop=4           " A tab is rendered as n spaces
 set softtabstop=4       " "
-"set expandtab          " Always uses spaces instead of tabs
+set expandtab          " Always uses spaces instead of tabs
 
 set linebreak           " Break wrapped lines on words
 set ruler               " Show the line and column number of the cursor position
@@ -52,7 +55,7 @@ augroup vimrc
     autocmd!
 augroup END
 
-highlight Tabs ctermbg=233
+highlight Tabs ctermbg=235 guibg=#000000
 match Tabs "\t"
 
 
@@ -106,6 +109,7 @@ inoremap <c-backspace> <c-w>
 " Paste in insert mode
 inoremap <c-v> <esc>pa
 inoremap <c-c> <c-v>
+
 
 
 " ----- gvim configuration -----------------------------------------------------
