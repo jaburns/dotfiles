@@ -6,7 +6,7 @@ set noshowmatch
 set splitbelow
 set completeopt=longest,menuone,preview
 
-let g:syntastic_cs_checkers = ['syntax', 'issues']
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 
 nnoremap gd :OmniSharpGotoDefinition<cr>
 nnoremap <leader>hh :OmniSharpHighlightTypes<cr>
