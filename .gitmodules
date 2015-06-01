@@ -34,3 +34,6 @@
 [submodule ".vim/bundle/rust.vim"]
 	path = .vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim
+[submodule ".vim/bundle/gitignore"]
+	path = .vim/bundle/gitignore
+	url = https://github.com/vim-scripts/gitignore
