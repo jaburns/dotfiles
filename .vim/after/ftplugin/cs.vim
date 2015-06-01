@@ -10,11 +10,12 @@ let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 
 nnoremap gd :OmniSharpGotoDefinition<cr>
 nnoremap <leader>hh :OmniSharpHighlightTypes<cr>
-nnoremap <leader>tt :OmniSharpTypeLookup<cr>
-nnoremap <leader>ii :OmniSharpGetCodeActions<cr>
+nnoremap <leader>tl :OmniSharpTypeLookup<cr>
+nnoremap <leader>ca :OmniSharpGetCodeActions<cr>
 nnoremap <leader>fs :OmniSharpFindSymbol<cr>
 nnoremap <leader>fu :OmniSharpFindUsages<cr>
-nnoremap <leader>uu :OmniSharpFixUsings<cr>
-nnoremap <leader>rr :OmniSharpReloadSolution<cr>
+nnoremap <leader>xu :OmniSharpFixUsings<cr>
+nnoremap <leader>xi :OmniSharpFixUsings<cr>
+nnoremap <leader>rs :OmniSharpReloadSolution<cr>
 command! -nargs=1 RR :call OmniSharp#RenameTo("<args>")
 
