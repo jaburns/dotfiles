@@ -229,6 +229,36 @@ let g:ctrlp_working_path_mode = ''
 " Size CtrlP window a little bigger than default
 let g:ctrlp_max_height = 20
 
+" --------- QuickScope to work with combinations  -----------------------------
+
+function! Quick_scope_selective(movement)
+    let needs_disabling = 0
+    if !g:qs_enable
+        QuickScopeToggle
+        redraw
+        let needs_disabling = 1
+    endif
+
+    let letter = nr2char(getchar())
+
+    if needs_disabling
+        QuickScopeToggle
+    endif
+
+    return a:movement . letter
+endfunction
+
+let g:qs_enable = 0
+
+for i in  [ 'f', 'F', 't', 'T' ]
+    execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
+endfor
+
+let g:qs_first_occurrence_highlight_color = '#afff5f'
+let g:qs_first_occurrence_highlight_color = 155
+
+let g:qs_second_occurrence_highlight_color = '#5fffff'
+let g:qs_second_occurrence_highlight_color = 81
 
 " --------- neocomplcache settings (mainly for OmniSharp) ----------------------
 
