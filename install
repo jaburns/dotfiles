@@ -7,13 +7,19 @@ case "$OSTYPE" in
 esac
 
 if [[ "$1" == 'omni' ]]; then
-    cd .vim/bundle/Omnisharp/server/OmniSharp
+    pushd .vim/bundle/Omnisharp/server/OmniSharp
     if [[ "$os" == 'windows' ]]; then
         echo msbuild | cmd
         echo ""
+        popd
+        echo "NEED TO LINK CONFIG.JSON"
     else
         xbuild
+        popd
+        rm .vim/bundle/Omnisharp/server/OmniSharp/bin/Debug/config.json
+        ln ./omnisharp.jaburns.json .vim/bundle/Omnisharp/server/OmniSharp/bin/Debug/config.json
     fi
+
     exit 0
 elif [[ "$1" == 'plugins' ]]; then
     git submodule update --init --recursive
