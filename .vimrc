@@ -77,6 +77,9 @@ nnoremap C "_C
 vnoremap c "_c
 vnoremap C "_C
 
+nnoremap H ^
+vnoremap H ^
+
 " Prevent pasting in visual mode from yanking the replaced text.
 vnoremap p "_dP
 
