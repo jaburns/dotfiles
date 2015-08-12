@@ -45,7 +45,9 @@ set wrapmargin=0        "  "
 set autowrite           " Write files when focus is lost
 
 syntax enable
-colorscheme solarized
+" colorscheme solarized
+" colorscheme jaburns
+set background=dark
 
 let mapleader=' '
 
