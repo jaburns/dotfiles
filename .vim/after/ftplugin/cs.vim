@@ -9,7 +9,7 @@ set completeopt=longest,menuone,preview
 let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 
 nnoremap gd :OmniSharpGotoDefinition<cr>
-nnoremap <leader>he :e ~/.vim/after/ftplugin/cs.vim<cr>
+nnoremap <leader>cv :e ~/.vim/after/ftplugin/cs.vim<cr>
 nnoremap <leader>hh :OmniSharpHighlightTypes<cr>
 nnoremap <leader>tl :OmniSharpTypeLookup<cr>
 nnoremap <leader>ca :OmniSharpGetCodeActions<cr>
@@ -19,4 +19,10 @@ nnoremap <leader>xu :OmniSharpFixUsings<cr>
 nnoremap <leader>xi :OmniSharpFixUsings<cr>
 nnoremap <leader>rs :OmniSharpReloadSolution<cr>
 command! -nargs=1 RR :call OmniSharp#RenameTo("<args>")
+
+augroup vimrc_cs
+    autocmd!
+    autocmd BufWritePost * :OmniSharpHighlightTypes
+augroup END
+
 

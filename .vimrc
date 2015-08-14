@@ -175,6 +175,8 @@ nnoremap <leader>l :source $HOME/.session.vim<cr>
 augroup vimrc
     " Automatically reload vimrc after saving changes to it
     autocmd BufWritePost vimrc source $MYVIMRC
+
+    " Treat AS3 files like javascript files
     autocmd BufNewFile,BufRead *.as set filetype=javascript
     autocmd BufNewFile,BufRead *.as set shiftwidth=4
 
@@ -257,11 +259,13 @@ for i in  [ 'f', 'F', 't', 'T' ]
     execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
 endfor
 
-let g:qs_first_occurrence_highlight_color = '#afff5f'
-let g:qs_first_occurrence_highlight_color = 155
-
-let g:qs_second_occurrence_highlight_color = '#5fffff'
-let g:qs_second_occurrence_highlight_color = 81
+if has('gui')
+    let g:qs_first_occurrence_highlight_color = '#afff5f'
+    let g:qs_second_occurrence_highlight_color = '#5fffff'
+else
+    let g:qs_first_occurrence_highlight_color = 155
+    let g:qs_second_occurrence_highlight_color = 81
+endif
 
 " --------- neocomplcache settings (mainly for OmniSharp) ----------------------
 
