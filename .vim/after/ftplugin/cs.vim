@@ -22,7 +22,7 @@ command! -nargs=1 RR :call OmniSharp#RenameTo("<args>")
 
 augroup vimrc_cs
     autocmd!
-    autocmd BufWritePost * :OmniSharpHighlightTypes
+    autocmd BufWritePost *.cs :OmniSharpHighlightTypes
 augroup END
 
 
