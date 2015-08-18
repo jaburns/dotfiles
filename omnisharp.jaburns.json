@@ -38,7 +38,8 @@
     "^Using member of null value will cause a NullReferenceException$",
     "^Redundant explicit array type specification$",
     "^Convert to 'return' statement$",
-    "^Convert to '..' expresssion$"
+    "^Convert to '..' expresssion$",
+    "^Parameter can be declared with base type$"
   ],
 
   "TestCommands": {

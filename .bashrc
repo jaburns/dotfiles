@@ -13,6 +13,7 @@ alias pyhttp='python -m SimpleHTTPServer'
 alias ywd='printf "%q" "$(pwd)" | pbcopy'
 alias dskill='find . -name .DS_Store | xargs rm'
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
+alias lss='du -hd 1'
 
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
