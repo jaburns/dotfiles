@@ -164,13 +164,7 @@ nnoremap <leader><cr> :nohlsearch<cr>
 
 " Some leader combos to navigate buffers
 nnoremap <leader><leader> <c-^>
-nnoremap <leader>j :bnext<cr>
-nnoremap <leader>k :bprevious<cr>
 nnoremap <leader>v :e $MYVIMRC<cr>
-
-" Save and load session
-nnoremap <leader>s :mksession! $HOME/.session.vim<cr>
-nnoremap <leader>l :source $HOME/.session.vim<cr>
 
 augroup vimrc
     " Automatically reload vimrc after saving changes to it
