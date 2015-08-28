@@ -43,6 +43,3 @@
 [submodule ".vim/bundle/quick-scope"]
 	path = .vim/bundle/quick-scope
 	url = https://github.com/unblevable/quick-scope
-[submodule ".vim/bundle/hsls.vim"]
-	path = .vim/bundle/hsls.vim
-	url = https://github.com/beyondmarc/hlsl.vim.git
