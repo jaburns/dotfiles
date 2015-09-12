@@ -34,6 +34,15 @@ swfsize () {
     php -r "print_r(getimagesize('$1'));"
 }
 
+# Rename some files with sed regex
+ren() {
+    [[ -z $1 ]] && echo "Example: sedmv '*.txt' 's/-suffix/-newsuff/'" && return
+    [[ -z $2 ]] && ls -1 $1 && return
+    for x in $1; do
+        mv "$x" "$(echo "$x" | sed "$2")";
+    done
+}
+
 # ----- set default output for ls; add auto ls after cd -----------------------
 
 if [[ "$(uname)" == "Darwin" ]]; then
