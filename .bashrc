@@ -25,12 +25,12 @@ command -v vim >/dev/null 2>&1 && alias vi='vim'
 # ----- Simple commands -------------------------------------------------------
 
 # Find a file with name containing some text
-finn () {
+finn() {
     find . -iname "*$1*"
 }
 
 # Print the default dimensions of a SWF, local or remote
-swfsize () {
+swfsize() {
     php -r "print_r(getimagesize('$1'));"
 }
 
@@ -52,7 +52,7 @@ else
 fi
 alias ll='ls --color=never'
 
-cdls () {
+cdls() {
     cd "$1"
     local cderr="$?"
     if [[ "$cderr" -eq '0' ]]; then
@@ -91,7 +91,7 @@ complete -F _cdup_complete cdup
 
 # ----- ack helpers -----------------------------------------------------------
 
-ack_formatted () {
+ack_formatted() {
     local lang=$1
     shift
     printf "\n\n\n    $@\n\n"
@@ -111,7 +111,7 @@ if ! which gxargs >/dev/null 2>/dev/null; then
     alias gxargs=xargs
 fi
 
-gg () {
+gg() {
     local cmd=
     if [[ "$#" -lt 1 ]]; then
         git status
@@ -148,7 +148,7 @@ alias gb='git branch'
 # ----- SVN helpers -----------------------------------------------------------
 
 # Grep SVN status for a pattern and execute an svn command on the selection.
-sg () {
+sg() {
     if [[ "$#" -lt 1 ]]; then
         svn st
     elif [[ "$#" -lt 2 ]]; then
@@ -159,13 +159,13 @@ sg () {
 }
 
 # Remove all deleted files, and add all new files.
-sa () {
+sa() {
     test `sg '!' | wc -l` -gt 0 && sg '!' rm
     test `sg '?' | wc -l` -gt 0 && sg '?' add
 }
 
 # Show the log from HEAD back n revisions
-svl () {
+svl() {
     rev=$(svn info | grep 'Revision' | cut -d\  -f2)
     svn log -r "$(expr $rev - $1):HEAD"
 }
@@ -175,7 +175,7 @@ alias si='svn propedit svn:ignore .'
 
 # ----- node.js breakpoint debugger setup -------------------------------------
 
-ndb () {
+ndb() {
     local params="$@"
     [[ -z "$params" ]] && local params=.
     tmux split-window -v "node --debug-brk $params"
