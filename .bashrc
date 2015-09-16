@@ -188,24 +188,27 @@ ndb () {
 
 # ----- Prompt config ---------------------------------------------------------
 
-ps1_color_error () {
+ps1_error() {
     if [[ "$1" -eq 0 ]]; then
-        printf '32'
+        printf '\[\033[0;32m\]'
     else
-        printf '31'
-    fi;
-    exit $1
-}
-ps1_value_error () {
-    if [[ "$1" -gt 0 ]]; then
+        printf '\[\033[0;31m\]'
         printf " $1 "
     fi;
 }
-ps1_git_branch () {
+ps1_git_branch() {
     local br="$(git branch 2> /dev/null)"
     if [[ ! -z "$br" ]]; then
-        printf '\b'
-        printf "$br" | sed '/^[^*]/d;s/* \(.*\)/ \1)/'
+        printf '\[\033[0;35m\] '
+        printf "$br" | sed '/^[^*]/d;s/* \(.*\)/ \1)/' | xargs printf
+    else
+        printf '\[\033[0;34m\])'
     fi
 }
-export PS1='\[\033[0;$(ps1_color_error $?)m\]$(ps1_value_error $?)\u\[\033[0;34m\] \W)\[\033[0;35m\]$(ps1_git_branch)\[\033[0m\] '
+ps1_render() {
+    printf "$(ps1_error $1)"
+    printf '\u \[\033[0;34m\]\W'
+    printf "$(ps1_git_branch)"
+    printf '\[\033[0m\] '
+}
+export PROMPT_COMMAND='PS1="$(ps1_render $?)"'
