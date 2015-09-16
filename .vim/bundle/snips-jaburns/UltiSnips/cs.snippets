@@ -4,6 +4,96 @@
 
 priority -50
 
+# ----- Unity -----------------------------------------------------------------
+
+snippet mb "monobehaviour" b
+using UnityEngine;
+
+public class ${1:XXX} : MonoBehaviour
+{
+	void Awake()
+	{
+		${VISUAL}$0
+	}
+}
+endsnippet
+
+snippet ed "editor" b
+using UnityEngine;
+using UnityEditor;
+
+[CustomEditor(typeof(${1:XXX}))]
+public class $1Editor : Editor
+{
+	$1 targ { get { return target as $1; } }
+
+	void OnSceneGUI()
+	{
+		${VISUAL}$0
+	}
+
+	override public void OnInspectorGUI()
+	{
+		base.OnInspectorGUI();
+	}
+}
+endsnippet
+
+snippet gc "get component" b
+${1:_var} = GetComponent<${2:Class}>();
+endsnippet
+
+snippet aw "awake" b
+void Awake()
+{
+	${VISUAL}$0
+}
+endsnippet
+
+snippet st "start" b
+void Start()
+{
+	${VISUAL}$0
+}
+endsnippet
+
+snippet fup "fixed update" b
+void FixedUpdate()
+{
+	${VISUAL}$0
+}
+endsnippet
+
+snippet up "update" b
+void Update()
+{
+	${VISUAL}$0
+}
+endsnippet
+
+snippet lup "late update" b
+void LateUpdate()
+{
+	${VISUAL}$0
+}
+endsnippet
+
+snippet odg "on draw gizmos" b
+void OnDrawGizmos()
+{
+	Gizmos.color = Color.${1:white};
+	${VISUAL}$0
+}
+endsnippet
+
+snippet ote2 "on trigger enter 2d" b
+void OnTriggerEnter2D(Collider2D other)
+{
+	${VISUAL}$0
+}
+endsnippet
+
+
 # ----- loops -----------------------------------------------------------------
 
 snippet fo "for loop" b
