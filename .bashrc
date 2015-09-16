@@ -193,22 +193,20 @@ ps1_error() {
         printf '\[\033[0;32m\]'
     else
         printf '\[\033[0;31m\]'
-        printf " $1 "
+        printf "$1 "
     fi;
 }
 ps1_git_branch() {
     local br="$(git branch 2> /dev/null)"
     if [[ ! -z "$br" ]]; then
         printf '\[\033[0;35m\] '
-        printf "$br" | sed '/^[^*]/d;s/* \(.*\)/ \1)/' | xargs printf
-    else
-        printf '\[\033[0;34m\])'
+        printf "$br" | sed '/^[^*]/d;s/* \(.*\)/ \1/' | xargs printf
     fi
 }
 ps1_render() {
     printf "$(ps1_error $1)"
-    printf '\u \[\033[0;34m\]\W'
+    printf '\u \[\033[0;34m\]\w'
     printf "$(ps1_git_branch)"
-    printf '\[\033[0m\] '
+    printf '\n\[\033[0;37m\]$) \[\033[0m\]'
 }
 export PROMPT_COMMAND='PS1="$(ps1_render $?)"'
