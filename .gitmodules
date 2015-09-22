@@ -40,6 +40,3 @@
 [submodule ".vim/bundle/colors-solarized"]
 	path = .vim/bundle/colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized
-[submodule ".vim/bundle/quick-scope"]
-	path = .vim/bundle/quick-scope
-	url = https://github.com/unblevable/quick-scope
