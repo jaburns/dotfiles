@@ -115,6 +115,23 @@ inoremap <c-v> <esc>pa
 inoremap <c-c> <c-v>
 
 
+" ----- filetype agnostic leader shortcuts -------------------------------------
+
+
+fun! RefreshAllBuffers()
+  set noconfirm
+  bufdo e!
+  set confirm
+  syntax on
+endfun
+
+nnoremap <leader>q call RefreshAllBuffers()
+
+
+" ----- node shortcuts ----
+
+nnoremap <leader>gv f'yi'<c-w>v<c-w>l:e<space>views/<c-r>".html<cr>
+
 
 " ----- gvim configuration -----------------------------------------------------
 
