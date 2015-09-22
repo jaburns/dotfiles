@@ -40,3 +40,6 @@
 [submodule ".vim/bundle/colors-solarized"]
 	path = .vim/bundle/colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized
+[submodule ".vim/bundle/vim-js-context-cooler"]
+	path = .vim/bundle/vim-js-context-cooler
+	url = git@github.com:jaburns/vim-js-context-coloring
