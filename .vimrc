@@ -164,6 +164,10 @@ nnoremap <c-down> :silent! let &guifont = substitute(
 
 " ----- Editor configuration ---------------------------------------------------
 
+" Mappings to open settings
+nnoremap <leader>vv :e $MYVIMRC<cr>
+nnoremap <leader>vc :e ~/.vim/after/ftplugin/cs.vim<cr>
+nnoremap <leader>vj :e ~/.vim/after/ftplugin/javascript.vim<cr>
 
 " Use system clipboard as default
 if has('unnamedplus')
@@ -181,7 +185,6 @@ nnoremap <leader><cr> :nohlsearch<cr>
 
 " Some leader combos to navigate buffers
 nnoremap <leader><leader> <c-^>
-nnoremap <leader>v :e $MYVIMRC<cr>
 
 augroup vimrc
     " Automatically reload vimrc after saving changes to it
@@ -223,6 +226,11 @@ set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb,*.meta,no
 " Enable default omnicomplete
 set omnifunc=syntaxcomplete#Complete
 
+" --------- syntastic settings -------------------------------------------------
+
+
+let g:syntastic_javascript_checkers = []
+
 
 " --------- Snippets settings --------------------------------------------------
 
@@ -234,6 +242,13 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+
+" --------- other plugin settings  ---------------------------------------------
+
+
+let g:js_context_colors_highlight_function_names = 1
+
 
 
 " --------- CtrlP settings -----------------------------------------------------

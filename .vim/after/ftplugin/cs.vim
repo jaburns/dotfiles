@@ -7,8 +7,7 @@ set splitbelow
 set completeopt=longest,menuone,preview
 
 nnoremap gd :OmniSharpGotoDefinition<cr>
-nnoremap <leader>cv :e ~/.vim/after/ftplugin/cs.vim<cr>
-nnoremap <leader>cs :e ~/.vim/bundle/snips-jaburns/UltiSnips/cs.snippets<cr>
+nnoremap <leader>vs :e ~/.vim/bundle/snips-jaburns/UltiSnips/cs.snippets<cr>
 nnoremap <leader>i :OmniSharpTypeLookup<cr>
 nnoremap <leader>a :OmniSharpGetCodeActions<cr>
 nnoremap <leader>s :OmniSharpFindSymbol<cr>
