@@ -44,7 +44,8 @@ install dir  .vim
 install file .ctags
 install file .bashrc
 install file .vimrc
-install file .gitconfig
+install file .gitconfig #TODO check platform here. This gitconfig is for OSX
+install file .gitignore_global
 install file .tmux.conf
 
 if [[ "$os" == 'linux' ]]; then

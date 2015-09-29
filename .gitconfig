@@ -5,14 +5,7 @@
 	email = j@jaburns.net
 [credential]
 	helper = cache --timeout=3600
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
 [push]
-    default = simple
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+	default = simple
 [core]
-    excludesfile = '/Users/jaburns/.gitignore_global'
-
+	excludesfile = '/Users/jaburns/.gitignore_global'
