@@ -144,6 +144,7 @@ alias gr='git rebase'
 alias gm='git merge'
 alias gco='git checkout'
 alias gb='git branch'
+alias gl='git log --all --graph --decorate --oneline'
 
 # ----- SVN helpers -----------------------------------------------------------
 
