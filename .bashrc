@@ -146,6 +146,17 @@ alias gco='git checkout'
 alias gb='git branch'
 alias gl='git log --all --graph --decorate --oneline'
 
+_gb_complete() {
+    local word=${COMP_WORDS[COMP_CWORD]}
+    local list=$(git branch --all | sed 's/^. //;s/ .*$//')
+    list=$(compgen -W "$list" -- "$word")
+    COMPREPLY=($list)
+    return 0
+}
+
+complete -F _gb_complete gb
+complete -F _gb_complete gco
+
 # ----- SVN helpers -----------------------------------------------------------
 
 # Grep SVN status for a pattern and execute an svn command on the selection.
