@@ -221,7 +221,9 @@ augroup END
 
 " Ignore some subfolders and files which we won't want to edit in vim
 let NERDTreeIgnore = ['\.meta$']
-set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb,*.meta,node_modules
+set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb,*.meta
+set wildignore+=node_modules,*.svg,*/public/vendors/**,*/build/**
+
 
 " Enable default omnicomplete
 set omnifunc=syntaxcomplete#Complete
