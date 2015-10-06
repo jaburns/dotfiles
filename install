@@ -44,9 +44,10 @@ install dir  .vim
 install file .ctags
 install file .bashrc
 install file .vimrc
-install file .gitconfig #TODO check platform here. This gitconfig is for OSX
+install file .gitconfig
 install file .gitignore_global
 install file .tmux.conf
+git config --global core.excludesfile ~/.gitignore_global
 
 if [[ "$os" == 'linux' ]]; then
     install file .Xmodmap
