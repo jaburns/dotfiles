@@ -202,23 +202,23 @@ ndb() {
 
 ps1_error() {
     if [[ "$1" -eq 0 ]]; then
-        printf '\[\033[0;32m\]'
+        echo -n '\[\033[0;32m\]'
     else
-        printf '\[\033[0;31m\]'
-        printf "$1 "
+        echo -n '\[\033[0;31m\]'
+        echo -n "$1 "
     fi;
 }
 ps1_git_branch() {
     local br="$(git branch 2> /dev/null)"
     if [[ ! -z "$br" ]]; then
-        printf '\[\033[0;35m\] '
-        printf "$br" | sed '/^[^*]/d;s/* \(.*\)/ \1/' | xargs printf
+        echo -n '\[\033[0;35m\] '
+        echo -n "$br" | sed '/^[^*]/d;s/* \(.*\)/ \1/' | xargs echo -n
     fi
 }
 ps1_render() {
-    printf "$(ps1_error $1)"
-    printf '\u \[\033[0;34m\]\w'
-    printf "$(ps1_git_branch)"
-    printf '\n\[\033[0;37m\]$) \[\033[0m\]'
+    echo -n "$(ps1_error $1)"
+    echo -n '\u \[\033[0;34m\]\w'
+    echo    "$(ps1_git_branch)"
+    echo -n '\[\033[0;37m\]$) \[\033[0m\]'
 }
 export PROMPT_COMMAND='PS1="$(ps1_render $?)"'
