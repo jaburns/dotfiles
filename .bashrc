@@ -134,11 +134,17 @@ gg() {
     fi
 }
 
+gu() {
+    local change_count="$(git status --porcelain --untracked-files=no | wc -l)"
+    [[ "$change_count" -gt 0 ]] && git stash
+    git pull --rebase
+    [[ "$change_count" -gt 0 ]] && git stash pop
+}
+
 alias gc='git commit'
 alias gd='git diff'
 alias ga='git add'
 alias gp='git push'
-alias gu='git fetch && git rebase'
 alias gf='git fetch'
 alias gr='git rebase'
 alias gm='git merge'
