@@ -138,7 +138,9 @@ gu() {
     local change_count="$(git status --porcelain --untracked-files=no | wc -l)"
     [[ "$change_count" -gt 0 ]] && git stash
     git pull --rebase
-    [[ "$change_count" -gt 0 ]] && git stash pop
+    if [[ "$change_count" -gt 0 ]]; then
+        git stash pop
+    fi
 }
 
 alias gc='git commit'
@@ -151,6 +153,7 @@ alias gm='git merge'
 alias gco='git checkout'
 alias gb='git branch'
 alias gl='git log --all --graph --decorate --oneline --first-parent'
+alias glv='git log --all --graph --decorate --oneline'
 
 _gb_complete() {
     local word=${COMP_WORDS[COMP_CWORD]}
