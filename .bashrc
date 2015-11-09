@@ -152,8 +152,8 @@ alias gr='git rebase'
 alias gm='git merge'
 alias gco='git checkout'
 alias gb='git branch'
-alias gl='git log --all --graph --decorate --oneline --first-parent'
-alias glv='git log --all --graph --decorate --oneline'
+alias gl='git log --all --graph --decorate --oneline'
+alias glfp='git log --all --graph --decorate --oneline --first-parent'
 
 _gb_complete() {
     local word=${COMP_WORDS[COMP_CWORD]}
