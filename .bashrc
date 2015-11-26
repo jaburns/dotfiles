@@ -12,6 +12,7 @@ alias music='vim ~/Dropbox/music.txt'
 alias pyhttp='python -m SimpleHTTPServer'
 alias ywd='printf "%q" "$(pwd)" | pbcopy'
 alias dskill='find . -name .DS_Store | xargs rm'
+alias ports='sudo netstat -tulpn'
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 alias lss='du -hd 1'
 
