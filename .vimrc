@@ -27,7 +27,6 @@ set cursorline          " Highlight the cursor line
 set nostartofline       " Don't jump to start of line when paging up/down
 set timeoutlen=500      " Set multi-character command time-out
 set gdefault            " Makes search/replace global by default
-set mouse=a             " Enables the mouse in all modes
 set title               " Show file in title bar
 set rnu                 " Use relative line numbers
 set hlsearch            " Highlight search results
