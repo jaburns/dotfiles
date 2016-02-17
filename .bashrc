@@ -12,7 +12,6 @@ alias music='vim ~/Dropbox/music.txt'
 alias pyhttp='python -m SimpleHTTPServer'
 alias ywd='printf "%q" "$(pwd)" | pbcopy'
 alias dskill='find . -name .DS_Store | xargs rm'
-alias ports='sudo netstat -tulpn'
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 alias lss='du -hd 1'
 
@@ -144,8 +143,15 @@ gu() {
     fi
 }
 
+gd() {
+    if [[ -z "$1" ]]; then
+        git diff
+    else
+        git diff "$1"^ "$1"
+    fi
+}
+
 alias gc='git commit'
-alias gd='git diff'
 alias ga='git add'
 alias gp='git push'
 alias gf='git fetch'
@@ -166,6 +172,8 @@ _gb_complete() {
 
 complete -F _gb_complete gb
 complete -F _gb_complete gco
+complete -F _gb_complete gm
+complete -F _gb_complete gr
 
 # ----- SVN helpers -----------------------------------------------------------
 
