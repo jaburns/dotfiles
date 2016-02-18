@@ -161,6 +161,7 @@ alias gm='git merge'
 alias gco='git checkout'
 alias gb='git branch'
 alias gl='git log --all --graph --decorate --oneline'
+alias gmt='git mergetool --tool=p4mergetool'
 alias glfp='git log --all --graph --decorate --oneline --first-parent'
 
 _gb_complete() {
