@@ -168,6 +168,9 @@ nnoremap <leader>vv :e $MYVIMRC<cr>
 nnoremap <leader>vc :e ~/.vim/after/ftplugin/cs.vim<cr>
 nnoremap <leader>vj :e ~/.vim/after/ftplugin/javascript.vim<cr>
 
+" Print the current file name
+nnoremap <leader>f :echo @%
+
 " Use system clipboard as default
 if has('unnamedplus')
     set clipboard=unnamedplus
