@@ -135,6 +135,20 @@ gg() {
     fi
 }
 
+gmon() {
+    if [[ ! -z "$1" ]]; then
+        local nap="$1"
+    else
+        local nap=5
+    fi
+
+    while :; do
+        clear
+        git ls-files -m -o --exclude-standard | grep '\.cs$' | gxargs -d"\n" git --no-pager diff
+        sleep "$nap"
+    done
+}
+
 gu() {
     local change_count="$(git status --porcelain --untracked-files=no | wc -l)"
     [[ "$change_count" -gt 0 ]] && git stash
@@ -176,6 +190,22 @@ complete -F _gb_complete gb
 complete -F _gb_complete gco
 complete -F _gb_complete gm
 complete -F _gb_complete gr
+
+# ----- Autocomplete make command, look inside makefile -----------------------
+
+_makefile_complete() {
+    local name=makefile
+    [[ ! -e "$name" ]] && local name=Makefile
+    [[ ! -e "$name" ]] && return 0
+
+    local word=${COMP_WORDS[COMP_CWORD]}
+    local list=$(grep "^[^ $(printf '\t')]*:" "$name" | cut -f1 -d:)
+    list=$(compgen -W "$list" -- "$word")
+    COMPREPLY=($list)
+    return 0
+}
+
+complete -F _makefile_complete make
 
 # ----- SVN helpers -----------------------------------------------------------
 
