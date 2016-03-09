@@ -126,6 +126,8 @@ endfun
 
 nnoremap <leader>q call RefreshAllBuffers()
 
+" Print and yank the current file name
+nnoremap <leader>f o<c-r>%<esc>0y$"_dd:echo @%<cr>
 
 " ----- node shortcuts ----
 
@@ -167,9 +169,6 @@ nnoremap <c-down> :silent! let &guifont = substitute(
 nnoremap <leader>vv :e $MYVIMRC<cr>
 nnoremap <leader>vc :e ~/.vim/after/ftplugin/cs.vim<cr>
 nnoremap <leader>vj :e ~/.vim/after/ftplugin/javascript.vim<cr>
-
-" Print the current file name
-nnoremap <leader>f :echo @%
 
 " Use system clipboard as default
 if has('unnamedplus')
