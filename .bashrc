@@ -18,7 +18,7 @@ alias ports='sudo netstat -tulpn'
 
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
-export PATH=$HOME/.cabal/bin:$PATH
+export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$PATH:/Applications/Adobe\ Flash\ Builder\ 4.7/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/bin
 
 command -v vim >/dev/null 2>&1 && alias vi='vim'
@@ -164,6 +164,15 @@ gd() {
     else
         git diff "$1"^ "$1"
     fi
+}
+
+git-nuke() {
+    ls -1a | while read line; do
+        if [[ "$line" != "." && "$line" != ".." && "$line" != ".git" ]]; then
+            rm -rf "$line"
+        fi
+    done
+    git reset --hard
 }
 
 alias gc='git commit'
