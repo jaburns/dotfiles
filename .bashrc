@@ -15,6 +15,7 @@ alias dskill='find . -name .DS_Store | xargs rm'
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 alias lss='du -hd 1'
 alias ports='sudo netstat -tulpn'
+alias unity='/Applications/Unity/Unity.app/Contents/MacOS/Unity'
 
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
@@ -33,6 +34,18 @@ finn() {
 # Print the default dimensions of a SWF, local or remote
 swfsize() {
     php -r "print_r(getimagesize('$1'));"
+}
+
+# Wait for a process to close then run a command
+after() {
+    while :; do
+        echo "\nWaiting for..."
+        if ! ps aux | grep "$1" | grep -v grep; then
+            eval "$2"
+            break
+        fi
+        sleep 2
+    done
 }
 
 # Rename some files with sed regex
