@@ -50,7 +50,7 @@ after() {
 
 # Rename some files with sed regex
 ren() {
-    [[ -z $1 ]] && echo "Example: sedmv '*.txt' 's/-suffix/-newsuff/'" && return
+    [[ -z $1 ]] && echo "Example: ren '*.txt' 's/-suffix/-newsuff/'" && return
     [[ -z $2 ]] && ls -1 $1 && return
     for x in $1; do
         mv "$x" "$(echo "$x" | sed "$2")";
@@ -196,6 +196,7 @@ alias gr='git rebase'
 alias gm='git merge'
 alias gco='git checkout'
 alias gb='git branch'
+alias gcp='git cherry-pick'
 alias gl='git log --all --graph --decorate --oneline'
 alias gmt='git mergetool --tool=p4mergetool'
 alias glfp='git log --all --graph --decorate --oneline --first-parent'
