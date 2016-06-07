@@ -16,6 +16,7 @@ alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 alias lss='du -hd 1'
 alias ports='sudo netstat -tulpn'
 alias unity='/Applications/Unity/Unity.app/Contents/MacOS/Unity'
+alias mkv2mp4='for x in *.mkv; do ffmpeg -i "$x" -vcodec copy -acodec libfaac "$x.mp4"; done'
 
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
@@ -162,15 +163,6 @@ gmon() {
     done
 }
 
-gu() {
-    local change_count="$(git status --porcelain --untracked-files=no | wc -l)"
-    [[ "$change_count" -gt 0 ]] && git stash
-    git pull --rebase
-    if [[ "$change_count" -gt 0 ]]; then
-        git stash pop
-    fi
-}
-
 gd() {
     if [[ -z "$1" ]]; then
         git diff
@@ -191,15 +183,17 @@ git-nuke() {
 alias gc='git commit'
 alias ga='git add'
 alias gp='git push'
-alias gf='git fetch'
+alias gu='git pull --rebase'
+alias gsu='git stash && git pull --rebase && git stash pop'
+alias gf='git fetch --all'
 alias gr='git rebase'
 alias gm='git merge'
 alias gco='git checkout'
 alias gb='git branch'
 alias gcp='git cherry-pick'
-alias gl='git log --all --graph --decorate --oneline'
+alias gl='git log --all --graph --decorate --oneline --first-parent'
+alias glv='git log --all --graph --decorate --oneline'
 alias gmt='git mergetool --tool=p4mergetool'
-alias glfp='git log --all --graph --decorate --oneline --first-parent'
 
 _gb_complete() {
     local word=${COMP_WORDS[COMP_CWORD]}
@@ -289,8 +283,18 @@ ps1_git_branch() {
     fi
 }
 ps1_render() {
+    # Error number and username
     echo -n "$(ps1_error $1)"
-    echo -n '\u \[\033[0;34m\]\w'
+    echo -n '\u '
+
+    # Time
+    echo -n '\[\033[0;35m\]'
+    echo -n "$(date +'%I:%M:%S%p') "
+
+    # Path
+    echo -n '\[\033[0;34m\]\w'
+
+    # Git branch and newline/prompt
     echo    "$(ps1_git_branch)"
     echo -n '\[\033[0;37m\]$) \[\033[0m\]'
 }
