@@ -21,7 +21,10 @@ alias mkv2mp4='for x in *.mkv; do ffmpeg -i "$x" -vcodec copy -acodec libfaac "$
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cabal/bin
+export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:/Applications/Adobe\ Flash\ Builder\ 4.7/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/bin
+
+export RUST_SRC_PATH=$HOME/sources/rust/src
 
 command -v vim >/dev/null 2>&1 && alias vi='vim'
 

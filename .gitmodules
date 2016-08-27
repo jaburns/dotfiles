@@ -31,9 +31,6 @@
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic
-[submodule ".vim/bundle/rust.vim"]
-	path = .vim/bundle/rust.vim
-	url = https://github.com/rust-lang/rust.vim
 [submodule ".vim/bundle/gitignore"]
 	path = .vim/bundle/gitignore
 	url = https://github.com/vim-scripts/gitignore
@@ -43,3 +40,6 @@
 [submodule ".vim/bundle/vim-js-context-cooler"]
 	path = .vim/bundle/vim-js-context-cooler
 	url = git@github.com:jaburns/vim-js-context-coloring
+[submodule ".vim/bundle/vim-racer"]
+	path = .vim/bundle/vim-racer
+	url = https://github.com/racer-rust/vim-racer
