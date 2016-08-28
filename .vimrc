@@ -163,6 +163,13 @@ nnoremap <c-down> :silent! let &guifont = substitute(
  \ 'g')<CR>
 
 
+" ----- Rust racer plugin config --------
+
+
+ let g:racer_cmd = "/Users/jaburns/.cargo/bin/racer"
+ let $RUST_SRC_PATH="/Users/jaburns/sources/rust/src/"
+
+
 " ----- Editor configuration ---------------------------------------------------
 
 " Mappings to open settings
@@ -251,7 +258,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 
 let g:js_context_colors_highlight_function_names = 1
-
 
 
 " --------- CtrlP settings -----------------------------------------------------
