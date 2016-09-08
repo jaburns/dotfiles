@@ -28,6 +28,11 @@ export RUST_SRC_PATH=$HOME/sources/rust/src
 
 command -v vim >/dev/null 2>&1 && alias vi='vim'
 
+# ----- Node version manager --------------------------------------------------
+
+export NVM_DIR="/Users/jaburns/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
 # ----- Simple commands -------------------------------------------------------
 
 # Find a file with name containing some text
