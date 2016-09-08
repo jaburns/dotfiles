@@ -240,6 +240,8 @@ set omnifunc=syntaxcomplete#Complete
 
 
 let g:syntastic_javascript_checkers = []
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:tsuquyomi_disable_quickfix = 1
 
 
 " --------- Snippets settings --------------------------------------------------
