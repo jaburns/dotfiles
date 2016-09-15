@@ -271,6 +271,9 @@ let g:ctrlp_working_path_mode = ''
 " Size CtrlP window a little bigger than default
 let g:ctrlp_max_height = 20
 
+" Ignore gitignore files
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
 
 " --------- neocomplcache settings (mainly for OmniSharp) ----------------------
 
