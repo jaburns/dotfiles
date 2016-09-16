@@ -272,7 +272,7 @@ let g:ctrlp_working_path_mode = ''
 let g:ctrlp_max_height = 20
 
 " Ignore gitignore files
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard | grep -v meta$']
 
 
 " --------- neocomplcache settings (mainly for OmniSharp) ----------------------
