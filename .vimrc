@@ -172,10 +172,24 @@ nnoremap <c-down> :silent! let &guifont = substitute(
 
 " ----- Editor configuration ---------------------------------------------------
 
+
+function! DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
+endfunction
+
+nnoremap <leader>q :call DeleteHiddenBuffers()<cr>
+
+
 " Mappings to open settings
 nnoremap <leader>vv :e $MYVIMRC<cr>
 nnoremap <leader>vc :e ~/.vim/after/ftplugin/cs.vim<cr>
 nnoremap <leader>vj :e ~/.vim/after/ftplugin/javascript.vim<cr>
+
+
 
 " Use system clipboard as default
 if has('unnamedplus')
@@ -243,6 +257,10 @@ let g:syntastic_javascript_checkers = []
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:tsuquyomi_disable_quickfix = 1
 
+
+" --------- BufSurf settings ---------------------------------------------------
+
+nnoremap <c-h> :BufSurfBack<cr>
 
 " --------- Snippets settings --------------------------------------------------
 
