@@ -126,8 +126,9 @@ endfun
 
 nnoremap <leader>q call RefreshAllBuffers()
 
-" Print and yank the current file name
-nnoremap <leader>f o<c-r>%<esc>0y$"_dd:echo @%<cr>
+" Print and/or yank the current file name
+nnoremap <leader>f :echo @%<cr>
+nnoremap <leader>yf o<esc>0C<c-r>%<esc>0y$"_ddk
 
 " ----- node shortcuts ----
 
@@ -278,6 +279,8 @@ let g:UltiSnipsEditSplit="vertical"
 
 
 let g:js_context_colors_highlight_function_names = 1
+
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
 
 " --------- CtrlP settings -----------------------------------------------------
