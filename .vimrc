@@ -130,6 +130,9 @@ nnoremap <leader>q call RefreshAllBuffers()
 nnoremap <leader>f :echo @%<cr>
 nnoremap <leader>yf o<esc>0C<c-r>%<esc>0y$"_ddk
 
+nnoremap <leader>p viwp
+nnoremap <leader>P viWp
+
 " ----- node shortcuts ----
 
 nnoremap <leader>gv f'yi'<c-w>v<c-w>l:e<space>views/<c-r>".html<cr>
