@@ -130,8 +130,8 @@ nnoremap <leader>q call RefreshAllBuffers()
 nnoremap <leader>f :echo @%<cr>
 nnoremap <leader>yf o<esc>0C<c-r>%<esc>0y$"_ddk
 
-nnoremap <leader>p viwp
-nnoremap <leader>P viWp
+nnoremap <leader>p "_ciw<c-r>"<esc>
+nnoremap <leader>P "_ciW<c-r>"<esc>
 
 " ----- node shortcuts ----
 
@@ -283,7 +283,10 @@ let g:UltiSnipsEditSplit="vertical"
 
 let g:js_context_colors_highlight_function_names = 1
 
-autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+augroup vimrc
+    autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+    autocmd FileType typescript nmap <buffer> gd <c-]>
+augroup END
 
 
 " --------- CtrlP settings -----------------------------------------------------
