@@ -17,6 +17,7 @@ alias lss='du -hd 1'
 alias ports='sudo netstat -tulpn'
 alias unity='/Applications/Unity/Unity.app/Contents/MacOS/Unity'
 alias mkv2mp4='for x in *.mkv; do ffmpeg -i "$x" -vcodec copy -acodec libfaac "$x.mp4"; done'
+alias agls='ag . -l --nocolor -g ""'
 
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
@@ -64,6 +65,17 @@ ren() {
     for x in $1; do
         mv "$x" "$(echo "$x" | sed "$2")";
     done
+}
+
+# Find and replace in files that match an ag search
+agsed() {
+    if [[ -z $1 ]]; then
+        echo "Example: agsed 'import xyz' 's/xyz/abc/'"
+        echo 'Supply first param only to run ag search without replace'
+        return
+    fi
+    [[ -z $2 ]] && ag "$1"
+    ag "$1" | cut -d: -f1 | xargs sed -i '' -e "$2"
 }
 
 # ----- set default output for ls; add auto ls after cd -----------------------
