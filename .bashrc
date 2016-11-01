@@ -316,6 +316,6 @@ ps1_render() {
 
     # Git branch and newline/prompt
     echo    "$(ps1_git_branch)"
-    echo -n '\[\033[0;37m\]$) \[\033[0m\]'
+    echo -n '\[\033[0;36m\]$) \[\033[0m\]'
 }
 export PROMPT_COMMAND='PS1="$(ps1_render $?)"'

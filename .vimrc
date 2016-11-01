@@ -46,7 +46,7 @@ set autowrite           " Write files when focus is lost
 syntax enable
 " colorscheme solarized
 " colorscheme jaburns
-set background=dark
+set background=light
 
 let mapleader=' '
 
