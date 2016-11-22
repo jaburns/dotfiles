@@ -62,8 +62,8 @@ after() {
 # Rename some files with sed regex
 ren() {
     [[ -z $1 ]] && echo "Example: ren '*.txt' 's/-suffix/-newsuff/'" && return
-    [[ -z $2 ]] && ls -1 $1 && return
-    for x in $1; do
+    [[ -z $2 ]] && find . -iname "$1" && return
+    find . -iname "$1" | while read x; do
         mv "$x" "$(echo "$x" | sed "$2")";
     done
 }
