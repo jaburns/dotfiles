@@ -19,6 +19,7 @@ alias unity='/Applications/Unity/Unity.app/Contents/MacOS/Unity'
 alias mkv2mp4='for x in *.mkv; do ffmpeg -i "$x" -vcodec copy -acodec libfaac "$x.mp4"; done'
 alias agls='ag . -l --nocolor -g ""'
 alias treed='tree -d -I node_modules'
+alias parent='ps -o comm= $PPID'
 
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
