@@ -49,6 +49,7 @@ install file .gitignore_global
 install file .tmux.conf
 git config --global core.excludesfile ~/.gitignore_global
 
+
 if [[ "$os" == 'linux' ]]; then
     install file .Xmodmap
     install dir  .xmonad
@@ -56,6 +57,8 @@ elif [[ "$os" == 'osx' ]]; then
     install file .bash_profile
     install file .vrapperrc
     install file .slate
+    rm -f '/Users/jaburns/Library/Application Support/Code/User/settings.json'
+    ln -s "$repo_dir/settings.json" '/Users/jaburns/Library/Application Support/Code/User/settings.json'
 elif [[ "$os" == 'windows' ]]; then
     install file .minttyrc
 

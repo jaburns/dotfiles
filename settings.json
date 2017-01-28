@@ -1,0 +1,33 @@
+{
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.insertModeKeyBindings": [
+
+    ],
+    "vim.otherModesKeyBindings": [
+        { "before": ["<c-j>"],
+          "after": ["1","5","j"]
+        },
+        { "before": ["<c-k>"],
+          "after": ["1","5","k"]
+        },
+        {
+            "before": ["Z", "Z"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                },
+                {
+                    "command": "workbench.action.closeActiveEditor",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "editor.autoClosingBrackets": false,
+    "editor.codeLens": false,
+    "editor.lineNumbers": "relative"
+}
