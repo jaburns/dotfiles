@@ -38,6 +38,16 @@ export NVM_DIR="/Users/jaburns/.nvm"
 
 # ----- Simple commands -------------------------------------------------------
 
+docker_kill() {
+    docker ps | awk '{print $1}' | grep -v CONTAINER | xargs docker stop
+    docker ps -a | awk '{print $1}' | grep -v CONTAINER | xargs docker rm
+}
+
+docker_clean() {
+    docker_kill
+    docker images | awk '{print $3}' | grep -v IMAGE | xargs docker rmi --force
+}
+
 # Find a file with name containing some text
 finn() {
     find . -iname "*$1*"
