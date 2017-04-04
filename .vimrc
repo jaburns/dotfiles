@@ -1,13 +1,14 @@
 ".vimrc
-"
-" JS Project stuff
-" let g:ctrlp_user_command = 'find %s -type f -iname "*.js" | grep -v "node_modules\|build"'
-"
-filetype plugin indent on
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" Load up plugins if pathogen is installed
-silent! call pathogen#infect()
-silent! call pathogen#helptags()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
+
+call vundle#end()
+filetype plugin indent on
 
 set autoindent          " Copy indent from current line when starting a new line
 set copyindent          " Copy the previous indentation on autoindenting
@@ -44,8 +45,6 @@ set wrapmargin=0        "  "
 set autowrite           " Write files when focus is lost
 
 syntax enable
-" colorscheme solarized
-" colorscheme jaburns
 set background=light
 
 let mapleader=' '
@@ -57,10 +56,6 @@ augroup END
 
 highlight Tabs ctermbg=235 guibg=#000000
 match Tabs "\t"
-
-
-" ----- Text editing keys configuration ----------------------------------------
-
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
@@ -113,10 +108,6 @@ inoremap <c-backspace> <c-w>
 inoremap <c-v> <esc>pa
 inoremap <c-c> <c-v>
 
-
-" ----- filetype agnostic leader shortcuts -------------------------------------
-
-
 fun! RefreshAllBuffers()
   set noconfirm
   bufdo e!
@@ -133,19 +124,7 @@ nnoremap <leader>yf o<esc>0C<c-r>%<esc>0y$"_ddk
 nnoremap <leader>p "_ciw<c-r>"<esc>
 nnoremap <leader>P "_ciW<c-r>"<esc>
 
-" ----- node shortcuts ----
-
-nnoremap <leader>gv f'yi'<c-w>v<c-w>l:e<space>views/<c-r>".html<cr>
-
-
-" ----- gvim configuration -----------------------------------------------------
-
-
-if has('gui_win32')
-    set guifont=Consolas:h10
-endif
-
-" Get rid of GUI noise (toolbar, menus, scrollbars)
+" Get rid of GUI noise in gvim (toolbar, menus, scrollbars)
 set guioptions-=T
 set guioptions-=l
 set guioptions-=L
@@ -153,29 +132,6 @@ set guioptions-=r
 set guioptions-=R
 set guioptions-=m
 set guioptions-=M
-
-" Use control + vertical arrows to resize font in gvim.
-nnoremap <c-up> :silent! let &guifont = substitute(
- \ &guifont,
- \ ':h\zs\d\+',
- \ '\=eval(submatch(0)+1)',
- \ 'g')<CR>
-nnoremap <c-down> :silent! let &guifont = substitute(
- \ &guifont,
- \ ':h\zs\d\+',
- \ '\=eval(submatch(0)-1)',
- \ 'g')<CR>
-
-
-" ----- Rust racer plugin config --------
-
-
- let g:racer_cmd = "/Users/jaburns/.cargo/bin/racer"
- let $RUST_SRC_PATH="/Users/jaburns/sources/rust/src/"
-
-
-" ----- Editor configuration ---------------------------------------------------
-
 
 function! DeleteHiddenBuffers()
     let tpbl=[]
@@ -187,13 +143,10 @@ endfunction
 
 nnoremap <leader>q :call DeleteHiddenBuffers()<cr>
 
-
 " Mappings to open settings
 nnoremap <leader>vv :e $MYVIMRC<cr>
 nnoremap <leader>vc :e ~/.vim/after/ftplugin/cs.vim<cr>
 nnoremap <leader>vj :e ~/.vim/after/ftplugin/javascript.vim<cr>
-
-
 
 " Use system clipboard as default
 if has('unnamedplus')
@@ -250,47 +203,10 @@ let NERDTreeIgnore = ['\.meta$']
 set wildignore+=*\\bin\\*,*/bin/*,*\\obj\\*,*/obj/*,*.dll,*.exe,*.pidb,*.meta
 set wildignore+=node_modules,*.svg,*/public/vendors/**,*/build/**
 
-
 " Enable default omnicomplete
 set omnifunc=syntaxcomplete#Complete
 
-" --------- syntastic settings -------------------------------------------------
-
-
-let g:syntastic_javascript_checkers = []
-let g:syntastic_typescript_checkers = ['tsuquyomi']
-let g:tsuquyomi_disable_quickfix = 1
-
-
-" --------- BufSurf settings ---------------------------------------------------
-
-nnoremap <c-h> :BufSurfBack<cr>
-
-" --------- Snippets settings --------------------------------------------------
-
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-
-" --------- other plugin settings  ---------------------------------------------
-
-
-let g:js_context_colors_highlight_function_names = 1
-
-augroup vimrc
-    autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
-    autocmd FileType typescript nmap <buffer> gd <c-]>
-augroup END
-
-
 " --------- CtrlP settings -----------------------------------------------------
-
 
 " Force CtrlP to operate from the working directory instead of the current file's
 let g:ctrlp_working_path_mode = ''
@@ -300,32 +216,3 @@ let g:ctrlp_max_height = 20
 
 " Ignore gitignore files
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-
-" --------- neocomplcache settings (mainly for OmniSharp) ----------------------
-
-
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_min_syntax_length = 0
-let g:neocomplcache_disable_auto_complete = 1
-let g:neocomplcache_enable_auto_close_preview = 0
-
-" Terminal vim understands c-space as c-@ so map both to auto-complete
-imap <c-space> <c-x><c-o><c-n><c-p>
-imap <c-@> <c-space>
-inoremap <expr><CR> pumvisible() ? neocomplcache#smart_close_popup() : "\<CR>"
-
-" Define keyword for minor languages
-if !exists('g:neocomplcache_keyword_patterns')
-  let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-" Enable heavy omni completion
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.cs = '.*'
-
-

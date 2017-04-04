@@ -8,18 +8,24 @@ install() {
     echo "Linking '$REPO_DIR/$1' -> '$HOME/$1'"
 }
 
-install file .bashrc
-install file .vimrc
-install file .gitconfig
-install file .gitignore_global
-install file .tmux.conf
+install .bashrc
+install .vimrc
+install .gitconfig
+install .gitignore_global
+install .tmux.conf
 git config --global core.excludesfile ~/.gitignore_global
+
+if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
+    echo 'Installing Vundle...'
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
 
 if [[ "$OSTYPE" == *darwin* ]]; then
     echo 'source ~/.bashrc' > ~/.bash_profile
-    install file .vrapperrc
-    install file .slate
+    install .vrapperrc
+    install .slate
     rm -f '/Users/jaburns/Library/Application Support/Code/User/settings.json'
     ln -s "$REPO_DIR/vscode_settings.json" '/Users/jaburns/Library/Application Support/Code/User/settings.json'
 fi
+
 # TODO install vscode settings file in windows under WSL
