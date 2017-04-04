@@ -29,5 +29,7 @@
     ],
     "editor.autoClosingBrackets": false,
     "editor.codeLens": false,
-    "editor.lineNumbers": "relative"
+    "editor.lineNumbers": "relative",
+    "workbench.colorTheme": "Solarized Light",
+    "window.zoomLevel": 0
 }
