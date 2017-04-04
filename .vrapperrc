@@ -1,4 +1,4 @@
-".vrapperrc
+".vrapperrc: vimrc for Eclipse vi plugin
 
 " Relative Numbers: http://matf.github.com/relativenumberruler/updatesite
 

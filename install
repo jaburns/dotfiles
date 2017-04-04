@@ -1,47 +1,13 @@
 #!/usr/bin/env bash
 
-case "$OSTYPE" in
-    linux*)  os='linux'   ;;
-    darwin*) os='osx'     ;;
-    *)       os='windows' ;;
-esac
+REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if [[ "$1" == 'omni' ]]; then
-    pushd .vim/bundle/Omnisharp/server/OmniSharp
-    if [[ "$os" == 'windows' ]]; then
-        echo msbuild | cmd
-        echo ""
-        popd
-        echo "NEED TO LINK CONFIG.JSON"
-    else
-        xbuild
-        popd
-        rm .vim/bundle/Omnisharp/server/OmniSharp/bin/Debug/config.json
-        ln ./omnisharp.jaburns.json .vim/bundle/Omnisharp/server/OmniSharp/bin/Debug/config.json
-    fi
-
-    exit 0
-elif [[ "$1" == 'plugins' ]]; then
-    git submodule update --init --recursive
-    exit 0
-fi
-
-repo_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-install () {
-    if [[ "$1" == 'dir' ]]; then
-        rm -rf "$HOME/$2"
-        mkdir -p "$(dirname "$HOME/$2")"
-        ln -s "$repo_dir/$2" "$HOME/$2"
-    else
-        rm -f "$HOME/$2"
-        ln "$repo_dir/$2" "$HOME/$2"
-    fi
-    echo "Linking '$repo_dir/$2' -> '$HOME/$2'"
+install() {
+    rm -f "$HOME/$1"
+    ln "$REPO_DIR/$1" "$HOME/$1"
+    echo "Linking '$REPO_DIR/$1' -> '$HOME/$1'"
 }
 
-install dir  .vim
-install file .ctags
 install file .bashrc
 install file .vimrc
 install file .gitconfig
@@ -49,25 +15,11 @@ install file .gitignore_global
 install file .tmux.conf
 git config --global core.excludesfile ~/.gitignore_global
 
-
-if [[ "$os" == 'linux' ]]; then
-    install file .Xmodmap
-    install dir  .xmonad
-elif [[ "$os" == 'osx' ]]; then
-    install file .bash_profile
+if [[ "$OSTYPE" == *darwin* ]]; then
+    echo 'source ~/.bashrc' > ~/.bash_profile
     install file .vrapperrc
     install file .slate
     rm -f '/Users/jaburns/Library/Application Support/Code/User/settings.json'
-    ln -s "$repo_dir/settings.json" '/Users/jaburns/Library/Application Support/Code/User/settings.json'
-elif [[ "$os" == 'windows' ]]; then
-    install file .minttyrc
-
-    rm -rf "/cygdrive/c/Users/$(whoami)/vimfiles"
-    rm -f /cygdrive/c/Users/$(whoami)/_vimrc
-    rm -rf /cygdrive/c/Users/$(whoami)/vimfiles
-    echo "mklink /h \"c:\\Users\\$(whoami)\\_vimrc\" \
-                    \"C:\\cygwin\\home\\$(whoami)\\dotfiles\\.vimrc" | cmd
-    echo "mklink /j \"c:\\Users\\$(whoami)\\vimfiles\" \
-                    \"C:\\cygwin\\home\\$(whoami)\\dotfiles\\.vim\"" | cmd
-    echo ""
+    ln -s "$REPO_DIR/vscode_settings.json" '/Users/jaburns/Library/Application Support/Code/User/settings.json'
 fi
+# TODO install vscode settings file in windows under WSL
