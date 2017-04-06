@@ -2,34 +2,32 @@
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
     "vim.useSystemClipboard": true,
-    "vim.insertModeKeyBindings": [
-
-    ],
+    "vim.insertModeKeyBindings": [ ],
     "vim.otherModesKeyBindings": [
-        { "before": ["<c-j>"],
-          "after": ["1","5","j"]
+        {   "before": ["<c-j>"],
+            "after": ["1","5","j"]
         },
-        { "before": ["<c-k>"],
-          "after": ["1","5","k"]
+        {   "before": ["<c-k>"],
+            "after": ["1","5","k"]
         },
-        {
-            "before": ["Z", "Z"],
+        {   "before": ["Z", "Z"],
             "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.files.save",
-                    "args": []
-                },
-                {
-                    "command": "workbench.action.closeActiveEditor",
-                    "args": []
-                }
-            ]
+            "commands": [{
+                "command": "workbench.action.files.save",
+                "args": []
+            },{
+                "command": "workbench.action.closeActiveEditor",
+                "args": []
+            }]
+        },
+        {   "before": ["K"],
+            "after": ["\"","a","y","l","\"","a","p","r","<cr>"]
         }
     ],
+
     "editor.autoClosingBrackets": false,
     "editor.codeLens": false,
     "editor.lineNumbers": "relative",
+
     "workbench.colorTheme": "Solarized Light",
-    "window.zoomLevel": 0
 }

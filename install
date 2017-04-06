@@ -2,6 +2,13 @@
 
 REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+if [[ "$1" == 'pull' ]]; then
+    echo 'Pulling Windows settings files in to repo dir...'
+    cp '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"
+    echo 'Done'
+    exit 0
+fi
+
 install() {
     rm -f "$HOME/$1"
     ln "$REPO_DIR/$1" "$HOME/$1"
@@ -20,6 +27,10 @@ if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
 
+if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
+    cp "$REPO_DIR/vscode_settings.json" '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json'
+fi
+
 if [[ "$OSTYPE" == *darwin* ]]; then
     echo 'source ~/.bashrc' > ~/.bash_profile
     install .vrapperrc
@@ -27,5 +38,3 @@ if [[ "$OSTYPE" == *darwin* ]]; then
     rm -f '/Users/jaburns/Library/Application Support/Code/User/settings.json'
     ln -s "$REPO_DIR/vscode_settings.json" '/Users/jaburns/Library/Application Support/Code/User/settings.json'
 fi
-
-# TODO install vscode settings file in windows under WSL
