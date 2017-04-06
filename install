@@ -19,8 +19,10 @@ install .bashrc
 install .vimrc
 install .gitconfig
 install .gitignore_global
-install .tmux.conf
 git config --global core.excludesfile ~/.gitignore_global
+
+cp "$REPO_DIR/.tmux.conf" ~/.tmux.conf
+echo "Copying '$REPO_DIR/.tmux.conf' -> '$HOME/.tmux.conf'"
 
 if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
     echo 'Installing Vundle...'
@@ -37,4 +39,8 @@ if [[ "$OSTYPE" == *darwin* ]]; then
     install .slate
     rm -f '/Users/jaburns/Library/Application Support/Code/User/settings.json'
     ln -s "$REPO_DIR/vscode_settings.json" '/Users/jaburns/Library/Application Support/Code/User/settings.json'
+else
+    sed -i 's/^.*OSX_ONLY.*$//g' ~/.tmux.conf
 fi
+
+echo 'Done'
