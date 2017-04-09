@@ -21,6 +21,11 @@ alias agls='ag . -l --nocolor -g ""'
 alias treed='tree -d -I node_modules'
 alias parent='ps -o comm= $PPID'
 
+# Needed on WSL to use clipboard
+if grep -q Microsoft /proc/version; then
+    export DISPLAY=localhost:0.0
+fi
+
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cabal/bin
