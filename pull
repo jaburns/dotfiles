@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+pull() {
+    cp "$HOME/$1" "$REPO_DIR/$1"
+}
+
+pull .bashrc
+pull .vimrc
+pull .gitconfig
+pull .gitignore_global
+pull .tmux.conf
+
+if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
+    cp '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"
+fi
+
+if [[ "$OSTYPE" == *darwin* ]]; then
+    pull .vrapperrc
+    pull .slate
+    cp '/Users/jaburns/Library/Application Support/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"
+fi

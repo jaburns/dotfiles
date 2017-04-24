@@ -2,61 +2,31 @@
 
 REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-pull() {
-    cp "$HOME/$1" "$REPO_DIR/$1"
-}
-
 install() {
     cp "$REPO_DIR/$1" "$HOME/$1"
 }
 
-do_install() {
-    install .bashrc
-    install .vimrc
-    install .gitconfig
-    install .gitignore_global
-    install .tmux.conf
-    git config --global core.excludesfile ~/.gitignore_global
+install .bashrc
+install .vimrc
+install .gitconfig
+install .gitignore_global
+install .tmux.conf
+git config --global core.excludesfile ~/.gitignore_global
 
-    if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
-        echo 'Installing Vundle...'
-        git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    fi
+if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
+    echo 'Installing Vundle...'
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
 
-    if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
-        cp "$REPO_DIR/vscode_settings.json" '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json'
-    fi
+if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
+    cp "$REPO_DIR/vscode_settings.json" '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json'
+fi
 
-    if [[ "$OSTYPE" == *darwin* ]]; then
-        echo 'source ~/.bashrc' > ~/.bash_profile
-        install .vrapperrc
-        install .slate
-        cp "$REPO_DIR/vscode_settings.json" '/Users/jaburns/Library/Application Support/Code/User/settings.json'
-    else
-        sed -i 's/^.*OSX_ONLY.*$//g' ~/.tmux.conf
-    fi
-}
-
-do_pull() {
-    pull .bashrc
-    pull .vimrc
-    pull .gitconfig
-    pull .gitignore_global
-    pull .tmux.conf
-
-    if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
-        cp '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"
-    fi
-
-    if [[ "$OSTYPE" == *darwin* ]]; then
-        pull .vrapperrc
-        pull .slate
-        cp '/Users/jaburns/Library/Application Support/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"
-    fi
-}
-
-if [[ "$1" == 'pull' ]]; then
-    do_pull
+if [[ "$OSTYPE" == *darwin* ]]; then
+    echo 'source ~/.bashrc' > ~/.bash_profile
+    install .vrapperrc
+    install .slate
+    cp "$REPO_DIR/vscode_settings.json" '/Users/jaburns/Library/Application Support/Code/User/settings.json'
 else
-    do_install
+    sed -i 's/^.*OSX_ONLY.*$//g' ~/.tmux.conf
 fi
