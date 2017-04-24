@@ -30,4 +30,9 @@
     "editor.lineNumbers": "relative",
 
     "workbench.colorTheme": "Solarized Light",
+
+    "rust.rls": {
+        "executable": "rustup",
+        "args": ["run", "nightly", "rls"]
+    }
 }
