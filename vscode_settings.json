@@ -30,9 +30,16 @@
     "editor.lineNumbers": "relative",
 
     "workbench.colorTheme": "Solarized Light",
+    "workbench.editor.enablePreview": false, 
 
     "rust.rls": {
         "executable": "rustup",
         "args": ["run", "nightly", "rls"]
+    },
+    "[cpp]": {
+        "editor.quickSuggestions": false
+    },
+    "[c]": {
+        "editor.quickSuggestions": false
     }
 }
