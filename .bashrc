@@ -20,6 +20,7 @@ alias mkv2mp4='for x in *.mkv; do ffmpeg -i "$x" -vcodec copy -acodec libfaac "$
 alias agls='ag . -l --nocolor -g ""'
 alias treed='tree -d -I node_modules'
 alias parent='ps -o comm= $PPID'
+alias hosts='sudo vi /etc/hosts'
 
 # Needed on WSL to use clipboard
 if grep -q Microsoft /proc/version; then
