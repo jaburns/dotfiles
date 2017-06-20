@@ -10,6 +10,9 @@
         {   "before": ["<c-k>"],
             "after": ["1","5","k"]
         },
+        {   "before": ["Y"],
+            "after": ["y","$"]
+        },
         {   "before": ["Z", "Z"],
             "after": [],
             "commands": [{
@@ -36,10 +39,5 @@
         "executable": "rustup",
         "args": ["run", "nightly", "rls"]
     },
-    "[cpp]": {
-        "editor.quickSuggestions": false
-    },
-    "[c]": {
-        "editor.quickSuggestions": false
-    }
+    "vim.disableAnnoyingNeovimMessage": true
 }
