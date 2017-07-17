@@ -145,6 +145,7 @@ function! DeleteHiddenBuffers()
 endfunction
 
 nnoremap <leader>q :call DeleteHiddenBuffers()<cr>
+nnoremap <leader>h :call CurtineIncSw()<cr>
 
 " Mappings to open settings
 nnoremap <leader>vv :e $MYVIMRC<cr>
