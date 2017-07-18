@@ -4,3 +4,4 @@
 .agignore
 jaburns/
 .vscode/
+.ycm_extra_conf.py
