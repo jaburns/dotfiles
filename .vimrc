@@ -145,7 +145,6 @@ function! DeleteHiddenBuffers()
 endfunction
 
 nnoremap <leader>q :call DeleteHiddenBuffers()<cr>
-nnoremap <leader>h :call CurtineIncSw()<cr>
 
 " Mappings to open settings
 nnoremap <leader>vv :e $MYVIMRC<cr>
@@ -210,7 +209,7 @@ set wildignore+=node_modules,*.svg,*/public/vendors/**,*/build/**
 " Enable default omnicomplete
 set omnifunc=syntaxcomplete#Complete
 
-" --------- CtrlP settings -----------------------------------------------------
+" --------- Plugin settings -----------------------------------------------------
 
 " Force CtrlP to operate from the working directory instead of the current file's
 let g:ctrlp_working_path_mode = ''
@@ -218,5 +217,11 @@ let g:ctrlp_working_path_mode = ''
 " Size CtrlP window a little bigger than default
 let g:ctrlp_max_height = 20
 
-" Ignore gitignore files
+" CtrlP ignore gitignore files
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" CurtineIncSw switch between cpp and hpp files
+nnoremap <leader>h :call CurtineIncSw()<cr>
+
+" Use YCM GoTo instead of default goto definition
+nnoremap gd :YcmCompleter GoTo<cr>
