@@ -39,5 +39,6 @@
         "executable": "rustup",
         "args": ["run", "nightly", "rls"]
     },
-    "vim.disableAnnoyingNeovimMessage": true
+    "vim.disableAnnoyingNeovimMessage": true,
+    "workbench.sideBar.location": "left"
 }
