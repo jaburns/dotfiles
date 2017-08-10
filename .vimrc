@@ -9,6 +9,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ericcurtin/CurtineIncSw.vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'tikhomirov/vim-glsl'
 
 call vundle#end()
 filetype plugin indent on
