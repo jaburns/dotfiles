@@ -222,7 +222,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 
 " Switch between cpp and hpp files
 nnoremap <leader>h :e %<.hpp<cr>
-nnoremap <leader>c :e %<.cpp<cr>
+nnoremap <leader>i :e %<.cpp<cr>
 
 " Use YCM GoTo instead of default goto definition
 nnoremap gd :YcmCompleter GoTo<cr>
