@@ -7,7 +7,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ericcurtin/CurtineIncSw.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tikhomirov/vim-glsl'
 
@@ -221,8 +220,9 @@ let g:ctrlp_max_height = 20
 " CtrlP ignore gitignore files
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
-" CurtineIncSw switch between cpp and hpp files
-nnoremap <leader>h :call CurtineIncSw()<cr>
+" Switch between cpp and hpp files
+nnoremap <leader>h :e %<.hpp<cr>
+nnoremap <leader>c :e %<.cpp<cr>
 
 " Use YCM GoTo instead of default goto definition
 nnoremap gd :YcmCompleter GoTo<cr>
