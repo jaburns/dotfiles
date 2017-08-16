@@ -24,6 +24,7 @@ alias hosts='sudo vi /etc/hosts'
 
 # Needed on WSL to use clipboard
 if grep -q Microsoft /proc/version; then
+    alias open='/mnt/c/Windows/explorer.exe'
     export DISPLAY=localhost:0.0
 fi
 
