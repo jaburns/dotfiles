@@ -20,6 +20,9 @@ fi
 
 if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
     cp "$REPO_DIR/vscode_settings.json" '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json'
+fi
+
+if [[ -d '/mnt/c/Users/jaburns' ]]; then
     cp "$REPO_DIR/.vimrc" '/mnt/c/Users/jaburns/_vsvimrc'
 fi
 
