@@ -23,7 +23,9 @@ if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
 fi
 
 if [[ -d '/mnt/c/Users/jaburns' ]]; then
+    cp "$REPO_DIR/windows.dircolors" ~/.dircolors
     cat "$REPO_DIR/.vimrc" "$REPO_DIR/vsvimrc_additions" > '/mnt/c/Users/jaburns/_vsvimrc'
+    echo 'eval "$(dircolors ~/.dircolors)"' >> ~/.bashrc
 fi
 
 if [[ "$OSTYPE" == *darwin* ]]; then
