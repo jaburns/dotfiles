@@ -9,7 +9,6 @@ pull() {
 pull .bashrc
 pull .vimrc
 pull .gitignore_global
-pull .tmux.conf
 
 if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
     cp '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"
