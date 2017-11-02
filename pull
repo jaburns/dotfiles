@@ -11,15 +11,18 @@ pull .vimrc
 pull .gitignore_global
 
 if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
+    echo 'Detected VS Code on WSL, pulling settings...'
     cp '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"
 fi
 
 if [[ -d '/mnt/c/Users/jaburns' ]]; then
+    echo 'Detected WSL, pulling Windows stuff...'
     cp ~/.gitconfig "$REPO_DIR/windows.gitconfig"
     cp ~/.dircolors "$REPO_DIR/windows.dircolors"
 fi
 
 if [[ "$OSTYPE" == *darwin* ]]; then
+    echo 'Detected OSX, pulling Mac stuff...'
     pull .vrapperrc
     pull .slate
     cp '/Users/jaburns/Library/Application Support/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"

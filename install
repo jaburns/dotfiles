@@ -17,16 +17,19 @@ if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
 fi
 
 if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
+    echo 'Detected VS Code on WSL, installing settings...'
     cp "$REPO_DIR/vscode_settings.json" '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json'
 fi
 
 if [[ -d '/mnt/c/Users/jaburns' ]]; then
+    echo 'Detected WSL, installing Windows stuff...'
     cp "$REPO_DIR/windows.dircolors" ~/.dircolors
     cp "$REPO_DIR/windows.gitconfig" ~/.gitconfig
     cat "$REPO_DIR/.vimrc" "$REPO_DIR/vsvimrc_additions" > '/mnt/c/Users/jaburns/_vsvimrc'
 fi
 
 if [[ "$OSTYPE" == *darwin* ]]; then
+    echo 'Detected OSX, installing Mac stuff...'
     echo 'source ~/.bashrc' > ~/.bash_profile
     install .vrapperrc
     install .slate
