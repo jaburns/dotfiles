@@ -232,7 +232,7 @@ alias gb='git branch'
 alias gcp='git cherry-pick'
 alias glf='git log --all --graph --decorate --oneline --first-parent'
 alias gl='git log --all --graph --decorate --oneline'
-alias gmt='git mergetool --tool=p4mergetool'
+alias gmt='git mergetool'
 
 _gb_complete() {
     local word=${COMP_WORDS[COMP_CWORD]}
@@ -338,3 +338,9 @@ ps1_render() {
     echo -n '\[\033[0;36m\]$) \[\033[0m\]'
 }
 export PROMPT_COMMAND='PS1="$(ps1_render $?)"'
+
+# Fix ugly dir colors on WSL
+if [[ -d /mnt/c/Windows ]]; then
+    eval "$(dircolors ~/.dircolors)"
+fi
+

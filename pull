@@ -17,6 +17,7 @@ fi
 
 if [[ -d '/mnt/c/Users/jaburns' ]]; then
     cp ~/.gitconfig "$REPO_DIR/windows.gitconfig"
+    cp ~/.dircolors "$REPO_DIR/windows.dircolors"
 fi
 
 if [[ "$OSTYPE" == *darwin* ]]; then

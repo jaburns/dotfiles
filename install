@@ -22,9 +22,8 @@ fi
 
 if [[ -d '/mnt/c/Users/jaburns' ]]; then
     cp "$REPO_DIR/windows.dircolors" ~/.dircolors
-    cat "$REPO_DIR/.vimrc" "$REPO_DIR/vsvimrc_additions" > '/mnt/c/Users/jaburns/_vsvimrc'
-    echo 'eval "$(dircolors ~/.dircolors)"' >> ~/.bashrc
     cp "$REPO_DIR/windows.gitconfig" ~/.gitconfig
+    cat "$REPO_DIR/.vimrc" "$REPO_DIR/vsvimrc_additions" > '/mnt/c/Users/jaburns/_vsvimrc'
 fi
 
 if [[ "$OSTYPE" == *darwin* ]]; then
