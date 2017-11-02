@@ -32,13 +32,13 @@
     "editor.codeLens": false,
     "editor.lineNumbers": "relative",
 
-    "workbench.colorTheme": "Solarized Light",
-    "workbench.editor.enablePreview": false, 
+    "workbench.editor.enablePreview": false,
 
     "rust.rls": {
         "executable": "rustup",
         "args": ["run", "nightly", "rls"]
     },
     "vim.disableAnnoyingNeovimMessage": true,
-    "workbench.sideBar.location": "left"
+    "workbench.sideBar.location": "left",
+    "extensions.ignoreRecommendations": true
 }

@@ -22,9 +22,12 @@ alias treed='tree -d -I node_modules'
 alias parent='ps -o comm= $PPID'
 alias hosts='sudo vi /etc/hosts'
 
-# Needed on WSL to use clipboard
-if grep -q Microsoft /proc/version; then
+# Windows-specific stuff
+if [[ -d /mnt/c/Windows ]]; then
     alias open='/mnt/c/Windows/explorer.exe'
+    alias code='/mnt/c/Program\ Files/Microsoft\ VS\ Code/Code.exe'
+
+    # Needed on WSL to use clipboard
     export DISPLAY=localhost:0.0
 fi
 
@@ -37,6 +40,7 @@ export PATH=$PATH:/Applications/Adobe\ Flash\ Builder\ 4.7/eclipse/plugins/com.a
 export RUST_SRC_PATH=$HOME/sources/rust/src
 
 command -v vim >/dev/null 2>&1 && alias vi='vim'
+
 
 # ----- Node version manager --------------------------------------------------
 
