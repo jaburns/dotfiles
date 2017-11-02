@@ -1,0 +1,27 @@
+[color]
+	ui = auto
+[user]
+	name = Jeremy Burns
+	email = j@jaburns.net
+[credential]
+	helper = cache --timeout=3600
+[push]
+	default = upstream
+[core]
+	excludesfile = /home/jaburns/.gitignore_global
+[merge]
+	tool = vs
+[mergetool "vs"]
+	cmd = /home/jaburns/dotfiles/win_merge merge $LOCAL $REMOTE $BASE $MERGED
+	trustExitCode = false
+[mergetool]
+	keepBackup = false
+[diff]
+    tool = vs
+[difftool "vs"]
+	cmd = /home/jaburns/dotfiles/win_merge diff $LOCAL $PWD/$REMOTE
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

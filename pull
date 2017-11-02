@@ -8,7 +8,6 @@ pull() {
 
 pull .bashrc
 pull .vimrc
-pull .gitconfig
 pull .gitignore_global
 pull .tmux.conf
 
@@ -16,8 +15,13 @@ if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
     cp '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"
 fi
 
+if [[ -d '/mnt/c/Users/jaburns' ]]; then
+    cp ~/.gitconfig "$REPO_DIR/windows.gitconfig"
+fi
+
 if [[ "$OSTYPE" == *darwin* ]]; then
     pull .vrapperrc
     pull .slate
     cp '/Users/jaburns/Library/Application Support/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"
+    cp ~/.gitconfig "$REPO_DIR/osx.gitconfig"
 fi

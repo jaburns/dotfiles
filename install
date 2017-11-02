@@ -8,10 +8,8 @@ install() {
 
 install .bashrc
 install .vimrc
-install .gitconfig
 install .gitignore_global
 install .tmux.conf
-git config --global core.excludesfile ~/.gitignore_global
 
 if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
     echo 'Installing Vundle...'
@@ -26,6 +24,7 @@ if [[ -d '/mnt/c/Users/jaburns' ]]; then
     cp "$REPO_DIR/windows.dircolors" ~/.dircolors
     cat "$REPO_DIR/.vimrc" "$REPO_DIR/vsvimrc_additions" > '/mnt/c/Users/jaburns/_vsvimrc'
     echo 'eval "$(dircolors ~/.dircolors)"' >> ~/.bashrc
+    cp "$REPO_DIR/windows.gitconfig" ~/.gitconfig
 fi
 
 if [[ "$OSTYPE" == *darwin* ]]; then
@@ -33,6 +32,7 @@ if [[ "$OSTYPE" == *darwin* ]]; then
     install .vrapperrc
     install .slate
     cp "$REPO_DIR/vscode_settings.json" '/Users/jaburns/Library/Application Support/Code/User/settings.json'
+    cp "$REPO_DIR/osx.gitconfig" ~/.gitconfig
 else
     sed -i 's/^.*OSX_ONLY.*$//g' ~/.tmux.conf
 fi
