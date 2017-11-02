@@ -230,8 +230,8 @@ alias gm='git merge'
 alias gco='git checkout'
 alias gb='git branch'
 alias gcp='git cherry-pick'
-alias gl='git log --all --graph --decorate --oneline --first-parent'
-alias glv='git log --all --graph --decorate --oneline'
+alias glf='git log --all --graph --decorate --oneline --first-parent'
+alias gl='git log --all --graph --decorate --oneline'
 alias gmt='git mergetool --tool=p4mergetool'
 
 _gb_complete() {
