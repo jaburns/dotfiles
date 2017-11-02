@@ -40,5 +40,6 @@
     },
     "vim.disableAnnoyingNeovimMessage": true,
     "workbench.sideBar.location": "left",
-    "extensions.ignoreRecommendations": true
+    "extensions.ignoreRecommendations": true,
+    "window.zoomLevel": -1
 }
