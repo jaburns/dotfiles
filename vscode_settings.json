@@ -23,6 +23,13 @@
                 "args": []
             }]
         },
+        {   "before": ["Z", "Q"],
+            "after": [],
+            "commands": [{
+                "command": "workbench.action.closeActiveEditor",
+                "args": []
+            }]
+        },
         {   "before": ["K"],
             "after": ["h","\"","a","y","l","\"","a","p","r","<cr>"]
         }
