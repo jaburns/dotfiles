@@ -1,6 +1,7 @@
 nnoremap <c-o> :vsc View.NavigateBackward<CR>
 nnoremap <c-i> :vsc View.NavigateForward<CR>
 nnoremap gd :vsc Edit.GoToDefinition<CR>
+nnoremap <c-p> :vsc Edit.GoToFile<CR>
 
 " These commands require the VS extension 'Navigate Tab Groups'
 nnoremap <c-w>h :vsc Tools.NavigateTabGroups.Left<CR>
