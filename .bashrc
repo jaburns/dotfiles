@@ -29,6 +29,8 @@ if [[ -d /mnt/c/Windows ]]; then
 
     # Needed on WSL to use clipboard
     export DISPLAY=localhost:0.0
+else
+    alias code='/Applications/Visual\ Studio\ Code.app/Contents/MacOS/Electron &'
 fi
 
 export PATH=$PATH:$HOME/tools
