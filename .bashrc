@@ -26,6 +26,7 @@ alias hosts='sudo vi /etc/hosts'
 if [[ -d /mnt/c/Windows ]]; then
     alias open='/mnt/c/Windows/explorer.exe'
     alias code='/mnt/c/Program\ Files/Microsoft\ VS\ Code/Code.exe &'
+    alias ps1='powershell.exe'
 
     # Needed on WSL to use clipboard
     export DISPLAY=localhost:0.0
