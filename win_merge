@@ -13,10 +13,10 @@ resolve_path() {
 }
 
 do_diff() {
-    tmpLocal="$(get_filename $1)"
-    remote="$(resolve_path "$2")"
-    cp "$1" "/mnt/c/Windows/Temp/$tmpLocal"
-    "$VS_MERGE" /t "C:\\Windows\\Temp\\$tmpLocal" "$remote" Source Target
+    local tmp_local="$(get_filename $1)"
+    local remote="$(resolve_path "$2")"
+    cp "$1" "/mnt/c/Windows/Temp/$tmp_local"
+    "$VS_MERGE" /t "C:\\Windows\\Temp\\$tmp_local" "$remote" Source Target
 }
 
 case "$1" in
