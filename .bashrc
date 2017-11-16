@@ -28,7 +28,7 @@ if [[ -d /mnt/c/Windows ]]; then
     alias ps1='powershell.exe'
 
     open() {
-        /mnt/c/Windows/explorer.exe "$(echo "%1" | sed 's:/:\\:g')"
+        /mnt/c/Windows/explorer.exe "$(echo "$1" | sed 's:/:\\:g')"
     }
 
     # Needed on WSL to use clipboard
