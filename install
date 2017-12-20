@@ -26,6 +26,7 @@ if [[ -d '/mnt/c/Users/jaburns' ]]; then
     cp "$REPO_DIR/windows.dircolors" ~/.dircolors
     cp "$REPO_DIR/windows.gitconfig" ~/.gitconfig
     cat "$REPO_DIR/.vimrc" "$REPO_DIR/vsvimrc_additions" > '/mnt/c/Users/jaburns/_vsvimrc'
+    cp "$REPO_DIR/.gitignore_global" /mnt/c/Users/jaburns/.gitignore_global
 fi
 
 if [[ "$OSTYPE" == *darwin* ]]; then
