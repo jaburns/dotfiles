@@ -9,7 +9,6 @@
 	default = upstream
 [core]
 	filemode = false
-	autocrlf = true
 	excludesfile = /home/jaburns/.gitignore_global
 [merge]
 	tool = vs
