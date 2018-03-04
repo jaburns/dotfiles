@@ -37,6 +37,7 @@ else
     alias code='/Applications/Visual\ Studio\ Code.app/Contents/MacOS/Electron &'
 fi
 
+export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cabal/bin
