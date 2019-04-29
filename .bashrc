@@ -88,6 +88,14 @@ after() {
     done
 }
 
+gitfuck() {
+    git clean -xfd
+    git submodule foreach --recursive git clean -xfd
+    git reset --hard
+    git submodule foreach --recursive git reset --hard
+    git submodule update --init --recursive
+}
+
 # Rename some files with sed regex
 ren() {
     [[ -z $1 ]] && echo "Example: ren '*.txt' 's/-suffix/-newsuff/'" && return
