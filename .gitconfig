@@ -1,0 +1,5 @@
+[user]
+	email = j@jaburns.net
+	name = jaburns
+[core]
+	excludesfile = /home/jaburns/.gitignore_global

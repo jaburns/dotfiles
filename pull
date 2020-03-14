@@ -9,22 +9,20 @@ pull() {
 pull .bashrc
 pull .vimrc
 pull .gitignore_global
+pull .gitconfig
+pull .tmux.conf
 
-if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
-    echo 'Detected VS Code on WSL, pulling settings...'
-    cp '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"
+vscode_loc=''
+if [[ -d '/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
+    vscode_loc='/c/Users/jaburns/AppData/Roaming/Code/User/settings.json'
+elif [[ -d '/Users/jaburns/Library/Application Support/Code/User' ]]
+    vscode_loc='/Users/jaburns/Library/Application Support/Code/User/settings.json'
+elif [[ -d '/home/jaburns/.config/Code/User' ]]
+    vscode_loc='/home/jaburns/.config/Code/User/settings.json'
+else
+    echo 'Couldnt find VSCode settings.json'
 fi
 
-if [[ -d '/mnt/c/Users/jaburns' ]]; then
-    echo 'Detected WSL, pulling Windows stuff...'
-    cp ~/.gitconfig "$REPO_DIR/windows.gitconfig"
-    cp ~/.dircolors "$REPO_DIR/windows.dircolors"
-fi
-
-if [[ "$OSTYPE" == *darwin* ]]; then
-    echo 'Detected OSX, pulling Mac stuff...'
-    pull .vrapperrc
-    pull .slate
-    cp '/Users/jaburns/Library/Application Support/Code/User/settings.json' "$REPO_DIR/vscode_settings.json"
-    cp ~/.gitconfig "$REPO_DIR/osx.gitconfig"
+if [[ ! -z "$vscode_loc" ]]; then
+    cp "$vscode_loc" "$REPO_DIR/vscode_settings.json" 
 fi

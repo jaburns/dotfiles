@@ -9,33 +9,20 @@ install() {
 install .bashrc
 install .vimrc
 install .gitignore_global
+install .gitconfig
 install .tmux.conf
 
-if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
-    echo 'Installing Vundle...'
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-fi
-
-if [[ -d '/mnt/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
-    echo 'Detected VS Code on WSL, installing settings...'
-    cp "$REPO_DIR/vscode_settings.json" '/mnt/c/Users/jaburns/AppData/Roaming/Code/User/settings.json'
-fi
-
-if [[ -d '/mnt/c/Users/jaburns' ]]; then
-    echo 'Detected WSL, installing Windows stuff...'
-    cp "$REPO_DIR/windows.dircolors" ~/.dircolors
-    cp "$REPO_DIR/windows.gitconfig" ~/.gitconfig
-    cat "$REPO_DIR/.vimrc" "$REPO_DIR/vsvimrc_additions" > '/mnt/c/Users/jaburns/_vsvimrc'
-    cp "$REPO_DIR/.gitignore_global" /mnt/c/Users/jaburns/.gitignore_global
-fi
-
-if [[ "$OSTYPE" == *darwin* ]]; then
-    echo 'Detected OSX, installing Mac stuff...'
-    echo 'source ~/.bashrc' > ~/.bash_profile
-    install .vrapperrc
-    install .slate
-    cp "$REPO_DIR/vscode_settings.json" '/Users/jaburns/Library/Application Support/Code/User/settings.json'
-    cp "$REPO_DIR/osx.gitconfig" ~/.gitconfig
+vscode_loc=''
+if [[ -d '/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
+    vscode_loc='/c/Users/jaburns/AppData/Roaming/Code/User/settings.json'
+elif [[ -d '/Users/jaburns/Library/Application Support/Code/User' ]]
+    vscode_loc='/Users/jaburns/Library/Application Support/Code/User/settings.json'
+elif [[ -d '/home/jaburns/.config/Code/User' ]]
+    vscode_loc='/home/jaburns/.config/Code/User/settings.json'
 else
-    sed -i 's/^.*OSX_ONLY.*$//g' ~/.tmux.conf
+    echo 'Couldnt find VSCode settings.json'
+fi
+
+if [[ ! -z "$vscode_loc" ]]; then
+    cp "$REPO_DIR/vscode_settings.json" "$vscode_loc"
 fi

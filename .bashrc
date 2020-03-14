@@ -7,60 +7,21 @@ set -o vi
 export EDITOR="vim"
 
 alias grep='grep --color=auto'
-alias notes='vim ~/Dropbox/notes.txt'
-alias music='vim ~/Dropbox/music.txt'
 alias pyhttp='python -m SimpleHTTPServer'
-alias ywd='printf "%q" "$(pwd)" | pbcopy'
 alias dskill='find . -name .DS_Store > /tmp/dskill && wc -l /tmp/dskill | sed "s:/.*$:.DS_Store files removed:" && while read line; do rm "$line"; done < /tmp/dskill && rm /tmp/dskill'
-alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
-alias lss='du -hd 1'
-alias ports='sudo netstat -tulpn'
-alias unity='/Applications/Unity/Unity.app/Contents/MacOS/Unity'
-alias mkv2mp4='for x in *.mkv; do ffmpeg -i "$x" -vcodec copy -acodec libfaac "$x.mp4"; done'
-alias agls='ag . -l --nocolor -g ""'
-alias treed='tree -d -I node_modules'
-alias parent='ps -o comm= $PPID'
-alias hosts='sudo vi /etc/hosts'
-
-# Windows-specific stuff
-if [[ -d /mnt/c/Windows ]]; then
-    alias code='/mnt/c/Program\ Files/Microsoft\ VS\ Code/Code.exe &'
-    alias ps1='powershell.exe'
-
-    open() {
-        /mnt/c/Windows/explorer.exe "$(echo "$1" | sed 's:/:\\:g')"
-    }
-
-    # Needed on WSL to use clipboard
-    export DISPLAY=localhost:0.0
-else
-    alias code='/Applications/Visual\ Studio\ Code.app/Contents/MacOS/Electron &'
-fi
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/tools
-export PATH=$PATH:$HOME/dotfiles/tools
-export PATH=$PATH:$HOME/.cabal/bin
-export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:/Applications/Adobe\ Flash\ Builder\ 4.7/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/bin
-
-export RUST_SRC_PATH=$HOME/sources/rust/src
-
-command -v vim >/dev/null 2>&1 && alias vi='vim'
-
-
-# ----- Node version manager --------------------------------------------------
-
-export NVM_DIR="/Users/jaburns/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # ----- Simple commands -------------------------------------------------------
 
+# Stop and remove all running containers
 docker_kill() {
     docker ps | awk '{print $1}' | grep -v CONTAINER | xargs docker stop
     docker ps -a | awk '{print $1}' | grep -v CONTAINER | xargs docker rm
 }
 
+# Delete all docker images
 docker_clean() {
     docker_kill
     docker images | awk '{print $3}' | grep -v IMAGE | xargs docker rmi --force
@@ -69,11 +30,6 @@ docker_clean() {
 # Find a file with name containing some text
 finn() {
     find . -iname "*$1*"
-}
-
-# Print the default dimensions of a SWF, local or remote
-swfsize() {
-    php -r "print_r(getimagesize('$1'));"
 }
 
 # Wait for a process to close then run a command
@@ -88,6 +44,7 @@ after() {
     done
 }
 
+# Completely reset the state of a git repo and all its submodules
 gitfuck() {
     git clean -xfd
     git submodule foreach --recursive git clean -xfd
@@ -162,23 +119,7 @@ function _cdup_complete {
 
 complete -F _cdup_complete cdup
 
-# ----- ack helpers -----------------------------------------------------------
-
-ack_formatted() {
-    local lang=$1
-    shift
-    printf "\n\n\n    $@\n\n"
-    ack $lang "$@"
-    printf "\n\n\n\n"
-}
-
-alias cck='ack_formatted --csharp'
-alias aak='ack_formatted --actionscript'
-
 # ----- git helpers -----------------------------------------------------------
-
-# git config --global credential.helper "cache --timeout=3600"
-# git config --global color.ui auto
 
 if ! which gxargs >/dev/null 2>/dev/null; then
     alias gxargs=xargs
@@ -229,15 +170,6 @@ gd() {
     fi
 }
 
-git-nuke() {
-    ls -1a | while read line; do
-        if [[ "$line" != "." && "$line" != ".." && "$line" != ".git" ]]; then
-            rm -rf "$line"
-        fi
-    done
-    git reset --hard
-}
-
 alias gc='git commit'
 alias ga='git add'
 alias gp='git push'
@@ -251,7 +183,6 @@ alias gb='git branch'
 alias gcp='git cherry-pick'
 alias glf='git log --all --graph --decorate --oneline --first-parent'
 alias gl='git log --all --graph --decorate --oneline'
-alias gmt='git mergetool'
 
 _gb_complete() {
     local word=${COMP_WORDS[COMP_CWORD]}
@@ -281,47 +212,6 @@ _makefile_complete() {
 }
 
 complete -F _makefile_complete make
-
-# ----- SVN helpers -----------------------------------------------------------
-
-# Grep SVN status for a pattern and execute an svn command on the selection.
-sg() {
-    if [[ "$#" -lt 1 ]]; then
-        svn st
-    elif [[ "$#" -lt 2 ]]; then
-        svn st | grep "$1" | awk '{print $2}'
-    else
-        svn st | grep "$1" | sed 's/^. *//g;s/\(.*\)/"\1"/' | xargs svn "$2"
-    fi;
-}
-
-# Remove all deleted files, and add all new files.
-sa() {
-    test `sg '!' | wc -l` -gt 0 && sg '!' rm
-    test `sg '?' | wc -l` -gt 0 && sg '?' add
-}
-
-# Show the log from HEAD back n revisions
-svl() {
-    rev=$(svn info | grep 'Revision' | cut -d\  -f2)
-    svn log -r "$(expr $rev - $1):HEAD"
-}
-
-# Quick alias for editing the ignore list in svn
-alias si='svn propedit svn:ignore .'
-
-# ----- node.js breakpoint debugger setup -------------------------------------
-
-ndb() {
-    local params="$@"
-    [[ -z "$params" ]] && local params=.
-    tmux split-window -v "node --debug-brk $params"
-    sleep 0.2
-    tmux split-window -h 'node-vim-inspector'
-    tmux swap-pane -U
-    tmux select-pane -U
-    vim -nb
-}
 
 # ----- Prompt config ---------------------------------------------------------
 
