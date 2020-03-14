@@ -9,3 +9,5 @@ jaburns/
 Assets/StreamingAssets/GLTF/
 Assets/Plugins/Unity-NPM-Assist-DLL.dll
 Assets/Plugins/Unity-NPM-Assist-DLL.dll.meta
+tags
+.ignore

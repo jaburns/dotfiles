@@ -1,16 +1,4 @@
 ".vimrc
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tikhomirov/vim-glsl'
-
-call vundle#end()
 filetype plugin indent on
 
 set autoindent          " Copy indent from current line when starting a new line

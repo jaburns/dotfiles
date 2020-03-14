@@ -1,19 +1,23 @@
 {
-    "vim.useCtrlKeys": true,
-    "vim.hlsearch": true,
+    "workbench.colorTheme": "Slime",
+    "window.zoomLevel": -1,
+    "keyboard.dispatch": "keyCode",
+    "editor.parameterHints.enabled": false,
     "vim.useSystemClipboard": true,
-    "vim.insertModeKeyBindings": [ ],
-    "vim.otherModesKeyBindings": [
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
+    "editor.fontFamily": "Consolas, 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "vim.normalModeKeyBindings": [
         {   "before": ["<c-j>"],
             "after": ["1","5","j"]
-        },
-        {   "before": ["<c-k>"],
+        },{ 
+            "before": ["<c-k>"],
             "after": ["1","5","k"]
-        },
-        {   "before": ["Y"],
+        },{
+            "before": ["Y"],
             "after": ["y","$"]
-        },
-        {   "before": ["Z", "Z"],
+        },{
+            "before": ["Z", "Z"],
             "after": [],
             "commands": [{
                 "command": "workbench.action.files.save",
@@ -22,31 +26,16 @@
                 "command": "workbench.action.closeActiveEditor",
                 "args": []
             }]
-        },
-        {   "before": ["Z", "Q"],
+        },{
+            "before": ["Z", "Q"],
             "after": [],
             "commands": [{
                 "command": "workbench.action.closeActiveEditor",
                 "args": []
             }]
-        },
-        {   "before": ["K"],
-            "after": ["h","\"","a","y","l","\"","a","p","r","<cr>"]
+        },{
+            "before": ["K"],
+            "after": ["i","<cr>","<esc>"]
         }
-    ],
-
-    "editor.autoClosingBrackets": false,
-    "editor.codeLens": false,
-    "editor.lineNumbers": "relative",
-
-    "workbench.editor.enablePreview": false,
-
-    "rust.rls": {
-        "executable": "rustup",
-        "args": ["run", "nightly", "rls"]
-    },
-    "vim.disableAnnoyingNeovimMessage": true,
-    "workbench.sideBar.location": "left",
-    "extensions.ignoreRecommendations": true,
-    "window.zoomLevel": -1
+    ]
 }
