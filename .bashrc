@@ -12,6 +12,7 @@ alias dskill='find . -name .DS_Store > /tmp/dskill && wc -l /tmp/dskill | sed "s
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/tools
+export PATH=$PATH:$HOME/dotfiles/tools
 
 # ----- Simple commands -------------------------------------------------------
 

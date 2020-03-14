@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# https://askubuntu.com/questions/162141/map-ctrl-and-alt-to-mouse-thumb-buttons
+
+# 8 -> Back button
+# 9 -> Forward button
+
+MOUSE_ID="$(xinput | grep 'Logitech G Pro Gaming Mouse  ' | awk -F= '{print $2}' | awk '{print $1}')"
+xinput set-button-map "$MOUSE_ID" 1 2 3 4 5 6 7 19 20 10 11 12 13 14 15 16 17 18 19 20
