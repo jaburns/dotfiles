@@ -10,6 +10,10 @@ alias grep='grep --color=auto'
 alias pyhttp='python -m SimpleHTTPServer'
 alias dskill='find . -name .DS_Store > /tmp/dskill && wc -l /tmp/dskill | sed "s:/.*$:.DS_Store files removed:" && while read line; do rm "$line"; done < /tmp/dskill && rm /tmp/dskill'
 
+if [[ "$OSTYPE" == *linux-gnu* ]]; then
+    alias open='xdg-open'
+fi
+
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
