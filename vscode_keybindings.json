@@ -1,23 +1,28 @@
 // Place your key bindings in this file to override the defaults
 [
     {
-        "key": "ctrl+a o",
-        "command": "workbench.action.terminal.resizePaneLeft",
+        "key": "ctrl+a ctrl+o",
+        "command": "workbench.action.terminal.resizePaneLeft"
     },
     {
-        "key": "ctrl+shift+left",
-        "command": "-workbench.action.terminal.resizePaneLeft",
+        "key": "ctrl+a o",
+        "command": "workbench.action.terminal.resizePaneLeft"
+    },
+    {
+        "key": "ctrl+a ctrl+y",
+        "command": "workbench.action.terminal.resizePaneRight"
     },
     {
         "key": "ctrl+a y",
-        "command": "workbench.action.terminal.resizePaneRight",
-    },
-    {
-        "key": "ctrl+shift+right",
-        "command": "-workbench.action.terminal.resizePaneRight",
+        "command": "workbench.action.terminal.resizePaneRight"
     },
     {
         "key": "ctrl+a j",
+        "command": "workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+a ctrl+j",
         "command": "workbench.action.terminal.focusNextPane",
         "when": "terminalFocus"
     },
@@ -27,11 +32,24 @@
         "when": "terminalFocus"
     },
     {
+        "key": "ctrl+a ctrl+k",
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus"
+    },
+    {
         "key": "ctrl+a h",
         "command": "workbench.action.terminal.focus"
     },
     {
+        "key": "ctrl+a ctrl+h",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
         "key": "ctrl+a l",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+a ctrl+l",
         "command": "workbench.action.terminal.focus"
     },
     {
@@ -40,7 +58,17 @@
         "when": "terminalFocus"
     },
     {
+        "key": "ctrl+a ctrl+h",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
+    },
+    {
         "key": "ctrl+a l",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+a ctrl+l",
         "command": "workbench.action.focusActiveEditorGroup",
         "when": "terminalFocus"
     }
