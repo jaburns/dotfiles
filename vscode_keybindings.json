@@ -29,5 +29,23 @@
         "key": "ctrl+a k",
         "command": "workbench.action.terminal.focusPreviousPane",
         "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+a h",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+a l",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+a h",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+a l",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
     }
 ]
