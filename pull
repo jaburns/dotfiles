@@ -13,16 +13,17 @@ pull .gitconfig
 pull .tmux.conf
 
 vscode_loc=''
-if [[ -d '/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
-    vscode_loc='/c/Users/jaburns/AppData/Roaming/Code/User/settings.json'
-elif [[ -d '/Users/jaburns/Library/Application Support/Code/User' ]]; then
-    vscode_loc='/Users/jaburns/Library/Application Support/Code/User/settings.json'
-elif [[ -d '/home/jaburns/.config/Code/User' ]]; then
-    vscode_loc='/home/jaburns/.config/Code/User/settings.json'
+if       [[ -d '/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
+    vscode_loc='/c/Users/jaburns/AppData/Roaming/Code/User'
+elif     [[ -d '/Users/jaburns/Library/Application Support/Code/User' ]]; then
+    vscode_loc='/Users/jaburns/Library/Application Support/Code/User'
+elif     [[ -d '/home/jaburns/.config/Code/User' ]]; then
+    vscode_loc='/home/jaburns/.config/Code/User'
 else
     echo 'Couldnt find VSCode settings.json'
 fi
 
 if [[ ! -z "$vscode_loc" ]]; then
-    cp "$vscode_loc" "$REPO_DIR/vscode_settings.json" 
+    cp "$vscode_loc/settings.json" "$REPO_DIR/vscode_settings.json"
+    cp "$vscode_loc/keybindings.json" "$REPO_DIR/vscode_keybindings.json"
 fi
