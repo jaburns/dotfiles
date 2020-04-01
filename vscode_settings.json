@@ -1,5 +1,11 @@
 {
     "workbench.colorTheme": "One Monokai 80s",
+    "workbench.colorCustomizations": {
+        "focusBorder": "#333842",
+        "editorSuggestWidget.border": "#282c34",
+        "tab.border": "#282C34",
+        "panel.border": "#505762"
+    },
     "keyboard.dispatch": "keyCode",
     "editor.parameterHints.enabled": false,
     "vim.useSystemClipboard": true,

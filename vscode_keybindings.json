@@ -1,24 +1,20 @@
 // Place your key bindings in this file to override the defaults
 [
     {
-        "key": "ctrl+shift+right",
+        "key": "ctrl+a o",
         "command": "workbench.action.terminal.resizePaneLeft",
-        "when": "terminalFocus"
     },
     {
         "key": "ctrl+shift+left",
         "command": "-workbench.action.terminal.resizePaneLeft",
-        "when": "terminalFocus"
     },
     {
-        "key": "ctrl+shift+left",
+        "key": "ctrl+a y",
         "command": "workbench.action.terminal.resizePaneRight",
-        "when": "terminalFocus"
     },
     {
         "key": "ctrl+shift+right",
         "command": "-workbench.action.terminal.resizePaneRight",
-        "when": "terminalFocus"
     },
     {
         "key": "ctrl+a j",
