@@ -1,6 +1,5 @@
 {
-    "workbench.colorTheme": "Slime",
-    "window.zoomLevel": -1,
+    "workbench.colorTheme": "One Monokai 80s",
     "keyboard.dispatch": "keyCode",
     "editor.parameterHints.enabled": false,
     "vim.useSystemClipboard": true,
@@ -37,5 +36,11 @@
             "before": ["K"],
             "after": ["i","<cr>","<esc>"]
         }
-    ]
+    ],
+    "editor.renderWhitespace": "boundary",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "csharp.suppressDotnetInstallWarning": true,
+    "editor.fontSize": 12,
+    "window.zoomLevel": 0,
+    "terminal.integrated.fontSize": 12
 }
