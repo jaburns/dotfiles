@@ -76,5 +76,9 @@
         "key": "ctrl+a -",
         "command": "workbench.action.terminal.split",
         "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+a m",
+        "command": "editor.action.toggleMinimap"
     }
 ]
