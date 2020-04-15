@@ -80,5 +80,9 @@
     {
         "key": "ctrl+a m",
         "command": "editor.action.toggleMinimap"
+    },
+    {
+        "key": "ctrl+a a",
+        "command": "workbench.action.terminal.focusNext"
     }
 ]

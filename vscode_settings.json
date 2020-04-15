@@ -49,5 +49,7 @@
     "editor.fontSize": 12,
     "window.zoomLevel": 0,
     "terminal.integrated.fontSize": 12,
-    "editor.minimap.enabled": true
+    "editor.minimap.enabled": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDragAndDrop": false
 }
