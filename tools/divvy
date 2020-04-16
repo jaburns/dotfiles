@@ -5,12 +5,18 @@ if [[ "$1" == 'next-monitor' ]]; then
 else
     lastSeconds="$(date +%s -r /tmp/win_move.js)"
     curSeconds="$(date +%s)"
-
     layoutIndex=0
+
     if (( "$(( $curSeconds - $lastSeconds ))" < 2 )); then
-        layoutIndex=1
+        if [[ ! -f /tmp/win_move.counter ]]; then
+            echo -1 > /tmp/win_move.counter
+        fi
+        layoutIndex="$(cat /tmp/win_move.counter)"
+        layoutIndex="$(( ( $layoutIndex + 1 ) % 2 ))"
     fi
 fi
+
+echo "$layoutIndex" > /tmp/win_move.counter
 
 >/tmp/win_move.js echo '
 const TASK_BAR_HEIGHT = 24;
