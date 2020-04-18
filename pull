@@ -27,3 +27,7 @@ if [[ ! -z "$vscode_loc" ]]; then
     cp "$vscode_loc/settings.json" "$REPO_DIR/vscode_settings.json"
     cp "$vscode_loc/keybindings.json" "$REPO_DIR/vscode_keybindings.json"
 fi
+
+if [[ -d '/home/jaburns/.config/xfce4' ]]; then
+    cp /home/jaburns/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml xfce/
+fi
