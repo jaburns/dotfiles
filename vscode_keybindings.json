@@ -88,5 +88,13 @@
     {
         "key": "ctrl+a ctrl+a",
         "command": "workbench.action.terminal.focusNext"
+    },
+    {
+        "key": "ctrl+a c",
+        "command": "workbench.action.terminal.new"
+    },
+    {
+        "key": "ctrl+a ctrl+c",
+        "command": "workbench.action.terminal.new"
     }
 ]
