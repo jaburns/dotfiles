@@ -51,5 +51,6 @@
     "terminal.integrated.fontSize": 12,
     "editor.minimap.enabled": true,
     "typescript.updateImportsOnFileMove.enabled": "always",
-    "explorer.confirmDragAndDrop": false
+    "explorer.confirmDragAndDrop": false,
+    "editor.codeLens": false
 }
