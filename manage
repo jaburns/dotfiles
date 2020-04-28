@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+cd "$( dirname "${BASH_SOURCE[0]}" )"
+REPO_DIR="$( pwd )"
+
+MODE="$1"
+shift
+
+if [[ "$MODE" != 'pull' ]] && [[ "$MODE" != 'install' ]]; then
+    echo 'Usage: ./manage [install | pull]'
+    exit 1
+fi
+
+copy_file() {
+    if [[ "$MODE" == 'install' ]]; then
+        cp "$1" "$2"
+    else
+        cp "$2" "$1"
+    fi
+}
+
+copy_home() {
+    copy_file "$REPO_DIR/$1" "$HOME/$1"
+}
+
+copy_home .bashrc
+copy_home .vimrc
+copy_home .gitignore_global
+copy_home .gitconfig
+copy_home .tmux.conf
+
+vscode_loc=''
+if       [[ -d '/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
+    vscode_loc='/c/Users/jaburns/AppData/Roaming/Code/User'
+elif     [[ -d '/Users/jaburns/Library/Application Support/Code/User' ]]; then
+    vscode_loc='/Users/jaburns/Library/Application Support/Code/User'
+elif     [[ -d '/home/jaburns/.config/Code/User' ]]; then
+    vscode_loc='/home/jaburns/.config/Code/User'
+else
+    echo 'Couldnt find vscode settings dir'
+fi
+
+if [[ ! -z "$vscode_loc" ]]; then
+    copy_file "$REPO_DIR/vscode_settings.json" "$vscode_loc/settings.json"
+    copy_file "$REPO_DIR/vscode_keybindings.json" "$vscode_loc/keybindings.json"
+fi
+
+[[ -d '/home/jaburns/.config/xfce4' ]] && \
+    copy_file 'xfce4-keyboard-shortcuts.xml' \
+        "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml"
+
+[[ -d '/home/jaburns/.config' ]] && copy_file 'redshift.conf' "$HOME/.config/redshift.conf"
