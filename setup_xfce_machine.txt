@@ -1,0 +1,3 @@
+
+Fix thunar lag:
+    https://forums.linuxmint.com/viewtopic.php?t=114090

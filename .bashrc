@@ -6,6 +6,7 @@ set keymap vi
 set -o vi
 export EDITOR="vim"
 
+alias junk='xdg-open ~/junk'
 alias notes='vim ~/gdrive/notes.txt'
 alias grep='grep --color=auto'
 alias pyhttp='python -m SimpleHTTPServer'
