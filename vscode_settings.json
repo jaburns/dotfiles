@@ -52,5 +52,7 @@
     "editor.minimap.enabled": true,
     "typescript.updateImportsOnFileMove.enabled": "always",
     "explorer.confirmDragAndDrop": false,
-    "editor.codeLens": false
+    "editor.codeLens": false,
+    "javascript.preferences.importModuleSpecifier": "relative",
+    "editor.insertSpaces": false
 }
