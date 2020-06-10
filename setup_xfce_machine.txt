@@ -1,13 +1,13 @@
-- Adjust panel position, bg color to #2B2E37, whisker menu icon, clock settings, workspace viewer
 - Download chrome, login, and set as default browser, click status bar icon and "Dont run in background"
 - Download and install overgrive, point to /home/jaburns/gdrive
 - Download and install vscode
+- Settings manager, appearance, arc-dark. Settings manager, window manager, arc-dark
 - Open terminal, switch colors to Presets: Dark Pastels
 - Create ssh key
 - Add ssh key to github
 - Shell:
     cd ~
-    sudo apt install vim tmux git keepassx flameshot vlc
+    sudo apt install vim-gtk tmux git keepassx flameshot vlc wmctrl arc-theme
     git clone git@github.com:jaburns/dotfiles
     cd dotfiles
     ./manage install
@@ -17,9 +17,33 @@
     sudo snap start docker
     sudo groupadd docker
     sudo usermod -aG docker jaburns
+    docker run hello-world
 - In Session and Startup settings add items:
     setxkbmap -option caps:escape   => Remap Caps to Escape
     /home/jaburns/dotfiles/tools/remap_mouse_buttons  => Remap Back/fwd mouse buttons
 - Log out and back in again
 - If keyboard layout doesnt have right meta, remap flameshot in keyboard shortcuts to ctrl+\
 - Disable desktop icons
+- Install consolas font: https://github.com/pensnarik/consolas-font
+- Install node 12 lts:
+    sudo apt update
+    sudo apt -y upgrade
+    sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+    sudo apt -y install nodejs
+- Download and install steam, slack, discord
+- If laptop, go to touchpad settings and disable "tap touchpad to click"
+- Download unity hub app image to ~/unity
+- Add Unity Hub launcher to whisker menu (right click, Edit Applications)
+- Download and install the latest mono runtime from
+    https://www.mono-project.com/download/stable/
+- Install git lfs
+- Install vscode plugins:
+    Vim,
+    One Monokai 80s Theme
+    C#
+- Install Easystroke Gesture Recognizer and remap mouse back to alt
+    In preferences set Gesture Button to Button 12,
+    Add an Additional Button, select Instant at the bottom, and click mouse back
+    Now in Actions tab add a new action, bind key to Alt+., and stroke to mouse back
+
