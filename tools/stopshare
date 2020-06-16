@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+pgrep extramaus | xargs kill
+pgrep vlc | xargs kill
