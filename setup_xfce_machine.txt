@@ -6,7 +6,7 @@
 - Add ssh key to github
 - Shell:
     cd ~
-    sudo apt install vim-gtk tmux git keepassx flameshot vlc wmctrl arc-theme redshift
+    sudo apt install vim-gtk tmux git keepassx flameshot vlc wmctrl arc-theme redshift-gtk
     git clone git@github.com:jaburns/dotfiles
     cd dotfiles
     ./manage install

@@ -28,6 +28,7 @@ copy_home .vimrc
 copy_home .gitignore_global
 copy_home .gitconfig
 copy_home .tmux.conf
+copy_file "$REPO_DIR/redshift.conf" "$HOME/.config/redshift.conf"
 
 vscode_loc=''
 if       [[ -d '/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
