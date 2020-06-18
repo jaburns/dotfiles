@@ -85,16 +85,17 @@ get_win_info() {
     xwininfo -id "$1" \
         | grep -E "upper-left|Width:|Height:" \
         | cut -d: -f2 \
-        | make_array_from_lines 
+        | make_array_from_lines
 }
 
 get_monitor_info() {
     xrandr \
         | grep ' connected' \
         | grep -v 'connected (' \
+        | sed 's/primary //g' \
         | cut -d\  -f3 \
         | sed 's/[+x]/,/g;s/^/\[/;s/$/\]/' \
-        | make_array_from_lines 
+        | make_array_from_lines
 }
 
 get_json() {

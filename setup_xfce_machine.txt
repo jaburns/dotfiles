@@ -17,7 +17,7 @@
     sudo groupadd docker
     sudo usermod -aG docker jaburns
     docker run hello-world
-- In Session and Startup settings add items:
+- In Session and Startup settings add items to startup:
     setxkbmap -option caps:escape   => Remap Caps to Escape
     /home/jaburns/dotfiles/tools/remap_mouse_buttons  => Remap Back/fwd mouse buttons
 - Log out and back in again
@@ -46,4 +46,5 @@
     In preferences set Gesture Button to Button 12,
     Add an Additional Button, select Instant at the bottom, and click mouse back
     Now in Actions tab add a new action, bind key to Alt+., and stroke to mouse back
+- Add command 'easystroke' to application startup.
 
