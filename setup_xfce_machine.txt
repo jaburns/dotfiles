@@ -47,4 +47,6 @@
     Add an Additional Button, select Instant at the bottom, and click mouse back
     Now in Actions tab add a new action, bind key to Alt+., and stroke to mouse back
 - Add command 'easystroke' to application startup.
-
+- Optionally disable crash notification (if popup happens on boot)
+    sudo rm /var/crash/*
+    sudo vim /etc/default/apport # set enabled=0

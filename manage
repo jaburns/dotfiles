@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+VSCODE_LIGHT_THEME='Kai Light'
+VSCODE_DARK_THEME='One Monokai 80s'
+
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 REPO_DIR="$( pwd )"
 
@@ -23,6 +26,16 @@ copy_home() {
     copy_file "$REPO_DIR/$1" "$HOME/$1"
 }
 
+vscode_light_to_dark() {
+    sed "s/$VSCODE_LIGHT_THEME/$VSCODE_DARK_THEME/" "$1" > /tmp/sedtmp
+    mv /tmp/sedtmp "$1"
+}
+
+vscode_dark_to_light() {
+    sed "s/$VSCODE_DARK_THEME/$VSCODE_LIGHT_THEME/" "$1" > /tmp/sedtmp
+    mv /tmp/sedtmp "$1"
+}
+
 copy_home .bashrc
 copy_home .vimrc
 copy_home .gitignore_global
@@ -44,6 +57,15 @@ fi
 if [[ ! -z "$vscode_loc" ]]; then
     copy_file "$REPO_DIR/vscode_settings.json" "$vscode_loc/settings.json"
     copy_file "$REPO_DIR/vscode_keybindings.json" "$vscode_loc/keybindings.json"
+fi
+
+# "Kai Light"
+# "One Monokai 80s"
+
+if [[ "$MODE" == 'install' ]]; then
+    [[ "$1" == 'light' ]] && vscode_dark_to_light "$vscode_loc/settings.json"
+else
+    vscode_light_to_dark "$REPO_DIR/vscode_settings.json"
 fi
 
 [[ -d '/home/jaburns/.config/xfce4' ]] && \
