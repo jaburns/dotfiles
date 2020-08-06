@@ -10,7 +10,7 @@ MODE="$1"
 shift
 
 if [[ "$MODE" != 'pull' ]] && [[ "$MODE" != 'install' ]]; then
-    echo 'Usage: ./manage [install | pull]'
+    echo 'Usage: ./manage [install | pull] [light]?'
     exit 1
 fi
 
