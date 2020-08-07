@@ -22,6 +22,9 @@
             "before": ["Y"],
             "after": ["y","$"]
         },{
+            "before": ["c","i","e"],
+            "after": []
+        },{
             "before": ["Z", "Z"],
             "after": [],
             "commands": [{
