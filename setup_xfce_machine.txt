@@ -37,8 +37,7 @@
 - Download unity hub app image to ~/unity
 - Add Unity Hub launcher to whisker menu (right click, Edit Applications)
 - Install the latest .NET Core SDK
-    sudo snap install dotnet-sdk --classic  # Might be better to not use snap
-    sudo snap alias dotnet-sdk.dotnet dotnet
+    https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 - Download and install the latest mono runtime from
     https://www.mono-project.com/download/stable/
 - Install git lfs
