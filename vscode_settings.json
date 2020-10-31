@@ -12,15 +12,34 @@
     "editor.autoClosingBrackets": "never",
     "editor.autoClosingQuotes": "never",
     "editor.fontFamily": "Consolas, 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "vim.insertModeKeyBindings": [
+        {   "before": ["<c-v>"],
+            "after": ["<esc>", "p", "a"]
+        }
+    ],
+    "vim.visualModeKeyBindings": [
+        {   "before": ["<c-j>"],
+            "after": ["1","5","j"]
+        },{ 
+            "before": ["<c-k>"],
+            "after": ["1","5","k"]
+        }
+    ],
     "vim.normalModeKeyBindings": [
         {   "before": ["<c-j>"],
             "after": ["1","5","j"]
         },{ 
             "before": ["<c-k>"],
             "after": ["1","5","k"]
+        },{ 
+            "before": ["<leader>","p"],
+            "after": ["\"","x","d","i","w","P"]
         },{
             "before": ["Y"],
             "after": ["y","$"]
+        },{
+            "before": ["d","i","e"],
+            "after": []
         },{
             "before": ["c","i","e"],
             "after": []
@@ -62,5 +81,6 @@
     "rust-analyzer.lens.enable": false,
     "rust-analyzer.inlayHints.parameterHints": false,
     "rust-analyzer.inlayHints.enable": false,
-    "omnisharp.useGlobalMono": "always"
+    "omnisharp.useGlobalMono": "always",
+    "vim.leader": "<space>"
 }
