@@ -61,5 +61,6 @@
     "rust-client.engine": "rust-analyzer",
     "rust-analyzer.lens.enable": false,
     "rust-analyzer.inlayHints.parameterHints": false,
-    "rust-analyzer.inlayHints.enable": false
+    "rust-analyzer.inlayHints.enable": false,
+    "omnisharp.useGlobalMono": "always"
 }

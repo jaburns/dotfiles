@@ -6,6 +6,8 @@ set keymap vi
 set -o vi
 export EDITOR="vim"
 
+export FrameworkPathOverride=/etc/mono/4.5
+
 alias junk='xdg-open ~/junk'
 alias notes='vim ~/gdrive/notes.txt'
 alias grep='grep --color=auto'
