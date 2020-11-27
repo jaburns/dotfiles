@@ -3,6 +3,7 @@
 .ackrc
 .agignore
 jaburns/
+jaburns.txt
 .vscode/
 .vs/
 .ycm_extra_conf.py
