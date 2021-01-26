@@ -20,7 +20,7 @@
     "vim.visualModeKeyBindings": [
         {   "before": ["<c-j>"],
             "after": ["1","5","j"]
-        },{ 
+        },{
             "before": ["<c-k>"],
             "after": ["1","5","k"]
         }
@@ -28,10 +28,10 @@
     "vim.normalModeKeyBindings": [
         {   "before": ["<c-j>"],
             "after": ["1","5","j"]
-        },{ 
+        },{
             "before": ["<c-k>"],
             "after": ["1","5","k"]
-        },{ 
+        },{
             "before": ["<leader>","p"],
             "after": ["\"","x","d","i","w","P"]
         },{
@@ -95,5 +95,8 @@
     "rust-analyzer.procMacro.server": null,
     "rust-analyzer.diagnostics.disabled": [
         "missing-unsafe"
-    ]
+    ],
+    "[rust]": {
+        "editor.formatOnSave": true
+    }
 }
