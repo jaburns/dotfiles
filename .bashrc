@@ -25,8 +25,7 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cargo/bin
-source "$HOME/.cargo/env"
-eval "$(thefuck --alias)"
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 # ----- Simple commands -------------------------------------------------------
 
