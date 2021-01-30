@@ -1,7 +1,19 @@
 - Download chrome, login, and set as default browser, click status bar icon and "Dont run in background"
+    Change launch shortcut to, if setting up dark machine
+      /usr/bin/google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode %U --use-gl=desktop
 - Download and install overgrive, point to /home/jaburns/gdrive
 - Download and install vscode
-- Open terminal, switch colors to Presets: Dark Pastels
+- Install git lfs
+- Install vscode plugins:
+    Vim,
+    One Monokai 80s Theme,
+    C#,
+    C/C++,
+    Docker,
+    Debugger for Unity,
+    rust-analyzer,
+    Shader languages support for VS Code
+- Open Terminal, switch colors to Presets: Dark Pastels
 - Create ssh key
 - Add ssh key to github
 - Shell:
@@ -23,28 +35,11 @@
     /home/jaburns/dotfiles/tools/remap_mouse_buttons  => Remap Back/fwd mouse buttons
 - Log out and back in again
 - Settings manager, appearance, arc-dark. Settings manager, window manager, arc-dark
-- If keyboard layout doesnt have right meta, remap flameshot in keyboard shortcuts to ctrl+\
+- If keyboard layout doesnt have RightMeta key, remap flameshot in keyboard shortcuts to ctrl+\
 - Disable desktop icons
 - Install consolas font: https://github.com/pensnarik/consolas-font
-- Install node 12 lts:
-    sudo apt update
-    sudo apt -y upgrade
-    sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
-    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-    sudo apt -y install nodejs
 - Download and install steam, slack, discord
 - If laptop, go to touchpad settings and disable "tap touchpad to click"
-- Download unity hub app image to ~/unity
-- Add Unity Hub launcher to whisker menu (right click, Edit Applications)
-- Install the latest .NET Core SDK
-    https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
-- Download and install the latest mono runtime from
-    https://www.mono-project.com/download/stable/
-- Install git lfs
-- Install vscode plugins:
-    Vim,
-    One Monokai 80s Theme
-    C#
 - Install Easystroke Gesture Recognizer and remap mouse back to alt
     In preferences set Gesture Button to Button 12,
     Add an Additional Button, select Instant at the bottom, and click mouse back
@@ -53,3 +48,19 @@
 - Optionally disable crash notification (if popup happens on boot)
     sudo rm /var/crash/*
     sudo vim /etc/default/apport # set enabled=0
+
+Node.js
+- Install node 12 lts:
+    sudo apt update
+    sudo apt -y upgrade
+    sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+    sudo apt -y install nodejs
+
+Unity
+- Download unity hub app image to ~/unity
+- Add Unity Hub launcher to whisker menu (right click, Edit Applications)
+- Install the latest .NET Core SDK
+    https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
+- Download and install the latest mono runtime from
+    https://www.mono-project.com/download/stable/
