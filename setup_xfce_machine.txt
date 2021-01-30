@@ -3,7 +3,6 @@
       /usr/bin/google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode %U --use-gl=desktop
 - Download and install overgrive, point to /home/jaburns/gdrive
 - Download and install vscode
-- Install git lfs
 - Install vscode plugins:
     Vim,
     One Monokai 80s Theme,
@@ -29,6 +28,7 @@
     sudo groupadd docker
     sudo usermod -aG docker jaburns
     docker run hello-world
+- Install git lfs
 - In Session and Startup settings add items to startup:
     fixbar   => Fix alternate monitor window button bar showing wrong windows
     setxkbmap -option caps:escape   => Remap Caps to Escape
