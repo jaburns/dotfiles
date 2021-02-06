@@ -2,12 +2,14 @@
 import subprocess
 import re
 
+PAD = 32
+
 def get_win_dims(win_id):
     info = subprocess.check_output("xwininfo -id "+win_id, shell=True).decode('utf-8').strip().split('\n')
     win = []
     for i in range(6):
         win.append(int(re.sub(r'.*:', '', info[2+i])))
-    return [ win[0] - win[2], win[1] - win[3], win[4], win[5] ]
+    return [ win[0] + PAD, win[1] + PAD, win[4] - (2 * PAD), win[5] - (2 * PAD) ]
 
 def minimize_window(win_id):
     subprocess.check_output('xdotool windowminimize ' + win_id, shell=True)
