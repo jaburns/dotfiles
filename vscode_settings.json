@@ -71,7 +71,7 @@
     "editor.fontSize": 12,
     "window.zoomLevel": 0,
     "terminal.integrated.fontSize": 12,
-    "editor.minimap.enabled": true,
+    "editor.minimap.enabled": false,
     "typescript.updateImportsOnFileMove.enabled": "always",
     "explorer.confirmDragAndDrop": false,
     "editor.codeLens": false,
@@ -83,12 +83,7 @@
     "omnisharp.useGlobalMono": "always",
     "vim.leader": "<space>",
     "rust-analyzer.cargo.allFeatures": true,
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": [],
     "explorer.confirmDelete": false,
     "rust-analyzer.cargo.loadOutDirsFromCheck": true,
     "rust-analyzer.procMacro.enable": true,
@@ -98,5 +93,6 @@
     ],
     "[rust]": {
         "editor.formatOnSave": true
-    }
+    },
+    "glassit-linux.opacity": 90,
 }

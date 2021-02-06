@@ -74,6 +74,7 @@
       <property name="&lt;Super&gt;backslash" type="string" value="flameshot gui"/>
       <property name="&lt;Super&gt;d" type="string" value="thunar /home/jaburns/Desktop"/>
       <property name="&lt;Super&gt;c" type="string" value="exo-open --launch WebBrowser"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;Down" type="string" value="/home/jaburns/dotfiles/tools/minimize_bg"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
