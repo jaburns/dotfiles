@@ -32,6 +32,20 @@
             "before": ["<c-k>"],
             "after": ["1","5","k"]
         },{
+            "before": ["<leader>", "i"],
+            "after": [],
+            "commands": [{
+                "command": "editor.action.showHover",
+                "args": []
+            }]
+        },{
+            "before": ["<leader>", "s"],
+            "after": [],
+            "commands": [{
+                "command": "editor.action.trimTrailingWhitespace",
+                "args": []
+            }]
+        },{
             "before": ["<leader>","p"],
             "after": ["\"","x","d","i","w","P"]
         },{
