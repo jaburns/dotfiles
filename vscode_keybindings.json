@@ -515,5 +515,9 @@
         "key": "ctrl+k ctrl+l",
         "command": "-editor.toggleFold",
         "when": "editorTextFocus && foldingEnabled"
+    },
+    {
+        "key": "ctrl+k ctrl+r",
+        "command": "-workbench.action.keybindingsReference"
     }
 ]
