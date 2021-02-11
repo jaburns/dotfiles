@@ -62,13 +62,13 @@
       <property name="&lt;Super&gt;m" type="string" value="xfce4-find-cursor"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;backslash" type="string" value="xfce4-screenshooter -w"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="xkill"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;q" type="string" value="/home/jaburns/dotfiles/tools/divvy 3"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;w" type="string" value="/home/jaburns/dotfiles/tools/divvy 4"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;e" type="string" value="/home/jaburns/dotfiles/tools/divvy 5"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;a" type="string" value="/home/jaburns/dotfiles/tools/divvy 0"/>
       <property name="&lt;Alt&gt;grave" type="string" value="/home/jaburns/dotfiles/tools/divvy 6"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;s" type="string" value="/home/jaburns/dotfiles/tools/divvy 1"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;d" type="string" value="/home/jaburns/dotfiles/tools/divvy 2"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;Delete" type="string" value="/home/jaburns/dotfiles/tools/divvy 0"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;End" type="string" value="/home/jaburns/dotfiles/tools/divvy 1"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;Page_Down" type="string" value="/home/jaburns/dotfiles/tools/divvy 2"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;Insert" type="string" value="/home/jaburns/dotfiles/tools/divvy 3"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;Home" type="string" value="/home/jaburns/dotfiles/tools/divvy 4"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;Page_Up" type="string" value="/home/jaburns/dotfiles/tools/divvy 5"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
