@@ -12,7 +12,7 @@ else
             echo -1 > /tmp/win_move.counter
         fi
         layoutIndex="$(cat /tmp/win_move.counter)"
-        layoutIndex="$(( ( $layoutIndex + 1 ) % 2 ))"
+        layoutIndex="$(( ( $layoutIndex + 1 ) % 7 ))"
     fi
 fi
 
@@ -22,8 +22,15 @@ echo "$layoutIndex" > /tmp/win_move.counter
 const TASK_BAR_HEIGHT = 24;
 const LAYOUTS = [
     // x, y, w, h
-    [ 0.125, 0.0, 0.75, 1.0 ],
-    [ 0.250, 1/6, 0.50, 4/6 ],
+    [ 0.25, 0.0, 0.5, 1.0 ],
+    [ 0.0, 0.0, 0.25, 1.0 ],
+    [ 0.75, 0.0, 0.25, 1.0 ],
+
+    [ 0, 0.0, 1/3, 1.0 ],
+    [ 1/3, 0.0, 1/3, 1.0 ],
+    [ 2/3, 0.0, 1/3, 1.0 ],
+
+    [ 0.3, 1/6, 0.4, 4/6 ],
 ];
 
 const { win, monitors } = JSON.parse(process.argv[2]);
