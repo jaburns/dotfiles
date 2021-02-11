@@ -2,7 +2,7 @@
 
 if [[ "$1" == 'next-monitor' ]]; then
     layoutIndex=-1
-else
+elif [[ "$1" == 'cycle' ]]; then
     lastSeconds="$(date +%s -r /tmp/win_move.js)"
     curSeconds="$(date +%s)"
     layoutIndex=0
@@ -14,6 +14,8 @@ else
         layoutIndex="$(cat /tmp/win_move.counter)"
         layoutIndex="$(( ( $layoutIndex + 1 ) % 7 ))"
     fi
+else
+    layoutIndex="$1"
 fi
 
 echo "$layoutIndex" > /tmp/win_move.counter
@@ -22,8 +24,8 @@ echo "$layoutIndex" > /tmp/win_move.counter
 const TASK_BAR_HEIGHT = 24;
 const LAYOUTS = [
     // x, y, w, h
-    [ 0.25, 0.0, 0.5, 1.0 ],
     [ 0.0, 0.0, 0.25, 1.0 ],
+    [ 0.25, 0.0, 0.5, 1.0 ],
     [ 0.75, 0.0, 0.25, 1.0 ],
 
     [ 0, 0.0, 1/3, 1.0 ],
