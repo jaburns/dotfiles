@@ -110,9 +110,9 @@ def get_visible_other_windows(this_win_id):
 
 def get_fill_layout(this_layout, other_layout):
     if other_layout[0] < this_layout[0]:
-        return [0, 0, 1.0 - this_layout[2], 1]
+        return [0, 0, this_layout[0], 1]
     else:
-        return [this_layout[2], 0, 1.0 - this_layout[2], 1]
+        return [this_layout[0] + this_layout[2], 0, 1.0 - this_layout[0] - this_layout[2], 1]
 
 def run_minimize_bg():
     this_win_id = get_active_win_id()
@@ -123,22 +123,17 @@ def run_minimize_bg():
 
 def run_fill_rest():
     this_win_id = get_active_win_id()
-    others = get_visible_other_windows(this_win_id)
-    if len(others) != 1:
-        return
-
     this_dims = get_win_dimensions(this_win_id)
-    other_dims = get_win_dimensions(others[0])
-
     monitor_index = get_monitor_index_for_point(this_dims['cx'], this_dims['cy'])
     mw, mh, mx, my = g_monitor_whxys[monitor_index]
     mh -= TASK_BAR_HEIGHT
-
     this_layout = convert_dims_to_layout(this_dims, mw, mh, mx, my)
-    other_layout = convert_dims_to_layout(other_dims, mw, mh, mx, my)
-    layout = get_fill_layout(this_layout, other_layout)
 
-    run_layout_or_next_monitor(others[0], layout)
+    for win_id in get_visible_other_windows(this_win_id):
+        other_dims = get_win_dimensions(win_id)
+        other_layout = convert_dims_to_layout(other_dims, mw, mh, mx, my)
+        layout = get_fill_layout(this_layout, other_layout)
+        run_layout_or_next_monitor(win_id, layout)
 
 def run_layout_or_next_monitor(win_id, maybe_layout):
     dims = get_win_dimensions(win_id)
