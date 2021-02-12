@@ -53,22 +53,22 @@
       <property name="override" type="bool" value="true"/>
       <property name="&lt;Super&gt;space" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
-      <property name="&lt;Alt&gt;&lt;Super&gt;Right" type="string" value="/home/jaburns/dotfiles/tools/divvy next-monitor"/>
-      <property name="&lt;Alt&gt;&lt;Super&gt;Left" type="string" value="/home/jaburns/dotfiles/tools/divvy next-monitor"/>
-      <property name="&lt;Super&gt;backslash" type="string" value="flameshot gui"/>
+      <property name="&lt;Alt&gt;&lt;Super&gt;Right" type="string" value="/home/jaburns/dotfiles/tools/divvy.py next-monitor"/>
+      <property name="&lt;Alt&gt;&lt;Super&gt;Left" type="string" value="/home/jaburns/dotfiles/tools/divvy.py next-monitor"/>
       <property name="&lt;Super&gt;d" type="string" value="thunar /home/jaburns/Desktop"/>
       <property name="&lt;Super&gt;c" type="string" value="exo-open --launch WebBrowser"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;Down" type="string" value="/home/jaburns/dotfiles/tools/minimize_bg"/>
       <property name="&lt;Super&gt;m" type="string" value="xfce4-find-cursor"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;backslash" type="string" value="xfce4-screenshooter -w"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="xkill"/>
-      <property name="&lt;Alt&gt;grave" type="string" value="/home/jaburns/dotfiles/tools/divvy 6"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;Delete" type="string" value="/home/jaburns/dotfiles/tools/divvy 0"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;End" type="string" value="/home/jaburns/dotfiles/tools/divvy 1"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;Page_Down" type="string" value="/home/jaburns/dotfiles/tools/divvy 2"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;Insert" type="string" value="/home/jaburns/dotfiles/tools/divvy 3"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;Home" type="string" value="/home/jaburns/dotfiles/tools/divvy 4"/>
-      <property name="&lt;Primary&gt;&lt;Super&gt;Page_Up" type="string" value="/home/jaburns/dotfiles/tools/divvy 5"/>
+      <property name="&lt;Alt&gt;grave" type="string" value="/home/jaburns/dotfiles/tools/divvy.py 6"/>
+      <property name="&lt;Alt&gt;backslash" type="string" value="flameshot gui"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;j" type="string" value="/home/jaburns/dotfiles/tools/divvy.py 0"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;k" type="string" value="/home/jaburns/dotfiles/tools/divvy.py 1"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;l" type="string" value="/home/jaburns/dotfiles/tools/divvy.py 2"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;u" type="string" value="/home/jaburns/dotfiles/tools/divvy.py 3"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;i" type="string" value="/home/jaburns/dotfiles/tools/divvy.py 4"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;o" type="string" value="/home/jaburns/dotfiles/tools/divvy.py 5"/>
+      <property name="&lt;Primary&gt;&lt;Super&gt;Down" type="string" value="/home/jaburns/dotfiles/tools/divvy.py minimize-bg"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
