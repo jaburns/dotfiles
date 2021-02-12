@@ -21,13 +21,16 @@ LAYOUTS = [
     [[ 3.0/10, 1.0/6, 4.0/10, 4.0/6 ]],
 ]
 
+g_monitor_whxys = []
+
 def run(cmd):
     lines = subprocess.check_output(cmd, shell=True).decode('utf-8').strip().split('\n')
     return [re.sub(r'\s+', ' ', l.strip()).split(' ') for l in lines]
 
-def get_monitor_whxys():
+def get_global_monitor_whxys():
+    global g_monitor_whxys
     vals = run(r"xrandr | grep ' connected' | grep -v 'connected (' | sed 's/primary //g'")
-    return [[int(x) for x in re.sub(r'[x+]', ' ', val[2]).split(' ')] for val in vals]
+    g_monitor_whxys = [[int(x) for x in re.sub(r'[x+]', ' ', val[2]).split(' ')] for val in vals]
 
 def get_active_win_id():
     return int(re.sub(',', '', run('xprop -root _NET_ACTIVE_WINDOW')[0][4]), 16)
@@ -38,12 +41,25 @@ def get_vdesktop_id(win_id):
 def get_all_win_ids():
     return [int(x[0], 16) for x in run("wmctrl -l")]
 
+def is_window_minimized(win_id):
+    return run('xwininfo -id '+hex(win_id)+' | grep "Map State:"')[0][2] == 'IsUnMapped'
+
 def minimize_window(win_id):
     run('xdotool windowminimize ' + hex(win_id))
 
-def get_monitor_index_for_point(monitor_whxys, x, y):
-    for i in range(len(monitor_whxys)):
-        mw, mh, mx, my = monitor_whxys[i]
+def get_monitor_index_for_point(x, y):
+    for i in range(len(g_monitor_whxys)):
+        mw, mh, mx, my = g_monitor_whxys[i]
+        if x >= mx and x <= mx + mw and y >= my and y <= my + mh:
+            return i
+    return 0
+
+def get_monitor_index_for_win_id(win_id):
+    dims = get_win_dimensions(win_id)
+    x = dims['cx']
+    y = dims['cy']
+    for i in range(len(g_monitor_whxys)):
+        mw, mh, mx, my = g_monitor_whxys[i]
         if x >= mx and x <= mx + mw and y >= my and y <= my + mh:
             return i
     return 0
@@ -61,6 +77,9 @@ def get_win_dimensions(id):
     cy = oy + oh / 2
     return { "woff":woff, "hoff":hoff, "ox":ox, "oy":oy, "ow":ow, "oh":oh, "cx":cx, "cy":cy }
 
+def convert_dims_to_layout(dims, mw, mh, mx, my):
+    return [ float(dims['ox']-mx)/mw, float(dims['oy']-my)/mh, float(dims['ow'])/mw, float(dims['oh'])/mh ]
+
 def win_dimensions_intersect(dims0, dims1, padding):
     l0 = dims0['ox'] + padding
     r0 = dims0['ox'] + dims0['ow'] - padding
@@ -77,31 +96,65 @@ def win_dimensions_intersect(dims0, dims1, padding):
 def move_window(id, xywh_args):
     run(r'wmctrl -i -r "'+hex(id)+'" -e "0,'+','.join([str(x) for x in xywh_args])+'"')
 
+def get_visible_other_windows(this_win_id):
+    this_vd_id = get_vdesktop_id(this_win_id)
+    this_mon_index = get_monitor_index_for_win_id(this_win_id)
+    ret = []
+    for win_id in get_all_win_ids():
+        if win_id == this_win_id or get_vdesktop_id(win_id) != this_vd_id or is_window_minimized(win_id):
+            continue
+        if this_mon_index != get_monitor_index_for_win_id(win_id):
+            continue
+        ret.append(win_id)
+    return ret
+
+def get_fill_layout(this_layout, other_layout):
+    if other_layout[0] < this_layout[0]:
+        return [0, 0, 1.0 - this_layout[2], 1]
+    else:
+        return [this_layout[2], 0, 1.0 - this_layout[2], 1]
+
 def run_minimize_bg():
     this_win_id = get_active_win_id()
-    this_vd_id = get_vdesktop_id(this_win_id)
     this_dims = get_win_dimensions(this_win_id)
-
-    for win_id in get_all_win_ids():
-        if win_id == this_win_id or get_vdesktop_id(win_id) != this_vd_id:
-            continue
+    for win_id in get_visible_other_windows(this_win_id):
         if win_dimensions_intersect(this_dims, get_win_dimensions(win_id), MINIMIZE_BG_PAD):
             minimize_window(win_id)
 
-def run_snap_or_next_monitor(maybe_new_index, new_subindex):
-    win_id = get_active_win_id()
-    dims = get_win_dimensions(win_id)
+def run_fill_rest():
+    this_win_id = get_active_win_id()
+    others = get_visible_other_windows(this_win_id)
+    if len(others) != 1:
+        return
 
-    monitor_whxys = get_monitor_whxys()
-    monitor_index = get_monitor_index_for_point(monitor_whxys, dims['cx'], dims['cy'])
-    if maybe_new_index == None: monitor_index = (monitor_index + 1) % len(monitor_whxys)
-    mw, mh, mx, my = monitor_whxys[monitor_index]
+    this_dims = get_win_dimensions(this_win_id)
+    other_dims = get_win_dimensions(others[0])
+
+    monitor_index = get_monitor_index_for_point(this_dims['cx'], this_dims['cy'])
+    mw, mh, mx, my = g_monitor_whxys[monitor_index]
     mh -= TASK_BAR_HEIGHT
 
-    if maybe_new_index == None:
-        layout = [ float(dims['ox']-mx)/mw, float(dims['oy']-my)/mh, float(dims['ow'])/mw, float(dims['oh'])/mh ]
+    this_layout = convert_dims_to_layout(this_dims, mw, mh, mx, my)
+    other_layout = convert_dims_to_layout(other_dims, mw, mh, mx, my)
+    layout = get_fill_layout(this_layout, other_layout)
+
+    run_layout_or_next_monitor(others[0], layout)
+
+def run_layout_or_next_monitor(win_id, maybe_layout):
+    dims = get_win_dimensions(win_id)
+
+    monitor_index = get_monitor_index_for_point(dims['cx'], dims['cy'])
+
+    if maybe_layout == None:
+        monitor_index = (monitor_index + 1) % len(g_monitor_whxys)
+
+    mw, mh, mx, my = g_monitor_whxys[monitor_index]
+    mh -= TASK_BAR_HEIGHT
+
+    if maybe_layout == None:
+        layout = convert_dims_to_layout(dims, mw, mh, mx, my)
     else:
-        layout = LAYOUTS[maybe_new_index][new_subindex % len(LAYOUTS[maybe_new_index])]
+        layout = maybe_layout
 
     nx = int( mx + layout[0] * mw )
     ny = int( my + layout[1] * mh )
@@ -110,7 +163,7 @@ def run_snap_or_next_monitor(maybe_new_index, new_subindex):
     move_window(win_id, [nx, ny, nw, nh])
 
 def run_next_monitor():
-    run_snap_or_next_monitor(None, 0)
+    run_layout_or_next_monitor(get_active_win_id(), None)
 
 def run_snap(new_index):
     new_time = time.time()
@@ -135,13 +188,18 @@ def run_snap(new_index):
     with open('/tmp/divvy.state', 'w') as writer:
         writer.write(','.join([ str(new_time), str(new_index), str(new_subindex) ]))
 
-    run_snap_or_next_monitor(new_index, new_subindex)
+    layout = LAYOUTS[new_index][new_subindex % len(LAYOUTS[new_index])]
+
+    run_layout_or_next_monitor(get_active_win_id(), layout)
 
 def main():
+    get_global_monitor_whxys()
     if sys.argv[1] == 'next-monitor':
         run_next_monitor()
     elif sys.argv[1] == 'minimize-bg':
         run_minimize_bg()
+    elif sys.argv[1] == 'fill-rest':
+        run_fill_rest()
     else:
         run_snap(int(sys.argv[1]))
 
