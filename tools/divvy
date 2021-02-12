@@ -43,7 +43,7 @@ def minimize_window(win_id):
 
 def get_monitor_index_for_point(monitor_whxys, x, y):
     for i in range(len(monitor_whxys)):
-        mw, mh, mx, my = monitor_whxys[i];
+        mw, mh, mx, my = monitor_whxys[i]
         if x >= mx and x <= mx + mw and y >= my and y <= my + mh:
             return i
     return 0
