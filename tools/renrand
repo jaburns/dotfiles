@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+SUFF="$(printf "$1" | sed 's/.*\.//')"
+mv "$1" "$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1).$SUFF"

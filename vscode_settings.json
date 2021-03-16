@@ -26,7 +26,14 @@
         }
     ],
     "vim.normalModeKeyBindings": [
-        {   "before": ["<c-j>"],
+        {
+            "before": ["j"],
+            "after": ["g","j"]
+        },{
+            "before": ["k"],
+            "after": ["g","k"]
+        },{
+            "before": ["<c-j>"],
             "after": ["1","5","j"]
         },{
             "before": ["<c-k>"],
