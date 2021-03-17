@@ -231,9 +231,9 @@ complete -F _makefile_complete make
 
 ps1_error() {
     if [[ "$1" -eq 0 ]]; then
-        echo -n '\[\033[0;32m\]'
+        echo -n '\[\033[0;32m\]# '
     else
-        echo -n '\[\033[0;31m\]'
+        echo -n '\[\033[0;31m\]# '
         echo -n "$1 "
     fi;
 }
@@ -258,7 +258,7 @@ ps1_render() {
 
     # Git branch and newline/prompt
     echo    "$(ps1_git_branch)"
-    echo -n '\[\033[0;36m\]$) \[\033[0m\]'
+    echo -n '\[\033[0;36m\]:; \[\033[0m\]'
 }
 export PROMPT_COMMAND='PS1="$(ps1_render $?)"'
 
