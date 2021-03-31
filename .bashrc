@@ -27,6 +27,8 @@ export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cargo/bin
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
+# cd "$(dirname "${BASH_SOURCE[0]}")" # For reference
+
 # ----- Simple commands -------------------------------------------------------
 
 # Stop and remove all running containers
