@@ -1,4 +1,11 @@
 {
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/target/*/**": true,
+        "**/mysql-data/*/**": true
+    },
     "workbench.colorTheme": "One Monokai 80s",
     "workbench.colorCustomizations": {
         "focusBorder": "#333842",
