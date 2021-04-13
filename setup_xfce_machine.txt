@@ -15,9 +15,10 @@
 - Open Terminal, switch colors to Presets: Dark Pastels
 - Create ssh key
 - Add ssh key to github
+- Install OBS, with required packages/repository
 - Shell:
     cd ~
-    sudo apt install vim-gtk tmux git keepassx flameshot vlc wmctrl arc-theme redshift-gtk
+    sudo apt install vim-gtk tmux git keepassx flameshot vlc wmctrl arc-theme redshift-gtk easystroke xdotool
     git clone git@github.com:jaburns/dotfiles
     cd dotfiles
     ./manage install
