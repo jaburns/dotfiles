@@ -6,7 +6,7 @@
         "**/target/*/**": true,
         "**/mysql-data/*/**": true
     },
-    "workbench.colorTheme": "One Monokai 80s",
+    "workbench.colorTheme": "One Monokai 80s Plus",
     "workbench.colorCustomizations": {
         "focusBorder": "#333842",
         "editorSuggestWidget.border": "#282c34",
