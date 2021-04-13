@@ -49,6 +49,7 @@
 - Optionally disable crash notification (if popup happens on boot)
     sudo rm /var/crash/*
     sudo vim /etc/default/apport # set enabled=0
+- To automount USB drives: https://askubuntu.com/questions/683034/how-to-automatically-mount-usb-flash-drive-at-startup
 
 Node.js
 - Install node 12 lts:
