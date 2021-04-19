@@ -108,6 +108,7 @@
     "editor.tabSize": 4,
     "editor.detectIndentation": true,
     "rust-analyzer.lens.enable": false,
+    "rust-analyzer.updates.askBeforeDownload": false,
     "rust-analyzer.inlayHints.parameterHints": false,
     "rust-analyzer.inlayHints.enable": false,
     "omnisharp.useGlobalMono": "always",
