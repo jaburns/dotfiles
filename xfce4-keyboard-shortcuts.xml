@@ -51,7 +51,6 @@
       <property name="&lt;Super&gt;t" type="string" value="exo-open --launch TerminalEmulator"/>
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="override" type="bool" value="true"/>
-      <property name="&lt;Super&gt;space" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;Right" type="string" value="/home/jaburns/dotfiles/tools/divvy.py next-monitor"/>
       <property name="&lt;Alt&gt;&lt;Super&gt;Left" type="string" value="/home/jaburns/dotfiles/tools/divvy.py next-monitor"/>
