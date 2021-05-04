@@ -126,4 +126,5 @@
         "editor.formatOnSave": true
     },
     "glassit-linux.opacity": 90,
+    "rust-analyzer.checkOnSave.command": "clippy",
 }
