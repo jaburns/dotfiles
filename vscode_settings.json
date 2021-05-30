@@ -6,6 +6,20 @@
         "**/target/*/**": true,
         "**/msdf-atlas-gen/*/**": true
     },
+    "files.exclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/target/*/**": true,
+        "**/msdf-atlas-gen/*/**": true
+    },
+    "search.exclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/target/*/**": true,
+        "**/msdf-atlas-gen/*/**": true
+    },
     "workbench.colorTheme": "One Monokai 80s",
     "workbench.colorCustomizations": {
         "focusBorder": "#333842",
