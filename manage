@@ -38,6 +38,7 @@ copy_file "$REPO_DIR/redshift.conf" "$HOME/.config/redshift.conf"
 copy_file "$REPO_DIR/init.vim" "$HOME/.config/nvim/init.vim"
 copy_file "$REPO_DIR/simple-dark.vim" "$HOME/.config/nvim/colors/simple-dark.vim"
 
+
 #########################################
 # vscode settings, unused/disabled
 #########################################
