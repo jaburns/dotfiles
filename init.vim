@@ -5,6 +5,7 @@
 " - For Rust, build and install rust-analyzer to PATH: https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
 " - For TS/JS: npm install -g typescript typescript-language-server
 " - For C#: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#omnisharp
+"   (Download omnisharp binaries to $HOME/source/omnisharp-bin, so that $HOME/source/omnisharp-bin/run exists)
 " -------------------- Plugins --------------------
 
 call plug#begin('~/.config/nvim/plugged')
