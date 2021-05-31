@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-VSCODE_LIGHT_THEME='Kai Light'
-VSCODE_DARK_THEME='One Monokai 80s'
-
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 REPO_DIR="$( pwd )"
 
@@ -26,50 +23,55 @@ copy_home() {
     copy_file "$REPO_DIR/$1" "$HOME/$1"
 }
 
-vscode_light_to_dark() {
-    sed "s/$VSCODE_LIGHT_THEME/$VSCODE_DARK_THEME/" "$1" > /tmp/sedtmp
-    mv /tmp/sedtmp "$1"
-}
-
-vscode_dark_to_light() {
-    sed "s/$VSCODE_DARK_THEME/$VSCODE_LIGHT_THEME/" "$1" > /tmp/sedtmp
-    mv /tmp/sedtmp "$1"
-}
-
 copy_home .bashrc
-copy_home .vimrc
 copy_home .gitignore_global
 copy_home .gitconfig
 copy_home .tmux.conf
 copy_file "$REPO_DIR/redshift.conf" "$HOME/.config/redshift.conf"
 
-vscode_loc=''
-if       [[ -d '/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
-    vscode_loc='/c/Users/jaburns/AppData/Roaming/Code/User'
-elif     [[ -d '/Users/jaburns/Library/Application Support/Code/User' ]]; then
-    vscode_loc='/Users/jaburns/Library/Application Support/Code/User'
-elif     [[ -d '/home/jaburns/.config/Code/User' ]]; then
-    vscode_loc='/home/jaburns/.config/Code/User'
-else
-    echo 'Couldnt find vscode settings dir'
-fi
-
-if [[ ! -z "$vscode_loc" ]]; then
-    copy_file "$REPO_DIR/vscode_settings.json" "$vscode_loc/settings.json"
-    copy_file "$REPO_DIR/vscode_keybindings.json" "$vscode_loc/keybindings.json"
-fi
-
-# "Kai Light"
-# "One Monokai 80s"
-
-if [[ "$MODE" == 'install' ]]; then
-    [[ "$1" == 'light' ]] && vscode_dark_to_light "$vscode_loc/settings.json"
-else
-    vscode_light_to_dark "$REPO_DIR/vscode_settings.json"
-fi
-
-[[ -d '/home/jaburns/.config/xfce4' ]] && \
+[[ -d "$HOME/.config/xfce4" ]] && \
     copy_file 'xfce4-keyboard-shortcuts.xml' \
         "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml"
 
-[[ -d '/home/jaburns/.config' ]] && copy_file 'redshift.conf' "$HOME/.config/redshift.conf"
+[[ "$MODE" == 'install' ]] && mkdir -p "$HOME/.config/nvim/colors"
+
+copy_file "$REPO_DIR/init.vim" "$HOME/.config/nvim/init.vim"
+copy_file "$REPO_DIR/simple-dark.vim" "$HOME/.config/nvim/colors/simple-dark.vim"
+
+#########################################
+# vscode settings, unused/disabled
+#########################################
+# vscode_light_to_dark() {
+#     sed "s/$VSCODE_LIGHT_THEME/$VSCODE_DARK_THEME/" "$1" > /tmp/sedtmp
+#     mv /tmp/sedtmp "$1"
+# }
+# 
+# vscode_dark_to_light() {
+#     sed "s/$VSCODE_DARK_THEME/$VSCODE_LIGHT_THEME/" "$1" > /tmp/sedtmp
+#     mv /tmp/sedtmp "$1"
+# }
+# 
+# VSCODE_LIGHT_THEME='Kai Light'
+# VSCODE_DARK_THEME='One Monokai 80s'
+# 
+# vscode_loc=''
+# if       [[ -d '/c/Users/jaburns/AppData/Roaming/Code/User' ]]; then
+#     vscode_loc='/c/Users/jaburns/AppData/Roaming/Code/User'
+# elif     [[ -d '/Users/jaburns/Library/Application Support/Code/User' ]]; then
+#     vscode_loc='/Users/jaburns/Library/Application Support/Code/User'
+# elif     [[ -d '/home/jaburns/.config/Code/User' ]]; then
+#     vscode_loc='/home/jaburns/.config/Code/User'
+# else
+#     echo 'Couldnt find vscode settings dir'
+# fi
+# 
+# if [[ ! -z "$vscode_loc" ]]; then
+#     copy_file "$REPO_DIR/vscode_settings.json" "$vscode_loc/settings.json"
+#     copy_file "$REPO_DIR/vscode_keybindings.json" "$vscode_loc/keybindings.json"
+# fi
+# 
+# if [[ "$MODE" == 'install' ]]; then
+#     [[ "$1" == 'light' ]] && vscode_dark_to_light "$vscode_loc/settings.json"
+# else
+#     vscode_light_to_dark "$REPO_DIR/vscode_settings.json"
+# fi
