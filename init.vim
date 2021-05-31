@@ -152,10 +152,17 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 imap <Tab> <Plug>(completion_smart_tab)
 imap <S-Tab> <Plug>(completion_smart_s_tab)
 
+" -------------------- Colors --------------------
+
+colorscheme simple-dark
+hi Normal ctermbg=NONE
+hi Pmenu ctermbg=black ctermfg=white
+
+highlight Tabs ctermbg=235 guibg=#000000
+match Tabs "\t"
+
 " ----------------------------------------------------
-" Write files when focus is lost and save/close all 
-" hidden buffers with shortcut
-set autowrite
+" Shortcut to write all buffers and close backgrounded
 
 function! DeleteHiddenBuffers()
     let tpbl=[]
@@ -166,15 +173,6 @@ function! DeleteHiddenBuffers()
 endfunction
 
 nnoremap <leader>w :wa<cr>:call DeleteHiddenBuffers()<cr>
-
-" -------------------- Colors --------------------
-
-colorscheme simple-dark
-hi Normal ctermbg=NONE
-hi Pmenu ctermbg=black ctermfg=white
-
-highlight Tabs ctermbg=235 guibg=#000000
-match Tabs "\t"
 
 " -------------------- Leader key shortcuts --------------------
 
