@@ -229,6 +229,7 @@ let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_git_hl = 1
 let g:nvim_tree_highlight_opened_files = 1
 let g:nvim_tree_lsp_diagnostics = 1
+let g:nvim_tree_tab_open = 1
 
 " Auto-format *.rs (rust) files prior to saving them
 autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
