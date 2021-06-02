@@ -161,8 +161,7 @@ hi Pmenu ctermbg=black ctermfg=white
 highlight Tabs ctermbg=235 guibg=#000000
 match Tabs "\t"
 
-" ----------------------------------------------------
-" Shortcut to write all buffers and close backgrounded
+" -------------------- Leader key shortcuts --------------------
 
 function! DeleteHiddenBuffers()
     let tpbl=[]
@@ -172,33 +171,37 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 
-nnoremap <leader>w :wa<cr>:call DeleteHiddenBuffers()<cr>
+function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen 30
+    else
+        cclose
+    endif
+endfunction
 
-" -------------------- Leader key shortcuts --------------------
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+nnoremap <c-p> :FZF<CR>
 
 nnoremap <leader><cr> :nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>v :e $MYVIMRC<cr>
-nnoremap <leader>q :copen 30<cr>
-nnoremap <leader>Q :cclose<cr>
-
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-nnoremap <c-p> :FZF<CR>
-nnoremap <leader>` :NvimTreeOpen<cr>
-
+nnoremap <leader>q :call ToggleQuickFix()<cr>
+nnoremap <leader>w :wa<cr>:call DeleteHiddenBuffers()<cr>
+nnoremap <leader>t :NvimTreeOpen<cr>
 nnoremap <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>e <cmd>lua vim.jaburns.update_diagnostics_qflist()<CR>:copen<CR>
+nnoremap <leader>o <cmd>lua vim.jaburns.update_diagnostics_unique_files_qflist()<CR>:copen<CR>
 nnoremap <leader>i <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>I <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>s <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>r <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>f <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <leader>F <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <leader>t <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>x <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-nnoremap <leader>n <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <leader>p <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <leader>g <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <leader>j <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <leader>k <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+" nnoremap <leader>? <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <leader>? <cmd>lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <leader>? <cmd>lua vim.lsp.buf.formatting()<CR>
+" nnoremap <leader>? <cmd>lua vim.lsp.buf.type_definition()<CR>
 
 imap <silent> <c-space> <Plug>(completion_trigger)
 
@@ -248,7 +251,7 @@ nvim_lsp.rust_analyzer.setup({
     settings = {
         ["rust-analyzer"] = {
             diagnostics = {
-                disabled = { "missing-unsafe" }
+                disabled = { "missing-unsafe", "incorrect-ident-case" }
             },
             cargo = {
                 allFeatures = true,
@@ -281,23 +284,40 @@ do
     local method = "textDocument/publishDiagnostics"
     local default_handler = vim.lsp.handlers[method]
     local qflist = {}
+    local ufqflist = {}
     vim.lsp.handlers[method] = function(err, method, result, client_id, bufnr, config)
         default_handler(err, method, result, client_id, bufnr, config)
         local diagnostics = vim.lsp.diagnostic.get_all()
         qflist = {}
+        ufqflist = {}
         for bufnr, diagnostic in pairs(diagnostics) do
+            first = true
             for _, d in ipairs(diagnostic) do
                 d.bufnr = bufnr
                 d.lnum = d.range.start.line + 1
                 d.col = d.range.start.character + 1
                 d.text = d.message
                 table.insert(qflist, d)
+
+                if first then
+                    table.insert(ufqflist, {
+                        bufnr = d.bufnr,
+                        lnum = d.lnum,
+                        col = d.col,
+                        text = " ...  " .. d.text,
+                    })
+                    first = false
+                end
             end
         end
     end
     vim.jaburns = {
         update_diagnostics_qflist = function()
+            -- print(vim.inspect(qflist))
             vim.lsp.util.set_qflist(qflist)
+        end,
+        update_diagnostics_unique_files_qflist = function()
+            vim.lsp.util.set_qflist(ufqflist)
         end
     }
 end
