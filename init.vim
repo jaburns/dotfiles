@@ -65,24 +65,12 @@ set nowrap              " No line wrap by default
 set textwidth=0         " Turn off automatic newline insertion
 set wrapmargin=0        "  "
 set signcolumn=yes      " Always show error/info column on left
+set clipboard^=unnamed,unnamedplus " Use system clipboard as default
+set pastetoggle=<F7>    " F7 for paste mode which doesnt insert tabs and junk
 
-set laststatus=2
-set statusline=
-set statusline+=\ %{getcwd()}\ 
-set statusline+=
-set statusline+=%#CursorColumn#
-set statusline+=\ %f\ 
-set statusline+=%=
-set statusline+=\ %l:%c\ %y\ 
-
+" Space as leader
 let mapleader=' '
 
-" Use system clipboard as default
-set clipboard^=unnamed,unnamedplus
-
-" Toggles vim's paste mode; when we want to paste something into vim from a
-" different application, turning on paste mode prevents extra whitespace.
-set pastetoggle=<F7>
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
@@ -148,17 +136,30 @@ nnoremap <c-w>. 2<c-w>>
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" use <Tab> as trigger keys
+" Use <Tab> as trigger keys for completion
 imap <Tab> <Plug>(completion_smart_tab)
 imap <S-Tab> <Plug>(completion_smart_s_tab)
 
+" -------------------- Status line --------------------
+
+set laststatus=2
+set statusline=
+set statusline+=\ %{getcwd()}\ 
+set statusline+=
+set statusline+=%#CursorColumn#
+set statusline+=\ %f\ 
+set statusline+=%=
+set statusline+=\ %l:%c\ %y\ 
+
 " -------------------- Colors --------------------
 
+set termguicolors
 colorscheme simple-dark
-hi Normal ctermbg=NONE
-hi Pmenu ctermbg=black ctermfg=white
+hi Normal guibg=NONE
+hi Pmenu guibg=black guifg=white
+hi Search guibg=black
 
-highlight Tabs ctermbg=235 guibg=#000000
+highlight Tabs guibg=#000000
 match Tabs "\t"
 
 " -------------------- Leader key shortcuts --------------------
@@ -205,8 +206,10 @@ nnoremap <leader>k <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 
 imap <silent> <c-space> <Plug>(completion_trigger)
 
-" -------------------- LSP configuration --------------------
-"
+" -------------------- LSP + plugin configuration --------------------
+
+let g:nvim_tree_lsp_diagnostics = 1
+
 " Auto-format *.rs (rust) files prior to saving them
 autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
 
