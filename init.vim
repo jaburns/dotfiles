@@ -13,6 +13,9 @@ call plug#begin('~/.config/nvim/plugged')
 " Collection of common configurations for the Nvim LSP client
 Plug 'neovim/nvim-lspconfig'
 
+" Auto reload externally modified files
+Plug 'djoshea/vim-autoread'
+
 " Extensions to built-in LSP, for example, providing type inlay hints
 " Plug 'nvim-lua/lsp_extensions.nvim'
 
@@ -67,6 +70,8 @@ set wrapmargin=0        "  "
 set signcolumn=yes      " Always show error/info column on left
 set clipboard^=unnamed,unnamedplus " Use system clipboard as default
 set pastetoggle=<F7>    " F7 for paste mode which doesnt insert tabs and junk
+set ignorecase          " Case insensitive search for all lowercase unless \C provided
+set smartcase           "  "
 
 " Space as leader
 let mapleader=' '
@@ -154,13 +159,19 @@ set statusline+=\ %l:%c\ %y\
 " -------------------- Colors --------------------
 
 set termguicolors
+
 colorscheme simple-dark
+
 hi Normal guibg=NONE
 hi Pmenu guibg=black guifg=white
-hi Search guibg=black
+hi Search guibg=#440044
 
-highlight Tabs guibg=#000000
+highlight Tabs guibg=#222222
 match Tabs "\t"
+
+hi NvimTreeFolderName guifg=#7399D8
+hi NvimTreeOpenedFolderName guifg=#7399D8
+hi NvimTreeEmptyFolderName guifg=#7399D8
 
 " -------------------- Leader key shortcuts --------------------
 
@@ -188,8 +199,10 @@ nnoremap <leader><leader> <c-^>
 nnoremap <leader>v :e $MYVIMRC<cr>
 nnoremap <leader>q :call ToggleQuickFix()<cr>
 nnoremap <leader>w :wa<cr>:call DeleteHiddenBuffers()<cr>
-nnoremap <leader>t :NvimTreeOpen<cr>
+nnoremap <leader>t :NvimTreeToggle<cr>
+nnoremap <leader>T :NvimTreeRefresh<CR>
 nnoremap <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap        gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>e <cmd>lua vim.jaburns.update_diagnostics_qflist()<CR>:copen<CR>
 nnoremap <leader>o <cmd>lua vim.jaburns.update_diagnostics_unique_files_qflist()<CR>:copen<CR>
 nnoremap <leader>i <cmd>lua vim.lsp.buf.hover()<CR>
@@ -208,6 +221,13 @@ imap <silent> <c-space> <Plug>(completion_trigger)
 
 " -------------------- LSP + plugin configuration --------------------
 
+let g:nvim_tree_ignore = [ '.git', 'node_modules', 'target' ]
+let g:nvim_tree_gitignore = 1
+let g:nvim_tree_auto_close = 1
+let g:nvim_tree_follow = 1
+let g:nvim_tree_indent_markers = 1
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_highlight_opened_files = 1
 let g:nvim_tree_lsp_diagnostics = 1
 
 " Auto-format *.rs (rust) files prior to saving them
