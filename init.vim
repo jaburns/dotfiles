@@ -39,6 +39,10 @@ Plug 'tpope/vim-sleuth'
 " GLSL syntax highlighting
 Plug 'tikhomirov/vim-glsl'
 
+" Diagnostics window
+" Plug 'folke/trouble.nvim'
+Plug 'jaburns/trouble.nvim'
+
 call plug#end()
 
 " -------------------- Basic configuration --------------------
@@ -183,28 +187,31 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 
-function! ToggleQuickFix()
-    if empty(filter(getwininfo(), 'v:val.quickfix'))
-        copen 30
-    else
-        cclose
-    endif
-endfunction
+" function! ToggleQuickFix()
+"     if empty(filter(getwininfo(), 'v:val.quickfix'))
+"         copen 30
+"     else
+"         cclose
+"     endif
+" endfunction
 
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 nnoremap <c-p> :FZF<CR>
 
-nnoremap <leader><cr> :nohlsearch<cr>
+nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
-nnoremap <leader>v :e $MYVIMRC<cr>
-nnoremap <leader>q :call ToggleQuickFix()<cr>
-nnoremap <leader>w :wa<cr>:call DeleteHiddenBuffers()<cr>
-nnoremap <leader>t :NvimTreeToggle<cr>
-nnoremap <leader>T :NvimTreeRefresh<CR>
+nnoremap <leader>p viw"_dP
+nnoremap <leader>v <cmd>e $MYVIMRC<cr>
+nnoremap <leader>o <cmd>copen 30<cr>
+nnoremap <leader>y :let @+ = expand("%:p")<cr>
+nnoremap <leader>q <cmd>cclose<cr><cmd>TroubleClose<cr>
+nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
+nnoremap <leader>t <cmd>NvimTreeToggle<cr>
+nnoremap <leader>T <cmd>NvimTreeRefresh<CR>
+nnoremap <leader>e <cmd>Trouble lsp_workspace_diagnostics<cr>
+nnoremap <leader>E <cmd>Trouble lsp_document_diagnostics<cr>
 nnoremap <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap        gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>e <cmd>lua vim.jaburns.update_diagnostics_qflist()<CR>:copen<CR>
-nnoremap <leader>o <cmd>lua vim.jaburns.update_diagnostics_unique_files_qflist()<CR>:copen<CR>
 nnoremap <leader>i <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>r <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>f <cmd>lua vim.lsp.buf.references()<CR>
@@ -221,12 +228,14 @@ imap <silent> <c-space> <Plug>(completion_trigger)
 
 " -------------------- LSP + plugin configuration --------------------
 
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+
 let g:nvim_tree_ignore = [ '.git', 'node_modules', 'target' ]
 let g:nvim_tree_gitignore = 1
 let g:nvim_tree_auto_close = 1
 let g:nvim_tree_follow = 1
 let g:nvim_tree_indent_markers = 1
-let g:nvim_tree_git_hl = 1
+" let g:nvim_tree_git_hl = 1
 let g:nvim_tree_highlight_opened_files = 1
 let g:nvim_tree_lsp_diagnostics = 1
 let g:nvim_tree_tab_open = 1
@@ -302,48 +311,29 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
--- Hack to print all diagnostics to the quickfix list, bind to vim.jaburns.update_diagnostics_qflist()
--- https://github.com/neovim/nvim-lspconfig/issues/69
-do
-    local method = "textDocument/publishDiagnostics"
-    local default_handler = vim.lsp.handlers[method]
-    local qflist = {}
-    local ufqflist = {}
-    vim.lsp.handlers[method] = function(err, method, result, client_id, bufnr, config)
-        default_handler(err, method, result, client_id, bufnr, config)
-        local diagnostics = vim.lsp.diagnostic.get_all()
-        qflist = {}
-        ufqflist = {}
-        for bufnr, diagnostic in pairs(diagnostics) do
-            first = true
-            for _, d in ipairs(diagnostic) do
-                d.bufnr = bufnr
-                d.lnum = d.range.start.line + 1
-                d.col = d.range.start.character + 1
-                d.text = d.message
-                table.insert(qflist, d)
-
-                if first then
-                    table.insert(ufqflist, {
-                        bufnr = d.bufnr,
-                        lnum = d.lnum,
-                        col = d.col,
-                        text = " ...  " .. d.text,
-                    })
-                    first = false
-                end
-            end
-        end
-    end
-    vim.jaburns = {
-        update_diagnostics_qflist = function()
-            -- print(vim.inspect(qflist))
-            vim.lsp.util.set_qflist(qflist)
-        end,
-        update_diagnostics_unique_files_qflist = function()
-            vim.lsp.util.set_qflist(ufqflist)
-        end
-    }
-end
+-- Configure diagnostics window
+require("trouble").setup {
+    height = 30,
+    auto_preview = false,
+    action_keys = { -- key mappings for actions in the trouble list
+--     close = "q", -- close the list
+--     cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+--     refresh = "r", -- manually refresh
+--     jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
+--     open_split = { "<c-x>" }, -- open buffer in new split
+--     open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+--     open_tab = { "<c-t>" }, -- open buffer in new tab
+--     jump_close = {"o"}, -- jump to the diagnostic and close the list
+       toggle_mode = "e", -- toggle between "workspace" and "document" diagnostics mode
+--     toggle_preview = "P", -- toggle auto_preview
+       hover = "i", -- opens a small poup with the full multiline message
+--     preview = "p", -- preview the diagnostic location
+       close_folds = "a", -- close all folds
+       open_folds = "A", -- open all folds
+       toggle_fold = "f" -- toggle fold of current file
+--     previous = "k", -- preview item
+--     next = "j" -- next item
+    },
+}
 
 EOF
