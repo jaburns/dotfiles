@@ -85,8 +85,11 @@ agsed() {
         echo 'Supply first param only to run ag search without replace'
         return
     fi
-    [[ -z $2 ]] && ag "$1"
-    ag "$1" | cut -d: -f1 | xargs sed -i '' -e "$2"
+    if [[ -z $2 ]]; then
+        ag "$1"
+    else
+        ag "$1" | cut -d: -f1 | xargs sed -i -e "$2"
+    fi
 }
 
 # ----- set default output for ls; add auto ls after cd -----------------------

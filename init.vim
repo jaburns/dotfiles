@@ -164,11 +164,11 @@ set statusline+=\ %l:%c\ %y\
 
 set termguicolors
 
-colorscheme simple-dark
+colorscheme corvine
 
 hi Normal guibg=NONE
-hi Pmenu guibg=black guifg=white
-hi Search guibg=#440044
+" hi Pmenu guibg=black guifg=white
+" hi Search guibg=#440044
 
 highlight Tabs guibg=#222222
 match Tabs "\t"
@@ -230,7 +230,7 @@ imap <silent> <c-space> <Plug>(completion_trigger)
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 
-let g:nvim_tree_ignore = [ '.git', 'node_modules', 'target' ]
+let g:nvim_tree_ignore = [ '.git', 'node_modules', 'target', '*.meta' ]
 let g:nvim_tree_gitignore = 1
 let g:nvim_tree_auto_close = 1
 let g:nvim_tree_follow = 1
