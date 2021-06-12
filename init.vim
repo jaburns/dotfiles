@@ -30,6 +30,9 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" Fuzzy find in the quickfix list
+Plug 'fszymanski/fzf-quickfix', { 'on': 'Quickfix' }
+
 " Auto-determine indentation rules
 Plug 'tpope/vim-sleuth'
 
@@ -78,7 +81,6 @@ set smartcase           "  "
 
 " Space as leader
 let mapleader=' '
-
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
@@ -151,6 +153,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 imap <Tab> <Plug>(completion_smart_tab)
 imap <S-Tab> <Plug>(completion_smart_s_tab)
 
+tnoremap <c-x> <c-\><c-n>
+
 " -------------------- Status line --------------------
 
 set laststatus=2
@@ -168,9 +172,9 @@ set termguicolors
 
 colorscheme corvine
 
-hi Normal guibg=NONE
-" hi Pmenu guibg=black guifg=white
-" hi Search guibg=#440044
+if !has("win32")
+  hi Normal guibg=NONE
+endif
 
 highlight Tabs guibg=#222222
 match Tabs "\t"
@@ -185,7 +189,7 @@ function! DeleteHiddenBuffers()
     let tpbl=[]
     call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
     for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
-        silent execute 'bwipeout' buf
+        silent execute 'bdelete' buf
     endfor
 endfunction
 
@@ -236,13 +240,17 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-k': function('s:build_quickfix_list'),
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 let $FZF_DEFAULT_OPTS = '--bind ctrl-j:select-all'
 
-let $FZF_DEFAULT_COMMAND = 'lsfiles'
+if has("win32")
+  let $FZF_DEFAULT_COMMAND = 'git ls-files'
+else
+  let $FZF_DEFAULT_COMMAND = 'lsfiles'
+endif
 
 " :Prg To ripgrep from the git project root of the current buffer with FZF
 command! -bang -nargs=* Prg
