@@ -30,9 +30,6 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" ag search
-Plug 'numkil/ag.nvim'
-
 " Auto-determine indentation rules
 Plug 'tpope/vim-sleuth'
 
@@ -42,6 +39,8 @@ Plug 'tikhomirov/vim-glsl'
 " Diagnostics window
 " Plug 'folke/trouble.nvim'
 Plug 'jaburns/trouble.nvim'
+
+Plug 'ap/vim-buftabline'
 
 call plug#end()
 
@@ -83,6 +82,9 @@ let mapleader=' '
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
+
+" Enter to yank in visual mode to match tmux
+vnoremap <cr> y
 
 " Make X behave like d, but preserve the " register.
 nnoremap X "_d
@@ -187,17 +189,8 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 
-" function! ToggleQuickFix()
-"     if empty(filter(getwininfo(), 'v:val.quickfix'))
-"         copen 30
-"     else
-"         cclose
-"     endif
-" endfunction
-
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 nnoremap <c-p> :FZF<CR>
-
+nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>p viw"_dP
@@ -228,17 +221,49 @@ imap <silent> <c-space> <Plug>(completion_trigger)
 
 " -------------------- LSP + plugin configuration --------------------
 
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+" *** Buftabline config ***
+
+let g:buftabline_indicators = 1
+nnoremap gt <cmd>bnext<cr>
+nnoremap gT <cmd>bprev<cr>
+
+" *** FZF Config ***
+
+" CTRL-A CTRL-Q to select all and build quickfix list
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let $FZF_DEFAULT_OPTS = '--bind ctrl-j:select-all'
+
+let $FZF_DEFAULT_COMMAND = 'lsfiles'
+
+" :Prg To ripgrep from the git project root of the current buffer with FZF
+command! -bang -nargs=* Prg
+  \ call fzf#vim#grep(
+  \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, 
+  \   fzf#vim#with_preview({'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}), <bang>0)
+
+" *** nvimtree config ***
 
 let g:nvim_tree_ignore = [ '.git', 'node_modules', 'target', '*.meta' ]
 let g:nvim_tree_gitignore = 1
 let g:nvim_tree_auto_close = 1
 let g:nvim_tree_follow = 1
 let g:nvim_tree_indent_markers = 1
-" let g:nvim_tree_git_hl = 1
+let g:nvim_tree_disable_netrw = 0
+let g:nvim_tree_hijack_netrw = 0 
 let g:nvim_tree_highlight_opened_files = 1
 let g:nvim_tree_lsp_diagnostics = 1
 let g:nvim_tree_tab_open = 1
+
+" *** misc ***
 
 " Auto-format *.rs (rust) files prior to saving them
 autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
@@ -249,6 +274,8 @@ autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
 " noinsert: Do not insert text until a selection is made
 " noselect: Do not select, force user to select one from the menu
 set completeopt=menuone,noinsert,noselect
+
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 
 " Avoid showing extra messages when using completion
 set shortmess+=c

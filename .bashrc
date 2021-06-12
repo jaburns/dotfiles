@@ -272,7 +272,6 @@ if [[ -d /mnt/c/Windows ]]; then
     eval "$(dircolors ~/.dircolors)"
 fi
 
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/jaburns/google-cloud-sdk/path.bash.inc' ]; then . '/home/jaburns/google-cloud-sdk/path.bash.inc'; fi
 
