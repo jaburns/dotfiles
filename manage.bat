@@ -7,8 +7,12 @@ goto end
 
 :install
 
+setlocal enableextensions
+md %appdata%\..Local\nvim\colors
+endlocal
 copy init.vim %appdata%\..\Local\nvim\init.vim
 copy ginit.vim %appdata%\..\Local\nvim\ginit.vim
+copy colors\*.* %appdata%\..\Local\nvim\colors\
 
 goto end
 :pull
