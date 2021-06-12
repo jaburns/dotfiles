@@ -29,9 +29,8 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Fuzzy find
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
-" Fuzzy find in the quickfix list
-Plug 'fszymanski/fzf-quickfix', { 'on': 'Quickfix' }
+"Plug 'fszymanski/fzf-quickfix', { 'on': 'Quickfix' }
+Plug 'jaburns/fzf-quickfix', { 'on': 'Quickfix' }
 
 " Auto-determine indentation rules
 Plug 'tpope/vim-sleuth'
