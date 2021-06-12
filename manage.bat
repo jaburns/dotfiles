@@ -19,5 +19,6 @@ goto end
 
 copy %appdata%\..\Local\nvim\init.vim init.vim
 copy %appdata%\..\Local\nvim\ginit.vim ginit.vim
+copy %appdata%\..\Local\nvim\colors\*.* colors\
 
 :end

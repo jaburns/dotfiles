@@ -167,9 +167,10 @@ set statusline+=\ %l:%c\ %y\
 
 set termguicolors
 
-colorscheme corvine
-
-if !has("win32")
+if has("win32")
+  colorscheme defminus
+else
+  colorscheme corvine
   hi Normal guibg=NONE
 endif
 
@@ -265,7 +266,7 @@ function! s:format_temp_qf_item(item) abort
 endfunction
 function! SearchQuickfixWithFzf()
   if has("win32")
-    let l:tmpfile = '%USERPROFILE%/AppData/Local/Temp/nvim_quickfix.txt'
+    let l:tmpfile = $USERPROFILE . '/AppData/Local/Temp/nvim_quickfix.txt'
   else
     let l:tmpfile = '/tmp/nvim_quickfix.txt'
   endif
