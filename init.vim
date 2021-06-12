@@ -29,8 +29,6 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Fuzzy find
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-"Plug 'fszymanski/fzf-quickfix', { 'on': 'Quickfix' }
-Plug 'jaburns/fzf-quickfix', { 'on': 'Quickfix' }
 
 " Auto-determine indentation rules
 Plug 'tpope/vim-sleuth'
@@ -201,6 +199,7 @@ nnoremap <leader>v <cmd>e $MYVIMRC<cr>
 nnoremap <leader>o <cmd>copen 30<cr>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 nnoremap <leader>q <cmd>cclose<cr><cmd>TroubleClose<cr>
+nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
 nnoremap <leader>t <cmd>NvimTreeToggle<cr>
 nnoremap <leader>T <cmd>NvimTreeRefresh<CR>
@@ -232,6 +231,12 @@ nnoremap gT <cmd>bprev<cr>
 
 " *** FZF Config ***
 
+if has("win32")
+  let $FZF_DEFAULT_COMMAND = 'git ls-files'
+else
+  let $FZF_DEFAULT_COMMAND = 'lsfiles'
+endif
+
 " CTRL-A CTRL-Q to select all and build quickfix list
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
@@ -245,17 +250,28 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 let $FZF_DEFAULT_OPTS = '--bind ctrl-j:select-all'
 
-if has("win32")
-  let $FZF_DEFAULT_COMMAND = 'git ls-files'
-else
-  let $FZF_DEFAULT_COMMAND = 'lsfiles'
-endif
-
 " :Prg To ripgrep from the git project root of the current buffer with FZF
 command! -bang -nargs=* Prg
   \ call fzf#vim#grep(
   \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, 
   \   fzf#vim#with_preview({'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}), <bang>0)
+
+" Helper function to write quickfix to temp file and open with preview with FZF
+function! s:format_temp_qf_item(item) abort
+  return (a:item.bufnr ? bufname(a:item.bufnr) : '')
+        \ . ':' . (a:item.lnum  ? a:item.lnum : '')
+        \ . (a:item.col ? ':' . a:item.col : ':')
+        \ . ':' . substitute(a:item.text, '\v^\s*', ' ', '')
+endfunction
+function! SearchQuickfixWithFzf()
+  if has("win32")
+    let l:tmpfile = '%USERPROFILE%/AppData/Local/Temp/nvim_quickfix.txt'
+  else
+    let l:tmpfile = '/tmp/nvim_quickfix.txt'
+  endif
+  call writefile(map(getqflist(), 's:format_temp_qf_item(v:val)'), l:tmpfile, '')
+  call fzf#vim#grep('cat ' . l:tmpfile, 1, fzf#vim#with_preview({ 'options': '--prompt="QF> "' }))
+endfunction
 
 " *** nvimtree config ***
 
