@@ -40,8 +40,6 @@ Plug 'tikhomirov/vim-glsl'
 " Plug 'folke/trouble.nvim'
 Plug 'jaburns/trouble.nvim'
 
-Plug 'ap/vim-buftabline'
-
 call plug#end()
 
 " -------------------- Basic configuration --------------------
@@ -168,7 +166,7 @@ set statusline+=\ %l:%c\ %y\
 set termguicolors
 
 if has("win32")
-  colorscheme defminus
+  colorscheme xcodelighthc
 else
   colorscheme corvine
   hi Normal guibg=NONE
@@ -191,6 +189,10 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 
+if has('win32')
+  nnoremap <leader>b <cmd>e term://bbash<cr>i
+endif
+
 nnoremap <c-p> :FZF<CR>
 nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
@@ -198,6 +200,7 @@ nnoremap <leader><leader> <c-^>
 nnoremap <leader>p viw"_dP
 nnoremap <leader>v <cmd>e $MYVIMRC<cr>
 nnoremap <leader>o <cmd>copen 30<cr>
+nnoremap <leader>l <cmd>Buffers<cr>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 nnoremap <leader>q <cmd>cclose<cr><cmd>TroubleClose<cr>
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
@@ -223,12 +226,6 @@ nnoremap <leader>k <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 imap <silent> <c-space> <Plug>(completion_trigger)
 
 " -------------------- LSP + plugin configuration --------------------
-
-" *** Buftabline config ***
-
-let g:buftabline_indicators = 1
-nnoremap gt <cmd>bnext<cr>
-nnoremap gT <cmd>bprev<cr>
 
 " *** FZF Config ***
 
