@@ -40,6 +40,8 @@ Plug 'tikhomirov/vim-glsl'
 " Plug 'folke/trouble.nvim'
 Plug 'jaburns/trouble.nvim'
 
+Plug 'knsh14/vim-github-link'
+
 call plug#end()
 
 " -------------------- Basic configuration --------------------
@@ -179,7 +181,7 @@ hi NvimTreeFolderName guifg=#7399D8
 hi NvimTreeOpenedFolderName guifg=#7399D8
 hi NvimTreeEmptyFolderName guifg=#7399D8
 
-" -------------------- Leader key shortcuts --------------------
+" -------------------- Leader key and plugin-related shortcuts --------------------
 
 function! DeleteHiddenBuffers()
     let tpbl=[]
@@ -189,39 +191,41 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 
-if has('win32')
-  nnoremap <leader>b <cmd>e term://bbash<cr>i
-endif
-
 nnoremap <c-p> :FZF<CR>
-nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
-nnoremap <leader>p viw"_dP
-nnoremap <leader>v <cmd>e $MYVIMRC<cr>
-nnoremap <leader>o <cmd>copen 30<cr>
-nnoremap <leader>l <cmd>Buffers<cr>
-nnoremap <leader>y :let @+ = expand("%:p")<cr>
+
 nnoremap <leader>q <cmd>cclose<cr><cmd>TroubleClose<cr>
-nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
-nnoremap <leader>t <cmd>NvimTreeToggle<cr>
-nnoremap <leader>T <cmd>NvimTreeRefresh<CR>
 nnoremap <leader>e <cmd>Trouble lsp_workspace_diagnostics<cr>
 nnoremap <leader>E <cmd>Trouble lsp_document_diagnostics<cr>
+nnoremap <leader>r <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>t <cmd>NvimTreeToggle<cr>
+nnoremap <leader>T <cmd>NvimTreeRefresh<CR>
+nnoremap <leader>y :let @+ = expand("%:p")<cr>
+nnoremap <leader>i <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>o <cmd>copen 30<cr>
+nnoremap <leader>p viw"_dP
+
+nnoremap <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap        gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>i <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>r <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>f <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
 nnoremap <leader>g <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 nnoremap <leader>j <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>k <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-" nnoremap <leader>? <cmd>lua vim.lsp.buf.implementation()<CR>
-" nnoremap <leader>? <cmd>lua vim.lsp.buf.signature_help()<CR>
-" nnoremap <leader>? <cmd>lua vim.lsp.buf.formatting()<CR>
-" nnoremap <leader>? <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <leader>l <cmd>Buffers<cr>
+vnoremap L :GetCurrentBranchLink<cr>
+
+nnoremap <leader>x <cmd>bd<CR>
+nnoremap <leader>v <cmd>e $MYVIMRC<cr>
+nnoremap <leader>b <cmd>e term://bbash<cr>i
+
+"nnoremap <leader>? <cmd>lua vim.lsp.buf.implementation()<CR>
+"nnoremap <leader>? <cmd>lua vim.lsp.buf.signature_help()<CR>
+"nnoremap <leader>? <cmd>lua vim.lsp.buf.formatting()<CR>
+"nnoremap <leader>? <cmd>lua vim.lsp.buf.type_definition()<CR>
 
 imap <silent> <c-space> <Plug>(completion_trigger)
 
