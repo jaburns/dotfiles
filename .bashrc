@@ -261,8 +261,8 @@ ps1_render() {
     # Path
     echo -n '\[\033[0;34m\]\w'
 
-    # Git branch and newline/prompt
-    echo    "$(ps1_git_branch)"
+    # Git branch and newline/prompt (too slow to be worth it on msys)
+    echo    "$([[ "$OSTYPE" == "msys" ]] || ps1_git_branch)"
     echo -n '\[\033[0;36m\]:; \[\033[0m\]'
 }
 export PROMPT_COMMAND='PS1="$(ps1_render $?)"'

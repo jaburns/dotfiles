@@ -13,6 +13,7 @@ endlocal
 copy init.vim %appdata%\..\Local\nvim\init.vim
 copy ginit.vim %appdata%\..\Local\nvim\ginit.vim
 copy colors\*.* %appdata%\..\Local\nvim\colors\
+copy .bashrc %appdata%\..\..\.bashrc
 
 goto end
 :pull
@@ -20,5 +21,5 @@ goto end
 copy %appdata%\..\Local\nvim\init.vim init.vim
 copy %appdata%\..\Local\nvim\ginit.vim ginit.vim
 copy %appdata%\..\Local\nvim\colors\*.* colors\
-
+copy %appdata%\..\..\.bashrc .bashrc
 :end
