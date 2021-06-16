@@ -336,7 +336,7 @@ nvim_lsp.rust_analyzer.setup({
     settings = {
         ["rust-analyzer"] = {
             diagnostics = {
-                disabled = { "missing-unsafe", "incorrect-ident-case" }
+                disabled = { "missing-unsafe", "incorrect-ident-case", "macro-error", "unresolved-proc-macro" }
             },
             cargo = {
                 allFeatures = true,
