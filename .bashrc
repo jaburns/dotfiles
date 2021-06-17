@@ -20,11 +20,17 @@ alias dff='df -h'
 if [[ "$OSTYPE" == *linux-gnu* ]]; then
     alias open='xdg-open'
 fi
+if [[ "$OSTYPE" == "msys" ]]; then
+    export PATH=$PATH:/c/nvim/bin
+    alias vim='nvim'
+    alias vi='nvim'
+fi
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cargo/bin
+
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 # cd "$(dirname "${BASH_SOURCE[0]}")" # For reference
@@ -266,11 +272,6 @@ ps1_render() {
     echo -n '\[\033[0;36m\]:; \[\033[0m\]'
 }
 export PROMPT_COMMAND='PS1="$(ps1_render $?)"'
-
-# Fix ugly dir colors on WSL
-if [[ -d /mnt/c/Windows ]]; then
-    eval "$(dircolors ~/.dircolors)"
-fi
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/jaburns/google-cloud-sdk/path.bash.inc' ]; then . '/home/jaburns/google-cloud-sdk/path.bash.inc'; fi
