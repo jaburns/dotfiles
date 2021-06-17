@@ -123,6 +123,9 @@ nnoremap <c-k> 15k
 vnoremap <c-j> 15j
 vnoremap <c-k> 15k
 
+" Ctrl+a is tmux leader, so remap increment to ctrl+s
+nnoremap <c-s> <c-a>
+
 " Get the standard c-backspace behaviour in insert mode
 inoremap <c-backspace> <c-w>
 
