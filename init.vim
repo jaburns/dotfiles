@@ -16,9 +16,6 @@ Plug 'neovim/nvim-lspconfig'
 " Auto reload externally modified files
 Plug 'djoshea/vim-autoread'
 
-" Extensions to built-in LSP, for example, providing type inlay hints
-" Plug 'nvim-lua/lsp_extensions.nvim'
-
 " Autocompletion framework for built-in LSP
 Plug 'nvim-lua/completion-nvim'
 
@@ -37,10 +34,13 @@ Plug 'tpope/vim-sleuth'
 Plug 'tikhomirov/vim-glsl'
 
 " Diagnostics window
-" Plug 'folke/trouble.nvim'
 Plug 'jaburns/trouble.nvim'
 
+" Copy link to selection on github
 Plug 'knsh14/vim-github-link'
+
+" Git integrations
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
