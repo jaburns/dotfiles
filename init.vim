@@ -216,7 +216,7 @@ nnoremap <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap        gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>f <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
-nnoremap <leader>gg :Git<cr>
+nnoremap <leader>gg :botright vertical Git<cr>
 nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gf :Git fetch --all<cr>
 nnoremap <leader>gu :Git pull --rebase<cr>
@@ -231,7 +231,7 @@ vnoremap L :GetCurrentBranchLink<cr>
 
 nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader>v <cmd>e $MYVIMRC<cr>
-nnoremap <leader>b <cmd>e term://bbash<cr>i
+nnoremap <leader>n <cmd>enew<cr>
 
 "nnoremap <leader>? <cmd>lua vim.lsp.buf.implementation()<CR>
 "nnoremap <leader>? <cmd>lua vim.lsp.buf.signature_help()<CR>
