@@ -1,6 +1,7 @@
 " -------------------------------------------------
 " Additional setup instructions for nvim:
 "
+"
 " - Install vim-plug: https://github.com/junegunn/vim-plug
 " - For Rust, build and install rust-analyzer to PATH: https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
 " - For TS/JS: npm install -g typescript typescript-language-server
