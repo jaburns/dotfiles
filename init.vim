@@ -186,6 +186,20 @@ hi NvimTreeEmptyFolderName guifg=#7399D8
 
 " -------------------- Leader key and plugin-related shortcuts --------------------
 
+function! BuildAndRunProject()
+    vsplit
+    exe "normal \<c-w>l"
+    Glcd
+    if findfile("rundev.js", ".") == "rundev.js"
+        exe "e term://node rundev.js"
+    elseif findfile("package.json", ".") == "package.json"
+        exe "e term://npm start"
+    else
+        exe "enew"
+    endif
+    exe "normal i"
+endfunction
+
 function! DeleteHiddenBuffers()
     let tpbl=[]
     call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
@@ -233,6 +247,8 @@ vnoremap L :GetCurrentBranchLink<cr>
 nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader>v <cmd>e $MYVIMRC<cr>
 nnoremap <leader>n <cmd>enew<cr>
+
+nnoremap <f5> <cmd>call BuildAndRunProject()<cr>
 
 "nnoremap <leader>? <cmd>lua vim.lsp.buf.implementation()<CR>
 "nnoremap <leader>? <cmd>lua vim.lsp.buf.signature_help()<CR>
