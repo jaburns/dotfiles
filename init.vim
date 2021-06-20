@@ -217,6 +217,7 @@ nnoremap        gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>f <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
 nnoremap <leader>gg :Git<cr>
+nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gf :Git fetch --all<cr>
 nnoremap <leader>gu :Git pull --rebase<cr>
 nnoremap <leader>gU :Git pull<cr>
