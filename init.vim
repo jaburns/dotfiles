@@ -217,13 +217,13 @@ nnoremap        gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>f <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
 nnoremap <leader>gg :botright vertical Git<cr>
-nnoremap <leader>gd :Git diff<cr>
+nnoremap <leader>gd :botright vertical Git diff<cr>
 nnoremap <leader>gf :Git fetch --all<cr>
 nnoremap <leader>gu :Git pull --rebase<cr>
 nnoremap <leader>gU :Git pull<cr>
 nnoremap <leader>gp :Git push<cr>
-nnoremap <leader>gl :Git log --all --graph --decorate --oneline<cr>
-nnoremap <leader>gL :Git log --all --graph --decorate --oneline --first-parent<cr>
+nnoremap <leader>gl :botright vertical Git log --all --graph --decorate --oneline<cr>
+nnoremap <leader>gL :botright vertical Git log --all --graph --decorate --oneline --first-parent<cr>
 nnoremap <leader>j <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>k <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <leader>l <cmd>Buffers<cr>
