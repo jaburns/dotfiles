@@ -258,6 +258,8 @@ imap <silent> <c-space> <Plug>(completion_trigger)
 
 " -------------------- LSP + plugin configuration --------------------
 
+let g:buftabline_indicators = 1
+
 " *** FZF Config ***
 
 if has("win32")
