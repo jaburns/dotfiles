@@ -45,6 +45,9 @@ Plug 'tpope/vim-fugitive'
 " Show buffers in the tab line (breaks tabs, but LSP sucks with tabs anyway)
 Plug 'ap/vim-buftabline'
 
+" Line gutter info for git change status
+Plug 'airblade/vim-gitgutter'
+
 call plug#end()
 
 " -------------------- Basic configuration --------------------
@@ -183,6 +186,8 @@ hi NvimTreeEmptyFolderName guifg=#7399D8
 
 " -------------------- Leader key and plugin-related shortcuts --------------------
 
+let g:gitgutter_map_keys = 0
+
 function! BuildAndRunProject(...)
     echo 
     vsplit
@@ -218,16 +223,18 @@ nnoremap <leader>t <cmd>NvimTreeToggle<cr>
 nnoremap <leader>T <cmd>NvimTreeRefresh<CR>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 vnoremap         Y :GetCurrentBranchLink<cr>
+nnoremap <leader>u :GitGutterUndoHunk<cr>
 nnoremap <leader>i <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>I <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 nnoremap <leader>o <cmd>copen 30<cr>
 nnoremap <leader>p viw"_dP
 
 nnoremap <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <leader>s <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 nnoremap <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap        gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>f <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
+nnoremap <leader>gw :GitGutterAll<cr>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gB :Git branch<cr>
 nnoremap <leader>gg :botright vertical Git<cr>
