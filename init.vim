@@ -239,10 +239,10 @@ nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gB :Git branch<cr>
 nnoremap <leader>gg :botright vertical Git<cr>
 nnoremap <leader>gd :botright vertical Git diff<cr>
-nnoremap <leader>gf :split<cr>:e term://git fetch --all<cr>
-nnoremap <leader>gu :split<cr>:e term://git pull --rebase<cr>
-nnoremap <leader>gU :split<cr>:e term://git pull<cr>
-nnoremap <leader>gp :split<cr>:e term://git push<cr>
+nnoremap <leader>gf :split<cr>:e term://git fetch --all<cr>i
+nnoremap <leader>gu :split<cr>:e term://git pull --rebase<cr>i
+nnoremap <leader>gU :split<cr>:e term://git pull<cr>i
+nnoremap <leader>gp :split<cr>:e term://git push<cr>i
 nnoremap <leader>gl :botright vertical Git log --all --graph --decorate --oneline<cr>
 nnoremap <leader>gL :botright vertical Git log --all --graph --decorate --oneline --first-parent<cr>
 nnoremap <leader>gb :Git blame<cr>
