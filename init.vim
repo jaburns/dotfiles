@@ -158,13 +158,7 @@ tnoremap <c-x> <c-\><c-n>
 " -------------------- Status line --------------------
 
 set laststatus=2
-set statusline=
-set statusline+=\ %{getcwd()}\ 
-set statusline+=
-set statusline+=%#CursorColumn#
-set statusline+=\ %f\ 
-set statusline+=%=
-set statusline+=\ %l:%c\ %y\ 
+set statusline=\ %{getcwd()}\ %#CursorColumn#\ %f\ %=\ %#StatusLine#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %y\ 
 
 " -------------------- Colors --------------------
 
@@ -186,19 +180,16 @@ hi NvimTreeEmptyFolderName guifg=#7399D8
 
 " -------------------- Leader key and plugin-related shortcuts --------------------
 
-function! BuildAndRunProject()
+function! BuildAndRunProject(...)
+    echo 
     vsplit
     exe "normal \<c-w>l"
     Glcd
-    if findfile("rundev.js", ".") == "rundev.js"
-        exe "e term://node rundev.js"
-    elseif findfile("package.json", ".") == "package.json"
-        exe "e term://npm start"
-    else
-        exe "enew"
-    endif
+    exe "e term://" . join(a:000)
     exe "normal i"
 endfunction
+
+command! -nargs=* Run call BuildAndRunProject(<f-args>)
 
 function! DeleteHiddenBuffers()
     let tpbl=[]
@@ -230,6 +221,8 @@ nnoremap <leader>d <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap        gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>f <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
+nnoremap <leader>gco :Git checkout<space>
+nnoremap <leader>gB :Git branch<cr>
 nnoremap <leader>gg :botright vertical Git<cr>
 nnoremap <leader>gd :botright vertical Git diff<cr>
 nnoremap <leader>gf :split<cr>:e term://git fetch --all<cr>
@@ -248,7 +241,8 @@ nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader>v <cmd>e $MYVIMRC<cr>
 nnoremap <leader>n <cmd>enew<cr>
 
-nnoremap <f5> <cmd>call BuildAndRunProject()<cr>
+nnoremap <f5> :Run npm start
+nnoremap <f6> :Run node rundev.js
 
 "nnoremap <leader>? <cmd>lua vim.lsp.buf.implementation()<CR>
 "nnoremap <leader>? <cmd>lua vim.lsp.buf.signature_help()<CR>
