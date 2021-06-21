@@ -42,6 +42,9 @@ Plug 'knsh14/vim-github-link'
 " Git integrations
 Plug 'tpope/vim-fugitive'
 
+" Show buffers in the tab line (breaks tabs, but LSP sucks with tabs anyway)
+Plug 'ap/vim-buftabline'
+
 call plug#end()
 
 " -------------------- Basic configuration --------------------
@@ -199,6 +202,9 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 
+nnoremap gt :bnext<cr>
+nnoremap gT :bprev<cr>
+
 nnoremap <c-p> :FZF<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
@@ -211,6 +217,7 @@ nnoremap <leader>r <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>t <cmd>NvimTreeToggle<cr>
 nnoremap <leader>T <cmd>NvimTreeRefresh<CR>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
+vnoremap         Y :GetCurrentBranchLink<cr>
 nnoremap <leader>i <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>o <cmd>copen 30<cr>
 nnoremap <leader>p viw"_dP
@@ -234,8 +241,6 @@ nnoremap <leader>gL :botright vertical Git log --all --graph --decorate --onelin
 nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>j <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>k <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <leader>l <cmd>Buffers<cr>
-vnoremap L :GetCurrentBranchLink<cr>
 
 nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader>v <cmd>e $MYVIMRC<cr>
