@@ -48,8 +48,8 @@ Plug 'tpope/vim-surround'
 " Show buffers in the tab line (breaks tabs, but LSP sucks with tabs anyway)
 Plug 'ap/vim-buftabline'
 
-" Line gutter info for git change status
-Plug 'airblade/vim-gitgutter'
+" Non-broken syntax highlighting for typescript
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
