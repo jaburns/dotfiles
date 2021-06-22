@@ -42,6 +42,9 @@ Plug 'knsh14/vim-github-link'
 " Git integrations
 Plug 'tpope/vim-fugitive'
 
+" Edit text object surroundings
+Plug 'tpope/vim-surround'
+
 " Show buffers in the tab line (breaks tabs, but LSP sucks with tabs anyway)
 Plug 'ap/vim-buftabline'
 
