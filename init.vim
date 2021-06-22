@@ -359,6 +359,9 @@ end
 -- Enable c#
 local pid = vim.fn.getpid()
 local omnisharp_bin = "/home/jaburns/source/omnisharp-bin/run"
+if vim.fn.has('win32') == 1 then
+    omnisharp_bin = "c:/omnisharp/omnisharp-vim/omnisharp-roslyn/OmniSharp.exe"
+end
 nvim_lsp.omnisharp.setup{
     on_attach=on_attach,
     cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) };
