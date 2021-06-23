@@ -83,6 +83,7 @@ set signcolumn=yes      " Always show error/info column on left
 set clipboard^=unnamed,unnamedplus " Use system clipboard as default
 set pastetoggle=<F7>    " F7 for paste mode which doesnt insert tabs and junk
 set ignorecase          " Case insensitive search for all lowercase unless \C provided
+set noequalalways       " Dont' resize windows when they're opened/closed
 set smartcase           "  "
 
 " Space as leader
