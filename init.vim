@@ -150,7 +150,7 @@ tnoremap <c-x> <c-\><c-n>
 " -------------------- Status line --------------------
 
 set laststatus=2
-set statusline=\ %{getcwd()}\ %#CursorColumn#\ %f\ %=\ %#StatusLine#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %y\ 
+set statusline=\ %{getcwd()}\ %#CursorColumn#\ %f\ %=\ %#StatusLine#%{coc#status()}%{get(b:,'coc_current_function','')}\ %{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %y\ 
 
 " -------------------- Colors --------------------
 
@@ -207,7 +207,7 @@ nnoremap <leader>i <cmd>call CocActionAsync('doHover')<cr>
 nnoremap <leader>o <cmd>copen<cr>
 nnoremap <leader>p viw"_dP
 
-nmap <silent> <leader>a <Plug>(coc-codeaction)
+nmap <silent> <leader>a <Plug>(coc-codeaction-selected)w
 nmap <silent> <leader>d <Plug>(coc-definition)
 nmap <silent>        gd <Plug>(coc-definition)
 nmap <silent> <leader>f <Plug>(coc-references)
