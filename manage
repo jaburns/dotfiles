@@ -23,21 +23,20 @@ copy_home() {
     copy_file "$REPO_DIR/$1" "$HOME/$1"
 }
 
+[[ "$MODE" == 'install' ]] && mkdir -p "$HOME/.config/nvim/colors"
+
 copy_home .bashrc
 copy_home .gitignore_global
 copy_home .gitconfig
 copy_home .tmux.conf
 copy_file "$REPO_DIR/redshift.conf" "$HOME/.config/redshift.conf"
+copy_file "$REPO_DIR/init.vim" "$HOME/.config/nvim/init.vim"
+copy_file "$REPO_DIR/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
+copy_file "$REPO_DIR/colors/corvine.vim" "$HOME/.config/nvim/colors/corvine.vim"
 
 [[ -d "$HOME/.config/xfce4" ]] && \
     copy_file 'xfce4-keyboard-shortcuts.xml' \
         "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml"
-
-[[ "$MODE" == 'install' ]] && mkdir -p "$HOME/.config/nvim/colors"
-
-copy_file "$REPO_DIR/init.vim" "$HOME/.config/nvim/init.vim"
-copy_file "$REPO_DIR/colors/corvine.vim" "$HOME/.config/nvim/colors/corvine.vim"
-
 
 #########################################
 # vscode settings, unused/disabled
