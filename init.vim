@@ -285,7 +285,7 @@ endif
 "   \ 'ctrl-t': 'tab split',
 "   \ 'ctrl-x': 'split',
 "   \ 'ctrl-v': 'vsplit' }
-let $FZF_DEFAULT_OPTS = '--bind ctrl-j:select-all'
+let $FZF_DEFAULT_OPTS = '--bind ctrl-j:select-all --reverse'
 
 " :Prg To ripgrep from the git project root of the current buffer with FZF
 command! -bang -nargs=* Prg
