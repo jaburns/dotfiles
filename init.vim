@@ -31,8 +31,9 @@ Plug 'tpope/vim-fugitive'
 " Edit text object surroundings
 Plug 'tpope/vim-surround'
 
-" Syntax highlighting for everything
-Plug 'sheerun/vim-polyglot'
+" Syntax highlights
+Plug 'OrangeT/vim-csharp'
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
@@ -138,10 +139,6 @@ nnoremap <c-w><c-o> 10<c-w>>
 nnoremap <c-w>, 2<c-w><
 nnoremap <c-w>. 2<c-w>>
 
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
 tnoremap <c-x> <c-\><c-n>
 
 " -------------------- Status line --------------------
@@ -198,6 +195,7 @@ nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
 nnoremap <leader>e <cmd>CocFzfList diagnostics<cr>
 nmap <silent> <leader>r <Plug>(coc-rename)
 nnoremap <leader>t <cmd>CocCommand explorer<cr>
+nnoremap <leader>T <cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<cr>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 vnoremap         Y <cmd>GetCurrentBranchLink<cr>
 nnoremap <leader>i <cmd>call CocActionAsync('doHover')<cr>
@@ -229,11 +227,23 @@ nnoremap <leader>v <cmd>e $MYVIMRC<cr>
 nnoremap <leader>V <cmd>CocConfig<cr>
 nnoremap <leader>n <cmd>enew<cr>
 
-nnoremap <f4> <cmd>call CocAction('runCommand', 'tsserver.watchBuild')<cr>:copen<cr>
+nnoremap <leader><f4> <cmd>call CocAction('runCommand', 'tsserver.watchBuild')<cr>:copen<cr>
+nnoremap <f4> :Run tsc --watch --noEmit<cr>
 nnoremap <f5> :Run npm start
 nnoremap <f6> :Run node rundev.js
 
-imap <silent> <c-space> <Plug>(completion_trigger)
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
 " -------------------- Plugin configuration --------------------
 
@@ -292,8 +302,6 @@ autocmd BufWritePre *.rs call CocAction('format')
 " noinsert: Do not insert text until a selection is made
 " noselect: Do not select, force user to select one from the menu
 set completeopt=menuone,noinsert,noselect
-
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 
 " Avoid showing extra messages when using completion
 set shortmess+=c
