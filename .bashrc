@@ -272,9 +272,9 @@ ps1_render() {
     echo -n '\[\033[0;36m\]:; \[\033[0m\]'
 }
 
-# history -a appends unwritten history to .bash_history immediately
-# to avoid losing history with multiple shells open
-export PROMPT_COMMAND='history -a;PS1="$(ps1_render $?)"'
+# history -a..-r appends unwritten history to .bash_history immediately
+# and reloads to avoid losing history with multiple shells open
+export PROMPT_COMMAND='history -a;history -r;PS1="$(ps1_render $?)"'
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/jaburns/google-cloud-sdk/path.bash.inc' ]; then . '/home/jaburns/google-cloud-sdk/path.bash.inc'; fi
