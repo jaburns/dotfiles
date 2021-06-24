@@ -1,6 +1,6 @@
 GuiTabline 0
 GuiPopupmenu 0
-GuiFont Source Code Pro:h11
+GuiFont! Source Code Pro:h11
 
 let s:fontsize = 11
 function! AdjustFontSize(amount)
