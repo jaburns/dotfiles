@@ -222,14 +222,14 @@ nmap <silent> <leader>f <Plug>(coc-references)
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gB :Git branch<cr>
-nnoremap <leader>gg :Git<cr>
-nnoremap <leader>gd :Git diff<cr>
+nnoremap <leader>gg :Git<cr><c-w>k:q<cr>
+nnoremap <leader>gd :Git diff<cr><c-w>k:q<cr>
 nnoremap <leader>gf :split<cr>:e term://git fetch --all<cr>i
 nnoremap <leader>gu :split<cr>:e term://git pull --rebase<cr>i
 nnoremap <leader>gU :split<cr>:e term://git pull<cr>i
 nnoremap <leader>gp :split<cr>:e term://git push<cr>i
-nnoremap <leader>gl :Git log --all --graph --decorate --oneline<cr>
-nnoremap <leader>gL :Git log --all --graph --decorate --oneline --first-parent<cr>
+nnoremap <leader>gl :Git log --all --graph --decorate --oneline<cr><c-w>k:q<cr>
+nnoremap <leader>gL :Git log --all --graph --decorate --oneline --first-parent<cr><c-w>k:q<cr>
 nnoremap <leader>gb :Git blame<cr>
 nmap <leader>j <Plug>(coc-diagnostic-next)
 nmap <leader>k <Plug>(coc-diagnostic-prev)
