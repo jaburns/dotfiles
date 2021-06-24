@@ -6,12 +6,8 @@ set keymap vi
 set -o vi
 export EDITOR="vim"
 
-export FrameworkPathOverride=/etc/mono/4.5
-
-alias junk='xdg-open ~/junk'
 alias notes='vim ~/gdrive/notes.txt'
 alias grep='grep --color=auto'
-alias pyhttp='python -m SimpleHTTPServer'
 alias dskill='find . -name .DS_Store > /tmp/dskill && wc -l /tmp/dskill | sed "s:/.*$:.DS_Store files removed:" && while read line; do rm "$line"; done < /tmp/dskill && rm /tmp/dskill'
 alias remap-esc='setxkbmap -option caps:escape'
 alias duu='du -hd 1'
@@ -30,6 +26,8 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cargo/bin
+
+export FrameworkPathOverride=/etc/mono/4.5
 
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
@@ -100,12 +98,13 @@ agsed() {
 
 # ----- set default output for ls; add auto ls after cd -----------------------
 
-if [[ "$(uname)" == "Darwin" ]]; then
+if command -v exa > /dev/null; then
+    alias ls='exa'
+elif [[ "$(uname)" == "Darwin" ]]; then
     alias ls='ls -G'
 else
     alias ls='ls --color'
 fi
-alias ll='ls --color=never'
 
 cdls() {
     cd "$1"
