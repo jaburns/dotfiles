@@ -4,6 +4,12 @@
 " - Install vim-plug: https://github.com/junegunn/vim-plug
 " - :PlugInstall
 " - :CocInstall coc-tsserver coc-omnisharp coc-json coc-explorer coc-rust-analyzer
+" -------------------------------------------------
+"  Notes
+"    Find and replace
+"      :Rg some_pattern
+"      <c-j><cr> to populate QF list
+"      :cdo s/some_pattern/something_else/g (or :cfdo %s/...)
 " -------------------- Plugins --------------------
 
 call plug#begin('~/.config/nvim/plugged')
@@ -190,7 +196,7 @@ endfunction
 nnoremap gt :bnext<cr>
 nnoremap gT :bprev<cr>
 
-nnoremap <c-p> :FZF<CR>
+nnoremap <c-p> :Files<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
@@ -269,16 +275,16 @@ else
 endif
 
 " CTRL-A CTRL-Q to select all and build quickfix list
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-let g:fzf_action = {
-  \ 'ctrl-k': function('s:build_quickfix_list'),
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+" function! s:build_quickfix_list(lines)
+"   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+"   copen
+"   cc
+" endfunction
+" let g:fzf_action = {
+"   \ 'ctrl-k': function('s:build_quickfix_list'),
+"   \ 'ctrl-t': 'tab split',
+"   \ 'ctrl-x': 'split',
+"   \ 'ctrl-v': 'vsplit' }
 let $FZF_DEFAULT_OPTS = '--bind ctrl-j:select-all'
 
 " :Prg To ripgrep from the git project root of the current buffer with FZF
