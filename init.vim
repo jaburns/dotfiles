@@ -177,9 +177,7 @@ match Tabs "\t"
 " -------------------- Leader key and plugin-related config/shortcuts --------------------
 
 function! BuildAndRunProject(...)
-    echo 
     split
-    exe "normal \<c-w>l"
     Glcd
     exe "e term://" . join(a:000)
     exe "normal i"
