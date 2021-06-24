@@ -274,7 +274,7 @@ ps1_render() {
 
 # history -a..-r appends unwritten history to .bash_history immediately
 # and reloads to avoid losing history with multiple shells open
-export PROMPT_COMMAND='history -a;history -r;PS1="$(ps1_render $?)"'
+export PROMPT_COMMAND='PS1="$(ps1_render $?)";history -a;history -r'
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/jaburns/google-cloud-sdk/path.bash.inc' ]; then . '/home/jaburns/google-cloud-sdk/path.bash.inc'; fi
