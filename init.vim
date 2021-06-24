@@ -40,6 +40,7 @@ Plug 'tpope/vim-surround'
 " Syntax highlights
 Plug 'OrangeT/vim-csharp'
 Plug 'leafgarland/typescript-vim'
+Plug 'cespare/vim-toml'
 
 " Jump to character patterns quickly
 Plug 'easymotion/vim-easymotion'
@@ -79,7 +80,8 @@ set signcolumn=yes      " Always show error/info column on left
 set clipboard^=unnamed,unnamedplus " Use system clipboard as default
 set pastetoggle=<F7>    " F7 for paste mode which doesnt insert tabs and junk
 set ignorecase          " Case insensitive search for all lowercase unless \C provided
-set noequalalways       " Dont' resize windows when they're opened/closed
+set noequalalways       " Dont resize windows when they're opened/closed
+set splitbelow          " Default to splitting windows downwards
 set smartcase           "  "
 
 " Space as leader
@@ -176,7 +178,7 @@ match Tabs "\t"
 
 function! BuildAndRunProject(...)
     echo 
-    vsplit
+    split
     exe "normal \<c-w>l"
     Glcd
     exe "e term://" . join(a:000)
@@ -220,14 +222,14 @@ nmap <silent> <leader>f <Plug>(coc-references)
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gB :Git branch<cr>
-nnoremap <leader>gg :botright vertical Git<cr>
-nnoremap <leader>gd :botright vertical Git diff<cr>
+nnoremap <leader>gg :Git<cr>
+nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gf :split<cr>:e term://git fetch --all<cr>i
 nnoremap <leader>gu :split<cr>:e term://git pull --rebase<cr>i
 nnoremap <leader>gU :split<cr>:e term://git pull<cr>i
 nnoremap <leader>gp :split<cr>:e term://git push<cr>i
-nnoremap <leader>gl :botright vertical Git log --all --graph --decorate --oneline<cr>
-nnoremap <leader>gL :botright vertical Git log --all --graph --decorate --oneline --first-parent<cr>
+nnoremap <leader>gl :Git log --all --graph --decorate --oneline<cr>
+nnoremap <leader>gL :Git log --all --graph --decorate --oneline --first-parent<cr>
 nnoremap <leader>gb :Git blame<cr>
 nmap <leader>j <Plug>(coc-diagnostic-next)
 nmap <leader>k <Plug>(coc-diagnostic-prev)
