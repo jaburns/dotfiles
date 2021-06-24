@@ -153,7 +153,8 @@ nnoremap <c-w><c-o> 10<c-w>>
 nnoremap <c-w>, 2<c-w><
 nnoremap <c-w>. 2<c-w>>
 
-tnoremap <c-x> <c-\><c-n>
+" Ctrl-w to drop cursor out of terminal
+tnoremap <c-w> <c-\><c-n>
 
 " -------------------- Status line --------------------
 
