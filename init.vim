@@ -35,6 +35,12 @@ Plug 'tpope/vim-surround'
 Plug 'OrangeT/vim-csharp'
 Plug 'leafgarland/typescript-vim'
 
+" Jump to character patterns quickly
+Plug 'easymotion/vim-easymotion'
+
+" Visualize and navigate undo tree
+Plug 'mbbill/undotree'
+
 call plug#end()
 
 " -------------------- Basic configuration --------------------
@@ -160,9 +166,7 @@ endif
 highlight Tabs guibg=#222222
 match Tabs "\t"
 
-" -------------------- Leader key and plugin-related shortcuts --------------------
-
-let g:gitgutter_map_keys = 0
+" -------------------- Leader key and plugin-related config/shortcuts --------------------
 
 function! BuildAndRunProject(...)
     echo 
@@ -198,6 +202,7 @@ nnoremap <leader>t <cmd>CocCommand explorer<cr>
 nnoremap <leader>T <cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<cr>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 vnoremap         Y <cmd>GetCurrentBranchLink<cr>
+nnoremap <leader>u <cmd>UndotreeToggle<cr>
 nnoremap <leader>i <cmd>call CocActionAsync('doHover')<cr>
 nnoremap <leader>o <cmd>copen<cr>
 nnoremap <leader>p viw"_dP
@@ -207,7 +212,6 @@ nmap <silent> <leader>d <Plug>(coc-definition)
 nmap <silent>        gd <Plug>(coc-definition)
 nmap <silent> <leader>f <Plug>(coc-references)
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
-nnoremap <leader>gw :GitGutterAll<cr>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gB :Git branch<cr>
 nnoremap <leader>gg :botright vertical Git<cr>
@@ -245,7 +249,16 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-" -------------------- Plugin configuration --------------------
+" *** Easymotion Config ***
+
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_smartcase = 1
+nmap s<space> <Plug>(easymotion-overwin-f)
+nmap s <Plug>(easymotion-overwin-f2)
+"nmap sh <Plug>(easymotion-linebackward)
+"nmap sj <Plug>(easymotion-j)
+"nmap sk <Plug>(easymotion-k)
+"nmap sl <Plug>(easymotion-lineforward)
 
 " *** FZF Config ***
 
