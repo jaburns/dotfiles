@@ -41,6 +41,7 @@ Plug 'tpope/vim-surround'
 Plug 'OrangeT/vim-csharp'
 Plug 'leafgarland/typescript-vim'
 Plug 'cespare/vim-toml'
+Plug 'tikhomirov/vim-glsl'
 
 " Jump to character patterns quickly
 Plug 'easymotion/vim-easymotion'
@@ -200,6 +201,7 @@ nnoremap gT :bprev<cr>
 nnoremap <c-p> :Files<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
+nnoremap <leader><tab> <cmd>Sleuth<cr>
 
 nnoremap <leader>q <cmd>cclose<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
@@ -221,14 +223,14 @@ nmap <silent> <leader>f <Plug>(coc-references)
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gB :Git branch<cr>
-nnoremap <leader>gg :Ge :<cr>
-nnoremap <leader>gd :Git diff<cr><c-w>k:q<cr>
+nnoremap <leader>gg <c-w>s:Ge :<cr>
+nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gf :split<cr>:e term://git fetch --all<cr>i
 nnoremap <leader>gu :split<cr>:e term://git pull --rebase<cr>i
 nnoremap <leader>gU :split<cr>:e term://git pull<cr>i
 nnoremap <leader>gp :split<cr>:e term://git push<cr>i
-nnoremap <leader>gl :Git log --all --graph --decorate --oneline<cr><c-w>k:q<cr>
-nnoremap <leader>gL :Git log --all --graph --decorate --oneline --first-parent<cr><c-w>k:q<cr>
+nnoremap <leader>gl :Git log --all --graph --decorate --oneline<cr>
+nnoremap <leader>gL :Git log --all --graph --decorate --oneline --first-parent<cr>
 nnoremap <leader>gb :Git blame<cr>
 nmap <leader>j <Plug>(coc-diagnostic-next)
 nmap <leader>k <Plug>(coc-diagnostic-prev)

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+ARGS="$@"
+xfce4-terminal --execute bash -i -c "nvr --servername unity $ARGS"
