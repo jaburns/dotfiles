@@ -4,6 +4,9 @@
   "rust-analyzer.procMacro.enable": true,
   "rust-analyzer.checkOnSave.command": "clippy",
   "rust-analyzer.inlayHints.enable": false,
-  "omnisharp.version": "v1.37.3"
+  "omnisharp.version": "v1.37.3",
+  "explorer.file.hiddenRules": {
+    "extensions": ["meta"]
+  }
 }
 
