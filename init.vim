@@ -201,7 +201,6 @@ nnoremap gT :bprev<cr>
 nnoremap <c-p> :Files<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
-nnoremap <leader><tab> :Sleuth<cr>
 
 nnoremap <leader>q <cmd>cclose<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
