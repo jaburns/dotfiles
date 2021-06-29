@@ -160,7 +160,7 @@ tnoremap <c-w> <c-\><c-n>
 " -------------------- Status line --------------------
 
 set laststatus=2
-set statusline=\ %{getcwd()}\ %#CursorColumn#\ %f\ %#StatusLine#%{coc#status()}%{get(b:,'coc_current_function','')}%#CursorColumn#%=\ %#StatusLine#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %y\ 
+set statusline=\ %{getcwd()}\ %#CursorColumn#\ %f\ %#StatusLine#%{coc#status()}%{get(b:,'coc_current_function','')}%#CursorColumn#%=\ %#StatusLine#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y\ 
 
 " -------------------- Colors --------------------
 
