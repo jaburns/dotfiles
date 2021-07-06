@@ -43,9 +43,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'cespare/vim-toml'
 Plug 'tikhomirov/vim-glsl'
 
-" Jump to character patterns quickly
-Plug 'easymotion/vim-easymotion'
-
 " Visualize and navigate undo tree
 Plug 'mbbill/undotree'
 
@@ -231,8 +228,10 @@ nnoremap <leader>gp :split<cr>:e term://git push<cr>i
 nnoremap <leader>gl :Git log --all --graph --decorate --oneline<cr>
 nnoremap <leader>gL :Git log --all --graph --decorate --oneline --first-parent<cr>
 nnoremap <leader>gb :Git blame<cr>
-nmap <leader>j <Plug>(coc-diagnostic-next)
-nmap <leader>k <Plug>(coc-diagnostic-prev)
+nmap <leader>j :cnext<cr>
+nmap <leader>J <Plug>(coc-diagnostic-next)
+nmap <leader>k :cprev<cr>
+nmap <leader>K <Plug>(coc-diagnostic-prev)
 
 nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader>v <cmd>e $MYVIMRC<cr>
@@ -256,17 +255,6 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
-
-" *** Easymotion Config ***
-
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-let g:EasyMotion_smartcase = 1
-nmap s<space> <Plug>(easymotion-overwin-f)
-nmap s <Plug>(easymotion-overwin-f2)
-"nmap sh <Plug>(easymotion-linebackward)
-"nmap sj <Plug>(easymotion-j)
-"nmap sk <Plug>(easymotion-k)
-"nmap sl <Plug>(easymotion-lineforward)
 
 " *** FZF Config ***
 
