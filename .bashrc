@@ -73,6 +73,15 @@ gitfuck() {
     git submodule update --init --recursive
 }
 
+# Remove submodule
+gitkillsm() {
+    [[ ( -z "$1" ) || ( -z "$2" ) ]] && echo "Example: gitkillsm path/to/submodule 'commit message'" && return
+    git submodule deinit "$1"
+    git rm "$1"
+    git commit -m "$2"
+    rm -rf ".git/modules/$1"
+}
+
 # Rename some files with sed regex
 ren() {
     [[ -z $1 ]] && echo "Example: ren '*.txt' 's/-suffix/-newsuff/'" && return
