@@ -165,12 +165,13 @@ set termguicolors
 
 if has("win32")
   colorscheme xcodelighthc
+  highlight Tabs guibg=#dddddd
 else
   colorscheme corvine
   hi Normal guibg=NONE
+  highlight Tabs guibg=#222222
 endif
 
-highlight Tabs guibg=#222222
 match Tabs "\t"
 
 " -------------------- Leader key and plugin-related config/shortcuts --------------------
