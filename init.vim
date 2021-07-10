@@ -113,8 +113,16 @@ vnoremap x "_x
 nnoremap Q @q
 
 " Use tick and doubletick to get around quickly, leaving ` for named marks.
-nnoremap ' mM
-nnoremap '' `M
+nnoremap '1 mQ
+nnoremap '2 mW
+nnoremap '3 mE
+nnoremap '4 mR
+nnoremap '5 mT
+nnoremap ''1 `Q
+nnoremap ''2 `W
+nnoremap ''3 `E
+nnoremap ''4 `Q
+nnoremap ''5 `Q
 
 " Keep selection during tabbing. Don't require shift to tab in v-mode.
 vnoremap . >gv
