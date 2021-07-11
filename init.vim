@@ -201,9 +201,6 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 
-nnoremap gt :bnext<cr>
-nnoremap gT :bprev<cr>
-
 nnoremap <c-p> :Files<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
