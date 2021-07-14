@@ -212,7 +212,7 @@ nmap <silent> <leader>r <Plug>(coc-rename)
 nnoremap <leader>t <cmd>CocCommand explorer<cr>
 nnoremap <leader>T <cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<cr>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
-vnoremap         Y <cmd>GetCurrentBranchLink<cr>
+vnoremap         Y :GetCurrentBranchLink<cr>
 nnoremap <leader>u <cmd>UndotreeToggle<cr>
 nnoremap <leader>i <cmd>call CocActionAsync('doHover')<cr>
 nnoremap <leader>o <cmd>copen<cr>
