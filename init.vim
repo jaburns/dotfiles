@@ -76,7 +76,7 @@ set textwidth=0         " Turn off automatic newline insertion
 set wrapmargin=0        "  "
 set signcolumn=yes      " Always show error/info column on left
 set clipboard^=unnamed,unnamedplus " Use system clipboard as default
-set pastetoggle=<F7>    " F7 for paste mode which doesnt insert tabs and junk
+set pastetoggle=<f12>   " F12 for paste mode which doesnt insert tabs and junk
 set ignorecase          " Case insensitive search for all lowercase unless \C provided
 set noequalalways       " Dont resize windows when they're opened/closed
 set splitbelow          " Default to splitting windows downwards
@@ -249,6 +249,7 @@ nnoremap <leader><f4> <cmd>call CocAction('runCommand', 'tsserver.watchBuild')<c
 nnoremap <f4> :Run tsc --watch --noEmit<cr>
 nnoremap <f5> :Run npm start
 nnoremap <f6> :Run node rundev.js
+nnoremap <f7> :Run blender
 
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
