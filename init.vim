@@ -75,6 +75,7 @@ set hlsearch            " Highlight search results
 set viminfo='20,\"500   " Remember copy registers after quitting in the .viminfo file
 set bs=indent,eol,start " Allow backspacing over everything in insert mode
 set nobackup            " No backup~ files
+set nowritebackup       " Really, no backup files even temporarily
 set hidden              " Don't ask to save when changing buffers
 set noswapfile          " Stop creating bothersome swap files
 set lazyredraw          " Don't render every detail when running macros
@@ -181,6 +182,9 @@ set termguicolors
 if has("win32")
   colorscheme xcodelighthc
   highlight Tabs guibg=#dddddd
+  highlight VertSplit guibg=#dddddd
+  highlight VertSplit guibg=#dddddd
+  highlight StatusLine guibg=#dddddd
 else
   colorscheme corvine
   hi Normal guibg=NONE
