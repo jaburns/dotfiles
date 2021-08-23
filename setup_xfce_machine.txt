@@ -39,7 +39,7 @@
 - Settings manager, appearance, arc-dark. Settings manager, window manager, arc-dark
 - If keyboard layout doesnt have RightMeta key, remap flameshot in keyboard shortcuts to ctrl+\
 - Disable desktop icons
-- Install consolas font: https://github.com/pensnarik/consolas-font
+- Install font: Source Code Pro (Regular)
 - Download and install steam, slack, discord
 - If laptop, go to touchpad settings and disable "tap touchpad to click"
 - Install Easystroke Gesture Recognizer and remap mouse back to alt
