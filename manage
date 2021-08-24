@@ -33,7 +33,7 @@ copy_file "$REPO_DIR/redshift.conf" "$HOME/.config/redshift.conf"
 copy_file "$REPO_DIR/init.vim" "$HOME/.config/nvim/init.vim"
 copy_file "$REPO_DIR/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
 copy_file "$REPO_DIR/colors/corvine.vim" "$HOME/.config/nvim/colors/corvine.vim"
-copy_file "$REPO_DIR/colors/xcodelighthc.vim" "$HOME/.config/nvim/colors/xcodelighthc.vim"
+copy_file "$REPO_DIR/colors/envy.vim" "$HOME/.config/nvim/colors/envy.vim"
 
 [[ -d "$HOME/.config/xfce4" ]] && \
     copy_file 'xfce4-keyboard-shortcuts.xml' \

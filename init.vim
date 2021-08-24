@@ -172,17 +172,19 @@ set statusline=\ %{getcwd()}\ %#CursorColumn#\ %f\ %#StatusLine#%{coc#status()}%
 
 set termguicolors
 
-if has("win32")
-  colorscheme xcodelighthc
-  highlight Tabs guibg=#dddddd
-  highlight VertSplit guibg=#dddddd
-  highlight VertSplit guibg=#dddddd
-  highlight StatusLine guibg=#dddddd
-else
-  colorscheme corvine
+"if has("win32")
+  colorscheme envy
+  set background=light
   hi Normal guibg=NONE
-  highlight Tabs guibg=#222222
-endif
+  highlight Tabs guibg=#dddddd
+  "highlight VertSplit guibg=#dddddd
+  "highlight VertSplit guibg=#dddddd
+  "highlight StatusLine guibg=#dddddd
+"else
+"  colorscheme corvine
+"  hi Normal guibg=NONE
+"  highlight Tabs guibg=#222222
+"endif
 
 match Tabs "\t"
 
