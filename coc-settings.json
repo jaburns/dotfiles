@@ -1,8 +1,8 @@
 {
-  "clangd.path": "/home/jaburns/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd",
+  "clangd.path": "/home/jaburns/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",
   "explorer.file.hiddenRules": { "extensions": ["meta"] },
   "omnisharp.version": "v1.37.3",
-  "python.analysis.extraPaths": [ "/home/jaburns/Blender/blender_autocomplete/2.92" ],
+  "python.analysis.extraPaths": [ "/var/local/blender_autocomplete/2.93" ],
   "python.analysis.typeCheckingMode": "off",
   "rust-analyzer.diagnostics.disabled": [ "missing-unsafe", "incorrect-ident-case", "macro-error", "unresolved-proc-macro", "inactive-code" ],
   "rust-analyzer.cargo.allFeatures": true,

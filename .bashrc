@@ -289,3 +289,4 @@ if [ -f '/home/jaburns/google-cloud-sdk/path.bash.inc' ]; then . '/home/jaburns/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/jaburns/google-cloud-sdk/completion.bash.inc' ]; then . '/home/jaburns/google-cloud-sdk/completion.bash.inc'; fi
+. "$HOME/.cargo/env"

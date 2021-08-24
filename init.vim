@@ -3,14 +3,7 @@
 ""
 " - Install vim-plug: https://github.com/junegunn/vim-plug
 " - :PlugInstall
-" - :CocInstall
-"       coc-explorer 
-"       coc-tsserver 
-"       coc-rust-analyzer
-"       coc-pyright 
-"       coc-omnisharp 
-"       coc-json 
-"       coc-clangd
+" - :CocInstall coc-explorer coc-tsserver coc-rust-analyzer coc-pyright coc-:CocInstall coc-explorer coc-tsserver coc-rust-analyzer coc-pyright coc-omnisharp coc-json coc-clangdomnisharp coc-json coc-clangd
 " -------------------------------------------------
 "  Notes
 "    Find and replace
