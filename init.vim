@@ -86,6 +86,9 @@ set smartcase           "  "
 " Space as leader
 let mapleader=' '
 
+" Dont clear clipboard on quit
+autocmd VimLeave * call system("xclip -i -sel p -f | xclip -i -sel c", getreg('+'))
+
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
 
@@ -280,6 +283,7 @@ nnoremap <leader>gp :split<cr>:e term://git push<cr>i
 nnoremap <leader>gl :Git log --all --graph --decorate --oneline<cr>
 nnoremap <leader>gL :Git log --all --graph --decorate --oneline --first-parent<cr>
 nnoremap <leader>gb :Git blame<cr>
+nnoremap <leader>h :CocCommand clangd.switchSourceHeader<cr>
 nmap <leader>j :cnext<cr>
 nmap <leader>J <Plug>(coc-diagnostic-next)
 nmap <leader>k :cprev<cr>

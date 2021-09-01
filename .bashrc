@@ -12,6 +12,8 @@ alias dskill='find . -name .DS_Store > /tmp/dskill && wc -l /tmp/dskill | sed "s
 alias remap-esc='setxkbmap -option caps:escape'
 alias duu='du -hd 1'
 alias dff='df -h'
+alias setclip="xclip -selection c"
+alias getclip="xclip -selection c -o"
 
 if [[ "$OSTYPE" == *linux-gnu* ]]; then
     alias open='xdg-open'
@@ -99,9 +101,9 @@ agsed() {
         return
     fi
     if [[ -z $2 ]]; then
-        ag "$1"
+        rg "$1"
     else
-        ag "$1" | cut -d: -f1 | xargs sed -i -e "$2"
+        rg "$1" | cut -d: -f1 | xargs sed -i -e "$2"
     fi
 }
 
