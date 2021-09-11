@@ -25,7 +25,7 @@ if [[ "$OSTYPE" == "msys" ]]; then
 fi
 
 export PATH=$HOME/.local/bin:$PATH
-export PATH=$PATH:$HOME/tools
+export PATH=$PATH:$HOME/syncbox/tools
 export PATH=$PATH:$HOME/dotfiles/tools
 export PATH=$PATH:$HOME/.cargo/bin
 
