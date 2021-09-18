@@ -4,9 +4,10 @@
 set editing-mode vi
 set keymap vi
 set -o vi
-export EDITOR="vim"
+export EDITOR="nvim"
 
-alias notes='vim ~/gdrive/notes.txt'
+alias v='nvim'
+alias notes='nvim ~/syncbox/notes.txt'
 alias grep='grep --color=auto'
 alias dskill='find . -name .DS_Store > /tmp/dskill && wc -l /tmp/dskill | sed "s:/.*$:.DS_Store files removed:" && while read line; do rm "$line"; done < /tmp/dskill && rm /tmp/dskill'
 alias remap-esc='setxkbmap -option caps:escape'
@@ -18,11 +19,11 @@ alias getclip="xclip -selection c -o"
 if [[ "$OSTYPE" == *linux-gnu* ]]; then
     alias open='xdg-open'
 fi
-if [[ "$OSTYPE" == "msys" ]]; then
-    export PATH=$PATH:/c/nvim/bin
-    alias vim='nvim'
-    alias vi='nvim'
-fi
+# if [[ "$OSTYPE" == "msys" ]]; then
+#     export PATH=$PATH:/c/nvim/bin
+#     alias vim='nvim'
+#     alias vi='nvim'
+# fi
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/syncbox/tools
