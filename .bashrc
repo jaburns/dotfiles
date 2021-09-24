@@ -1,6 +1,6 @@
 #.bashrc
+# cd "$(dirname "${BASH_SOURCE[0]}")" # For reference
 
-# vi mode
 set editing-mode vi
 set keymap vi
 set -o vi
@@ -33,8 +33,7 @@ export PATH=$PATH:$HOME/.cargo/bin
 export FrameworkPathOverride=/etc/mono/4.5
 
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
-
-# cd "$(dirname "${BASH_SOURCE[0]}")" # For reference
+[[ -f '/usr/share/nvm/init-nvm.sh' ]] && source '/usr/share/nvm/init-nvm.sh'
 
 # ----- Simple commands -------------------------------------------------------
 
