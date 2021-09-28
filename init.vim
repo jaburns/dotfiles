@@ -181,7 +181,11 @@ set statusline=\ %{getcwd()}\ %#CursorColumn#\ %f\ %#StatusLine#%{coc#status()}%
 
 set termguicolors
 
-"if has("win32")
+if system("cat /etc/hostname | tr -d '\n'") == "jaburns-desktop"
+  colorscheme corvine
+  hi Normal guibg=NONE
+  highlight Tabs guibg=#222222
+else
   colorscheme envy
   set background=light
   hi Normal guibg=NONE
@@ -189,11 +193,7 @@ set termguicolors
   "highlight VertSplit guibg=#dddddd
   "highlight VertSplit guibg=#dddddd
   "highlight StatusLine guibg=#dddddd
-"else
-"  colorscheme corvine
-"  hi Normal guibg=NONE
-"  highlight Tabs guibg=#222222
-"endif
+endif
 
 match Tabs "\t"
 
