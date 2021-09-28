@@ -87,7 +87,13 @@ set smartcase           "  "
 let mapleader=' '
 
 " Dont clear clipboard on quit
-autocmd VimLeave * call system("xclip -i -sel p -f | xclip -i -sel c", getreg('+'))
+function! SaveVimClipboard()
+    try
+        call system("xclip -i -sel p -f | xclip -i -sel c", getreg('+'))
+    catch
+    endtry
+endfunction
+autocmd VimLeave * call SaveVimClipboard()
 
 " Make Y behave consistently like D instead of yy
 nnoremap Y y$
