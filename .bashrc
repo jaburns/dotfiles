@@ -37,18 +37,6 @@ export FrameworkPathOverride=/etc/mono/4.5
 
 # ----- Simple commands -------------------------------------------------------
 
-# Stop and remove all running containers
-docker_kill() {
-    docker ps | awk '{print $1}' | grep -v CONTAINER | xargs docker stop
-    docker ps -a | awk '{print $1}' | grep -v CONTAINER | xargs docker rm
-}
-
-# Delete all docker images
-docker_clean() {
-    docker_kill
-    docker images | awk '{print $3}' | grep -v IMAGE | xargs docker rmi --force
-}
-
 # Find a file with name containing some text
 finn() {
     find . -iname "*$1*"
@@ -73,15 +61,6 @@ gitfuck() {
     git reset --hard
     git submodule foreach --recursive git reset --hard
     git submodule update --init --recursive
-}
-
-# Remove submodule
-gitkillsm() {
-    [[ ( -z "$1" ) || ( -z "$2" ) ]] && echo "Example: gitkillsm path/to/submodule 'commit message'" && return
-    git submodule deinit "$1"
-    git rm "$1"
-    git commit -m "$2"
-    rm -rf ".git/modules/$1"
 }
 
 # Rename some files with sed regex
@@ -181,20 +160,6 @@ gg() {
             git status
         fi
     fi
-}
-
-gmon() {
-    if [[ ! -z "$1" ]]; then
-        local nap="$1"
-    else
-        local nap=5
-    fi
-
-    while :; do
-        clear
-        git ls-files -m -o --exclude-standard | grep '\.cs$' | gxargs -d"\n" git --no-pager diff
-        sleep "$nap"
-    done
 }
 
 gd() {
