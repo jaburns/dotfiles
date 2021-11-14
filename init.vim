@@ -366,6 +366,9 @@ endfunction
 
 " *** misc ***
 
+" Clear trailing whitespace when saving files
+autocmd BufWritePre * :%s/\s\+$//e
+
 " Auto-format *.rs (rust) files prior to saving them
 autocmd BufWritePre *.rs call CocAction('format')
 
