@@ -1,9 +1,16 @@
 " -------------------------------------------------
 " Additional setup instructions for nvim:
-""
+"
 " - Install vim-plug: https://github.com/junegunn/vim-plug
 " - :PlugInstall
-" - :CocInstall coc-explorer coc-tsserver coc-rust-analyzer coc-pyright coc-:CocInstall coc-explorer coc-tsserver coc-rust-analyzer coc-pyright coc-omnisharp coc-json coc-clangdomnisharp coc-json coc-clangd
+" - :CocInstall
+"     coc-explorer
+"     coc-tsserver
+"     coc-rust-analyzer
+"     coc-pyright
+"     coc-omnisharp
+"     coc-json
+"     coc-clangd
 " -------------------------------------------------
 "  Notes
 "    Find and replace
@@ -175,13 +182,13 @@ tnoremap <c-w> <c-\><c-n>
 " -------------------- Status line --------------------
 
 set laststatus=2
-set statusline=\ %{getcwd()}\ %#CursorColumn#\ %f\ %#StatusLine#%{coc#status()}%{get(b:,'coc_current_function','')}%#CursorColumn#%=\ %#StatusLine#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y\ 
+set statusline=%{getcwd()}\ %#CursorColumn#\ %f\ %#StatusLine#%{coc#status()}%{get(b:,'coc_current_function','')}%#CursorColumn#%=\ %#StatusLine#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
 
 " -------------------- Colors --------------------
 
 set termguicolors
 
-if system("cat /etc/hostname | tr -d '\n'") == "jaburns-desktop"
+if system("cat /etc/hostname | tr -d '\n'") == "jaburns-desktop" || !empty(glob("/tmp/force-dark-vim"))
   colorscheme corvine
   hi Normal guibg=NONE
   highlight Tabs guibg=#222222
@@ -190,16 +197,16 @@ else
   set background=light
   hi Normal guibg=NONE
   highlight Tabs guibg=#dddddd
-  "highlight VertSplit guibg=#dddddd
-  "highlight VertSplit guibg=#dddddd
-  "highlight StatusLine guibg=#dddddd
+  highlight VertSplit guibg=#dddddd
+  highlight VertSplit guibg=#dddddd
+  highlight StatusLine guibg=#dddddd
 endif
 
 match Tabs "\t"
 
 "   " ---------- Make terminal auto-close when exit with 0 error code ----------
 "   "https://vi.stackexchange.com/questions/10292/how-to-close-and-and-delete-terminal-buffer-if-programs-exited
-"   
+"
 "   " Get the exit status from a terminal buffer by looking for a line near the end
 "   " of the buffer with the format, '[Process exited ?]'.
 "   func! s:getExitStatus() abort
@@ -220,13 +227,13 @@ match Tabs "\t"
 "     endwhile
 "     throw 'Could not determine exit status for buffer, ' . expand('%')
 "   endfunc
-"   
+"
 "   func! s:afterTermClose() abort
 "     if s:getExitStatus() == 0
 "       bdelete!
 "     endif
 "   endfunc
-"   
+"
 "   augroup MyNeoterm
 "     autocmd!
 "     " The line '[Process exited ?]' is appended to the terminal buffer after the
@@ -344,7 +351,7 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-j:select-all --reverse'
 " :Prg To ripgrep from the git project root of the current buffer with FZF
 command! -bang -nargs=* Prg
   \ call fzf#vim#grep(
-  \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, 
+  \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
   \   fzf#vim#with_preview({'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}), <bang>0)
 
 " Helper function to write quickfix to temp file and open with preview with FZF
