@@ -39,6 +39,13 @@ copy_file "$REPO_DIR/colors/envy.vim" "$HOME/.config/nvim/colors/envy.vim"
     copy_file 'xfce4-keyboard-shortcuts.xml' \
         "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml"
 
+if [[ "$MODE" == 'install' ]]; then
+    if [[ ! -f '/usr/share/xfce4/terminal/colorschemes/xfce4-terminal-dark-theme.theme' ]]; then
+        sudo cp xfce4-terminal-dark-theme.theme /usr/share/xfce4/terminal/colorschemes/
+        sudo cp xfce4-terminal-light-theme.theme /usr/share/xfce4/terminal/colorschemes/
+    fi
+fi
+
 #########################################
 # vscode settings, unused/disabled
 #########################################
