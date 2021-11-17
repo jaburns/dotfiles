@@ -62,6 +62,8 @@ filetype plugin indent on
 
 set mouse=a
 set tabstop=4           " A tab is rendered as n spaces
+set shiftwidth=4        " Default tab size is 4
+set expandtab           " Default to spaces instead of tabs
 set linebreak           " Break wrapped lines on words
 set ruler               " Show the line and column number of the cursor position
 set number              " Print the line number in front of each line
