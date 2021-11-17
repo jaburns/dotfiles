@@ -1,5 +1,6 @@
 - Download chrome, login, and set as default browser, click status bar icon and "Dont run in background"
     Change launch shortcut to, if setting up dark machine
+      (For applications menu: /usr/share/applications)
       /usr/bin/google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode %U --use-gl=desktop
 - Install ULauncher
 - Download and install overgrive, point to /home/jaburns/gdrive
