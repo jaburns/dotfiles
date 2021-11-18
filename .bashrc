@@ -12,6 +12,7 @@ alias grep='grep --color=auto'
 alias dskill='find . -name .DS_Store > /tmp/dskill && wc -l /tmp/dskill | sed "s:/.*$:.DS_Store files removed:" && while read line; do rm "$line"; done < /tmp/dskill && rm /tmp/dskill'
 alias remap-esc='setxkbmap -option caps:escape'
 alias duu='du -hd 1'
+alias lss='ls -lh'
 alias dff='df -h'
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
