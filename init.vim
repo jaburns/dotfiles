@@ -22,8 +22,10 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Language server manager
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'antoinemadec/coc-fzf'
+if $NVIM_BASIC_MODE != "1"
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'antoinemadec/coc-fzf'
+endif
 
 " Auto reload externally modified files
 Plug 'djoshea/vim-autoread'
@@ -184,7 +186,12 @@ tnoremap <c-w> <c-\><c-n>
 " -------------------- Status line --------------------
 
 set laststatus=2
-set statusline=%{getcwd()}\ %#CursorColumn#\ %f\ %#StatusLine#%{coc#status()}%{get(b:,'coc_current_function','')}%#CursorColumn#%=\ %#StatusLine#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
+
+if $NVIM_BASIC_MODE == "1"
+  set statusline=%{getcwd()}\ %#CursorColumn#\ %f\ %#StatusLine#%#CursorColumn#%=\ %#StatusLine#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
+else
+  set statusline=%{getcwd()}\ %#CursorColumn#\ %f\ %#StatusLine#%{coc#status()}%{get(b:,'coc_current_function','')}%#CursorColumn#%=\ %#StatusLine#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
+endif
 
 " -------------------- Colors --------------------
 
@@ -379,7 +386,9 @@ endfunction
 autocmd BufWritePre * :%s/\s\+$//e
 
 " Auto-format *.rs (rust) files prior to saving them
-autocmd BufWritePre *.rs call CocAction('format')
+if $NVIM_BASIC_MODE != "1"
+  autocmd BufWritePre *.rs call CocAction('format')
+endif
 
 " Set completeopt to have a better completion experience
 " :help completeopt

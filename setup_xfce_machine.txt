@@ -53,6 +53,14 @@
     sudo vim /etc/default/apport # set enabled=0
 - To automount USB drives: https://askubuntu.com/questions/683034/how-to-automatically-mount-usb-flash-drive-at-startup
 
+- To have double click from thunar launch nvim without coc:
+    - Write to /usr/bin/vi, and chmod +x:
+        #!/usr/bin/env bash
+        NVIM_BASIC_MODE=1 nvim "$@"
+    - In /usr/share/applications/nvim.desktop, replace the TryExec and Exec lines:
+        TryExec=vi
+        Exec=vi %F
+
 Node.js
 - Install node 12 lts:
     sudo apt update
