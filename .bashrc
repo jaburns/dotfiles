@@ -7,12 +7,13 @@ set -o vi
 export EDITOR="nvim"
 
 alias v='nvim'
+alias l='ls -lh'
+alias d='du -hd 1'
+alias cls='printf "\n\n\n\n\n\n\n\n\n\n"'
+alias dff='df -h'
 alias notes='nvim ~/syncbox/notes.txt'
 alias grep='grep --color=auto'
 alias remap-esc='setxkbmap -option caps:escape'
-alias duu='du -hd 1'
-alias lss='ls -lh'
-alias dff='df -h'
 alias treee='tree -d -I  "node_modules|target|__pycache__"'
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
