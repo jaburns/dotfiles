@@ -197,7 +197,7 @@ endif
 
 set termguicolors
 
-if system("cat /etc/hostname | tr -d '\n'") == "jaburns-desktop" || !empty(glob("/tmp/dv"))
+if system("cat /etc/hostname | tr -d '\n'") == "jaburns-desktop" || !empty(glob("/home/jaburns/.darkvim"))
   colorscheme corvine
   hi Normal guibg=NONE
   highlight Tabs guibg=#222222
