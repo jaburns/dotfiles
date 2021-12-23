@@ -249,6 +249,9 @@ ps1_render() {
     echo -n '\[\033[0;36m\]:; \[\033[0m\]'
 }
 
+# Disable ctrl-s freezing terminal output
+stty -ixon
+
 # history -a..-r appends unwritten history to .bash_history immediately
 # and reloads to avoid losing history with multiple shells open
 export PROMPT_COMMAND='PS1="$(ps1_render $?)";history -a;history -r'

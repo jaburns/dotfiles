@@ -6,7 +6,7 @@
   "python.analysis.typeCheckingMode": "off",
   "rust-analyzer.diagnostics.disabled": [ "missing-unsafe", "incorrect-ident-case", "macro-error", "unresolved-proc-macro", "inactive-code" ],
   "rust-analyzer.cargo.allFeatures": true,
-  "//rust-analyzer.cargo.target": "wasm32-unknown-unknown",
+  "/rust-analyzer.cargo.target": "wasm32-unknown-unknown",
   "rust-analyzer.procMacro.enable": true,
   "rust-analyzer.checkOnSave.command": "clippy",
   "rust-analyzer.inlayHints.enable": false
