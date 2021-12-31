@@ -197,7 +197,7 @@ endif
 
 set termguicolors
 
-if len(system("grep 'VIM_DARKMODE=1' /home/jaburns/.alacritty.yml")) > 2
+if system("grep colors: /home/jaburns/.alacritty.yml | tr -d '\n'") == "colors: *dark"
   colorscheme corvine
   hi Normal guibg=NONE
   highlight Tabs guibg=#222222
