@@ -29,6 +29,7 @@ copy_home .bashrc
 copy_home .gitignore_global
 copy_home .gitconfig
 copy_home .tmux.conf
+copy_home .alacritty.yml
 copy_file "$REPO_DIR/redshift.conf" "$HOME/.config/redshift.conf"
 copy_file "$REPO_DIR/init.vim" "$HOME/.config/nvim/init.vim"
 copy_file "$REPO_DIR/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"

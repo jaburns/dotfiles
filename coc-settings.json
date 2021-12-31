@@ -1,5 +1,6 @@
 {
   "clangd.path": "/home/jaburns/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",
+  "diagnostic.messageTarget": "echo",
   "explorer.file.hiddenRules": { "extensions": ["meta"] },
   "omnisharp.version": "v1.37.3",
   "python.analysis.extraPaths": [ "/var/local/blender_autocomplete/2.93" ],

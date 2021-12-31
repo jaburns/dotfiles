@@ -316,6 +316,8 @@ nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader>v <cmd>e $MYVIMRC<cr>
 nnoremap <leader>V <cmd>CocConfig<cr>
 nnoremap <leader>n <cmd>enew<cr>
+nmap <leader>m :call coc#config('diagnostic.messageTarget', 'echo')<cr>
+nmap <leader>M :call coc#config('diagnostic.messageTarget', 'float')<cr>
 
 nnoremap <leader><f4> <cmd>call CocAction('runCommand', 'tsserver.watchBuild')<cr>:copen<cr>
 nnoremap <f4> :Run tsc --watch --noEmit<cr>
