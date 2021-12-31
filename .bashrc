@@ -34,9 +34,6 @@ export PATH=$PATH:$HOME/.cargo/bin
 
 export FrameworkPathOverride=/etc/mono/4.5
 
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
-[[ -f '/usr/share/nvm/init-nvm.sh' ]] && source '/usr/share/nvm/init-nvm.sh'
-
 # ----- Simple commands -------------------------------------------------------
 
 # Find a file with name containing some text
@@ -90,9 +87,7 @@ agsed() {
 
 # ----- set default output for ls; add auto ls after cd -----------------------
 
-if command -v exa > /dev/null; then
-    alias ls='exa'
-elif [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$(uname)" == "Darwin" ]]; then
     alias ls='ls -G'
 else
     alias ls='ls --color'
@@ -256,9 +251,7 @@ stty -ixon
 # and reloads to avoid losing history with multiple shells open
 export PROMPT_COMMAND='PS1="$(ps1_render $?)";history -a;history -r'
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/jaburns/google-cloud-sdk/path.bash.inc' ]; then . '/home/jaburns/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/jaburns/google-cloud-sdk/completion.bash.inc' ]; then . '/home/jaburns/google-cloud-sdk/completion.bash.inc'; fi
-. "$HOME/.cargo/env"
+# External configs
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+[[ -f '/usr/share/nvm/init-nvm.sh' ]] && source '/usr/share/nvm/init-nvm.sh'
+[[ -f '/usr/share/autojump/autojump.bash' ]] && source '/usr/share/autojump/autojump.bash'
