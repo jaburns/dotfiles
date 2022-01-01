@@ -197,7 +197,7 @@ endif
 
 set termguicolors
 
-if system("grep colors: /home/jaburns/.alacritty.yml | tr -d '\n'") == "colors: *dark"
+if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
   colorscheme corvine
   hi Normal guibg=NONE
   highlight Tabs guibg=#222222

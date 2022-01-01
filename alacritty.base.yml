@@ -1,7 +1,8 @@
 font:
   normal:
     family: Source Code Pro
-  size: 7.0
+  size: 10.0
+  #size: 7.0  # laptop
 key_bindings:
   - { key: F11, action: ToggleFullscreen }
 dynamic_padding: true
@@ -54,4 +55,4 @@ schemes:
       cyan: '0x93E0E3'
       white: '0xFFFFFF'
 
-colors: *light
+colors: *dark

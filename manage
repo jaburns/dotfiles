@@ -29,7 +29,6 @@ copy_home .bashrc
 copy_home .gitignore_global
 copy_home .gitconfig
 copy_home .tmux.conf
-copy_home .alacritty.yml
 copy_file "$REPO_DIR/redshift.conf" "$HOME/.config/redshift.conf"
 copy_file "$REPO_DIR/init.vim" "$HOME/.config/nvim/init.vim"
 copy_file "$REPO_DIR/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
@@ -40,9 +39,6 @@ copy_file "$REPO_DIR/colors/envy.vim" "$HOME/.config/nvim/colors/envy.vim"
     copy_file 'xfce4-keyboard-shortcuts.xml' \
         "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml"
 
-if [[ "$MODE" == 'install' ]]; then
-    if [[ ! -f '/usr/share/xfce4/terminal/colorschemes/xfce4-terminal-dark-theme.theme' ]]; then
-        sudo cp xfce4-terminal-dark-theme.theme /usr/share/xfce4/terminal/colorschemes/
-        sudo cp xfce4-terminal-light-theme.theme /usr/share/xfce4/terminal/colorschemes/
-    fi
+if [[ "$MODE" == 'install' ]] && [[ ! -f "$HOME/.alacritty.yml" ]]; then
+    printf "import:\n  - ~/dotfiles/alacritty.dark.yml\n" > "$HOME/.alacritty.yml"
 fi
