@@ -19,6 +19,7 @@ LAYOUTS = [
     [[ 2.0/3, 0, 1.0/3, 1 ], [ 1.0/3, 0, 2.0/3, 1 ]],
 
     [[ 3.0/10, 1.0/6, 4.0/10, 4.0/6 ]],
+    [[ 0, 0, 1, 1 ]],
 ]
 
 g_monitor_whxys = []
@@ -127,6 +128,7 @@ def run_fill_rest():
     monitor_index = get_monitor_index_for_point(this_dims['cx'], this_dims['cy'])
     mw, mh, mx, my = g_monitor_whxys[monitor_index]
     mh -= TASK_BAR_HEIGHT
+    my += TASK_BAR_HEIGHT
     this_layout = convert_dims_to_layout(this_dims, mw, mh, mx, my)
 
     for win_id in get_visible_other_windows(this_win_id):
@@ -145,6 +147,7 @@ def run_layout_or_next_monitor(win_id, maybe_layout):
 
     mw, mh, mx, my = g_monitor_whxys[monitor_index]
     mh -= TASK_BAR_HEIGHT
+    my += TASK_BAR_HEIGHT
 
     if maybe_layout == None:
         layout = convert_dims_to_layout(dims, mw, mh, mx, my)
