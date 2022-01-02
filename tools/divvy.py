@@ -7,7 +7,7 @@ import sys
 
 MINIMIZE_BG_PAD = 32
 
-TASK_BAR_HEIGHT = 26
+TASK_BAR_HEIGHT = 25
 LAYOUTS = [
     #/ x, y, w, h
     [[     0, 0, 1,     1 ], [ 1.0/4, 0, 1.0/2, 1 ], [ 1.0/3, 0, 1.0/3, 1 ]], # m-m (maximized / middle)
