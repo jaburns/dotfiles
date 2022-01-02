@@ -1,7 +1,5 @@
 import:
   - ~/dotfiles/alacritty.base.yml
-font:
-  size: 10.0
 background_opacity: 0.95
 colors: #dark_pastels
   primary:

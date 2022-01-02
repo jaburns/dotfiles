@@ -1,7 +1,5 @@
 import:
   - ~/dotfiles/alacritty-base.yml
-font:
-  size: 7.0
 colors: #atom_one_light
   primary:
     background: '0xf8f8f8'
