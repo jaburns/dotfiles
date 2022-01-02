@@ -296,7 +296,7 @@ nmap <silent> <leader>f <Plug>(coc-references)
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gB :Git branch<cr>
-nnoremap <leader>gg <c-w>s:Ge :<cr>
+nnoremap <leader>gg :Ge :<cr>
 nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gf :split<cr>:e term://git fetch --all<cr>i
 nnoremap <leader>gu :split<cr>:e term://git pull --rebase<cr>i
