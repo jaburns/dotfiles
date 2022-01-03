@@ -195,6 +195,7 @@
       <property name="&lt;Super&gt;equal" type="string" value="add_workspace_key"/>
       <property name="&lt;Super&gt;minus" type="string" value="del_active_workspace_key"/>
       <property name="&lt;Super&gt;Down" type="string" value="hide_window_key"/>
+      <property name="&lt;Super&gt;b" type="string" value="maximize_window_key"/>
     </property>
   </property>
   <property name="providers" type="array">
