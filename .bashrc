@@ -17,7 +17,6 @@ alias remap-esc='setxkbmap -option caps:escape'
 alias treee='tree -d -I  "node_modules|target|__pycache__"'
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
-alias syncadmin="open http://localhost:8384"
 
 if [[ "$OSTYPE" == *linux-gnu* ]]; then
     alias open='xdg-open'
