@@ -178,8 +178,10 @@ alias gm='git merge'
 alias gco='git checkout'
 alias gb='git branch'
 alias gcp='git cherry-pick'
+alias gl='git log --all --graph --decorate --oneline --pretty=format:"%C(yellow)%h %C(green)%an%C(auto)%d %C(reset)%s"'
 alias glf='git log --all --graph --decorate --oneline --first-parent'
-alias gl='git log --all --graph --decorate --oneline'
+alias gld='git log --all --graph --decorate --oneline --date=relative --pretty=format:"%C(yellow)%h %C(blue)%ad %C(green)%an%C(auto)%d %C(reset)%s"'
+alias gll='git log --all --graph --decorate --oneline'
 
 _gb_complete() {
     local word=${COMP_WORDS[COMP_CWORD]}
