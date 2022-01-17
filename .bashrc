@@ -36,6 +36,13 @@ export FrameworkPathOverride=/etc/mono/4.5
 
 # ----- Simple commands -------------------------------------------------------
 
+timer() {
+    (
+        sleep "$1"
+        notify-send -i face-smile TIMER "$2"
+    ) &
+}
+
 # Find a file with name containing some text
 finn() {
     find . -iname "*$1*"
