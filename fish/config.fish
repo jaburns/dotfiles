@@ -50,6 +50,4 @@ if status is-interactive
     alias gld='git log --all --graph --decorate --oneline --date=relative --pretty=format:"%C(yellow)%h %C(blue)%ad %C(green)%an%C(auto)%d %C(reset)%s"'
     alias gll='git log --all --graph --decorate --oneline'
 
-    source ~/.config/fish/autojump.fish
-
 end
