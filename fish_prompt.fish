@@ -1,14 +1,14 @@
 function fish_prompt
     # Last status and username
-    set -l pip $pipestatus
-    if test $pip = 0
+    set -l lstatus $status
+    if test $lstatus = 0
         set_color green
         echo -n "# $USER"
     else
-        set -l promp (__fish_print_pipestatus '{' '}' '' (set_color red) (set_color red) $pip)
-        set_color red
+        set -l promp (__fish_print_pipestatus '{' '}' '' (set_color brred) (set_color brred) $lstatus)
+        set_color brred
         echo -n "# $promp"
-        set_color red
+        set_color brred
         echo -n " $USER"
     end
 
@@ -22,7 +22,7 @@ function fish_prompt
         set -l mode
         switch $fish_bind_mode
             case default
-                set mode (set_color red)'[N]'
+                set mode (set_color brred)'[N]'
             case insert
                 set mode (set_color green)'[I]'
             case replace_one
