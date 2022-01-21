@@ -8,7 +8,4 @@ key_bindings:
   - { key: F11, action: ToggleFullscreen }
 dynamic_padding: true
 shell:
-  program: /usr/bin/bash
-  args:
-    - -c
-    - tmux
+  program: tmux
