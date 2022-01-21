@@ -51,6 +51,7 @@ Plug 'OrangeT/vim-csharp'
 Plug 'leafgarland/typescript-vim'
 Plug 'cespare/vim-toml'
 Plug 'tikhomirov/vim-glsl'
+Plug 'dag/vim-fish'
 
 " Visualize and navigate undo tree
 Plug 'mbbill/undotree'
