@@ -35,13 +35,8 @@ copy_file "$REPO_DIR/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
 copy_file "$REPO_DIR/colors/corvine.vim" "$HOME/.config/nvim/colors/corvine.vim"
 copy_file "$REPO_DIR/colors/envy.vim" "$HOME/.config/nvim/colors/envy.vim"
 copy_file "$REPO_DIR/config.fish" "$HOME/.config/fish/config.fish"
-if [[ "$MODE" == 'install' ]]; then
-    rm -rf "$HOME/.config/fish/functions"
-    cp -r "$REPO_DIR/fish_functions" "$HOME/.config/fish/functions"
-else
-    rm -rf "$REPO_DIR/fish_functions"
-    cp -r "$HOME/.config/fish/functions" "$REPO_DIR/fish_functions"
-fi
+copy_file "$REPO_DIR/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
+copy_file "$REPO_DIR/fish_plugins" "$HOME/.config/fish/fish_plugins"
 
 [[ -d "$HOME/.config/xfce4" ]] && \
     copy_file 'xfce4-keyboard-shortcuts.xml' \
