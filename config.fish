@@ -1,6 +1,8 @@
 if status is-interactive
 
     fish_vi_key_bindings
+
+    # Remove greeting
     set fish_greeting
 
     # Auto-ls after a cd
@@ -18,21 +20,13 @@ if status is-interactive
     alias cls='printf "\n\n\n\n\n\n\n\n\n\n"'
     alias dff='df -h'
     alias notes='nvim ~/syncbox/notes.txt'
-    alias grep='grep --color=auto'
     alias remap-esc='setxkbmap -option caps:escape'
     alias treee='tree -d -I  "node_modules|target|__pycache__"'
     alias setclip='xclip -selection c'
     alias getclip='xclip -selection c -o'
     alias open='xdg-open'
 
-    fish_add_path ~/.local/bin
-    fish_add_path ~/syncbox/tools
-    fish_add_path ~/dotfiles/tools
-    fish_add_path ~/.cargo/bin
-
-    # TODO gg function
     alias gg='git status'
-
     alias gc='git commit'
     alias ga='git add'
     alias gp='git push'
@@ -48,5 +42,10 @@ if status is-interactive
     alias glf='git log --all --graph --decorate --oneline --first-parent'
     alias gld='git log --all --graph --decorate --oneline --date=relative --pretty=format:"%C(yellow)%h %C(blue)%ad %C(green)%an%C(auto)%d %C(reset)%s"'
     alias gll='git log --all --graph --decorate --oneline'
+
+    fish_add_path ~/.local/bin
+    fish_add_path ~/syncbox/tools
+    fish_add_path ~/dotfiles/tools
+    fish_add_path ~/.cargo/bin
 
 end
