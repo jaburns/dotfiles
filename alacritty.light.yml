@@ -1,5 +1,5 @@
 import:
-  - ~/dotfiles/alacritty-base.yml
+  - ~/dotfiles/alacritty.base.yml
 colors: #atom_one_light
   primary:
     background: '0xf8f8f8'
