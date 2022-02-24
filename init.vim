@@ -75,7 +75,7 @@ set cursorline          " Highlight the cursor line
 set nostartofline       " Don't jump to start of line when paging up/down
 set timeoutlen=500      " Set multi-character command time-out
 set title               " Show file in title bar
-set rnu                 " Use relative line numbers
+"set rnu                " Use relative line numbers
 set hlsearch            " Highlight search results
 set viminfo='20,\"500   " Remember copy registers after quitting in the .viminfo file
 set bs=indent,eol,start " Allow backspacing over everything in insert mode
