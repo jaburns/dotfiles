@@ -4,7 +4,7 @@
   "diagnostic.virtualText": true,
   "explorer.file.hiddenRules": { "extensions": ["meta"] },
   "omnisharp.version": "v1.37.3",
-  "python.analysis.extraPaths": [ "/var/local/blender_autocomplete/2.93" ],
+  "python.analysis.extraPaths": [ "/var/local/blender_autocomplete/3.0" ],
   "python.analysis.typeCheckingMode": "off",
   "rust-analyzer.diagnostics.disabled": [ "missing-unsafe", "incorrect-ident-case", "macro-error", "unresolved-proc-macro", "inactive-code" ],
   "rust-analyzer.cargo.allFeatures": true,

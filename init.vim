@@ -272,6 +272,10 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 
+" No paste with middle mouse wheel
+map <MiddleMouse> <Nop>
+imap <MiddleMouse> <Nop>
+
 nnoremap <c-p> :Files<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
