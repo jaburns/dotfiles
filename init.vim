@@ -296,6 +296,7 @@ nnoremap <leader>y :let @+ = expand("%:p")<cr>
 vnoremap         Y :GetCurrentBranchLink<cr>
 nnoremap <leader>u <cmd>UndotreeToggle<cr>
 nnoremap <leader>i <cmd>call CocActionAsync('doHover')<cr>
+nmap <silent> <leader>I <Plug>(coc-implementation)
 nnoremap <leader>o <cmd>copen<cr>
 nnoremap <leader>p viw"_dP
 
