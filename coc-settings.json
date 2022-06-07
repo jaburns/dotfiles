@@ -10,6 +10,10 @@
   "rust-analyzer.cargo.allFeatures": true,
   "rust-analyzer.procMacro.enable": true,
   "rust-analyzer.checkOnSave.command": "clippy",
-  "rust-analyzer.inlayHints.enable": false,
+  "rust-analyzer.inlayHints.enable": true,
+  "rust-analyzer.inlayHints.chainingHints.enable": true,
+  "rust-analyzer.inlayHints.closureReturnTypeHints.enable": true,
+  "rust-analyzer.inlayHints.parameterHints.enable": true,
+  "rust-analyzer.inlayHints.typeHints.enable": false,
   "//": { "rust-analyzer.cargo.target": "wasm32-unknown-unknown" }
 }
