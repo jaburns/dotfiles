@@ -290,7 +290,7 @@ nnoremap <leader>q <cmd>cclose<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
 nnoremap <leader>e <cmd>CocFzfList diagnostics<cr>
 nmap <silent> <leader>r <Plug>(coc-rename)
-nnoremap <leader>t <cmd>CocCommand explorer<cr>
+nnoremap <leader>t <cmd>CocCommand explorer --sources buffer+,file+ --open-action-strategy previousWindow<cr>
 nnoremap <leader>T <cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<cr>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 vnoremap         Y :GetCurrentBranchLink<cr>
