@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+for x in *.wav; do
+    ffmpeg -i "$x" -acodec libvorbis "${x/.wav/.ogg}"
+done
+rm *.wav
