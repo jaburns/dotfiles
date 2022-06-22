@@ -314,8 +314,7 @@ nnoremap <leader>gf :split<cr>:e term://git fetch --all<cr>i
 nnoremap <leader>gu :split<cr>:e term://git pull --rebase<cr>i
 nnoremap <leader>gU :split<cr>:e term://git pull<cr>i
 nnoremap <leader>gp :split<cr>:e term://git push<cr>i
-nnoremap <leader>gl :Git log --all --graph --decorate --oneline<cr>
-nnoremap <leader>gL :Git log --all --graph --decorate --oneline --first-parent<cr>
+nnoremap <leader>gl :Git log --all --graph --decorate --oneline --date=relative --pretty=format:"%h %ad %an%d :: %s"<cr>
 nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>h :CocCommand clangd.switchSourceHeader<cr>
 nmap <leader>j :cnext<cr>
@@ -333,8 +332,7 @@ nmap <leader>M :call coc#config('diagnostic.messageTarget', 'float')<cr>
 
 nnoremap <leader><f4> <cmd>call CocAction('runCommand', 'tsserver.watchBuild')<cr>:copen<cr>
 nnoremap <f4> :Run tsc --watch --noEmit<cr>
-nnoremap <f5> :Run npm start
-nnoremap <f6> :Run node rundev.js
+nnoremap <f5> :Run node build.js
 nnoremap <f7> :Run blender
 
 inoremap <silent><expr> <c-space> coc#refresh()
