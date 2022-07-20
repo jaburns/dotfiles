@@ -6,13 +6,13 @@ if status is-interactive
     set fish_greeting
 
     # Auto-ls after a cd
-    function cdls
-        functions --erase cd
-        cd $argv
-        ls
-        alias cd=cdls
-    end
-    alias cd=cdls
+    # function cdls
+    #     functions --erase cd
+    #     cd $argv
+    #     ls
+    #     alias cd=cdls
+    # end
+    # alias cd=cdls
 
     alias v='nvim'
     alias l='ls -lh'
