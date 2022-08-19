@@ -303,6 +303,7 @@ nnoremap <leader>p viw"_dP
 nmap <silent> <leader>a <Plug>(coc-codeaction-selected)w
 nnoremap <leader>s :%s/\s\+$//g<cr>
 nmap <silent> <leader>d <Plug>(coc-definition)
+nmap <silent> <leader>D <Plug>(coc-type-definition)
 nmap <silent>        gd <Plug>(coc-definition)
 nmap <silent> <leader>f <Plug>(coc-references)
 nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
