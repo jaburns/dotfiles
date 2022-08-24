@@ -338,7 +338,7 @@ nnoremap <f5> :Run node build.js
 nnoremap <f7> :Run blender
 
 inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<cr>"
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
       \ CheckBackspace() ? "\<Tab>" :
