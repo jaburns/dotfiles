@@ -5,7 +5,7 @@ env:
 font:
   normal:
     family: Source Code Pro
-  size: 10.0
+  size: 9.5
 key_bindings:
   - { key: F11, action: ToggleFullscreen }
 dynamic_padding: true
