@@ -1,7 +1,7 @@
 import:
   - ~/dotfiles/alacritty.base.yml
-window:
-  opacity: 0.9
+#window:
+#  opacity: 0.9
 colors: #dark_pastels
   primary:
     background: '0x1C1C1C'
