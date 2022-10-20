@@ -1,4 +1,5 @@
 {
+  "suggest.noselect": false,
   "clangd.path": "/home/jaburns/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",
   "diagnostic.messageTarget": "echo",
   "diagnostic.virtualText": true,
@@ -7,7 +8,6 @@
   "python.analysis.extraPaths": [ "/var/local/blender_autocomplete/3.0" ],
   "python.analysis.typeCheckingMode": "off",
   "rust-analyzer.diagnostics.disabled": [ "inactive-code", "unresolved-proc-macro" ],
-  "rust-analyzer.cargo.allFeatures": true,
   "rust-analyzer.procMacro.enable": true,
   "rust-analyzer.checkOnSave.command": "clippy",
   "rust-analyzer.inlayHints.enable": false,

@@ -52,6 +52,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'cespare/vim-toml'
 Plug 'tikhomirov/vim-glsl'
 Plug 'dag/vim-fish'
+Plug 'ziglang/zig.vim'
 
 " Visualize and navigate undo tree
 Plug 'mbbill/undotree'
@@ -198,6 +199,8 @@ endif
 
 set termguicolors
 
+au BufNewFile,BufRead *.ejs set filetype=html
+
 if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
   colorscheme corvine
   hi Normal guibg=NONE
@@ -339,10 +342,7 @@ nnoremap <f7> :Run blender
 
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<cr>"
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
+inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 xmap if <Plug>(coc-funcobj-i)
