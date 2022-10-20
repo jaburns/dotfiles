@@ -1,20 +1,7 @@
-- Download chrome, login, and set as default browser, click status bar icon and "Dont run in background"
-    Change launch shortcut to, if setting up dark machine
-      (For applications menu: /usr/share/applications)
-      /usr/bin/google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode %U --use-gl=desktop
-- Install ULauncher
-- Download and install overgrive, point to /home/jaburns/gdrive
-- Download and install vscode
-- Install vscode plugins:
-    Vim,
-    One Monokai 80s Theme,
-    C#,
-    C/C++,
-    Docker,
-    Debugger for Unity,
-    rust-analyzer,
-    Shader languages support for VS Code
-- Open Terminal, switch colors to Presets: Dark Pastels
+- Download latest chromium appimage from: https://ungoogled-software.github.io/ungoogled-chromium-binaries/ to ~/programs
+- ln -s /usr/local/bin/chromium ~/programs/....appimage
+- cp dotfiles/chromium.desktop /usr/share/applications
+- Install ULauncher, alacritty, syncthing
 - Create ssh key
 - Add ssh key to github
 - Install OBS, with required packages/repository
@@ -48,11 +35,6 @@
     Add an Additional Button, select Instant at the bottom, and click mouse back
     Now in Actions tab add a new action, bind key to Alt+., and stroke to mouse back
 - Add command 'easystroke' to application startup.
-- Optionally disable crash notification (if popup happens on boot)
-    sudo rm /var/crash/*
-    sudo vim /etc/default/apport # set enabled=0
-- To automount USB drives: https://askubuntu.com/questions/683034/how-to-automatically-mount-usb-flash-drive-at-startup
-
 - To have double click from thunar launch nvim without coc:
     - Write to /usr/bin/vi, and chmod +x:
         #!/usr/bin/env bash
@@ -60,19 +42,3 @@
     - In /usr/share/applications/nvim.desktop, replace the TryExec and Exec lines:
         TryExec=vi
         Exec=vi %F
-
-Node.js
-- Install node 12 lts:
-    sudo apt update
-    sudo apt -y upgrade
-    sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
-    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-    sudo apt -y install nodejs
-
-Unity
-- Download unity hub app image to ~/unity
-- Add Unity Hub launcher to whisker menu (right click, Edit Applications)
-- Install the latest .NET Core SDK
-    https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
-- Download and install the latest mono runtime from
-    https://www.mono-project.com/download/stable/
