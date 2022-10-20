@@ -1,5 +1,6 @@
 - Download latest chromium appimage from: https://ungoogled-software.github.io/ungoogled-chromium-binaries/ to ~/programs
 - ln -s /usr/local/bin/chromium ~/programs/....appimage
+- In chromium under privacy and security -> cookies -> disable "clear cookies when close all windows"
 - cp dotfiles/chromium.desktop /usr/share/applications
 - Install ULauncher, alacritty, syncthing
 - Create ssh key
