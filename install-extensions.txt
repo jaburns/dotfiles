@@ -1,0 +1,56 @@
+From: https://avoidthehack.com/manually-install-extensions-ungoogled-chromium
+
+This method works by accessing and downloading the .crx file directly.
+
+We do this by using a template URL that takes us right to the .crx file. The template URL is:
+
+https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=[VERSION]&x=id%3D[EXTENSION_ID]%26installsource%3Dondemand%26uc
+
+Note the VERSION and EXTENSION_ID in brackets in the URL...
+
+VERSION = the Chromium browser version
+EXTENSION_ID = is the unique ID of the extension. This comes from an extension's Chrome Web Store page URL.
+Let's run through an example. This time, I will be installing the LocalCDN extension.
+
+1. Get Chromium browser version
+We need to get the version of Chromium we have installed on our system. This is pretty simple.
+
+Open your Chromium browser
+Access the browser's menu. It should be in the top right.
+Click About Chromium
+A new tab should open. This tab should have the version number right there for you, like so:
+about chromium version settings
+
+Copy this version number exactly as you see it, periods and all. Be sure not to copy and extra spaces before or after the number.
+Paste this version number somewhere safe and easily accessed because we will be using it later. For example, I'm pasting mine into Notepad. No need to save.
+2. Get the extension ID
+Now, we need to get the extension ID from the Chrome Web Store.
+
+Open any browser of choice. It doesn't have to be a Chromium based browser.
+Go to the Chrome Web Store.
+Search for the extension you want to download.
+Go to the extension's Chrome Web Store page. Again, I'm on the page for LocalCDN:
+localcdn chrome web store page
+
+Simply look at your browser's address bar. The extension ID is the series of seemingly random letters at the end of the URL:
+extension id of localcdn
+
+As you can see, LocalCDN's extension ID is njdfdhgcmkocbgbhcioffdbicglldapd
+
+Copy this extension ID. Be sure not to accidentally copy any extra spaces after the ID.
+Paste this ID somewhere safe. We'll need it later.
+3. Installing via the CRX URL
+We have both the Chromium browser version number and the ID number of the extension we are installing.
+
+Now it's time to actually pull the .crx file by using the template URL found earlier in this guide.
+
+Paste the Chromium browser version number in place of VERSION. Keep the periods, delete any extra spaces you may have accidentally copied. Be sure to delete the brackets as well!
+Paste the extension ID in place of EXTENSION_ID. Delete any accidental spaces and the brackets as well!
+Your final URL should look something like this:
+https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=86.0.4240.183&x=id%3Dnjdfdhgcmkocbgbhcioffdbicglldapd%26installsource%3Dondemand%26uc
+
+Press Enter on your keyboard.
+In a couple of seconds, you should get a dialog box, like so:
+install localcdn crx
+
+Click Add extension. Your extension should install.
