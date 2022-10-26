@@ -96,6 +96,9 @@ set noequalalways       " Dont resize windows when they're opened/closed
 set splitbelow          " Default to splitting windows downwards
 set smartcase           "  "
 
+" Dont try to be smart about comments
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 " Space as leader
 let mapleader=' '
 
