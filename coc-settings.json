@@ -22,6 +22,7 @@
   "rust-analyzer.inlayHints.typeHints.enable": false,
   "rust-analyzer.inlayHints.typeHints.hideNamedConstructor": false,
   "//": {
+    "rust-analyzer.server.extraEnv": { "RUSTFLAGS": "--cfg apes_server" },
     "rust-analyzer.cargo.target": "wasm32-unknown-unknown"
   }
 }
