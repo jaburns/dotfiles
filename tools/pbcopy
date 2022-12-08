@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+cat > /tmp/pbcopy
+cat /tmp/pbcopy | xsel --clipboard
+cat /tmp/pbcopy | xsel --primary

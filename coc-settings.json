@@ -7,6 +7,7 @@
   "omnisharp.version": "v1.37.3",
   "python.analysis.extraPaths": [ "/var/local/blender_autocomplete/3.0" ],
   "python.analysis.typeCheckingMode": "off",
+  "zls.path": "/usr/local/bin/zls",
   "rust-analyzer.diagnostics.disabled": [ "inactive-code", "unresolved-proc-macro" ],
   "rust-analyzer.procMacro.enable": true,
   "rust-analyzer.checkOnSave.command": "clippy",
