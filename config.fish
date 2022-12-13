@@ -38,10 +38,10 @@ if status is-interactive
     alias gco='git checkout'
     alias gb='git branch'
     alias gcp='git cherry-pick'
-    alias gl='git log --all --graph --decorate --oneline --pretty=format:"%C(yellow)%h %C(green)%an%C(auto)%d %C(reset)%s"'
-    alias glf='git log --all --graph --decorate --oneline --first-parent'
-    alias gld='git log --all --graph --decorate --oneline --date=relative --pretty=format:"%C(yellow)%h %C(blue)%ad %C(green)%an%C(auto)%d %C(reset)%s"'
-    alias gll='git log --all --graph --decorate --oneline'
+    alias gl='git log --all --graph --decorate --oneline --date=relative --pretty=format:"%C(yellow)%h %C(blue)%ad %C(green)%an%C(auto)%d %C(reset)%s"'
+    # alias gl_simple='git log --all --graph --decorate --oneline'
+    # alias gl_noDate='git log --all --graph --decorate --oneline --pretty=format:"%C(yellow)%h %C(green)%an%C(auto)%d %C(reset)%s"'
+    # alias gl_firstParent='git log --all --graph --decorate --oneline --first-parent'
 
     fish_add_path ~/.local/bin
     fish_add_path ~/syncbox/tools
