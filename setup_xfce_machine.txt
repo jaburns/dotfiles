@@ -2,46 +2,35 @@
 - ln -s /usr/local/bin/chromium ~/programs/....appimage
 - In chromium under privacy and security -> cookies -> disable "clear cookies when close all windows"
 - cp dotfiles/chromium.desktop /usr/share/applications
-- Install ULauncher, alacritty, syncthing
-- Create ssh key
-- Add ssh key to github
+- Install ULauncher, alacritty, syncthing, syncthing-tray
+- Create ssh key, add to github
 - Install OBS, with required packages/repository
 - Shell:
     cd ~
     sudo apt install vim-gtk tmux git keepassx flameshot vlc wmctrl arc-theme redshift-gtk xdotool input-remapper-git
-
-
     git clone git@github.com:jaburns/dotfiles
     cd dotfiles
     ./manage install
     vim /usr/share/gvfs/mounts/network.mount
     # Replace AutoMount=true with AutoMount=false, fixes laggy thunar
-    sudo snap install docker
-    sudo snap start docker
-    sudo groupadd docker
-    sudo usermod -aG docker jaburns
-    docker run hello-world
 - Install git lfs
 - In Session and Startup settings add items to startup:
-    fixbar   => Fix alternate monitor window button bar showing wrong windows
     setxkbmap -option caps:escape   => Remap Caps to Escape
     /home/jaburns/dotfiles/tools/remap_mouse_buttons  => Remap Back/fwd mouse buttons
 - Log out and back in again
 - Settings manager, appearance, arc-dark. Settings manager, window manager, arc-dark
 - If keyboard layout doesnt have RightMeta key, remap flameshot in keyboard shortcuts to ctrl+\
-- Disable desktop icons
 - Install font: Source Code Pro (Regular)
 - Download and install steam, slack, discord
 - If laptop, go to touchpad settings and disable "tap touchpad to click"
-- Install Easystroke Gesture Recognizer and remap mouse back to alt
-    In preferences set Gesture Button to Button 12,
-    Add an Additional Button, select Instant at the bottom, and click mouse back
-    Now in Actions tab add a new action, bind key to Alt+., and stroke to mouse back
-- Add command 'easystroke' to application startup.
 - To have double click from thunar launch nvim without coc:
     - Write to /usr/bin/vi, and chmod +x:
         #!/usr/bin/env bash
         NVIM_BASIC_MODE=1 nvim "$@"
+    - Write to /usr/bin/launch_nvim, and chmod +x:
+        #!/usr/bin/env bash
+        NVIM_BASIC_MODE=1 alacritty -e nvim "$@"
     - In /usr/share/applications/nvim.desktop, replace the TryExec and Exec lines:
-        TryExec=vi
-        Exec=vi %F
+        TryExec=launch_nvim
+        Exec=launch_nvim %F
+        Terminal=false
