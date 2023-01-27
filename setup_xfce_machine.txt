@@ -8,6 +8,7 @@
 - Shell:
     cd ~
     sudo apt install vim-gtk tmux git keepassx flameshot vlc wmctrl arc-theme redshift-gtk xdotool input-remapper-git
+    xmousepasteblock
     git clone git@github.com:jaburns/dotfiles
     cd dotfiles
     ./manage install
