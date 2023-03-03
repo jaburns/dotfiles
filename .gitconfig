@@ -10,3 +10,5 @@
 	required = true
 [init]
 	defaultBranch = main
+[push]
+	autoSetupRemote = true
