@@ -329,7 +329,7 @@ nmap <leader>j :cnext<cr>
 nmap <leader>J <Plug>(coc-diagnostic-next)
 nmap <leader>k :cprev<cr>
 nmap <leader>K <Plug>(coc-diagnostic-prev)
-nnoremap <leader>l :!npx eslint --fix <c-r>%<cr>
+" nnoremap <leader>l :!npx eslint --fix <c-r>%<cr>
 
 nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader>v <cmd>e $MYVIMRC<cr>
