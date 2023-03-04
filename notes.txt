@@ -1,0 +1,37 @@
+Ungoogled Chromium
+- Download latest chromium appimage from: https://ungoogled-software.github.io/ungoogled-chromium-binaries/ to ~/programs
+- ln -s /usr/local/bin/chromium ~/programs/....appimage
+- In chromium under privacy and security -> cookies -> disable "clear cookies when close all windows"
+- cp dotfiles/chromium.desktop /usr/share/applications
+
+Fixes
+- vim /usr/share/gvfs/mounts/network.mount # Replace AutoMount=true with AutoMount=false, fixes laggy thunar
+- If keyboard layout doesnt have RightMeta key, remap flameshot in keyboard shortcuts to ctrl+\
+- If laptop, go to touchpad settings and disable "tap touchpad to click"
+
+Applications/Packages
+- ULauncher, alacritty, syncthing, syncthing-tray, OBS,
+- vim-gtk tmux git keepassx flameshot vlc wmctrl arc-theme redshift-gtk xdotool xbindkeys xsel git-lfs
+- input-remapper-git -> For remapping mouse side buttons
+- Font: Source Code Pro (Regular)
+
+Auto-start Programs
+- xbindkeys                       => Disable middle click paste
+- setxkbmap -option caps:escape   => Remap Caps to Escape
+- /home/jaburns/dotfiles/tools/remap_mouse_buttons  => Remap Back/fwd mouse buttons
+
+Theme
+- Settings manager, appearance, arc-dark.
+- Settings manager, window manager, arc-dark
+
+Double click from thunar launch nvim without coc:
+- Write to /usr/bin/vi, and chmod +x:
+    #!/usr/bin/env bash
+    NVIM_BASIC_MODE=1 nvim "$@"
+- Write to /usr/bin/launch_nvim, and chmod +x:
+    #!/usr/bin/env bash
+    NVIM_BASIC_MODE=1 alacritty -e nvim "$@"
+- In /usr/share/applications/nvim.desktop, replace the TryExec and Exec lines:
+    TryExec=launch_nvim
+    Exec=launch_nvim %F
+    Terminal=false
