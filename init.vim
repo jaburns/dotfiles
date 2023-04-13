@@ -25,6 +25,7 @@ call plug#begin('~/.config/nvim/plugged')
 if $NVIM_BASIC_MODE != "1"
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'antoinemadec/coc-fzf'
+  Plug 'github/copilot.vim'
 endif
 
 " Auto reload externally modified files
@@ -220,6 +221,14 @@ endif
 
 match Tabs "\t"
 
+" Copilot
+let g:copilot_filetypes = { '*': v:false }
+imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+imap <C-J> <Plug>(copilot-suggest)
+imap <C-K> <Plug>(copilot-next)
+imap <C-H> <Plug>(copilot-dismiss)
+
 "   " ---------- Make terminal auto-close when exit with 0 error code ----------
 "   "https://vi.stackexchange.com/questions/10292/how-to-close-and-and-delete-terminal-buffer-if-programs-exited
 "
@@ -332,6 +341,7 @@ nmap <leader>K <Plug>(coc-diagnostic-prev)
 " nnoremap <leader>l :!npx eslint --fix <c-r>%<cr>
 
 nnoremap <leader>x <cmd>bd<CR>
+nnoremap <leader>c :Copilot<CR>
 nnoremap <leader>v <cmd>e $MYVIMRC<cr>
 nnoremap <leader>V <cmd>CocConfig<cr>
 nnoremap <leader>n <cmd>enew<cr>
