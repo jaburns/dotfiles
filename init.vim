@@ -194,9 +194,9 @@ tnoremap <c-w> <c-\><c-n>
 set laststatus=2
 
 if $NVIM_BASIC_MODE == "1"
-  set statusline=%{getcwd()}\ %#CursorColumn#\ %f\ %#StatusLine#%#CursorColumn#%=\ %#StatusLine#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
+  set statusline=%{getcwd()}\ :\ %f\ %#CursorColumn#%#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
 else
-  set statusline=%{getcwd()}\ %#CursorColumn#\ %f\ %#StatusLine#%{coc#status()}%{get(b:,'coc_current_function','')}%#CursorColumn#%=\ %#StatusLine#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
+  set statusline=%{getcwd()}\ :\ %f\ %#CursorColumn#\ %{coc#status()}%{get(b:,'coc_current_function','')}%#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
 endif
 
 " -------------------- Colors --------------------
@@ -209,6 +209,14 @@ if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
   colorscheme corvine
   hi Normal guibg=NONE
   highlight Tabs guibg=#222222
+  highlight VertSplit guibg=#444444
+  highlight VertSplit guifg=#8888cc
+  highlight StatusLine guibg=#606060
+  highlight StatusLine guifg=#88ff88
+  highlight StatusLineNC guibg=#606060
+  highlight StatusLineNC guifg=#eeeeee
+  highlight CursorColumn guibg=#505050
+  highlight CursorColumn guifg=#dddddd
 else
   colorscheme envy
   set background=light
