@@ -209,7 +209,7 @@ if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
   colorscheme corvine
   hi Normal guibg=NONE
   highlight Tabs guibg=#222222
-  highlight VertSplit guibg=#444444
+  highlight VertSplit guibg=NONE
   highlight VertSplit guifg=#8888cc
   highlight StatusLine guibg=#606060
   highlight StatusLine guifg=#88ff88
