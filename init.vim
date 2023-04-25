@@ -328,7 +328,7 @@ nnoremap <leader><leader> <c-^>
 
 " nnoremap <leader>q <cmd>cclose<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
-nnoremap <leader>e <cmd>Telescope coc diagnostics<cr>
+nnoremap <leader>e <cmd>Telescope coc workspace_diagnostics<cr>
 nmap <silent> <leader>r <Plug>(coc-rename)
 " nnoremap <leader>t <cmd>CocCommand explorer --sources buffer+,file+ --open-action-strategy previousWindow<cr>
 nnoremap <leader>t <cmd>CocCommand explorer --sources buffer-,file+ --position right<cr>
@@ -339,10 +339,11 @@ nnoremap <leader>u <cmd>UndotreeToggle<cr>
 nnoremap <leader>i <cmd>call CocActionAsync('doHover')<cr>
 nmap <silent> <leader>I <cmd>Telescope coc implementations<cr>
 nnoremap <leader>o <cmd>copen<cr>
-nnoremap <leader>p viw"_dP
+nnoremap <leader>p viw"_p
 
 nmap <silent> <leader>a <Plug>(coc-codeaction-selected)w
-nmap <silent> <leader>s <cmd>CocCommand tsserver.goToSourceDefinition<cr>
+nmap <silent> <leader>s <cmd>Telescope coc workspace_symbols<cr>
+nmap <silent> <leader>S <cmd>CocCommand tsserver.goToSourceDefinition<cr>
 nmap <silent> <leader>d <cmd>Telescope coc definitions<cr>
 nmap <silent> <leader>D <cmd>Telescope coc type_definitions<cr>
 nmap <silent>        gd <cmd>Telescope coc definitions<cr>
