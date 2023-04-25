@@ -21,19 +21,21 @@
 
 call plug#begin('~/.config/nvim/plugged')
 
+" Fuzzy find
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
+
 " Language server manager
 if $NVIM_BASIC_MODE != "1"
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'antoinemadec/coc-fzf'
+  Plug 'fannheyward/telescope-coc.nvim'
   Plug 'github/copilot.vim'
 endif
 
 " Auto reload externally modified files
 Plug 'djoshea/vim-autoread'
-
-" Fuzzy find
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 
 " Auto-determine indentation rules
 Plug 'tpope/vim-sleuth'
@@ -54,6 +56,7 @@ Plug 'cespare/vim-toml'
 Plug 'tikhomirov/vim-glsl'
 Plug 'dag/vim-fish'
 Plug 'ziglang/zig.vim'
+Plug 'DingDean/wgsl.vim'
 
 " Visualize and navigate undo tree
 Plug 'mbbill/undotree'
@@ -305,32 +308,31 @@ imap <3-MiddleMouse> <Nop>
 map <4-MiddleMouse> <Nop>
 imap <4-MiddleMouse> <Nop>
 
-nnoremap <c-p> :Files<CR>
+nnoremap <c-p> :Telescope find_files<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
-nnoremap <leader>q <cmd>cclose<cr>
+" nnoremap <leader>q <cmd>cclose<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
-nnoremap <leader>e <cmd>CocFzfList diagnostics<cr>
+nnoremap <leader>e <cmd>Telescope coc diagnostics<cr>
 nmap <silent> <leader>r <Plug>(coc-rename)
-"nnoremap <leader>t <cmd>CocCommand explorer --sources buffer+,file+ --open-action-strategy previousWindow<cr>
+" nnoremap <leader>t <cmd>CocCommand explorer --sources buffer+,file+ --open-action-strategy previousWindow<cr>
 nnoremap <leader>t <cmd>CocCommand explorer --sources buffer-,file+ --position right<cr>
 nnoremap <leader>T <cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<cr>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 vnoremap         Y :GetCurrentBranchLink<cr>
 nnoremap <leader>u <cmd>UndotreeToggle<cr>
 nnoremap <leader>i <cmd>call CocActionAsync('doHover')<cr>
-nmap <silent> <leader>I <Plug>(coc-implementation)
+nmap <silent> <leader>I <cmd>Telescope coc implementations<cr>
 nnoremap <leader>o <cmd>copen<cr>
 nnoremap <leader>p viw"_dP
 
 nmap <silent> <leader>a <Plug>(coc-codeaction-selected)w
 nmap <silent> <leader>s <cmd>CocCommand tsserver.goToSourceDefinition<cr>
-nmap <silent> <leader>d <Plug>(coc-definition)
-nmap <silent> <leader>D <Plug>(coc-type-definition)
-nmap <silent>        gd <Plug>(coc-definition)
-nmap <silent> <leader>f <Plug>(coc-references)
-nnoremap <leader>F <cmd>call SearchQuickfixWithFzf()<cr>
+nmap <silent> <leader>d <cmd>Telescope coc definitions<cr>
+nmap <silent> <leader>D <cmd>Telescope coc type_definitions<cr>
+nmap <silent>        gd <cmd>Telescope coc definitions<cr>
+nmap <silent> <leader>f <cmd>Telescope coc references<cr>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gB :Git branch<cr>
 nnoremap <leader>gg :Ge :<cr>
@@ -356,11 +358,6 @@ nnoremap <leader>n <cmd>enew<cr>
 nmap <leader>m :call coc#config('diagnostic.messageTarget', 'echo')<cr>
 nmap <leader>M :call coc#config('diagnostic.messageTarget', 'float')<cr>
 
-nnoremap <leader><f4> <cmd>call CocAction('runCommand', 'tsserver.watchBuild')<cr>:copen<cr>
-nnoremap <f4> :Run tsc --watch --noEmit<cr>
-nnoremap <f5> :Run node build.js
-nnoremap <f7> :Run blender
-
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<cr>"
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
@@ -376,49 +373,49 @@ xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
 " *** FZF Config ***
-
-if has("win32")
-  let $FZF_DEFAULT_COMMAND = 'git ls-files'
-else
-  let $FZF_DEFAULT_COMMAND = 'lsfiles'
-endif
-
-" CTRL-A CTRL-Q to select all and build quickfix list
-" function! s:build_quickfix_list(lines)
-"   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-"   copen
-"   cc
-" endfunction
-" let g:fzf_action = {
-"   \ 'ctrl-k': function('s:build_quickfix_list'),
-"   \ 'ctrl-t': 'tab split',
-"   \ 'ctrl-x': 'split',
-"   \ 'ctrl-v': 'vsplit' }
-let $FZF_DEFAULT_OPTS = '--bind ctrl-j:select-all --reverse'
-
-" :Prg To ripgrep from the git project root of the current buffer with FZF
-command! -bang -nargs=* Prg
-  \ call fzf#vim#grep(
-  \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview({'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}), <bang>0)
-
-" Helper function to write quickfix to temp file and open with preview with FZF
-function! s:format_temp_qf_item(item) abort
-  return (a:item.bufnr ? bufname(a:item.bufnr) : '')
-        \ . ':' . (a:item.lnum  ? a:item.lnum : '')
-        \ . (a:item.col ? ':' . a:item.col : ':')
-        \ . ':' . substitute(a:item.text, '\v^\s*', ' ', '')
-endfunction
-function! SearchQuickfixWithFzf()
-  if has("win32")
-    let l:tmpfile = $USERPROFILE . '/AppData/Local/Temp/nvim_quickfix.txt'
-  else
-    let l:tmpfile = '/tmp/nvim_quickfix.txt'
-  endif
-  call writefile(map(getqflist(), 's:format_temp_qf_item(v:val)'), l:tmpfile, '')
-  call fzf#vim#grep('cat ' . l:tmpfile, 1, fzf#vim#with_preview({ 'options': '--prompt="QF> "' }))
-endfunction
-
+"
+"    if has("win32")
+"      let $FZF_DEFAULT_COMMAND = 'git ls-files'
+"    else
+"      let $FZF_DEFAULT_COMMAND = 'lsfiles'
+"    endif
+"
+"    " CTRL-A CTRL-Q to select all and build quickfix list
+"    " function! s:build_quickfix_list(lines)
+"    "   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+"    "   copen
+"    "   cc
+"    " endfunction
+"    " let g:fzf_action = {
+"    "   \ 'ctrl-k': function('s:build_quickfix_list'),
+"    "   \ 'ctrl-t': 'tab split',
+"    "   \ 'ctrl-x': 'split',
+"    "   \ 'ctrl-v': 'vsplit' }
+"    let $FZF_DEFAULT_OPTS = '--bind ctrl-j:select-all --reverse'
+"
+"    " :Prg To ripgrep from the git project root of the current buffer with FZF
+"    command! -bang -nargs=* Prg
+"      \ call fzf#vim#grep(
+"      \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
+"      \   fzf#vim#with_preview({'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}), <bang>0)
+"
+"    " Helper function to write quickfix to temp file and open with preview with FZF
+"    function! s:format_temp_qf_item(item) abort
+"      return (a:item.bufnr ? bufname(a:item.bufnr) : '')
+"            \ . ':' . (a:item.lnum  ? a:item.lnum : '')
+"            \ . (a:item.col ? ':' . a:item.col : ':')
+"            \ . ':' . substitute(a:item.text, '\v^\s*', ' ', '')
+"    endfunction
+"    function! SearchQuickfixWithFzf()
+"      if has("win32")
+"        let l:tmpfile = $USERPROFILE . '/AppData/Local/Temp/nvim_quickfix.txt'
+"      else
+"        let l:tmpfile = '/tmp/nvim_quickfix.txt'
+"      endif
+"      call writefile(map(getqflist(), 's:format_temp_qf_item(v:val)'), l:tmpfile, '')
+"      call fzf#vim#grep('cat ' . l:tmpfile, 1, fzf#vim#with_preview({ 'options': '--prompt="QF> "' }))
+"    endfunction
+"
 " *** misc ***
 
 " Clear trailing whitespace when saving files
@@ -438,3 +435,12 @@ set completeopt=menuone,noinsert,noselect
 
 " Avoid showing extra messages when using completion
 set shortmess+=c
+
+" *** Telescope Config ***
+lua << EOF
+require('telescope').setup{
+    defaults = {
+        layout_strategy = "vertical",
+    },
+}
+EOF
