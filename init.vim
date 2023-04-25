@@ -220,8 +220,8 @@ if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
 
   highlight VertSplit guibg=NONE
   highlight VertSplit guifg=#8888cc
-  highlight StatusLine guibg=#303030
-  highlight StatusLine guifg=#8888ff
+  highlight StatusLine guibg=#393939
+  highlight StatusLine guifg=#aaaaff
   highlight StatusLineNC guibg=#393939
   highlight StatusLineNC guifg=#eeeeee
   highlight CursorColumn guibg=#505050
