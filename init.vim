@@ -210,8 +210,14 @@ au BufNewFile,BufRead *.ejs set filetype=html
 
 if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
   colorscheme corvine
-  hi Normal guibg=NONE
+  highlight Normal guibg=NONE
+
   highlight Tabs guibg=#222222
+
+  highlight CursorLine guibg=#3a3a3a
+  highlight TelescopeSelection guibg=#444444
+  highlight TelescopePreviewLine guibg=#555555
+
   highlight VertSplit guibg=NONE
   highlight VertSplit guifg=#8888cc
   highlight StatusLine guibg=#606060
@@ -224,7 +230,9 @@ else
   colorscheme envy
   set background=light
   hi Normal guibg=NONE
+
   highlight Tabs guibg=#dddddd
+
   highlight VertSplit guibg=#dddddd
   highlight VertSplit guibg=#dddddd
   highlight StatusLine guibg=#dddddd
@@ -336,6 +344,7 @@ nmap <silent> <leader>f <cmd>Telescope coc references<cr>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gB :Git branch<cr>
 nnoremap <leader>gg :Ge :<cr>
+nnoremap <leader>gv <cmd>Telescope git_status<cr>
 nnoremap <leader>gd :Git diff<cr>
 nnoremap <leader>gf :split<cr>:e term://git fetch --all<cr>i
 nnoremap <leader>gu :split<cr>:e term://git pull --rebase<cr>i
@@ -343,7 +352,9 @@ nnoremap <leader>gU :split<cr>:e term://git pull<cr>i
 nnoremap <leader>gp :split<cr>:e term://git push<cr>i
 nnoremap <leader>gl :Git log --all --graph --decorate --oneline --date=relative --pretty=format:"%h %ad %an%d :: %s"<cr>
 nnoremap <leader>gb :Git blame<cr>
-nnoremap <leader>h :CocCommand clangd.switchSourceHeader<cr>
+nnoremap <leader>G <cmd>Telescope live_grep<cr>
+nnoremap <leader>h <cmd>Telescope command_history<cr>
+nnoremap <leader>H :CocCommand clangd.switchSourceHeader<cr>
 nmap <leader>j :cnext<cr>
 nmap <leader>J <Plug>(coc-diagnostic-next)
 nmap <leader>k :cprev<cr>
