@@ -328,7 +328,7 @@ nnoremap <leader><leader> <c-^>
 
 " nnoremap <leader>q <cmd>cclose<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
-nnoremap <leader>e <cmd>Telescope coc workspace_diagnostics<cr>
+nnoremap <leader>e <cmd>Telescope coc workspace_diagnostics path_display={shorten={len=4,exclude={1,-1}}}<cr>
 nmap <silent> <leader>r <Plug>(coc-rename)
 " nnoremap <leader>t <cmd>CocCommand explorer --sources buffer+,file+ --open-action-strategy previousWindow<cr>
 nnoremap <leader>t <cmd>CocCommand explorer --sources buffer-,file+ --position right<cr>
