@@ -339,7 +339,7 @@ nnoremap <leader>u <cmd>UndotreeToggle<cr>
 nnoremap <leader>i <cmd>call CocActionAsync('doHover')<cr>
 nmap <silent> <leader>I <cmd>Telescope coc implementations<cr>
 nnoremap <leader>o <cmd>copen<cr>
-nnoremap <leader>p viw"_p
+nnoremap <leader>p viwP
 
 nmap <silent> <leader>a <Plug>(coc-codeaction-selected)w
 nmap <silent> <leader>s <cmd>Telescope coc workspace_symbols<cr>
