@@ -341,6 +341,7 @@ nmap <silent> <leader>d <cmd>Telescope coc definitions<cr>
 nmap <silent> <leader>D <cmd>Telescope coc type_definitions<cr>
 nmap <silent>        gd <cmd>Telescope coc definitions<cr>
 nmap <silent> <leader>f <cmd>Telescope coc references<cr>
+nmap <silent> <leader>F <cmd>Telescope grep_string<cr>
 nnoremap <leader>gco :Git checkout<space>
 nnoremap <leader>gB :Git branch<cr>
 nnoremap <leader>gg :Ge :<cr>
