@@ -49,6 +49,8 @@ Plug 'tpope/vim-fugitive'
 " Edit text object surroundings
 Plug 'tpope/vim-surround'
 
+Plug 'lambdalisue/fern.vim'
+
 " Syntax highlights
 Plug 'OrangeT/vim-csharp'
 Plug 'leafgarland/typescript-vim'
@@ -226,6 +228,10 @@ if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
   highlight StatusLineNC guifg=#eeeeee
   highlight CursorColumn guibg=#505050
   highlight CursorColumn guifg=#dddddd
+
+  highlight CocExplorerCocErrorSignColor_Internal guifg=#ff8888
+  highlight CocExplorerCocWarningSignColor_Internal guifg=#cccc88
+
 else
   colorscheme envy
   set background=light
