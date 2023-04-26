@@ -49,8 +49,6 @@ Plug 'tpope/vim-fugitive'
 " Edit text object surroundings
 Plug 'tpope/vim-surround'
 
-Plug 'lambdalisue/fern.vim'
-
 " Syntax highlights
 Plug 'OrangeT/vim-csharp'
 Plug 'leafgarland/typescript-vim'
