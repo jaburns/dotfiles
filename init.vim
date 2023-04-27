@@ -310,6 +310,15 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 
+function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+        wincmd p
+    else
+        cclose
+    endif
+endfunction
+
 " No paste with middle mouse wheel
 map <MiddleMouse> <Nop>
 imap <MiddleMouse> <Nop>
@@ -324,12 +333,11 @@ nnoremap <c-p> :Telescope find_files<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
-" nnoremap <leader>q <cmd>cclose<cr>
+nnoremap <leader>q <cmd>call ToggleQuickFix()<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
 nnoremap <leader>e <cmd>Telescope coc workspace_diagnostics path_display={shorten={len=4,exclude={1,-1}}}<cr>
 nmap <silent> <leader>r <Plug>(coc-rename)
-" nnoremap <leader>t <cmd>CocCommand explorer --sources buffer+,file+ --open-action-strategy previousWindow<cr>
-nnoremap <leader>t <cmd>CocCommand explorer --sources buffer-,file+ --position right<cr>
+nnoremap <leader>t <cmd>CocCommand explorer --no-toggle --sources buffer-,file+ --position right --open-action-strategy previousWindow<cr>
 nnoremap <leader>T <cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<cr>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 vnoremap         Y :GetCurrentBranchLink<cr>
@@ -365,7 +373,6 @@ nmap <leader>j :cnext<cr>
 nmap <leader>J <Plug>(coc-diagnostic-next)
 nmap <leader>k :cprev<cr>
 nmap <leader>K <Plug>(coc-diagnostic-prev)
-" nnoremap <leader>l :!npx eslint --fix <c-r>%<cr>
 
 nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader>c :Copilot<CR>
@@ -375,11 +382,13 @@ nnoremap <leader>n <cmd>enew<cr>
 nmap <leader>m :call coc#config('diagnostic.messageTarget', 'echo')<cr>
 nmap <leader>M :call coc#config('diagnostic.messageTarget', 'float')<cr>
 
+" Coc auto-complete configuration
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<cr>"
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
+" Function and class object selection keys
 xmap if <Plug>(coc-funcobj-i)
 omap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
@@ -388,52 +397,6 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
-
-" *** FZF Config ***
-"
-"    if has("win32")
-"      let $FZF_DEFAULT_COMMAND = 'git ls-files'
-"    else
-"      let $FZF_DEFAULT_COMMAND = 'lsfiles'
-"    endif
-"
-"    " CTRL-A CTRL-Q to select all and build quickfix list
-"    " function! s:build_quickfix_list(lines)
-"    "   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-"    "   copen
-"    "   cc
-"    " endfunction
-"    " let g:fzf_action = {
-"    "   \ 'ctrl-k': function('s:build_quickfix_list'),
-"    "   \ 'ctrl-t': 'tab split',
-"    "   \ 'ctrl-x': 'split',
-"    "   \ 'ctrl-v': 'vsplit' }
-"    let $FZF_DEFAULT_OPTS = '--bind ctrl-j:select-all --reverse'
-"
-"    " :Prg To ripgrep from the git project root of the current buffer with FZF
-"    command! -bang -nargs=* Prg
-"      \ call fzf#vim#grep(
-"      \   "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
-"      \   fzf#vim#with_preview({'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}), <bang>0)
-"
-"    " Helper function to write quickfix to temp file and open with preview with FZF
-"    function! s:format_temp_qf_item(item) abort
-"      return (a:item.bufnr ? bufname(a:item.bufnr) : '')
-"            \ . ':' . (a:item.lnum  ? a:item.lnum : '')
-"            \ . (a:item.col ? ':' . a:item.col : ':')
-"            \ . ':' . substitute(a:item.text, '\v^\s*', ' ', '')
-"    endfunction
-"    function! SearchQuickfixWithFzf()
-"      if has("win32")
-"        let l:tmpfile = $USERPROFILE . '/AppData/Local/Temp/nvim_quickfix.txt'
-"      else
-"        let l:tmpfile = '/tmp/nvim_quickfix.txt'
-"      endif
-"      call writefile(map(getqflist(), 's:format_temp_qf_item(v:val)'), l:tmpfile, '')
-"      call fzf#vim#grep('cat ' . l:tmpfile, 1, fzf#vim#with_preview({ 'options': '--prompt="QF> "' }))
-"    endfunction
-"
-" *** misc ***
 
 " Clear trailing whitespace when saving files
 autocmd BufWritePre * :%s/\s\+$//e
@@ -455,9 +418,20 @@ set shortmess+=c
 
 " *** Telescope Config ***
 lua << EOF
+local actions = require "telescope.actions"
 require('telescope').setup{
     defaults = {
         layout_strategy = "vertical",
+        mappings = {
+            i = {
+                -- ["<C-j>"] = actions.send_to_qflist + actions.open_qflist
+                ["<C-j>"] = function(bufnr)
+                    actions.send_to_qflist(bufnr)
+                    actions.open_qflist(bufnr)
+                    vim.cmd("wincmd p")
+                end
+            },
+        },
     },
 }
 EOF
