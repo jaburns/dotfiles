@@ -319,6 +319,24 @@ function! ToggleQuickFix()
     endif
 endfunction
 
+function! CocExplorerBufferExists()
+    for buf in getbufinfo()
+        if getbufvar(buf.bufnr, '&filetype') ==# 'coc-explorer'
+            return 1
+        endif
+    endfor
+    return 0
+endfunction
+
+function! RevealInCocExplorer()
+    if CocExplorerBufferExists()
+        call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])
+    endif
+endfunction
+
+" Auto-highligh current file in coc-explorer if open
+autocmd BufReadPost * call RevealInCocExplorer()
+
 " No paste with middle mouse wheel
 map <MiddleMouse> <Nop>
 imap <MiddleMouse> <Nop>
@@ -337,8 +355,8 @@ nnoremap <leader>q <cmd>call ToggleQuickFix()<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
 nnoremap <leader>e <cmd>Telescope coc workspace_diagnostics path_display={shorten={len=4,exclude={1,-1}}}<cr>
 nmap <silent> <leader>r <Plug>(coc-rename)
-nnoremap <leader>t <cmd>CocCommand explorer --no-toggle --sources buffer-,file+ --position right --open-action-strategy previousWindow<cr>
-nnoremap <leader>T <cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<cr>
+nnoremap <leader>t <cmd>CocCommand explorer --no-toggle --sources buffer-,file+ --open-action-strategy previousWindow<cr>
+nnoremap <leader>T <cmd>CocCommand explorer --no-toggle --sources buffer-,file+ --position right --open-action-strategy previousWindow<cr>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 vnoremap         Y :GetCurrentBranchLink<cr>
 nnoremap <leader>u <cmd>UndotreeToggle<cr>
