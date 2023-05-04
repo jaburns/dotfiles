@@ -23,7 +23,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Fuzzy find
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+Plug 'nvim-telescope/telescope.nvim'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf.vim'
 
@@ -48,6 +48,9 @@ Plug 'tpope/vim-fugitive'
 
 " Edit text object surroundings
 Plug 'tpope/vim-surround'
+
+" Autoformat JS/TS
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 " Syntax highlights
 Plug 'OrangeT/vim-csharp'
@@ -415,6 +418,14 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
+
+" Prettier config
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+let g:prettier#config#print_width = 100
+let g:prettier#config#tab_width = 4
+let g:prettier#config#use_tabs = 'false'
+let g:prettier#config#semi = 'false'
 
 " Clear trailing whitespace when saving files
 autocmd BufWritePre * :%s/\s\+$//e
