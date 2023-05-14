@@ -24,6 +24,8 @@ call plug#begin('~/.config/nvim/plugged')
 " Fuzzy find
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
 
 " Language server manager
 if $NVIM_BASIC_MODE != "1"
@@ -43,10 +45,6 @@ Plug 'knsh14/vim-github-link'
 
 " Git integrations
 Plug 'tpope/vim-fugitive'
-
-" Status line
-Plug 'itchyny/lightline.vim'
-Plug 'niklaas/lightline-gitdiff'
 
 " Edit text object surroundings
 Plug 'tpope/vim-surround'
@@ -85,6 +83,7 @@ set cursorline          " Highlight the cursor line
 set nostartofline       " Don't jump to start of line when paging up/down
 set timeoutlen=500      " Set multi-character command time-out
 set title               " Show file in title bar
+"set rnu                " Use relative line numbers
 set hlsearch            " Highlight search results
 set viminfo='20,\"500   " Remember copy registers after quitting in the .viminfo file
 set bs=indent,eol,start " Allow backspacing over everything in insert mode
@@ -198,64 +197,13 @@ tnoremap <c-w> <c-\><c-n>
 
 " -------------------- Status line --------------------
 
-let g:lightline = {
-\ 'active': {
-\   'left': [ [ 'paste', 'gitbranch' ],
-\             [ 'readonly', 'relativepath', 'modified' ] ],
-\   'right': [ [ 'percent', 'lineinfo' ],
-\              [ 'gitdiff' ],
-\              [ 'filetype' ],
-\              [ 'coc_error', 'coc_warning' ] ]
-\ },
-\ 'component_expand': {
-\   'coc_error'   : 'LightlineCocErrors',
-\   'coc_warning' : 'LightlineCocWarnings',
-\   'gitdiff'     : 'lightline#gitdiff#get',
-\ },
-\ 'component_function': {
-\   'gitbranch': 'FugitiveHead'
-\ },
-\ }
+set laststatus=2
 
-let g:lightline.component_type = {
-\ 'coc_error'   : 'error',
-\ 'coc_warning' : 'warning',
-\ }
-
-let g:lightline#gitdiff#indicator_added = 'A:'
-let g:lightline#gitdiff#indicator_deleted = 'D:'
-let g:lightline#gitdiff#indicator_modified = 'M:'
-let g:lightline#gitdiff#separator = ' '
-
-function! CountErrorsAndWarnings()
-    let diags = CocAction('diagnosticList')
-    let warnings = len(filter(copy(diags), 'v:val["severity"] == "Warning"'))
-    let errors = len(filter(copy(diags), 'v:val["severity"] == "Error"'))
-    return {'error': errors, 'warning': warnings}
-endfunction
-
-function! s:lightline_coc_diagnostic(kind, sign) abort
-  let info = CountErrorsAndWarnings() " get(b:, 'coc_diagnostic_info', 0)
-  if empty(info) || get(info, a:kind, 0) == 0
-    return ''
-  endif
-  try
-    let s = g:coc_user_config['diagnostic'][a:sign . 'Sign']
-  catch
-    let s = ''
-  endtry
-  return printf('%s %d', s, info[a:kind])
-endfunction
-
-function! LightlineCocErrors() abort
-  return s:lightline_coc_diagnostic('error', 'error')
-endfunction
-
-function! LightlineCocWarnings() abort
-  return s:lightline_coc_diagnostic('warning', 'warning')
-endfunction
-
-autocmd User CocDiagnosticChange call lightline#update()
+if $NVIM_BASIC_MODE == "1"
+  set statusline=%{getcwd()}\ :\ %f\ %#CursorColumn#%#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
+else
+  set statusline=%{getcwd()}\ :\ %f\ %#CursorColumn#\ %{coc#status()}%{get(b:,'coc_current_function','')}%#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
+endif
 
 " -------------------- Colors --------------------
 
@@ -275,6 +223,10 @@ if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
 
   highlight VertSplit guibg=NONE
   highlight VertSplit guifg=#8888cc
+  highlight StatusLine guibg=#393939
+  highlight StatusLine guifg=#aaaaff
+  highlight StatusLineNC guibg=#393939
+  highlight StatusLineNC guifg=#eeeeee
   highlight CursorColumn guibg=#505050
   highlight CursorColumn guifg=#dddddd
 
@@ -290,6 +242,7 @@ else
 
   highlight VertSplit guibg=#dddddd
   highlight VertSplit guibg=#dddddd
+  highlight StatusLine guibg=#dddddd
 endif
 
 match Tabs "\t"
@@ -434,13 +387,13 @@ nnoremap <leader>gU :split<cr>:e term://git pull<cr>i
 nnoremap <leader>gp :split<cr>:e term://git push<cr>i
 nnoremap <leader>gl :Git log --all --graph --decorate --oneline --date=relative --pretty=format:"%h %ad %an%d :: %s"<cr>
 nnoremap <leader>gb :Git blame<cr>
+nnoremap <leader>G <cmd>Telescope live_grep<cr>
 nnoremap <leader>h <cmd>Telescope command_history<cr>
 nnoremap <leader>H :CocCommand clangd.switchSourceHeader<cr>
 nmap <leader>j :cnext<cr>
 nmap <leader>J <Plug>(coc-diagnostic-next)
 nmap <leader>k :cprev<cr>
 nmap <leader>K <Plug>(coc-diagnostic-prev)
-nnoremap <leader>l <cmd>Telescope live_grep<cr>
 
 nnoremap <leader>x <cmd>bd<CR>
 nnoremap <leader>c :Copilot<CR>
