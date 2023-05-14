@@ -2,6 +2,7 @@
 	email = j@jaburns.net
 	name = jaburns
 [core]
+	editor = vi
 	excludesfile = /home/jaburns/.gitignore_global
 [filter "lfs"]
 	clean = git-lfs clean -- %f
