@@ -29,6 +29,7 @@
       <property name="&lt;Super&gt;r" type="empty">
         <property name="startup-notify" type="empty"/>
       </property>
+      <property name="&lt;Alt&gt;&lt;Super&gt;s" type="empty"/>
       <property name="XF86HomePage" type="empty"/>
       <property name="&lt;Super&gt;w" type="empty"/>
       <property name="&lt;Super&gt;m" type="empty"/>
@@ -56,7 +57,6 @@
       <property name="&lt;Super&gt;d" type="string" value="thunar /home/jaburns/Desktop"/>
       <property name="&lt;Super&gt;c" type="string" value="exo-open --launch WebBrowser"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="xkill"/>
-      <property name="&lt;Alt&gt;backslash" type="string" value="flameshot gui"/>
       <property name="&lt;Primary&gt;&lt;Super&gt;Down" type="string" value="/home/jaburns/dotfiles/tools/divvy.py minimize-bg"/>
       <property name="&lt;Primary&gt;&lt;Super&gt;Up" type="string" value="/home/jaburns/dotfiles/tools/divvy.py fill-rest"/>
       <property name="&lt;Super&gt;Return" type="string" value="exo-open --launch TerminalEmulator"/>
@@ -77,6 +77,7 @@
       <property name="&lt;Shift&gt;&lt;Super&gt;o" type="string" value="/home/jaburns/dotfiles/tools/divvy.py 12"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;u" type="string" value="/home/jaburns/dotfiles/tools/divvy.py 13"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;i" type="string" value="/home/jaburns/dotfiles/tools/divvy.py 14"/>
+      <property name="Print" type="string" value="flameshot gui"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
@@ -135,8 +136,8 @@
       <property name="&lt;Primary&gt;F12" type="empty"/>
       <property name="&lt;Super&gt;KP_Left" type="empty"/>
       <property name="&lt;Super&gt;KP_Right" type="empty"/>
-      <property name="&lt;Super&gt;KP_Up" type="empty"/>
       <property name="&lt;Super&gt;KP_Down" type="empty"/>
+      <property name="&lt;Super&gt;KP_Up" type="empty"/>
       <property name="&lt;Super&gt;KP_Page_Up" type="empty"/>
       <property name="&lt;Super&gt;KP_Home" type="empty"/>
       <property name="&lt;Super&gt;KP_End" type="empty"/>
