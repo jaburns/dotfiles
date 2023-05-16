@@ -197,30 +197,29 @@ tnoremap <c-w> <c-\><c-n>
 
 " -------------------- Status line --------------------
 
-let g:jb_coc_diags = {}
-function! JbCocErrors()
-    return ''
-    " try
-    "     let g:jb_coc_diags = CocAction('diagnosticList')
-    "     let errors = len(filter(copy(g:jb_coc_diags), 'v:val["severity"] == "Error"'))
-    "     if errors > 0
-    "         return printf(' %d ', errors)
-    "     endif
-    " catch
-    " endtry
-    " return ''
-endfunction
-function! JbCocWarnings()
-    return ''
-    " try
-    "     let warnings = len(filter(copy(g:jb_coc_diags), 'v:val["severity"] == "Warning"'))
-    "     if warnings > 0
-    "         return printf(' %d ', warnings)
-    "     endif
-    " catch
-    " endtry
-    " return ''
-endfunction
+" let g:jb_coc_diags = {}
+" function! JbCocErrors()
+"     try
+"         let g:jb_coc_diags = CocAction('diagnosticList')
+"         let errors = len(filter(copy(g:jb_coc_diags), 'v:val["severity"] == "Error"'))
+"         if errors > 0
+"             return printf(' %d ', errors)
+"         endif
+"     catch
+"     endtry
+"     return ''
+" endfunction
+" function! JbCocWarnings()
+"     try
+"         let warnings = len(filter(copy(g:jb_coc_diags), 'v:val["severity"] == "Warning"'))
+"         if warnings > 0
+"             return printf(' %d ', warnings)
+"         endif
+"     catch
+"     endtry
+"     return ''
+" endfunction
+" set statusline=\ %{GetLastPartOfCwd()}\ :\ %f\ %#JbStatusErr#%{JbCocErrors()}%#StatusLineNC#\ %#JbStatusWarn#%{JbCocWarnings()}%#CursorColumn#\ %{coc#status()}\ %#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
 
 set laststatus=2
 
@@ -233,7 +232,7 @@ endfunction
 if $NVIM_BASIC_MODE == "1"
   set statusline=\ %{GetLastPartOfCwd()}\ :\ %f\ %#CursorColumn#%#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
 else
-  set statusline=\ %{GetLastPartOfCwd()}\ :\ %f\ %#JbStatusErr#%{JbCocErrors()}%#StatusLineNC#\ %#JbStatusWarn#%{JbCocWarnings()}%#CursorColumn#\ %{coc#status()}\ %#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
+  set statusline=\ %{GetLastPartOfCwd()}\ :\ %f\ %#CursorColumn#\ %{coc#status()}\ %#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
 endif
 
 " -------------------- Colors --------------------
@@ -260,10 +259,10 @@ if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
   highlight StatusLineNC guifg=#eeeeee
   highlight CursorColumn guibg=#505050
   highlight CursorColumn guifg=#dddddd
-  highlight JbStatusErr guibg=#ff7777
-  highlight JbStatusErr guifg=#000000
-  highlight JbStatusWarn guibg=#ffff33
-  highlight JbStatusWarn guifg=#000000
+  " highlight JbStatusErr guibg=#ff7777
+  " highlight JbStatusErr guifg=#000000
+  " highlight JbStatusWarn guibg=#ffff33
+  " highlight JbStatusWarn guifg=#000000
 
   highlight CocExplorerCocErrorSignColor_Internal guifg=#ff8888
   highlight CocExplorerCocWarningSignColor_Internal guifg=#cccc88
