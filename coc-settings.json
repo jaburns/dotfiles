@@ -24,6 +24,7 @@
     "rust-analyzer.inlayHints.renderColons": false,
     "rust-analyzer.inlayHints.typeHints.enable": false,
     "rust-analyzer.inlayHints.typeHints.hideNamedConstructor": false,
+    "workspace.ignoredFolders": [".rustup", ".cargo"],
     "//": {
         "rust-analyzer.server.extraEnv": { "RUSTFLAGS": "--cfg apes_server" },
         "rust-analyzer.cargo.target": "wasm32-unknown-unknown"

@@ -199,33 +199,41 @@ tnoremap <c-w> <c-\><c-n>
 
 let g:jb_coc_diags = {}
 function! JbCocErrors()
-    try
-        let g:jb_coc_diags = CocAction('diagnosticList')
-        let errors = len(filter(copy(g:jb_coc_diags), 'v:val["severity"] == "Error"'))
-        if errors > 0
-            return printf(' %d ', errors)
-        endif
-    catch
-    endtry
     return ''
+    " try
+    "     let g:jb_coc_diags = CocAction('diagnosticList')
+    "     let errors = len(filter(copy(g:jb_coc_diags), 'v:val["severity"] == "Error"'))
+    "     if errors > 0
+    "         return printf(' %d ', errors)
+    "     endif
+    " catch
+    " endtry
+    " return ''
 endfunction
 function! JbCocWarnings()
-    try
-        let warnings = len(filter(copy(g:jb_coc_diags), 'v:val["severity"] == "Warning"'))
-        if warnings > 0
-            return printf(' %d ', warnings)
-        endif
-    catch
-    endtry
     return ''
+    " try
+    "     let warnings = len(filter(copy(g:jb_coc_diags), 'v:val["severity"] == "Warning"'))
+    "     if warnings > 0
+    "         return printf(' %d ', warnings)
+    "     endif
+    " catch
+    " endtry
+    " return ''
 endfunction
 
 set laststatus=2
 
+function! GetLastPartOfCwd()
+    let cwd = getcwd()
+    let parts = split(cwd, '/')
+    return parts[-1]
+endfunction
+
 if $NVIM_BASIC_MODE == "1"
-  set statusline=%{getcwd()}\ :\ %f\ %#CursorColumn#%#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
+  set statusline=\ %{GetLastPartOfCwd()}\ :\ %f\ %#CursorColumn#%#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
 else
-  set statusline=%{getcwd()}\ :\ %f\ %#JbStatusErr#%{JbCocErrors()}%#StatusLineNC#\ %#JbStatusWarn#%{JbCocWarnings()}%#CursorColumn#\ %{coc#status()}\ %#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
+  set statusline=\ %{GetLastPartOfCwd()}\ :\ %f\ %#JbStatusErr#%{JbCocErrors()}%#StatusLineNC#\ %#JbStatusWarn#%{JbCocWarnings()}%#CursorColumn#\ %{coc#status()}\ %#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
 endif
 
 " -------------------- Colors --------------------
