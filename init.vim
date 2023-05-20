@@ -369,14 +369,14 @@ nnoremap <leader>q <cmd>call ToggleQuickFix()<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
 nnoremap <leader>e <cmd>Telescope coc workspace_diagnostics path_display={shorten={len=4,exclude={1,-1}}}<cr>
 nmap <silent> <leader>r <Plug>(coc-rename)
-nnoremap <leader>t <cmd>CocCommand explorer --no-toggle --sources buffer-,file+ --open-action-strategy previousWindow<cr>
-nnoremap <leader>T <cmd>CocCommand explorer --no-toggle --sources buffer-,file+ --position right --open-action-strategy previousWindow<cr>
+" nnoremap <leader>t <cmd>CocCommand explorer --no-toggle --sources buffer-,file+ --open-action-strategy previousWindow<cr>
+" nnoremap <leader>T <cmd>CocCommand explorer --no-toggle --sources buffer-,file+ --position right --open-action-strategy previousWindow<cr>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 vnoremap         Y :GetCurrentBranchLink<cr>
 nnoremap <leader>u <cmd>UndotreeToggle<cr>
 nnoremap <leader>i <cmd>call CocActionAsync('doHover')<cr>
 nmap <silent> <leader>I <cmd>Telescope coc implementations<cr>
-nnoremap <leader>o <cmd>copen<cr>
+nnoremap <leader>o <cmd>lua require'telescope.builtin'.buffers{ on_complete = { function() vim.cmd"stopinsert" end } }<cr>
 nnoremap <leader>p viwP
 
 nmap <silent> <leader>a <Plug>(coc-codeaction-selected)w
@@ -475,6 +475,17 @@ require('telescope').setup{
                     actions.open_qflist(bufnr)
                     vim.cmd("wincmd p")
                 end
+            },
+        },
+    },
+    pickers = {
+        buffers = {
+            show_all_buffers = true,
+            sort_lastused = true,
+            mappings = {
+                n = {
+                    ["d"] = "delete_buffer",
+                },
             },
         },
     },
