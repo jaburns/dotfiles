@@ -11,6 +11,7 @@
 "     coc-omnisharp
 "     coc-json
 "     coc-clangd
+"     coc-prettier
 " -------------------------------------------------
 "  Notes
 "    Find and replace
@@ -31,7 +32,6 @@ Plug 'nvim-telescope/telescope.nvim'
 if $NVIM_BASIC_MODE != "1"
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'fannheyward/telescope-coc.nvim'
-  Plug 'github/copilot.vim'
 endif
 
 " Auto reload externally modified files
@@ -49,9 +49,6 @@ Plug 'tpope/vim-fugitive'
 " Edit text object surroundings
 Plug 'tpope/vim-surround'
 
-" Autoformat JS/TS
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-
 " Syntax highlights
 Plug 'OrangeT/vim-csharp'
 Plug 'leafgarland/typescript-vim'
@@ -63,6 +60,9 @@ Plug 'DingDean/wgsl.vim'
 
 " Visualize and navigate undo tree
 Plug 'mbbill/undotree'
+
+
+Plug 'stevearc/oil.nvim'
 
 call plug#end()
 
@@ -281,14 +281,6 @@ endif
 
 match Tabs "\t"
 
-" Copilot
-let g:copilot_filetypes = { '*': v:false }
-imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
-imap <C-J> <Plug>(copilot-suggest)
-imap <C-K> <Plug>(copilot-next)
-imap <C-H> <Plug>(copilot-dismiss)
-
 "   " ---------- Make terminal auto-close when exit with 0 error code ----------
 "   "https://vi.stackexchange.com/questions/10292/how-to-close-and-and-delete-terminal-buffer-if-programs-exited
 "
@@ -356,24 +348,6 @@ function! ToggleQuickFix()
     endif
 endfunction
 
-function! CocExplorerBufferExists()
-    for buf in getbufinfo()
-        if getbufvar(buf.bufnr, '&filetype') ==# 'coc-explorer'
-            return 1
-        endif
-    endfor
-    return 0
-endfunction
-
-function! RevealInCocExplorer()
-    if CocExplorerBufferExists()
-        call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])
-    endif
-endfunction
-
-" Auto-highligh current file in coc-explorer if open
-autocmd BufReadPost * call RevealInCocExplorer()
-
 " No paste with middle mouse wheel
 map <MiddleMouse> <Nop>
 imap <MiddleMouse> <Nop>
@@ -387,6 +361,9 @@ imap <4-MiddleMouse> <Nop>
 nnoremap <c-p> :Telescope find_files<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
+
+" nnoremap <c-h> <cmd>bprev<cr>
+" nnoremap <c-l> <cmd>bnext<cr>
 
 nnoremap <leader>q <cmd>call ToggleQuickFix()<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
@@ -458,6 +435,7 @@ let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0
 let g:prettier#config#print_width = 100
 let g:prettier#config#tab_width = 4
+let g:prettier#config#disable_languages = ['html']
 let g:prettier#config#trailing_comma = 'all'
 let g:prettier#config#use_tabs = 'false'
 let g:prettier#config#semi = 'false'
@@ -465,9 +443,9 @@ let g:prettier#config#semi = 'false'
 " Clear trailing whitespace when saving files
 autocmd BufWritePre * :%s/\s\+$//e
 
-" Auto-format *.rs (rust) files prior to saving them
+" Auto-format files prior to saving them
 if $NVIM_BASIC_MODE != "1"
-  autocmd BufWritePre *.rs call CocAction('format')
+  autocmd BufWritePre *.rs,*.js,*.json,*.ts,*.css call CocAction('format')
 endif
 
 " Set completeopt to have a better completion experience
@@ -480,8 +458,11 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing extra messages when using completion
 set shortmess+=c
 
-" *** Telescope Config ***
+" *** Lua config ***
 lua << EOF
+
+-- Telescope
+
 local actions = require "telescope.actions"
 require('telescope').setup{
     defaults = {
@@ -498,4 +479,14 @@ require('telescope').setup{
         },
     },
 }
+
+-- oil.nvim
+
+require("oil").setup({
+    view_options = {
+        show_hidden = true,
+    }
+})
+vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
+
 EOF
