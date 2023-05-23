@@ -51,6 +51,7 @@ Plug 'tpope/vim-surround'
 
 " Syntax highlights
 Plug 'OrangeT/vim-csharp'
+Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'cespare/vim-toml'
 Plug 'tikhomirov/vim-glsl'
@@ -61,7 +62,7 @@ Plug 'DingDean/wgsl.vim'
 " Visualize and navigate undo tree
 Plug 'mbbill/undotree'
 
-
+" Filesystem browse/edit
 Plug 'stevearc/oil.nvim'
 
 call plug#end()
@@ -243,6 +244,7 @@ au BufNewFile,BufRead *.ejs set filetype=html
 
 if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
   colorscheme corvine
+
   highlight Normal guibg=NONE
 
   highlight Tabs guibg=#222222
@@ -259,6 +261,7 @@ if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
   highlight StatusLineNC guifg=#eeeeee
   highlight CursorColumn guibg=#505050
   highlight CursorColumn guifg=#dddddd
+
   " highlight JbStatusErr guibg=#ff7777
   " highlight JbStatusErr guifg=#000000
   " highlight JbStatusWarn guibg=#ffff33
@@ -266,10 +269,10 @@ if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
 
   highlight CocExplorerCocErrorSignColor_Internal guifg=#ff8888
   highlight CocExplorerCocWarningSignColor_Internal guifg=#cccc88
-
 else
   colorscheme envy
   set background=light
+
   hi Normal guibg=NONE
 
   highlight Tabs guibg=#dddddd
