@@ -4,7 +4,6 @@
 " - Install vim-plug: https://github.com/junegunn/vim-plug
 " - :PlugInstall
 " - :CocInstall
-"     coc-explorer
 "     coc-tsserver
 "     coc-rust-analyzer
 "     coc-pyright
@@ -25,8 +24,6 @@ call plug#begin('~/.config/nvim/plugged')
 " Fuzzy find
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
 
 " Language server manager
 if $NVIM_BASIC_MODE != "1"
@@ -198,30 +195,6 @@ tnoremap <c-w> <c-\><c-n>
 
 " -------------------- Status line --------------------
 
-" let g:jb_coc_diags = {}
-" function! JbCocErrors()
-"     try
-"         let g:jb_coc_diags = CocAction('diagnosticList')
-"         let errors = len(filter(copy(g:jb_coc_diags), 'v:val["severity"] == "Error"'))
-"         if errors > 0
-"             return printf(' %d ', errors)
-"         endif
-"     catch
-"     endtry
-"     return ''
-" endfunction
-" function! JbCocWarnings()
-"     try
-"         let warnings = len(filter(copy(g:jb_coc_diags), 'v:val["severity"] == "Warning"'))
-"         if warnings > 0
-"             return printf(' %d ', warnings)
-"         endif
-"     catch
-"     endtry
-"     return ''
-" endfunction
-" set statusline=\ %{GetLastPartOfCwd()}\ :\ %f\ %#JbStatusErr#%{JbCocErrors()}%#StatusLineNC#\ %#JbStatusWarn#%{JbCocWarnings()}%#CursorColumn#\ %{coc#status()}\ %#CursorColumn#%=\ %#StatusLineNC#%{FugitiveStatusline()}%#CursorColumn#\ %l:%c\ %p%%\ %y
-
 set laststatus=2
 
 function! GetLastPartOfCwd()
@@ -262,11 +235,6 @@ if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
   highlight CursorColumn guibg=#505050
   highlight CursorColumn guifg=#dddddd
 
-  " highlight JbStatusErr guibg=#ff7777
-  " highlight JbStatusErr guifg=#000000
-  " highlight JbStatusWarn guibg=#ffff33
-  " highlight JbStatusWarn guifg=#000000
-
   highlight CocExplorerCocErrorSignColor_Internal guifg=#ff8888
   highlight CocExplorerCocWarningSignColor_Internal guifg=#cccc88
 else
@@ -283,45 +251,6 @@ else
 endif
 
 match Tabs "\t"
-
-"   " ---------- Make terminal auto-close when exit with 0 error code ----------
-"   "https://vi.stackexchange.com/questions/10292/how-to-close-and-and-delete-terminal-buffer-if-programs-exited
-"
-"   " Get the exit status from a terminal buffer by looking for a line near the end
-"   " of the buffer with the format, '[Process exited ?]'.
-"   func! s:getExitStatus() abort
-"     let ln = line('$')
-"     " The terminal buffer includes several empty lines after the 'Process exited'
-"     " line that need to be skipped over.
-"     while ln >= 1
-"       let l = getline(ln)
-"       let ln -= 1
-"       let exitCode = substitute(l, '^\[Process exited \([0-9]\+\)\]$', '\1', '')
-"       if l != '' && l == exitCode
-"         " The pattern did not match, and the line was not empty. It looks like
-"         " there is no process exit message in this buffer.
-"         break
-"       elseif exitCode != ''
-"         return str2nr(exitCode)
-"       endif
-"     endwhile
-"     throw 'Could not determine exit status for buffer, ' . expand('%')
-"   endfunc
-"
-"   func! s:afterTermClose() abort
-"     if s:getExitStatus() == 0
-"       bdelete!
-"     endif
-"   endfunc
-"
-"   augroup MyNeoterm
-"     autocmd!
-"     " The line '[Process exited ?]' is appended to the terminal buffer after the
-"     " `TermClose` event. So we use a timer to wait a few milliseconds to read the
-"     " exit status. Setting the timer to 0 or 1 ms is not sufficient; 20 ms seems
-"     " to work for me.
-"     autocmd TermClose * call timer_start(20, { -> s:afterTermClose() })
-"   augroup END
 
 " -------------------- Leader key and plugin-related config/shortcuts --------------------
 
@@ -365,15 +294,10 @@ nnoremap <c-p> :Telescope find_files<CR>
 nnoremap <leader><cr> <cmd>nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
-" nnoremap <c-h> <cmd>bprev<cr>
-" nnoremap <c-l> <cmd>bnext<cr>
-
 nnoremap <leader>q <cmd>call ToggleQuickFix()<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
 nnoremap <leader>e <cmd>Telescope coc workspace_diagnostics path_display={shorten={len=4,exclude={1,-1}}}<cr>
 nmap <silent> <leader>r <Plug>(coc-rename)
-" nnoremap <leader>t <cmd>CocCommand explorer --no-toggle --sources buffer-,file+ --open-action-strategy previousWindow<cr>
-" nnoremap <leader>T <cmd>CocCommand explorer --no-toggle --sources buffer-,file+ --position right --open-action-strategy previousWindow<cr>
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 vnoremap         Y :GetCurrentBranchLink<cr>
 nnoremap <leader>u <cmd>UndotreeToggle<cr>
