@@ -26,7 +26,6 @@ if status is-interactive
     alias getclip='xclip -selection c -o'
     alias open='xdg-open'
 
-    alias gtree='git ls-tree -r --name-only HEAD | tree --fromfile'
     alias gg='git status'
     alias gc='git commit'
     alias ga='git add'
