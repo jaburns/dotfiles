@@ -4,6 +4,7 @@
 
 pacman -S xfce4 lightdm lightdm-gtk-greeter networkmanager fish os-prober nvim sudo network-manager-applet base-devel
 # Uncomment "GRUB_DISABLE_OS_PROBER=false" in /etc/default/grub
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 systemctl enable lightdm
 systemctl enable NetworkManager
