@@ -1,8 +1,49 @@
+----------------------------------------------------------
+
+- Start with https://wiki.archlinux.org/title/Installation_guide
+
+pacman -S xfce4 lightdm lightdm-gtk-greeter networkmanager fish os-prober nvim sudo network-manager-applet base-devel
+# Uncomment "GRUB_DISABLE_OS_PROBER=false" in /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
+systemctl enable lightdm
+systemctl enable NetworkManager
+useradd -m -G wheel -s /usr/bin/fish jaburns
+passwd jaburns
+EDITOR=nvim visudo
+# Uncomment "%wheel ALL=(ALL) ALL"
+
+----------------------------------------------------------
+
 Ungoogled Chromium
 - Download latest chromium appimage from: https://ungoogled-software.github.io/ungoogled-chromium-binaries/ to ~/programs
 - ln -s /usr/local/bin/chromium ~/programs/....appimage
 - In chromium under privacy and security -> cookies -> disable "clear cookies when close all windows"
 - cp dotfiles/chromium.desktop /usr/share/applications
+
+# Install yay: https://www.tecmint.com/install-yay-aur-helper-in-arch-linux-and-manjaro/
+
+yay -S
+    git git-lfs xxd-standalone
+    noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk adobe-source-code-pro-fonts
+    alacritty tmux ulauncher fzf
+    syncthing keepassx flameshot vlc
+    wmctrl xdotool xbindkeys xsel xorg-xrandr xorg-xprop xorg-xwininfo
+    arc-gtk-theme
+
+    obs-studio redshift syncthingtray
+
+create ssh key
+add ssh key to github
+clone dotfiles repo
+
+mkdir -p ~/.themes/vacui/xfwm4/ && touch ~/.themes/vacui/xfwm4/themerc
+
+Install vimplug: https://github.com/junegunn/vim-plug
+Install fisher: https://github.com/jorgebucaran/fisher ; Install plugins from ~/dotfiles/fish_plugins
+Ulauncher key binding (cmd+space) is set in its own options menu
+
+----------------------------------------------------------
+## Notes
 
 Fixes
 - vim /usr/share/gvfs/mounts/network.mount # Replace AutoMount=true with AutoMount=false, fixes laggy thunar
@@ -10,8 +51,6 @@ Fixes
 - If laptop, go to touchpad settings and disable "tap touchpad to click"
 
 Applications/Packages
-- ULauncher, alacritty, syncthing, syncthing-tray, OBS,
-- vim-gtk tmux git keepassx flameshot vlc wmctrl arc-theme redshift-gtk xdotool xbindkeys xsel git-lfs
 - input-remapper-git -> For remapping mouse side buttons
 - Font: Source Code Pro (Regular)
 
@@ -22,7 +61,7 @@ Auto-start Programs
 
 Theme
 - Settings manager, appearance, arc-dark.
-- Settings manager, window manager, arc-dark
+- Settings manager, window manager, vacui
 
 Double click from thunar launch nvim without coc:
 - Write to /usr/bin/vi, and chmod +x:
