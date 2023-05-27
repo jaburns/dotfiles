@@ -27,11 +27,14 @@ yay -S
     git git-lfs xxd-standalone
     noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk adobe-source-code-pro-fonts
     alacritty tmux ulauncher fzf
-    syncthing keepassx flameshot vlc
-    wmctrl xdotool xbindkeys xsel xorg-xrandr xorg-xprop xorg-xwininfo
-    arc-gtk-theme
+    syncthing keepassx2 flameshot vlc
+    slack-desktop obs-studio redshift syncthingtray
+    wmctrl xdotool xbindkeys xsel xorg-xrandr xorg-xprop xorg-xwininfo xbindkeys
+    nvidia optimus-manager optimus-manager-qt
+    arc-gtk-theme chicago95-icon-theme-git
+    pulseaudio xfce4-pulseaudio-plugin pavucontol pulseaudio-alsa
 
-    obs-studio redshift syncthingtray
+(optimus-manager for switching GPUs on laptop)
 
 create ssh key
 add ssh key to github
