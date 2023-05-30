@@ -33,6 +33,7 @@ yay -S
     nvidia optimus-manager optimus-manager-qt intel-media-driver
     arc-gtk-theme chicago95-icon-theme-git
     pulseaudio xfce4-pulseaudio-plugin pavucontol pulseaudio-alsa
+    input-remapper-git # <--- For remapping mouse side buttons
 
 (optimus-manager for switching GPUs on laptop)
 
@@ -56,7 +57,6 @@ Fixes
 
 Applications/Packages
 - input-remapper-git -> For remapping mouse side buttons
-- Font: Source Code Pro (Regular)
 
 Auto-start Programs
 - xbindkeys                       => Disable middle click paste
