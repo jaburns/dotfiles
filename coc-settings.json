@@ -37,7 +37,9 @@
     "rust-analyzer.inlayHints.renderColons": false,
     "rust-analyzer.inlayHints.typeHints.enable": false,
     "rust-analyzer.inlayHints.typeHints.hideNamedConstructor": false,
+    "rust-analyzer.files.excludeDirs": ["../../../.rustup", "../../../.cargo"],
     "// rust-analyzer.server.extraEnv": { "RUSTFLAGS": "--cfg apes_server" },
     "// rust-analyzer.cargo.target": "wasm32-unknown-unknown",
-    "workspace.ignoredFolders": [".rustup", ".cargo"]
+    "workspace.ignoredFolders": [".rustup", ".cargo"],
+    "zig.zls.path": "/home/jaburns/.config/coc/extensions/coc-zls-data/zls_install/zls"
 }

@@ -26,7 +26,7 @@ copy_home() {
 [[ "$MODE" == 'install' ]] && mkdir -p "$HOME/.config/nvim/colors"
 
 copy_home .bashrc
-copy_home .xbindkeysrc
+# copy_home .xbindkeysrc
 copy_home .gitignore_global
 copy_home .gitconfig
 copy_home .tmux.conf

@@ -297,7 +297,10 @@ nnoremap <leader><leader> <c-^>
 nnoremap <leader>q <cmd>call ToggleQuickFix()<cr>
 nnoremap <leader>w <cmd>wa<cr><cmd>call DeleteHiddenBuffers()<cr>
 nnoremap <leader>e <cmd>Telescope coc workspace_diagnostics path_display={shorten={len=4,exclude={1,-1}}}<cr>
+nmap <silent> <leader>E <cmd>CocCommand rust-analyzer.expandMacro<cr>
 nmap <silent> <leader>r <Plug>(coc-rename)
+nnoremap <leader>t <cmd>CocCommand explorer --sources buffer-,file+<cr>
+" --position right
 nnoremap <leader>y :let @+ = expand("%:p")<cr>
 vnoremap         Y :GetCurrentBranchLink<cr>
 nnoremap <leader>u <cmd>UndotreeToggle<cr>
