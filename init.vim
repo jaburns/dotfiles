@@ -193,6 +193,9 @@ nnoremap <c-w>. 2<c-w>>
 " Ctrl-w to drop cursor out of terminal
 tnoremap <c-w> <c-\><c-n>
 
+" Remap :wq to just write and not quit
+cnoremap <expr> <CR> getcmdtype() == ":" && index(["wq"], getcmdline()) >= 0 ? "<c-u><esc>:w<cr>" : "<CR>"
+
 " -------------------- Status line --------------------
 
 set laststatus=2
