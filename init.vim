@@ -62,6 +62,9 @@ Plug 'mbbill/undotree'
 " Filesystem browse/edit
 Plug 'stevearc/oil.nvim'
 
+" Show what block we're in
+Plug 'wellle/context.vim'
+
 call plug#end()
 
 " -------------------- Basic configuration --------------------
