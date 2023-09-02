@@ -220,6 +220,8 @@ endif
 set termguicolors
 
 au BufNewFile,BufRead *.ejs set filetype=html
+au BufRead,BufNewFile *.atml set filetype=atml
+au FileType atml set syntax=atml
 
 if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
   colorscheme corvine
@@ -379,9 +381,16 @@ let g:prettier#config#semi = 'false'
 " Clear trailing whitespace when saving files
 autocmd BufWritePre * :%s/\s\+$//e
 
+function! FormatAtml()
+    let l:winview = winsaveview()
+    exe "%!apetmlfmt"
+    call winrestview(l:winview)
+endfunction
+
 " Auto-format files prior to saving them
 if $NVIM_BASIC_MODE != "1"
   autocmd BufWritePre *.rs,*.js,*.json,*.ts,*.css call CocAction('format')
+  autocmd BufWritePre *.atml call FormatAtml()
 endif
 
 " Set completeopt to have a better completion experience
