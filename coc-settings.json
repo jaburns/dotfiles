@@ -15,6 +15,7 @@
 
     "zls.path": "/usr/local/bin/zls",
 
+    "prettier.arrowParens": "avoid",
     "prettier.printWidth": 100,
     "prettier.tabWidth": 4,
     "prettier.trailingComma": "all",

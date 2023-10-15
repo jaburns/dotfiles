@@ -382,14 +382,14 @@ let g:prettier#config#semi = 'false'
 autocmd BufWritePre * :%s/\s\+$//e
 
 function! FormatAtml()
-    let l:winview = winsaveview()
-    exe "%!apetmlfmt"
-    call winrestview(l:winview)
+    let l:saved_pos = getcurpos()
+    exe "silent %!apetmlfmt"
+    call setpos('.', l:saved_pos)
 endfunction
 
 " Auto-format files prior to saving them
 if $NVIM_BASIC_MODE != "1"
-  autocmd BufWritePre *.rs,*.js,*.json,*.ts,*.css call CocAction('format')
+  autocmd BufWritePre *.rs,*.js,*.json,*.ts,*.css,*.jsx,*.tsx call CocAction('format')
   autocmd BufWritePre *.atml call FormatAtml()
 endif
 
