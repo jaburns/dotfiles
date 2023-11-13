@@ -49,18 +49,23 @@ Plug 'tpope/vim-surround'
 " Syntax highlights
 Plug 'OrangeT/vim-csharp'
 Plug 'rust-lang/rust.vim'
+Plug 'arzg/vim-rust-syntax-ext'
 Plug 'leafgarland/typescript-vim'
 Plug 'cespare/vim-toml'
 Plug 'tikhomirov/vim-glsl'
 Plug 'dag/vim-fish'
 Plug 'ziglang/zig.vim'
 Plug 'DingDean/wgsl.vim'
+Plug 'MaxMEllon/vim-jsx-pretty'
 
 " Visualize and navigate undo tree
 Plug 'mbbill/undotree'
 
 " Filesystem browse/edit
 Plug 'stevearc/oil.nvim'
+
+" Colors
+Plug 'neanias/everforest-nvim'
 
 " Show what block we're in
 " Plug 'wellle/context.vim'
@@ -224,9 +229,10 @@ au BufNewFile,BufRead *.ejs set filetype=html
 " au FileType atml set syntax=atml
 
 if len(system("grep alacritty.dark.yml /home/jaburns/.alacritty.yml")) > 2
-  colorscheme corvine
+  colorscheme everforest
 
   highlight Normal guibg=NONE
+  highlight NormalNC guibg=NONE
 
   highlight Tabs guibg=#222222
 
@@ -444,5 +450,10 @@ require("oil").setup({
     }
 })
 vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
+
+-- everforest bg colors
+require("everforest").setup({
+    background = "hard",
+})
 
 EOF
