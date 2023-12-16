@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+if [[ -z "$1" || -z "$2" ]]; then
+    echo 'No args provided'
+fi
+rg --line-number "$1" -r "$2" | $HOME/dev/writelines/target/release/writelines

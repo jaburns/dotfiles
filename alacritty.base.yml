@@ -1,13 +1,15 @@
-env:
-  WINIT_X11_SCALE_FACTOR: "1"
+# env:
+#   WINIT_X11_SCALE_FACTOR: "1"
 # window:
 #   opacity: 0.95
 font:
   normal:
     family: Source Code Pro
-  size: 9.5
+  size: 14
+#  use_thin_strokes: true
+#   - { key: F11, action: ToggleFullscreen }
 key_bindings:
-  - { key: F11, action: ToggleFullscreen }
-dynamic_padding: true
+  - { key: W, mods: Command, action: None }
+# dynamic_padding: true
 shell:
-  program: tmux
+  program: /opt/homebrew/bin/tmux

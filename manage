@@ -25,24 +25,26 @@ copy_home() {
 
 [[ "$MODE" == 'install' ]] && mkdir -p "$HOME/.config/nvim/colors"
 
-copy_home .bashrc
+# copy_home .bashrc
 # copy_home .xbindkeysrc
-copy_home .gitignore_global
-copy_home .gitconfig
-copy_home .tmux.conf
-copy_file "$REPO_DIR/redshift.conf" "$HOME/.config/redshift.conf"
+# copy_home .gitignore_global
+# copy_home .gitconfig
+# copy_home .tmux.conf
+# copy_file "$REPO_DIR/redshift.conf" "$HOME/.config/redshift.conf"
+
 copy_file "$REPO_DIR/init.vim" "$HOME/.config/nvim/init.vim"
 copy_file "$REPO_DIR/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
 copy_file "$REPO_DIR/colors/corvine.vim" "$HOME/.config/nvim/colors/corvine.vim"
 copy_file "$REPO_DIR/colors/envy.vim" "$HOME/.config/nvim/colors/envy.vim"
-copy_file "$REPO_DIR/config.fish" "$HOME/.config/fish/config.fish"
-copy_file "$REPO_DIR/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
-copy_file "$REPO_DIR/fish_plugins" "$HOME/.config/fish/fish_plugins"
 
-[[ -d "$HOME/.config/xfce4" ]] && \
-    copy_file 'xfce4-keyboard-shortcuts.xml' \
-        "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml"
+# copy_file "$REPO_DIR/config.fish" "$HOME/.config/fish/config.fish"
+# copy_file "$REPO_DIR/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
+# copy_file "$REPO_DIR/fish_plugins" "$HOME/.config/fish/fish_plugins"
 
-if [[ "$MODE" == 'install' ]] && [[ ! -f "$HOME/.alacritty.yml" ]]; then
-    printf "import:\n  - ~/dotfiles/alacritty.dark.yml\n" > "$HOME/.alacritty.yml"
-fi
+# [[ -d "$HOME/.config/xfce4" ]] && \
+#     copy_file 'xfce4-keyboard-shortcuts.xml' \
+#         "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml"
+
+# if [[ "$MODE" == 'install' ]] && [[ ! -f "$HOME/.alacritty.yml" ]]; then
+#     printf "import:\n  - ~/dotfiles/alacritty.dark.yml\n" > "$HOME/.alacritty.yml"
+# fi

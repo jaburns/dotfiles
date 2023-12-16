@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-tee /proc/acpi/wakeup <<< XHC
